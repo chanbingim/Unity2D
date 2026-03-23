@@ -1,8 +1,11 @@
 using UnityEngine;
 
-interface IState
+namespace GameFSM
 {
-    public OnEnter();
-    public OnUpdate();
-    public Exit();
+    public interface IFSMState
+    {
+        public void OnEnter();
+        public void OnUpdate();
+        public void Exit();
+    }
 }

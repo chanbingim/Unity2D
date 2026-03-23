@@ -1,6 +1,6 @@
 using UnityEngine;
 
-interface IMoveState
+interface IMovement
 {
-    void Move(Vector3 dir);
+    public void Move(Vector3 dir);
 }

@@ -1,32 +1,29 @@
+using GameFSM;
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MoveState : IState, IMovement
+public class MoveState : IFSMState
 {
-    [System.Serializable]
     Transform m_Transform = null;
-
-    [System.Serializable]
     float m_fMoveSpeed = 0.0f;
 
-
-    MoveState()
+    MoveState(Transform transform, float Speed)
     {
 
     }
 
-    public OnEnter()
+    public void OnEnter()
     {
 
     }
 
-    public OnUpdate()
+    public void OnUpdate()
     {
 
     }
 
-    public Exit()
+    public void Exit()
     {
 
     }

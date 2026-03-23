@@ -428,6 +428,8 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.3.5f1/Editor/Data/Tools/BuildPipeline/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.3.5f1/Editor/Data/Tools/BuildPipeline/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
 "Assets/Script/CGameManager.cs"
+"Assets/Script/Character/CCharacter_Controller.cs"
+"Assets/Script/Character/Character.cs"
 "Assets/Script/Character/Fsm/Fsm.cs"
 "Assets/Script/Character/Fsm/State/IState.cs"
 "Assets/Script/Character/Fsm/State/Move/IMovement.cs"

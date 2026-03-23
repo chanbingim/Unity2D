@@ -1,32 +1,20 @@
 using NUnit.Framework.Constraints;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
-public class Player_Controller : MonoBehaviour
+public class Player_Controller : CCharacter_Controller
 {
-    [SerializeField]
-    Fsm PlayerFsm = null;
-
     void Start()
     {
-        PlayerFsm = new Fsm();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(null != PlayerFsm)
-        {
-            if(Input.GetKeyDown(KeyCode.RightArrow))
-                PlayerFsm.Horizontal_Move(1);
+        Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
 
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-                PlayerFsm.Horizontal_Move(-1);
-
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-                PlayerFsm.Vertical_Move(1);
-
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-                PlayerFsm.Vertical_Move(-1);
-        }
+        transform.position += input * Time.deltaTime * 10.0f;
+        transform.forward = input.normalized;
     }
 }
