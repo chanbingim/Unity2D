@@ -33,7 +33,7 @@ public class CTittle : MonoBehaviour
 
     public void Change_Scene()
     {
-        CGameManager.Get_Instance().Change_Level("Lobby");
+        CUtilyManager.Get_Instance().Change_Level("Lobby");
     }
 
 }

@@ -9,9 +9,9 @@ using UnityEngine.SceneManagement;
 // 하지만 클래스명. 을 제거하는방법은 아래 처럼 하면됨
 using static Defines;
 
-public class CGameManager
+public class CUtilyManager
 {
-    private static CGameManager pInstance = null;
+    private static CUtilyManager pInstance = null;
     private Vector2Int vScreenSize;
     private string szNextLevel;
 
@@ -40,16 +40,16 @@ public class CGameManager
     #endregion
 
     #region Default
-   private CGameManager()
+   private CUtilyManager()
     {
 
     }
 
-    public static CGameManager Get_Instance()
+    public static CUtilyManager Get_Instance()
     {
         if (null == pInstance)
         {
-            pInstance = new CGameManager();
+            pInstance = new CUtilyManager();
             if (REULST.FAIL == pInstance.Initialize())
                 return null;
         }
