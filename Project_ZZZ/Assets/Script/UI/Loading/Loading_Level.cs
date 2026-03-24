@@ -12,9 +12,6 @@ public class Loading_Level : MonoBehaviour
     public UnityEvent LoadCompletedEvent;
 
     [SerializeField]
-    private float CurTime = 0;
-
-    [SerializeField]
     private Slider  LoadingBar = null;
 
     [SerializeField]

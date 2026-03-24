@@ -1,20 +1,33 @@
 using NUnit.Framework.Constraints;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+using InputCommand;
 
 public class Player_Controller : CCharacter_Controller
 {
+    [SerializeField]
+    Character m_Character = null;
+
+    private CMoveCommand m_MoveCommand;
+
     void Start()
     {
-
+        m_MoveCommand = new CMoveCommand(m_Character.transform, Vector3.zero, 0.0f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
-
-        transform.position += input * Time.deltaTime * 10.0f;
-        transform.forward = input.normalized;
+        if(null != m_Character)
+        {
+            Vector3 vDir = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+            if (Vector3.zero != vDir)
+            {
+                m_MoveCommand.m_vDir = vDir;
+                m_MoveCommand.m_fSpeed = m_Character.m_fSpeed;
+                m_Character.HandleCommand("Move", m_MoveCommand);
+            }
+            else
+                m_Character.HandleCommand("Idle", null);
+        }
     }
 }

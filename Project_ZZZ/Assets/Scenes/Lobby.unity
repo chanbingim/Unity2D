@@ -320,6 +320,7 @@ GameObject:
   - component: {fileID: 1311781420}
   - component: {fileID: 1311781419}
   - component: {fileID: 1311781418}
+  - component: {fileID: 1311781422}
   - component: {fileID: 1311781417}
   m_Layer: 0
   m_Name: Player
@@ -340,6 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e8868527ae6ec4eb39d8ebc8033021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player_Controller
+  m_Character: {fileID: 1311781422}
 --- !u!65 &1311781418
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -433,6 +435,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1311781422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311781415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08e9a068f9603814faaa0de65c39b904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player
+  m_CurStateName: 
 --- !u!1 &2051282666
 GameObject:
   m_ObjectHideFlags: 0
