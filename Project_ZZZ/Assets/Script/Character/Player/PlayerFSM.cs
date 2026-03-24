@@ -17,6 +17,7 @@ public class PlayerFSM : Fsm
     {
         Dic_State = new Dictionary<string, IFSMState>();
         Dic_State.Add("Move", new MoveState());
+        Dic_State.Add("Idle", new IdleState());
         return true;
     }
 

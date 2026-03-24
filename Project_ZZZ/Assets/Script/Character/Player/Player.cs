@@ -7,12 +7,12 @@ public class Player : Character
     {
         m_fSpeed = 10;
         m_Health = 1000;
+        m_fRotationSpeed = 3;
         m_Character_Fsm = PlayerFSM.CreateFSM();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 }

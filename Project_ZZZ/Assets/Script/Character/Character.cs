@@ -3,6 +3,7 @@ using InputCommand;
 
 public class Character : MonoBehaviour
 {
+    public float       m_fRotationSpeed { get; set; }
     public float       m_fSpeed { get; set; }
     public float       m_Health { get; set; }
 
@@ -18,7 +19,7 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     public void HandleCommand(string StateName, ICommand command)

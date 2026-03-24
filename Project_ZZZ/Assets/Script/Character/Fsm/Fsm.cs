@@ -40,7 +40,6 @@ public class Fsm
             m_CurState = NewState;
             m_CurState.OnEnter();
         }
-           
     }
 
     public void FSM_Update(ICommand command)

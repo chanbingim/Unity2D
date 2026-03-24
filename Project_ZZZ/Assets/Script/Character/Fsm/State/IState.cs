@@ -1,5 +1,6 @@
 using UnityEngine;
 using InputCommand;
+using Unity.IO.LowLevel.Unsafe;
 
 namespace GameFSM
 {
