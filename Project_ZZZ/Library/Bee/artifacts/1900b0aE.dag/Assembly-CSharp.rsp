@@ -427,11 +427,13 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.3.5f1/Editor/Data/Tools/BuildPipeline/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.3.5f1/Editor/Data/Tools/BuildPipeline/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.3.5f1/Editor/Data/Tools/BuildPipeline/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
+"Assets/Script/Camera/Player_Camera.cs"
 "Assets/Script/CGameManager.cs"
 "Assets/Script/Character/CCharacter_Controller.cs"
 "Assets/Script/Character/Character.cs"
 "Assets/Script/Character/Fsm/Fsm.cs"
 "Assets/Script/Character/Fsm/State/IState.cs"
+"Assets/Script/Character/Fsm/State/Move/IdleState.cs"
 "Assets/Script/Character/Fsm/State/Move/IMovement.cs"
 "Assets/Script/Character/Fsm/State/Move/MoveState.cs"
 "Assets/Script/Character/Player/Player.cs"
@@ -440,10 +442,14 @@
 "Assets/Script/Command/ICommand.cs"
 "Assets/Script/Defines.cs"
 "Assets/Script/GameManager.cs"
+"Assets/Script/Object/Enviornment.cs"
+"Assets/Script/Object/InstancingTest.cs"
 "Assets/Script/UI/CUIAnimComponent.cs"
 "Assets/Script/UI/Loading/Loading_Level.cs"
+"Assets/Script/UI/Lobby/InteractionUI.cs"
 "Assets/Script/UI/Tittle/CTittle.cs"
 "Assets/Script/UIRender.cs"
+"Assets/unity-chan!/Unity-chan! Model/SplashScreen/Scripts/SplashScreen.cs"
 -langversion:9.0
 /deterministic
 /optimize+

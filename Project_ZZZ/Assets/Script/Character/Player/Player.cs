@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Player : Character
 {
+    public delegate void OnEnter(Transform transform);
+    public OnEnter TirggerEnter;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -15,4 +18,17 @@ public class Player : Character
     void Update()
     {
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Player Trigger Enter");
+        TirggerEnter.Invoke(transform);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Debug.Log("Player Trigger Exit");
+        TirggerEnter.Invoke(null);
+    }
+
 }
