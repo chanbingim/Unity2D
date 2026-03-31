@@ -139,6 +139,8 @@
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
 -define:UNITY_EDITOR_ONLY_COMPILATION
+-r:"Assets/Plugins/Unity/ProudDotNetClientUnity.dll"
+-r:"Assets/Plugins/Unity/WebGL/ProudNetClientPlugin-webgl.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/6000.3.5f1/Editor/Data/Managed/UnityEditor.Graphs.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/6000.3.5f1/Editor/Data/Managed/UnityEngine/UnityEditor.AccessibilityModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/6000.3.5f1/Editor/Data/Managed/UnityEngine/UnityEditor.AdaptivePerformanceModule.dll"
