@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 820.8
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Inspector
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 492}
   m_MaxSize: {x: 10000, y: 10000}
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 112}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 96
+  controlID: 163
   draggingID: 0
 --- !u!114 &5
 MonoBehaviour:
@@ -220,8 +220,8 @@ MonoBehaviour:
     y: 0
     width: 276.80005
     height: 764.8
-  m_MinSize: {x: 276, y: 76}
-  m_MaxSize: {x: 4001, y: 4026}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -273,8 +273,8 @@ MonoBehaviour:
     y: 390.4
     width: 724.8
     height: 374.4
-  m_MinSize: {x: 201, y: 226}
-  m_MaxSize: {x: 4001, y: 4026}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -755,7 +755,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Script
+    - Assets/Server/Server
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -765,7 +765,7 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 84
   m_LastFolders:
-  - Assets/Script
+  - Assets/Server/Server
   m_LastFoldersGridSize: 84
   m_LastProjectPath: "C:\\Users\\gimch\\OneDrive\\\uBB38\uC11C\\GitHub\\Unity2D\\Project_ZZZ"
   m_LockTracker:
@@ -774,9 +774,9 @@ MonoBehaviour:
   m_FolderTreeState:
     scrollPos: {x: 0, y: 5.200012}
     m_SelectedIDs:
-    - m_Data: 35106
+    - m_Data: 35298
     m_LastClickedID:
-      m_Data: 35106
+      m_Data: 35298
     m_ExpandedIDs:
     - m_Data: 0
     - m_Data: 35104
@@ -888,7 +888,7 @@ MonoBehaviour:
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_TrimLeadingAndTrailingWhitespace: 0
-      m_ClientGUIView: {fileID: 8}
+      m_ClientGUIView: {fileID: 9}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -896,7 +896,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 346.2}
+    m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 84
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 161.59996
@@ -1564,7 +1564,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.09087319, y: -0.7984248, z: 0.12424809, w: -0.5825068}
     speed: 2
-    m_Value: {x: 0.09087318, y: 0.7984248, z: -0.12424808, w: 0.5825068}
+    m_Value: {x: -0.09085086, y: -0.79822856, z: 0.124217555, w: -0.5823636}
   m_Size:
     m_Target: 272.43677
     speed: 2

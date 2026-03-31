@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ServerEvent">
+      <UniqueIdentifier>{cc16d4d8-6a27-4c77-8ec9-f1a29a273060}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="100.Global">
+      <UniqueIdentifier>{19cbb8b5-9428-4671-99a3-052f1c9e8d8e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ProjectZZZ_Server.cpp" />
+    <ClCompile Include="..\Include\Private\ServerEvent.cpp">
+      <Filter>ServerEvent</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>100.Global</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Include\Public\pch.h">
+      <Filter>100.Global</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Public\ServerEvent.h">
+      <Filter>ServerEvent</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
