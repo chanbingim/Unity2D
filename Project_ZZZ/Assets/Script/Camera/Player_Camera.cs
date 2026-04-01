@@ -1,18 +1,17 @@
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class Player_Camera : MonoBehaviour
 {
     enum CAMERA_MODE { TOP_VIEW, END };
 
-    public GameObject       Target;
-    public float            m_fSensitive;
-    public float            m_fCamDistance;
-    Vector2                 m_Angle;
+    public GameObject Target;
+    public float m_fSensitive;
+    public float m_fCamDistance;
+    Vector2 m_Angle;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    {   
-        
+    {
+
     }
 
     // Update is called once per frame

@@ -1,13 +1,11 @@
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEngine.GraphicsBuffer;
 
 public class InteractionUI : MonoBehaviour
 {
-    public GameObject   m_Pannel;      // Canvas 안의 UI
-    public GameObject   Player;
-    public Vector2      m_Offset;
-    private Camera      m_MainCam;
+    public GameObject m_Pannel;      // Canvas 안의 UI
+    public GameObject Player;
+    public Vector2 m_Offset;
+    private Camera m_MainCam;
 
     void Start()
     {
@@ -18,12 +16,12 @@ public class InteractionUI : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 
     public void Interaction_Enable(Transform PlayerTransform)
     {
-        if(null == PlayerTransform)
+        if (null == PlayerTransform)
             gameObject.SetActive(false);
         else
         {

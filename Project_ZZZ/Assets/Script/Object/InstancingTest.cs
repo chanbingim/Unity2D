@@ -18,7 +18,7 @@ public class InstancingModel : MonoBehaviour
 
     void Start()
     {
-       
+
     }
 
     void Update()

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,9 +13,9 @@ public class CUtilyManager
     private string szNextLevel;
 
     #region public
-    public Vector2Int Get_GameScreenSize () { return vScreenSize; }
+    public Vector2Int Get_GameScreenSize() { return vScreenSize; }
 
-    public  void Change_Level(string szLevel)
+    public void Change_Level(string szLevel)
     {
         szNextLevel = szLevel;
         Debug.Log("Next Level :" + szNextLevel);
@@ -40,7 +37,7 @@ public class CUtilyManager
     #endregion
 
     #region Default
-   private CUtilyManager()
+    private CUtilyManager()
     {
 
     }

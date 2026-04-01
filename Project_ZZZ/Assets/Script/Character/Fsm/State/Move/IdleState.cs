@@ -1,6 +1,5 @@
 using GameFSM;
 using InputCommand;
-using UnityEngine;
 
 public class IdleState : IFSMState
 {

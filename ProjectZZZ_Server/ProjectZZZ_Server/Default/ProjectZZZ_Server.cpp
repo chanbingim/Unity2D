@@ -2,32 +2,16 @@
 //
 
 #include "pch.h"
-#include "ServerEvent.h"
-
-CServer_Event   g_Event;
-
+#include "ServerManager.h"
 
 int main()
 {
     // 서버를 연다.
-    CNetServer*     m_pServer = CNetServer::Create();
-    m_pServer->SetEventSink(&g_Event);
-
     // 서버의 파라미터 받을 객체
-    CStartServerParameter param;
-
-    // 서버 포트 번호 등록
-    param.m_tcpPorts.push_back(33334);
-
-    ErrorInfoPtr startError;
-    m_pServer->Start(param, startError);
-    if (startError != nullptr)
-    {
-        cout << "Server start failed: " << startError->ToString().GetString() << endl;
+    ErrorInfoPtr Error;
+    CServerManager::Get_Instance(Error);
+    if (Error != nullptr)
         return 1;
-    }
-
-    cout << "Server started on TCP 33334" << endl;
 
     while (true)
     {

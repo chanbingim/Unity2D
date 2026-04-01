@@ -1,10 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Loading_Level : MonoBehaviour
 {
@@ -12,11 +10,11 @@ public class Loading_Level : MonoBehaviour
     public UnityEvent LoadCompletedEvent;
 
     [SerializeField]
-    private Slider  LoadingBar = null;
+    private Slider LoadingBar = null;
 
     [SerializeField]
     private float Max_LoadTime = 0;
-    private float m_fCurTime =  0;
+    private float m_fCurTime = 0;
 
     private void Start()
     {
@@ -25,7 +23,7 @@ public class Loading_Level : MonoBehaviour
 
     public void LoadScene()
     {
-        if(0 < LoadSceneEvent.GetPersistentEventCount())
+        if (0 < LoadSceneEvent.GetPersistentEventCount())
             LoadSceneEvent.Invoke();
 
         StartCoroutine(LoadingAsync(CUtilyManager.Get_Instance().Get_NextLevel()));
@@ -41,7 +39,7 @@ public class Loading_Level : MonoBehaviour
         {
             m_fCurTime += Time.deltaTime;
             float fRatio = m_fCurTime / Max_LoadTime;
-            if(null != LoadingBar)
+            if (null != LoadingBar)
                 LoadingBar.value = fRatio;
 
             print(asyncOperation.progress); //로딩이 얼마나 완료되었는지 0~1의 값으로 보여줌

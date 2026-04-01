@@ -138,6 +138,7 @@
 -define:TEXTCORE_FONT_ENGINE_1_6_OR_NEWER
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
+-r:"Assets/Plugins/Unity/ProudDotNetClientUnity.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/6000.3.5f1/Editor/Data/Managed/UnityEngine/UnityEditor.AccessibilityModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/6000.3.5f1/Editor/Data/Managed/UnityEngine/UnityEditor.AdaptivePerformanceModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/6000.3.5f1/Editor/Data/Managed/UnityEngine/UnityEditor.AssetComplianceModule.dll"
@@ -397,6 +398,7 @@
 -r:"Library/PackageCache/com.unity.ext.nunit@d8c07649098d/net40/unity-custom/nunit.framework.dll"
 -r:"Library/PackageCache/com.unity.testtools.codecoverage@e4e5058206c0/lib/ReportGenerator/ReportGeneratorMerged.dll"
 -r:"Library/PackageCache/com.unity.visualscripting@191c0d7e3b69/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll"
+-r:"Library/Bee/artifacts/1900b0aEDbg.dag/Assembly-CSharp-firstpass.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.EditorCoroutines.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.InternalAPIEngineBridge.004.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.Multiplayer.Center.Common.ref.dll"
@@ -442,10 +444,20 @@
 "Assets/Script/Command/ICommand.cs"
 "Assets/Script/Defines.cs"
 "Assets/Script/GameManager.cs"
+"Assets/Script/Object/Enviornment.cs"
+"Assets/Script/Object/InstancingTest.cs"
 "Assets/Script/UI/CUIAnimComponent.cs"
 "Assets/Script/UI/Loading/Loading_Level.cs"
+"Assets/Script/UI/Lobby/InteractionUI.cs"
 "Assets/Script/UI/Tittle/CTittle.cs"
 "Assets/Script/UIRender.cs"
+"Assets/Server/BuildServer.cs"
+"Assets/Server/Client/GameClient.cs"
+"Assets/Server/RMI/ClientRmi_common.cs"
+"Assets/Server/RMI/ClientRmi_proxy.cs"
+"Assets/Server/RMI/ServerRmi_common.cs"
+"Assets/Server/RMI/ServerRmi_stub.cs"
+"Assets/unity-chan!/Unity-chan! Model/SplashScreen/Scripts/SplashScreen.cs"
 -langversion:9.0
 /deterministic
 /optimize-

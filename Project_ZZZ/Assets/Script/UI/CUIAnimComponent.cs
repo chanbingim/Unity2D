@@ -1,32 +1,28 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine.UI;
-using UnityEngine.Events;
 using UnityEngine;
-using System.Data;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class CUIAnimComponent : MonoBehaviour
 {
     [System.Serializable]
     struct AnimationData
     {
-       public  float        fAnimEventTime;
-       public AnimProperty  AnimPorperty;
+        public float fAnimEventTime;
+        public AnimProperty AnimPorperty;
     }
 
     [System.Serializable]
     struct AnimProperty
     {
-        public  Color       vColor;
-        public  Vector3     vScale;
-        public  Vector4     vRotation;
-        public  Vector3     vPosition;
+        public Color vColor;
+        public Vector3 vScale;
+        public Vector4 vRotation;
+        public Vector3 vPosition;
     }
 
     public UnityEvent FinishedEvent;
-    private bool    bIsEvnet = false;
+    private bool bIsEvnet = false;
 
     [SerializeField]
     private bool bIsAnimPlay = false;
@@ -43,16 +39,16 @@ public class CUIAnimComponent : MonoBehaviour
     [SerializeField]
     private List<AnimationData> AnimationEvents;
 
-    private Color       m_StartColor;
-    private Vector3     m_vStartPosition;
-    private Quaternion  m_vStartRotation;
-    private Vector3     m_vStartScale;
+    private Color m_StartColor;
+    private Vector3 m_vStartPosition;
+    private Quaternion m_vStartRotation;
+    private Vector3 m_vStartScale;
 
-    private int         m_iNumEvents = 0;
-    private int         m_iAnimIndex = 0;
+    private int m_iNumEvents = 0;
+    private int m_iAnimIndex = 0;
 
-    private float       m_fAnimCurTime = 0;
-    private Graphic     m_Graphic = null;
+    private float m_fAnimCurTime = 0;
+    private Graphic m_Graphic = null;
 
     public void Play_Animtaion() { bIsAnimPlay = true; }
     public void Stop_Animtaion() { bIsAnimPlay = false; }
@@ -84,7 +80,7 @@ public class CUIAnimComponent : MonoBehaviour
 
         if (AnimationData.fAnimEventTime <= m_fAnimCurTime)
         {
-            if(m_iAnimIndex < m_iNumEvents - 1)
+            if (m_iAnimIndex < m_iNumEvents - 1)
             {
                 m_iAnimIndex++;
                 m_fAnimCurTime = 0;
@@ -92,9 +88,9 @@ public class CUIAnimComponent : MonoBehaviour
             }
         }
 
-        if(m_fAnimationTime <= m_fAnimCurTime)
+        if (m_fAnimationTime <= m_fAnimCurTime)
         {
-            if(0 < FinishedEvent.GetPersistentEventCount())
+            if (0 < FinishedEvent.GetPersistentEventCount())
             {
                 if (!bIsEvnet)
                 {

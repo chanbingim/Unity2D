@@ -1,20 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ServerEvent">
-      <UniqueIdentifier>{cc16d4d8-6a27-4c77-8ec9-f1a29a273060}</UniqueIdentifier>
-    </Filter>
     <Filter Include="100.Global">
       <UniqueIdentifier>{19cbb8b5-9428-4671-99a3-052f1c9e8d8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. ServerEvent">
+      <UniqueIdentifier>{cc16d4d8-6a27-4c77-8ec9-f1a29a273060}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. RIMI">
+      <UniqueIdentifier>{42486133-815c-4b38-8cd6-783f8ca4b1e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. RIMI\Stub">
+      <UniqueIdentifier>{088d0ba1-08a5-40d1-8bef-9ce4d8409ccb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. RIMI\Proxy">
+      <UniqueIdentifier>{97bef217-0621-4229-8b17-32992375a506}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. RIMI\Common">
+      <UniqueIdentifier>{7f2edd8f-8178-496c-8de6-4cd18ec3bd1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. RIMI\Proxy\Base">
+      <UniqueIdentifier>{842a2a83-6df1-44b9-bdcb-c5e694fd11c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. RIMI\Stub\Base">
+      <UniqueIdentifier>{1ac6d27d-115c-4e79-96bd-0fab5a5ee2e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. RIMI\Common\Client">
+      <UniqueIdentifier>{178dfce7-986b-436f-ab53-87ea232d6e49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. RIMI\Common\Server">
+      <UniqueIdentifier>{4bfd0c01-428c-44ef-8d32-7ff735125fe5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. ServerManager">
+      <UniqueIdentifier>{f97e1fde-5981-4113-8e2f-6ece99b54728}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ProjectZZZ_Server.cpp" />
     <ClCompile Include="..\Include\Private\ServerEvent.cpp">
-      <Filter>ServerEvent</Filter>
+      <Filter>01. ServerEvent</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>100.Global</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Include\Private\ServerRmi_proxy.cpp">
+      <Filter>02. RIMI\Proxy\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Include\Private\Custom_Stub.cpp">
+      <Filter>02. RIMI\Stub</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Include\Private\ClientRmi_stub.cpp">
+      <Filter>02. RIMI\Stub\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Include\Private\ClientRmi_common.cpp">
+      <Filter>02. RIMI\Common\Client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Include\Private\ServerRmi_common.cpp">
+      <Filter>02. RIMI\Common\Server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Include\Private\ServerManager.cpp">
+      <Filter>03. ServerManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -22,7 +67,30 @@
       <Filter>100.Global</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Public\ServerEvent.h">
-      <Filter>ServerEvent</Filter>
+      <Filter>01. ServerEvent</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\Public\ServerRmi_proxy.h">
+      <Filter>02. RIMI\Proxy\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Public\Custom_Stub.h">
+      <Filter>02. RIMI\Stub</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Public\ClientRmi_stub.h">
+      <Filter>02. RIMI\Stub\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Public\ClientRmi_common.h">
+      <Filter>02. RIMI\Common\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Public\ServerRmi_common.h">
+      <Filter>02. RIMI\Common\Server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Public\ServerManager.h">
+      <Filter>03. ServerManager</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\util\ServerRmi.pidl">
+      <Filter>02. RIMI</Filter>
+    </None>
   </ItemGroup>
 </Project>

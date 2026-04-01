@@ -10,6 +10,8 @@
 #include <stack>
 
 #include "ProudNetServer.h"
+#include "ServerRmi_proxy.h"
+#include "Custom_Stub.h"
 
 using namespace std;
 using namespace Proud;

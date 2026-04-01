@@ -1,0 +1,10 @@
+<linker>
+	<assembly fullname="Assembly-CSharp" ignoreIfMissing="1">
+		<type fullname="CTittle">
+			<method name="Change_Scene"/>
+		</type>
+		<type fullname="CUIFadeAnim">
+			<method name="Play_Animtaion"/>
+		</type>
+	</assembly>
+</linker>

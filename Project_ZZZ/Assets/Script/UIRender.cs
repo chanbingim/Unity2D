@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -24,10 +21,11 @@ public class CUIFadeAnim : MonoBehaviour
         m_Graphic = GetComponent<Graphic>();
     }
 
-    public void Play_Animtaion() {
+    public void Play_Animtaion()
+    {
         gameObject.SetActive(true);
         m_Color.a = 0.0f;
-        bIsAnimPlay = true; 
+        bIsAnimPlay = true;
     }
     public void Stop_Animtaion() { bIsAnimPlay = false; }
 
@@ -35,7 +33,7 @@ public class CUIFadeAnim : MonoBehaviour
 
     void Update()
     {
-        if(!bIsAnimPlay)
+        if (!bIsAnimPlay)
             return;
 
         m_curTime += Time.deltaTime;

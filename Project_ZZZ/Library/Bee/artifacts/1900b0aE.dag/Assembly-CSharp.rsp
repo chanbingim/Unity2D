@@ -139,7 +139,6 @@
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
 -r:"Assets/Plugins/Unity/ProudDotNetClientUnity.dll"
--r:"Assets/Plugins/Unity/WebGL/ProudNetClientPlugin-webgl.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/6000.3.5f1/Editor/Data/Managed/UnityEngine/UnityEditor.AccessibilityModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/6000.3.5f1/Editor/Data/Managed/UnityEngine/UnityEditor.AdaptivePerformanceModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/6000.3.5f1/Editor/Data/Managed/UnityEngine/UnityEditor.AssetComplianceModule.dll"
@@ -452,7 +451,11 @@
 "Assets/Script/UI/Lobby/InteractionUI.cs"
 "Assets/Script/UI/Tittle/CTittle.cs"
 "Assets/Script/UIRender.cs"
+"Assets/Server/BuildServer.cs"
 "Assets/Server/Client/GameClient.cs"
+"Assets/Server/RMI/ClientRmi_common.cs"
+"Assets/Server/RMI/ClientRmi_proxy.cs"
+"Assets/Server/RMI/ClientRmi_stub.cs"
 "Assets/unity-chan!/Unity-chan! Model/SplashScreen/Scripts/SplashScreen.cs"
 -langversion:9.0
 /deterministic
