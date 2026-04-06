@@ -1,8 +1,9 @@
 global ServerToClient 3000
 {
-    // Server ¡æ Client
+    // Server ï¿½ï¿½ Client
     OnPlayerJoined([in] int clientId, [in] float PosX, [in] float PosY, [in] float PosZ);
 
+    OnOtherPlayerUpdated([in] int ClientID, [in] string NickName, [in] float PosX, [in] float PosY, [in] float PosZ );
     OnPositionUpdated([in] int clientId, 
                       [in] float PosX, [in] float PosY, [in] float PosZ, 
                       [in] float DirX, [in] float DirY, [in] float DirZ);

@@ -367,6 +367,10 @@
 "Assets/Script/UIRender.cs"
 "Assets/Server/BuildServer.cs"
 "Assets/Server/Client/GameClient.cs"
+"Assets/Server/RMI/ClientRmi_common.cs"
+"Assets/Server/RMI/ClientRmi_proxy.cs"
+"Assets/Server/RMI/ServerRmi_common.cs"
+"Assets/Server/RMI/ServerRmi_stub.cs"
 "Assets/unity-chan!/Unity-chan! Model/SplashScreen/Scripts/SplashScreen.cs"
 -langversion:9.0
 /deterministic

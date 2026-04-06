@@ -17,6 +17,9 @@ public class Player_Camera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Target == null)
+            return;
+
         m_Angle.x -= Input.GetAxis("Mouse Y") * m_fSensitive;
         m_Angle.y += Input.GetAxis("Mouse X") * m_fSensitive;
         m_Angle.x = Mathf.Clamp(m_Angle.x, -30f, 45f);

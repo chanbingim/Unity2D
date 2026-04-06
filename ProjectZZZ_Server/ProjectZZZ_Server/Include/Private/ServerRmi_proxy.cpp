@@ -10,6 +10,9 @@
 #include "ServerRmi_proxy.h"
 
 namespace ServerToClient {
+
+
+        
 	bool Proxy::OnPlayerJoined ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & PosX, const float & PosY, const float & PosZ)	{
 		::Proud::CMessage __msg;
 __msg.UseInternalBuffer();
@@ -42,6 +45,42 @@ __msg << PosZ;
 		
 		return RmiSend(remotes,remoteCount,rmiContext,__msg,
 			RmiName_OnPlayerJoined, (::Proud::RmiID)Rmi_OnPlayerJoined);
+	}
+        
+	bool Proxy::OnOtherPlayerUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const string & NickName, const float & PosX, const float & PosY, const float & PosZ)	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_OnOtherPlayerUpdated;
+__msg.Write(__msgid); 
+	
+__msg << ClientID;
+__msg << NickName;
+__msg << PosX;
+__msg << PosY;
+__msg << PosZ;
+		
+		return RmiSend(&remote,1,rmiContext,__msg,
+			RmiName_OnOtherPlayerUpdated, (::Proud::RmiID)Rmi_OnOtherPlayerUpdated);
+	}
+
+	bool Proxy::OnOtherPlayerUpdated ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & ClientID, const string & NickName, const float & PosX, const float & PosY, const float & PosZ)  	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_OnOtherPlayerUpdated;
+__msg.Write(__msgid); 
+	
+__msg << ClientID;
+__msg << NickName;
+__msg << PosX;
+__msg << PosY;
+__msg << PosZ;
+		
+		return RmiSend(remotes,remoteCount,rmiContext,__msg,
+			RmiName_OnOtherPlayerUpdated, (::Proud::RmiID)Rmi_OnOtherPlayerUpdated);
 	}
         
 	bool Proxy::OnPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)	{
@@ -117,6 +156,11 @@ __msg << message;
 const PNTCHAR* Proxy::RmiName_OnPlayerJoined =_PNT("OnPlayerJoined");
 #else
 const PNTCHAR* Proxy::RmiName_OnPlayerJoined =_PNT("");
+#endif
+#ifdef USE_RMI_NAME_STRING
+const PNTCHAR* Proxy::RmiName_OnOtherPlayerUpdated =_PNT("OnOtherPlayerUpdated");
+#else
+const PNTCHAR* Proxy::RmiName_OnOtherPlayerUpdated =_PNT("");
 #endif
 #ifdef USE_RMI_NAME_STRING
 const PNTCHAR* Proxy::RmiName_OnPositionUpdated =_PNT("OnPositionUpdated");

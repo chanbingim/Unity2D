@@ -21,6 +21,11 @@ public BeforeRmiInvocationDelegate BeforeRmiInvocation = delegate(Nettention.Pro
 		{ 
 			return false;
 		};
+		public delegate bool OnOtherPlayerUpdatedDelegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int ClientID, string NickName, float PosX, float PosY, float PosZ);  
+		public OnOtherPlayerUpdatedDelegate OnOtherPlayerUpdated = delegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int ClientID, string NickName, float PosX, float PosY, float PosZ)
+		{ 
+			return false;
+		};
 		public delegate bool OnPositionUpdatedDelegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int clientId, float PosX, float PosY, float PosZ, float DirX, float DirY, float DirZ);  
 		public OnPositionUpdatedDelegate OnPositionUpdated = delegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int clientId, float PosX, float PosY, float PosZ, float DirX, float DirY, float DirZ)
 		{ 
@@ -49,6 +54,9 @@ public BeforeRmiInvocationDelegate BeforeRmiInvocation = delegate(Nettention.Pro
 		{
         case Common.OnPlayerJoined:
             ProcessReceivedMessage_OnPlayerJoined(__msg, pa, hostTag, remote);
+            break;
+        case Common.OnOtherPlayerUpdated:
+            ProcessReceivedMessage_OnOtherPlayerUpdated(__msg, pa, hostTag, remote);
             break;
         case Common.OnPositionUpdated:
             ProcessReceivedMessage_OnPositionUpdated(__msg, pa, hostTag, remote);
@@ -117,6 +125,65 @@ parameterString+=PosZ.ToString()+",";
         Nettention.Proud.AfterRmiSummary summary = new Nettention.Proud.AfterRmiSummary();
         summary.rmiID = Common.OnPlayerJoined;
         summary.rmiName = RmiName_OnPlayerJoined;
+        summary.hostID = remote;
+        summary.hostTag = hostTag;
+        summary.elapsedTime = Nettention.Proud.PreciseCurrentTime.GetTimeMs()-t0;
+        AfterRmiInvocation(summary);
+        }
+    }
+    void ProcessReceivedMessage_OnOtherPlayerUpdated(Nettention.Proud.Message __msg, Nettention.Proud.ReceivedMessage pa, Object hostTag, Nettention.Proud.HostID remote)
+    {
+        Nettention.Proud.RmiContext ctx = new Nettention.Proud.RmiContext();
+        ctx.sentFrom=pa.RemoteHostID;
+        ctx.relayed=pa.IsRelayed;
+        ctx.hostTag=hostTag;
+        ctx.encryptMode = pa.EncryptMode;
+        ctx.compressMode = pa.CompressMode;
+        ctx.rmiID = Common.OnOtherPlayerUpdated;
+
+        int ClientID; Nettention.Proud.Marshaler.Read(__msg,out ClientID);	
+string NickName; Nettention.Proud.Marshaler.Read(__msg,out NickName);	
+float PosX; Nettention.Proud.Marshaler.Read(__msg,out PosX);	
+float PosY; Nettention.Proud.Marshaler.Read(__msg,out PosY);	
+float PosZ; Nettention.Proud.Marshaler.Read(__msg,out PosZ);	
+core.PostCheckReadMessage(__msg, RmiName_OnOtherPlayerUpdated);
+        if(enableNotifyCallFromStub==true)
+        {
+        string parameterString = "";
+        parameterString+=ClientID.ToString()+",";
+parameterString+=NickName.ToString()+",";
+parameterString+=PosX.ToString()+",";
+parameterString+=PosY.ToString()+",";
+parameterString+=PosZ.ToString()+",";
+        NotifyCallFromStub(Common.OnOtherPlayerUpdated, RmiName_OnOtherPlayerUpdated,parameterString);
+        }
+
+        if(enableStubProfiling)
+        {
+        Nettention.Proud.BeforeRmiSummary summary = new Nettention.Proud.BeforeRmiSummary();
+        summary.rmiID = Common.OnOtherPlayerUpdated;
+        summary.rmiName = RmiName_OnOtherPlayerUpdated;
+        summary.hostID = remote;
+        summary.hostTag = hostTag;
+        BeforeRmiInvocation(summary);
+        }
+
+        long t0 = Nettention.Proud.PreciseCurrentTime.GetTimeMs();
+
+        // Call this method.
+        bool __ret =OnOtherPlayerUpdated (remote,ctx , ClientID, NickName, PosX, PosY, PosZ );
+
+        if(__ret==false)
+        {
+        // Error: RMI function that a user did not create has been called. 
+        core.ShowNotImplementedRmiWarning(RmiName_OnOtherPlayerUpdated);
+        }
+
+        if(enableStubProfiling)
+        {
+        Nettention.Proud.AfterRmiSummary summary = new Nettention.Proud.AfterRmiSummary();
+        summary.rmiID = Common.OnOtherPlayerUpdated;
+        summary.rmiName = RmiName_OnOtherPlayerUpdated;
         summary.hostID = remote;
         summary.hostTag = hostTag;
         summary.elapsedTime = Nettention.Proud.PreciseCurrentTime.GetTimeMs()-t0;
@@ -243,6 +310,7 @@ parameterString+=message.ToString()+",";
 // RMI name declaration.
 // It is the unique pointer that indicates RMI name such as RMI profiler.
 public const string RmiName_OnPlayerJoined="OnPlayerJoined";
+public const string RmiName_OnOtherPlayerUpdated="OnOtherPlayerUpdated";
 public const string RmiName_OnPositionUpdated="OnPositionUpdated";
 public const string RmiName_OnChat="OnChat";
        
@@ -251,6 +319,7 @@ public const string RmiName_First = RmiName_OnPlayerJoined;
 // RMI name declaration.
 // It is the unique pointer that indicates RMI name such as RMI profiler.
 public const string RmiName_OnPlayerJoined="";
+public const string RmiName_OnOtherPlayerUpdated="";
 public const string RmiName_OnPositionUpdated="";
 public const string RmiName_OnChat="";
        

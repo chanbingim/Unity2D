@@ -72,19 +72,19 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 32642}
+      Script: {instanceID: 32662}
     - Class: 114
-      Script: {instanceID: 28688}
+      Script: {instanceID: 28702}
     - Class: 114
-      Script: {instanceID: 28898}
+      Script: {instanceID: 28912}
     - Class: 114
-      Script: {instanceID: 31502}
+      Script: {instanceID: 31518}
     - Class: 114
-      Script: {instanceID: 27072}
+      Script: {instanceID: 27082}
     - Class: 114
-      Script: {instanceID: 28214}
+      Script: {instanceID: 28226}
     - Class: 114
-      Script: {instanceID: 28030}
+      Script: {instanceID: 28040}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -118,8 +118,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
-    - Class: 54
-      Script: {instanceID: 0}
     - Class: 64
       Script: {instanceID: 0}
     - Class: 65
@@ -139,34 +137,34 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 33148}
+      Script: {instanceID: 33168}
     - Class: 114
-      Script: {instanceID: 30434}
+      Script: {instanceID: 32140}
     - Class: 114
-      Script: {instanceID: 29754}
+      Script: {instanceID: 30450}
     - Class: 114
-      Script: {instanceID: 30408}
+      Script: {instanceID: 29768}
     - Class: 114
-      Script: {instanceID: 32746}
+      Script: {instanceID: 30426}
     - Class: 114
-      Script: {instanceID: 31006}
+      Script: {instanceID: 32766}
     - Class: 114
-      Script: {instanceID: 28688}
+      Script: {instanceID: 31022}
     - Class: 114
-      Script: {instanceID: 28898}
+      Script: {instanceID: 28702}
     - Class: 114
-      Script: {instanceID: 31502}
+      Script: {instanceID: 28912}
     - Class: 114
-      Script: {instanceID: 27072}
+      Script: {instanceID: 31518}
     - Class: 114
-      Script: {instanceID: 28214}
+      Script: {instanceID: 27082}
     - Class: 114
-      Script: {instanceID: 30620}
+      Script: {instanceID: 28226}
+    - Class: 114
+      Script: {instanceID: 30636}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
-      Script: {instanceID: 0}
-    - Class: 136
       Script: {instanceID: 0}
     - Class: 137
       Script: {instanceID: 0}
@@ -200,25 +198,25 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 27706}
+      Script: {instanceID: 27716}
     - Class: 114
-      Script: {instanceID: 31214}
+      Script: {instanceID: 31230}
     - Class: 114
-      Script: {instanceID: 28448}
+      Script: {instanceID: 28460}
     - Class: 114
-      Script: {instanceID: 32122}
+      Script: {instanceID: 32140}
     - Class: 114
-      Script: {instanceID: 28688}
+      Script: {instanceID: 28702}
     - Class: 114
-      Script: {instanceID: 28898}
+      Script: {instanceID: 28912}
     - Class: 114
-      Script: {instanceID: 31502}
+      Script: {instanceID: 31518}
     - Class: 114
-      Script: {instanceID: 27072}
+      Script: {instanceID: 27082}
     - Class: 114
-      Script: {instanceID: 28214}
+      Script: {instanceID: 28226}
     - Class: 114
-      Script: {instanceID: 30620}
+      Script: {instanceID: 30636}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1064,7 +1062,7 @@ ScriptsOnlyBuild:
     className: UnityOnMouseOverMessageListener
   - hash:
       serializedVersion: 2
-      Hash: a01fe95fc5ccef253473e05a26f2c5d7
+      Hash: 7907c169edc3210e695ade8d8b0d72eb
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: GameClient

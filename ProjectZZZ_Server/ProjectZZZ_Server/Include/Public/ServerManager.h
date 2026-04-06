@@ -5,6 +5,15 @@ class CServer_Event;
 
 using namespace ServerToClient;
 
+struct Player
+{
+    int         hostID;
+    string      NickName;
+
+    int         iLevel;
+    int         PosX, PosY, PosZ;
+};
+
 class CServerManager
 {
 private :
@@ -14,14 +23,23 @@ private :
 public :
     static  CServerManager* Get_Instance(ErrorInfoPtr Error);
     static  CServerManager* Get_Instance();
+    
+    void                    Release_Server();
 
-    Proxy*              Get_Proxy()     { return m_pProxy; }
+    void                    ADD_JoinClient(Player* ClientData);
+    void                    Update_Player(HostID ID, float PosX, float PosY, float PosZ);
+
+
+    void                    Update(float fTime);
+
+    Proxy*                  Get_Proxy()     { return m_pProxy; }
 
 private :
     void                    Initalized(ErrorInfoPtr Error);
 
 private :
-    static CServerManager*  m_pGameInstance;
+    static CServerManager*              m_pGameInstance;
+    unordered_map<int, Player*>         m_PlayerList;
 
     Proxy*                  m_pProxy = nullptr;
     CCustom_Stub*           m_pStub = nullptr;

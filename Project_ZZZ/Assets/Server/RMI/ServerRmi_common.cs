@@ -14,11 +14,13 @@ namespace ServerToClient
 	{
 		// Message ID that replies to each RMI method. 
 			public const Nettention.Proud.RmiID OnPlayerJoined = (Nettention.Proud.RmiID)3000+1;
-			public const Nettention.Proud.RmiID OnPositionUpdated = (Nettention.Proud.RmiID)3000+2;
-			public const Nettention.Proud.RmiID OnChat = (Nettention.Proud.RmiID)3000+3;
+			public const Nettention.Proud.RmiID OnOtherPlayerUpdated = (Nettention.Proud.RmiID)3000+2;
+			public const Nettention.Proud.RmiID OnPositionUpdated = (Nettention.Proud.RmiID)3000+3;
+			public const Nettention.Proud.RmiID OnChat = (Nettention.Proud.RmiID)3000+4;
 		// List that has RMI ID.
 		public static Nettention.Proud.RmiID[] RmiIDList = new Nettention.Proud.RmiID[] {
 			OnPlayerJoined,
+			OnOtherPlayerUpdated,
 			OnPositionUpdated,
 			OnChat,
 		};

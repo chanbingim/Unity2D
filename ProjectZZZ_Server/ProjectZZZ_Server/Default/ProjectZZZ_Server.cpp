@@ -9,15 +9,17 @@ int main()
     // 서버를 연다.
     // 서버의 파라미터 받을 객체
     ErrorInfoPtr Error;
-    CServerManager::Get_Instance(Error);
+    auto pInstance = CServerManager::Get_Instance(Error);
     if (Error != nullptr)
         return 1;
 
     while (true)
     {
-        Sleep(1000);
+        Sleep(100);
+        pInstance->Update(0.01f);
     }
 
+    pInstance->Release_Server();
     return 0;
    
 }

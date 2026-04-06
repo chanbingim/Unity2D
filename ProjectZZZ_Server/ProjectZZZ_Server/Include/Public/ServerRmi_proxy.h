@@ -19,14 +19,17 @@ namespace ServerToClient {
 	public:
 	virtual bool OnPlayerJoined ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & PosX, const float & PosY, const float & PosZ) PN_SEALED; 
 	virtual bool OnPlayerJoined ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & clientId, const float & PosX, const float & PosY, const float & PosZ)   PN_SEALED;  
+	virtual bool OnOtherPlayerUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const string & NickName, const float & PosX, const float & PosY, const float & PosZ) PN_SEALED; 
+	virtual bool OnOtherPlayerUpdated ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & ClientID, const string & NickName, const float & PosX, const float & PosY, const float & PosZ)   PN_SEALED;  
 	virtual bool OnPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ) PN_SEALED; 
 	virtual bool OnPositionUpdated ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & clientId, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)   PN_SEALED;  
 	virtual bool OnChat ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & message) PN_SEALED; 
 	virtual bool OnChat ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & clientId, const string & message)   PN_SEALED;  
-    static const PNTCHAR* RmiName_OnPlayerJoined;
-    static const PNTCHAR* RmiName_OnPositionUpdated;
-    static const PNTCHAR* RmiName_OnChat;
-    static const PNTCHAR* RmiName_First;
+static const PNTCHAR* RmiName_OnPlayerJoined;
+static const PNTCHAR* RmiName_OnOtherPlayerUpdated;
+static const PNTCHAR* RmiName_OnPositionUpdated;
+static const PNTCHAR* RmiName_OnChat;
+static const PNTCHAR* RmiName_First;
 		Proxy()
 		{
 			if(m_signature != 1)

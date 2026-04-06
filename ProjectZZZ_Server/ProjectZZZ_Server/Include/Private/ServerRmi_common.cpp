@@ -4,7 +4,6 @@
 
 #include "pch.h"
 #include "ServerRmi_common.h"
-
 namespace ServerToClient {
 
 
@@ -12,12 +11,14 @@ namespace ServerToClient {
                
 		Rmi_OnPlayerJoined,
                
+		Rmi_OnOtherPlayerUpdated,
+               
 		Rmi_OnPositionUpdated,
                
 		Rmi_OnChat,
 	};
 
-	int g_RmiIDListCount = 3;
+	int g_RmiIDListCount = 4;
 
 }
 

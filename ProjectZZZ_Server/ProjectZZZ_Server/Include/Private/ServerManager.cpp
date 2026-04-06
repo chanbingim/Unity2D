@@ -28,6 +28,40 @@ CServerManager* CServerManager::Get_Instance()
     return m_pGameInstance;
 }
 
+void CServerManager::Release_Server()
+{
+    for (auto& iter : m_PlayerList)
+        delete iter.second;
+
+    m_PlayerList.clear();
+}
+
+void CServerManager::ADD_JoinClient(Player* ClientData)
+{
+    auto iter = m_PlayerList.find(ClientData->hostID);
+    if (iter == m_PlayerList.end())
+    {
+        m_PlayerList.emplace(ClientData->hostID, ClientData);
+        cout << "Join Player : " << ClientData->NickName << endl;
+    }
+    else
+    {
+        cout << "AlReady Join Player : " << ClientData->NickName << endl;
+    }
+}
+
+void CServerManager::Update_Player(HostID ID, float PosX, float PosY, float PosZ)
+{
+    auto iter = m_PlayerList.find(ID);
+    if (iter != m_PlayerList.end())
+    {
+        iter->second->PosX = PosX;
+        iter->second->PosY = PosY;
+        iter->second->PosZ = PosZ;
+    }
+
+}
+
 void CServerManager::Initalized(ErrorInfoPtr Error)
 {
     m_pServer = CNetServer::Create();
@@ -49,4 +83,23 @@ void CServerManager::Initalized(ErrorInfoPtr Error)
         cout << "Server start failed: " << Error->ToString().GetString() << endl;
     else
         cout << "Server started on UDP 33334" << endl;
+}
+
+void CServerManager::Update(float fTime)
+{
+    // 여기서 서버의 시간주기마다 업데이트
+    // 일단 접속된 클라이언트의 좌표를 모두 뿌려보자
+   
+    HostID clientList[256];
+    int count = m_pServer->GetClientHostIDs(clientList, 256);
+    
+    for (auto& iter : m_PlayerList)
+    {
+        Player* pPlayer = iter.second;
+        for (int i = 0; i < count; i++)
+        {
+            double Latency = m_pServer->GetRecentPingSec(clientList[i]);
+            m_pProxy->OnOtherPlayerUpdated(clientList[i], RmiContext::ReliableSend, pPlayer->hostID, pPlayer->NickName, pPlayer->PosX, pPlayer->PosY, pPlayer->PosZ);
+        }
+    }
 }

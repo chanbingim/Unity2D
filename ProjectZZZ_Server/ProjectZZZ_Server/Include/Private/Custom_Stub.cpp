@@ -10,7 +10,10 @@ DEFRMI_ClientToServer_OnPositionUpdated(CCustom_Stub)
     float NewY = PosY + DirY;
     float NewZ = PosZ + DirZ;
 
-    Proxy* pProxy = CServerManager::Get_Instance()->Get_Proxy();
+    auto pInstance = CServerManager::Get_Instance();
+    Proxy* pProxy = pInstance->Get_Proxy();
+
+    pInstance->Update_Player((HostID)clientId, NewX, NewY, NewZ);
     pProxy->OnPositionUpdated((HostID)clientId, RmiContext::UnreliableSend,
         clientId, NewX, NewY, NewZ, DirX, DirY, DirZ);
 
