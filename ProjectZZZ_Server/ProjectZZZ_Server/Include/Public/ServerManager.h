@@ -1,6 +1,9 @@
 #pragma once
 
+#include "Server_Defines.h"
+
 class CCustom_Stub;
+class CTimerManager;
 class CServer_Event;
 
 using namespace ServerToClient;
@@ -11,7 +14,7 @@ struct Player
     string      NickName;
 
     int         iLevel;
-    int         PosX, PosY, PosZ;
+    float       PosX, PosY, PosZ;
 };
 
 class CServerManager
@@ -27,10 +30,12 @@ public :
     void                    Release_Server();
 
     void                    ADD_JoinClient(Player* ClientData);
+    void                    Leave_Client(int ClientID);
+
     void                    Update_Player(HostID ID, float PosX, float PosY, float PosZ);
 
-
     void                    Update(float fTime);
+    void                    Update_Proxy();
 
     Proxy*                  Get_Proxy()     { return m_pProxy; }
 

@@ -42,11 +42,23 @@ void CServerManager::ADD_JoinClient(Player* ClientData)
     if (iter == m_PlayerList.end())
     {
         m_PlayerList.emplace(ClientData->hostID, ClientData);
+        m_pProxy->OnPlayerJoined((HostID)ClientData->hostID, RmiContext::ReliableSend, ClientData->hostID, 0, 0, 0);
+
         cout << "Join Player : " << ClientData->NickName << endl;
     }
     else
     {
         cout << "AlReady Join Player : " << ClientData->NickName << endl;
+    }
+}
+
+void CServerManager::Leave_Client(int ClientID)
+{
+    auto iter = m_PlayerList.find(ClientID);
+    if (iter != m_PlayerList.end())
+    {
+        // 여기서 나간 클라이언트를 제외한 모두에게 이벤트 호출을 통해서 알려주자.
+        m_PlayerList.erase(iter);
     }
 }
 
@@ -59,14 +71,13 @@ void CServerManager::Update_Player(HostID ID, float PosX, float PosY, float PosZ
         iter->second->PosY = PosY;
         iter->second->PosZ = PosZ;
     }
-
 }
 
 void CServerManager::Initalized(ErrorInfoPtr Error)
 {
     m_pServer = CNetServer::Create();
 
-    m_pEvent = new CServer_Event();
+    m_pEvent = CServer_Event::Create();
     m_pServer->SetEventSink(m_pEvent);
 
     CStartServerParameter   param;
@@ -87,12 +98,18 @@ void CServerManager::Initalized(ErrorInfoPtr Error)
 
 void CServerManager::Update(float fTime)
 {
-    // 여기서 서버의 시간주기마다 업데이트
-    // 일단 접속된 클라이언트의 좌표를 모두 뿌려보자
+   // Tick처리를 위한 데이터를 여기서 뿌리자
+    cout << "Tick : " << fTime << endl;
    
+}
+
+void CServerManager::Update_Proxy()
+{
     HostID clientList[256];
     int count = m_pServer->GetClientHostIDs(clientList, 256);
-    
+
+    // 여기서 서버의 1FPS 마다 처리
+    // 일단 접속된 클라이언트의 좌표를 모두 뿌려보자
     for (auto& iter : m_PlayerList)
     {
         Player* pPlayer = iter.second;

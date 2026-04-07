@@ -1,5 +1,8 @@
 #pragma once
 #include "INetServerEvent.h"
+#include "Server_Defines.h"
+
+class CServerManager;
 
 class CServer_Event : public INetServerEvent
 {
@@ -18,4 +21,15 @@ public :
     void OnP2PGroupJoinMemberAckComplete(HostID groupHostID, HostID memberHostID, ErrorType result) override;
     void OnUserWorkerThreadBegin() override;
     void OnUserWorkerThreadEnd() override;
+
+public :
+    static  CServer_Event*      Create();
+
+private :
+    HRESULT                     Initailize();
+
+private :
+    CServerManager*     m_pServerMgr_Instance = nullptr;
+
+
 };

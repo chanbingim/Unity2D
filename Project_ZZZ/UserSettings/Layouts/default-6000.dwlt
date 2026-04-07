@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1534.4
     height: 812.8
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Hierarchy
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 112}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 142
+  controlID: 160
   draggingID: 0
 --- !u!114 &5
 MonoBehaviour:
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 112}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 26
+  controlID: 44
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -625,15 +625,11 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: []
+      m_SelectedIDs:
+      - m_Data: -9950
       m_LastClickedID:
-        m_Data: 0
+        m_Data: -9950
       m_ExpandedIDs:
-      - m_Data: -28776
-      - m_Data: -28726
-      - m_Data: -28360
-      - m_Data: -28308
-      - m_Data: -28280
       - m_Data: -1284
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -760,7 +756,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/unity-chan!/Unity-chan! Model/Prefabs
+    - Assets/Server/Client
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -770,7 +766,7 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 84
   m_LastFolders:
-  - Assets/unity-chan!/Unity-chan! Model/Prefabs
+  - Assets/Server/Client
   m_LastFoldersGridSize: 84
   m_LastProjectPath: "C:\\Users\\gimch\\OneDrive\\\uBB38\uC11C\\GitHub\\Unity2D\\Project_ZZZ"
   m_LockTracker:
@@ -779,14 +775,15 @@ MonoBehaviour:
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs:
-    - m_Data: 34976
+    - m_Data: 35390
     m_LastClickedID:
-      m_Data: 34976
+      m_Data: 35390
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 34834
-    - m_Data: 34948
-    - m_Data: 34978
+    - m_Data: 34830
+    - m_Data: 34940
+    - m_Data: 34946
+    - m_Data: 34976
     - m_Data: 1000000000
     - m_Data: 2147483647
     m_RenameOverlay:
@@ -821,7 +818,7 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 34834
+    - m_Data: 34830
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -848,8 +845,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: []
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs:
+    - m_Data: -9950
+    m_LastClickedInstanceID: -9950
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs:
     - m_Data: 46562
@@ -879,7 +877,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 128.20001}
+    m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 84
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 194.80003

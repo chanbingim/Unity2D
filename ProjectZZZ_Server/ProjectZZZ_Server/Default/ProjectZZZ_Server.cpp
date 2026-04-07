@@ -2,7 +2,10 @@
 //
 
 #include "pch.h"
+#include "Server_Defines.h"
+
 #include "ServerManager.h"
+#include "TimerManager.h"
 
 int main()
 {
@@ -10,13 +13,25 @@ int main()
     // 서버의 파라미터 받을 객체
     ErrorInfoPtr Error;
     auto pInstance = CServerManager::Get_Instance(Error);
+    auto pTimerManager = CTimerManager::Create();
+
+    float TimeAcc = 0;
+    pTimerManager->ADD_Timer("ServerTimer");
+    pTimerManager->ADD_Timer("Timer_Frame");
+
     if (Error != nullptr)
         return 1;
-
+    
     while (true)
     {
-        Sleep(100);
-        pInstance->Update(0.01f);
+        TimeAcc += pTimerManager->Get_TimeDelta("ServerTimer");
+        if (TimeAcc >= 1.f / 10)
+        {
+            pInstance->Update(pTimerManager->Get_TimeDelta("Timer_Frame"));
+            TimeAcc = 0.f;
+        }
+
+        pInstance->Update_Proxy();
     }
 
     pInstance->Release_Server();

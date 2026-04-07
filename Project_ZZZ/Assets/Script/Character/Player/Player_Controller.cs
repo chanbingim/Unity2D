@@ -13,8 +13,12 @@ public class Player_Controller : CCharacter_Controller
     void Start()
     {
         m_Client = GameObject.FindWithTag("GameManager").GetComponent<GameClient>();
-        m_PlayerCam = Camera.main.GetComponent<Player_Camera>();
-        m_PlayerCam.Target = m_Character.gameObject;
+        if(gameObject.name == "Player")
+        {
+            m_PlayerCam = Camera.main.GetComponent<Player_Camera>();
+            m_PlayerCam.Target = m_Character.gameObject;
+        }
+      
         m_MoveCommand = new CMoveCommand(m_Character.transform, Vector3.zero, 0.0f, 0.0f);
     }
 

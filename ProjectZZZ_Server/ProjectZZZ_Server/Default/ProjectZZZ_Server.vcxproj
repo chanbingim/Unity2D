@@ -159,6 +159,8 @@
     <ClCompile Include="..\Include\Private\ServerManager.cpp" />
     <ClCompile Include="..\Include\Private\ServerRmi_common.cpp" />
     <ClCompile Include="..\Include\Private\ServerRmi_proxy.cpp" />
+    <ClCompile Include="..\Include\Private\Timer.cpp" />
+    <ClCompile Include="..\Include\Private\TimerManager.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
@@ -176,6 +178,9 @@
     <ClInclude Include="..\Include\Public\ServerManager.h" />
     <ClInclude Include="..\Include\Public\ServerRmi_common.h" />
     <ClInclude Include="..\Include\Public\ServerRmi_proxy.h" />
+    <ClInclude Include="..\Include\Public\Server_Defines.h" />
+    <ClInclude Include="..\Include\Public\Timer.h" />
+    <ClInclude Include="..\Include\Public\TimerManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\util\ServerRmi.pidl">

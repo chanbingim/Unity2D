@@ -9,8 +9,7 @@ using System.Collections.Generic;
 public class GameClient : MonoBehaviour
 {
     Dictionary<int, GameObject>     m_Players;
-    [SerializeField]
-    int                             m_MyID;
+    [SerializeField]    int         m_MyID;
     public GameObject               m_PlayerPrefab;
 
     NetClient       m_netClient = null;

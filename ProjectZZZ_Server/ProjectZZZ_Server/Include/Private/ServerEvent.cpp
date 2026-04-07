@@ -8,8 +8,6 @@ void CServer_Event::OnClientJoin(CNetClientInfo* clientInfo)
         return;
 
 	cout << "Join : " << clientInfo->m_HostID << endl;
-    CServerManager* pInstance = CServerManager::Get_Instance();
-
     Player* pPlayer = new Player();
     pPlayer->iLevel = 1;
     pPlayer->hostID = clientInfo->m_HostID;
@@ -17,15 +15,14 @@ void CServer_Event::OnClientJoin(CNetClientInfo* clientInfo)
     pPlayer->PosX = 0;
     pPlayer->PosY = 0;
     pPlayer->PosZ = 0;
-    pInstance->ADD_JoinClient(pPlayer);
-
-    auto pProxy = pInstance->Get_Proxy();
-    pProxy->OnPlayerJoined(clientInfo->m_HostID, RmiContext::ReliableSend, (int)clientInfo->m_HostID, 0, 0, 0);
+    
+    m_pServerMgr_Instance->ADD_JoinClient(pPlayer);
 }
 
 void CServer_Event::OnClientLeave(CNetClientInfo* clientInfo, ErrorInfo* errorinfo, const ByteArray& comment)
 {
 	cout << "Levae : " << clientInfo->m_HostID << endl;
+    m_pServerMgr_Instance->Leave_Client(clientInfo->m_HostID);
 }
 
 void CServer_Event::OnError(ErrorInfo* errorInfo)
@@ -58,4 +55,22 @@ void CServer_Event::OnUserWorkerThreadBegin()
 
 void CServer_Event::OnUserWorkerThreadEnd()
 {
+}
+
+CServer_Event* CServer_Event::Create()
+{
+    CServer_Event* pInstance = new CServer_Event();
+    if (FAILED(pInstance->Initailize()))
+    {
+        delete pInstance;
+        pInstance = nullptr;
+    }
+
+    return pInstance;
+}
+
+HRESULT CServer_Event::Initailize()
+{
+    m_pServerMgr_Instance = CServerManager::Get_Instance();
+    return S_OK;
 }

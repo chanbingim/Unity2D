@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="100.Global">
-      <UniqueIdentifier>{19cbb8b5-9428-4671-99a3-052f1c9e8d8e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01. ServerEvent">
       <UniqueIdentifier>{cc16d4d8-6a27-4c77-8ec9-f1a29a273060}</UniqueIdentifier>
     </Filter>
@@ -34,6 +31,18 @@
     <Filter Include="03. ServerManager">
       <UniqueIdentifier>{f97e1fde-5981-4113-8e2f-6ece99b54728}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04. Timer">
+      <UniqueIdentifier>{dcba8e12-3585-43b9-b302-8e62e09760f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Timer\Manager">
+      <UniqueIdentifier>{c82a2045-49f5-44ff-a445-35f477c06ffa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="100. Global">
+      <UniqueIdentifier>{19cbb8b5-9428-4671-99a3-052f1c9e8d8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="100. Global\Define">
+      <UniqueIdentifier>{511b04b5-3431-48bc-a05d-7c2823b12afb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ProjectZZZ_Server.cpp" />
@@ -41,7 +50,7 @@
       <Filter>01. ServerEvent</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
-      <Filter>100.Global</Filter>
+      <Filter>100. Global</Filter>
     </ClCompile>
     <ClCompile Include="..\Include\Private\ServerRmi_proxy.cpp">
       <Filter>02. RIMI\Proxy\Base</Filter>
@@ -61,10 +70,16 @@
     <ClCompile Include="..\Include\Private\ServerManager.cpp">
       <Filter>03. ServerManager</Filter>
     </ClCompile>
+    <ClCompile Include="..\Include\Private\Timer.cpp">
+      <Filter>04. Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Include\Private\TimerManager.cpp">
+      <Filter>04. Timer\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\Public\pch.h">
-      <Filter>100.Global</Filter>
+      <Filter>100. Global</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Public\ServerEvent.h">
       <Filter>01. ServerEvent</Filter>
@@ -86,6 +101,15 @@
     </ClInclude>
     <ClInclude Include="..\Include\Public\ServerManager.h">
       <Filter>03. ServerManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Public\Timer.h">
+      <Filter>04. Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Public\Server_Defines.h">
+      <Filter>100. Global\Define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Public\TimerManager.h">
+      <Filter>04. Timer\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

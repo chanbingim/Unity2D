@@ -14,9 +14,6 @@ DEFRMI_ClientToServer_OnPositionUpdated(CCustom_Stub)
     Proxy* pProxy = pInstance->Get_Proxy();
 
     pInstance->Update_Player((HostID)clientId, NewX, NewY, NewZ);
-    pProxy->OnPositionUpdated((HostID)clientId, RmiContext::UnreliableSend,
-        clientId, NewX, NewY, NewZ, DirX, DirY, DirZ);
-
     return true;
 }
 
