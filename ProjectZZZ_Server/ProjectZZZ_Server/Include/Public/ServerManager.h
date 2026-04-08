@@ -12,6 +12,7 @@ struct Player
 {
     int         hostID;
     string      NickName;
+    bool        bIsDead = false;
 
     int         iLevel;
     float       PosX, PosY, PosZ;
@@ -36,6 +37,7 @@ public :
 
     void                    Update(float fTime);
     void                    Update_Proxy();
+    void                    Clear_DeadClient();
 
     Proxy*                  Get_Proxy()     { return m_pProxy; }
 

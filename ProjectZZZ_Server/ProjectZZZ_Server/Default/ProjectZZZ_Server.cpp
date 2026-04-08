@@ -24,8 +24,9 @@ int main()
     
     while (true)
     {
+        pInstance->Clear_DeadClient();
         TimeAcc += pTimerManager->Get_TimeDelta("ServerTimer");
-        if (TimeAcc >= 1.f / 10)
+        if (TimeAcc >= 1.f / 144)
         {
             pInstance->Update(pTimerManager->Get_TimeDelta("Timer_Frame"));
             TimeAcc = 0.f;

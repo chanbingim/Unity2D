@@ -9,10 +9,10 @@ namespace InputCommand
 
     struct CMoveCommand : ICommand
     {
-        public Transform m_Transform;
-        public Vector3 m_vDir;
-        public float m_fSpeed;
-        public float m_fRotSpeed;
+        public Transform    m_Transform;
+        public Vector3      m_vDir;
+        public float        m_fSpeed;
+        public float        m_fRotSpeed;
 
         public CMoveCommand(Transform transform, Vector3 Dir, float Speed, float RotSpeed)
         {

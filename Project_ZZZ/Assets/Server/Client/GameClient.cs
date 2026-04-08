@@ -5,10 +5,12 @@ using InputCommand;
 using Nettention.Proud;
 using UnityEngine;
 using System.Collections.Generic;
+using static ServerToClient.Stub;
+using System;
 
 public class GameClient : MonoBehaviour
 {
-    Dictionary<int, GameObject>     m_Players;
+    Dictionary<int, Player_Controller>     m_Players;
     [SerializeField]    int         m_MyID;
     public GameObject               m_PlayerPrefab;
 
@@ -21,7 +23,7 @@ public class GameClient : MonoBehaviour
         m_netClient = new NetClient();
         // 파라미터 정의
         NetConnectionParam ClientParam = new NetConnectionParam();
-        m_Players = new Dictionary<int, GameObject>();
+        m_Players = new Dictionary<int, Player_Controller>();
 
         // 서버와 동일한 protocol version, 입력하지 않아도 됨
         //cp.protocolVersion.Set(version);
@@ -70,24 +72,23 @@ public class GameClient : MonoBehaviour
 
     private bool OnOtherPlayerUpdated(HostID remote, RmiContext rmiContext, int clientId, string NickName, float px, float py, float pz)
     {
-        GameObject pNewPlayer = null;
+        Player_Controller pController = null;
         if (m_Players.ContainsKey(clientId))
         {
-            pNewPlayer = m_Players[clientId];
+            pController = m_Players[clientId];
+            pController.Update_Position(px, py, pz);
         }
         else
         {
-            pNewPlayer = GameObject.Instantiate(m_PlayerPrefab);
+            GameObject pNewPlayer = GameObject.Instantiate(m_PlayerPrefab);
             if(clientId == m_MyID)
                 pNewPlayer.name = "Player";
             else
                 pNewPlayer.name = "other" + clientId;
 
-            m_Players.Add(clientId, pNewPlayer);
+            m_Players.Add(clientId, pNewPlayer.GetComponent<Player_Controller>());
         }
-
-        pNewPlayer.transform.position = new Vector3(px, py, pz);
-
+        
         return true;
     }
 
@@ -95,17 +96,6 @@ public class GameClient : MonoBehaviour
     {
         m_MyID = clientId;
         gameObject.transform.position = new Vector3(px, py, pz);
-        return true;
-    }
-
-    private bool OnPositionUpdated(HostID remote, RmiContext rmiContext, int clientId, float px, float py, float pz, float dx, float dy, float dz)
-    {
-        if (m_Players.ContainsKey(clientId))
-        {
-            GameObject pNewPlayer = m_Players[clientId];
-            pNewPlayer.transform.position = new Vector3(px, py, pz); // Vector3.Lerp(pNewPlayer.transform.position, new Vector3(px, py, pz), Time.deltaTime);
-        }
-
         return true;
     }
 
@@ -133,7 +123,6 @@ public class GameClient : MonoBehaviour
     private void InitializedSutb()
     {
         m_ClientStub = new Stub();
-        m_ClientStub.OnPositionUpdated += OnPositionUpdated;
         m_ClientStub.OnChat += OnChat;
         m_ClientStub.OnPlayerJoined += OnPlayerJoined;
         m_ClientStub.OnOtherPlayerUpdated += OnOtherPlayerUpdated;

@@ -58,7 +58,7 @@ void CServerManager::Leave_Client(int ClientID)
     if (iter != m_PlayerList.end())
     {
         // 여기서 나간 클라이언트를 제외한 모두에게 이벤트 호출을 통해서 알려주자.
-        m_PlayerList.erase(iter);
+        iter->second->bIsDead = true;
     }
 }
 
@@ -99,12 +99,7 @@ void CServerManager::Initalized(ErrorInfoPtr Error)
 void CServerManager::Update(float fTime)
 {
    // Tick처리를 위한 데이터를 여기서 뿌리자
-    cout << "Tick : " << fTime << endl;
    
-}
-
-void CServerManager::Update_Proxy()
-{
     HostID clientList[256];
     int count = m_pServer->GetClientHostIDs(clientList, 256);
 
@@ -118,5 +113,25 @@ void CServerManager::Update_Proxy()
             double Latency = m_pServer->GetRecentPingSec(clientList[i]);
             m_pProxy->OnOtherPlayerUpdated(clientList[i], RmiContext::ReliableSend, pPlayer->hostID, pPlayer->NickName, pPlayer->PosX, pPlayer->PosY, pPlayer->PosZ);
         }
+    }
+
+}
+
+void CServerManager::Update_Proxy()
+{
+    
+}
+
+void CServerManager::Clear_DeadClient()
+{
+    for (auto iter = m_PlayerList.begin();  iter != m_PlayerList.end();)
+    {
+        if (iter->second->bIsDead)
+        {
+            delete iter->second;
+            iter = m_PlayerList.erase(iter);
+        }
+        else
+            iter++;
     }
 }

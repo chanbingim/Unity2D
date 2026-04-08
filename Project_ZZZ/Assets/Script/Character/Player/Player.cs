@@ -1,3 +1,4 @@
+using InputCommand;
 using UnityEngine;
 
 public class Player : Character
@@ -17,6 +18,13 @@ public class Player : Character
     // Update is called once per frame
     void Update()
     {
+    }
+
+    public void Character_LookAt(Vector3 vDir)
+    {
+        Quaternion NewRot = Quaternion.LookRotation(vDir);
+        transform.rotation = Quaternion.Lerp(
+            transform.rotation, NewRot, m_fSpeed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)

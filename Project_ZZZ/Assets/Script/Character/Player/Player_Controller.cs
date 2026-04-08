@@ -1,13 +1,15 @@
 using InputCommand;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player_Controller : CCharacter_Controller
 {
    
-    [SerializeField] Character      m_Character = null;
+    [SerializeField] Player         m_Character = null;
     [SerializeField] Player_Camera  m_PlayerCam = null;
 
     private CMoveCommand        m_MoveCommand;
+    private CMoveCommand        m_ServerMoveCommand;
     private GameClient          m_Client = null;
 
     void Start()
@@ -18,8 +20,9 @@ public class Player_Controller : CCharacter_Controller
             m_PlayerCam = Camera.main.GetComponent<Player_Camera>();
             m_PlayerCam.Target = m_Character.gameObject;
         }
-      
+
         m_MoveCommand = new CMoveCommand(m_Character.transform, Vector3.zero, 0.0f, 0.0f);
+        m_ServerMoveCommand = new CMoveCommand(m_Character.transform, Vector3.zero, 0.0f, 0.0f);
     }
 
     // Update is called once per frame
@@ -42,12 +45,25 @@ public class Player_Controller : CCharacter_Controller
                 m_MoveCommand.m_vDir = vDir.x * camRight + vDir.z * camForward;
                 m_MoveCommand.m_fSpeed = m_Character.m_fSpeed;
                 m_MoveCommand.m_fRotSpeed = m_Character.m_fRotationSpeed;
-                m_Client.ClientMoveMessage(m_MoveCommand);
 
-                //m_Character.HandleCommand("Move", m_MoveCommand);
+                m_Character.Character_LookAt(m_MoveCommand.m_vDir);
+                m_Client.ClientMoveMessage(m_MoveCommand);
             }
-            else
-                m_Character.HandleCommand("Idle", null);
+        }
+    }
+
+    public  void Update_Position(float px, float py, float pz)
+    {
+        m_ServerMoveCommand.m_vDir = new Vector3(px, py, pz);
+        Debug.Log(m_ServerMoveCommand.m_vDir);
+
+        if (m_ServerMoveCommand.m_vDir != m_Character.transform.position)
+        {
+            m_Character.HandleCommand("Move", m_ServerMoveCommand);
+        }
+        else
+        {
+            m_Character.HandleCommand("Idle", null);
         }
     }
 }
