@@ -14,7 +14,7 @@ public class Player_Controller : CCharacter_Controller
 
     void Start()
     {
-        m_Client = GameObject.FindWithTag("GameManager").GetComponent<GameClient>();
+        m_Client = GameClient.Get_Instance();
         if(gameObject.name == "Player")
         {
             m_PlayerCam = Camera.main.GetComponent<Player_Camera>();

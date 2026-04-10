@@ -448,6 +448,7 @@
 "Assets/Script/Object/InstancingTest.cs"
 "Assets/Script/UI/CUIAnimComponent.cs"
 "Assets/Script/UI/Loading/Loading_Level.cs"
+"Assets/Script/UI/Lobby/ChatingUI.cs"
 "Assets/Script/UI/Lobby/InteractionUI.cs"
 "Assets/Script/UI/Tittle/CTittle.cs"
 "Assets/Script/UIRender.cs"

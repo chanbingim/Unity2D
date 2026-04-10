@@ -10,15 +10,35 @@ DEFRMI_ClientToServer_OnPositionUpdated(CCustom_Stub)
     float NewY = PosY + DirY;
     float NewZ = PosZ + DirZ;
 
-    auto pInstance = CServerManager::Get_Instance();
-    Proxy* pProxy = pInstance->Get_Proxy();
-
-    pInstance->Update_Player((HostID)clientId, NewX, NewY, NewZ);
+    m_pInstance->Update_Player((HostID)clientId, NewX, NewY, NewZ);
     return true;
 }
 
 DEFRMI_ClientToServer_OnChat(CCustom_Stub)
 {
-
+    m_pInstance->ADD_Chat((HostID)clientId, message);
     return true;
+}
+
+CCustom_Stub* CCustom_Stub::Create()
+{
+    CCustom_Stub* pInstance = new CCustom_Stub();
+    if (FAILED(pInstance->Initialize()))
+    {
+        delete pInstance;
+        pInstance = nullptr;
+    }
+
+    return pInstance;
+}
+
+void CCustom_Stub::Release()
+{
+}
+
+HRESULT CCustom_Stub::Initialize()
+{
+    m_pInstance = CServerManager::Get_Instance();
+
+    return S_OK;
 }

@@ -34,6 +34,8 @@ public :
     void                    Leave_Client(int ClientID);
 
     void                    Update_Player(HostID ID, float PosX, float PosY, float PosZ);
+    void                    ADD_Chat(HostID ID, string Text);
+    void                    Clear_Chat();
 
     void                    Update(float fTime);
     void                    Update_Proxy();
@@ -48,9 +50,12 @@ private :
     static CServerManager*              m_pGameInstance;
     unordered_map<int, Player*>         m_PlayerList;
 
-    Proxy*                  m_pProxy = nullptr;
-    CCustom_Stub*           m_pStub = nullptr;
-    CNetServer*             m_pServer = nullptr;
-    CServer_Event*          m_pEvent = nullptr;
+    Deque<string>                       m_ChatList;
+    queue<string>                       m_NewChat;
+
+    Proxy*                              m_pProxy = nullptr;
+    CCustom_Stub*                       m_pStub = nullptr;
+    CNetServer*                         m_pServer = nullptr;
+    CServer_Event*                      m_pEvent = nullptr;
 };
 

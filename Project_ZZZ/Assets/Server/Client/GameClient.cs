@@ -7,33 +7,33 @@ using UnityEngine;
 using System.Collections.Generic;
 using static ServerToClient.Stub;
 using System;
+using static Defines;
+using Unity.VisualScripting;
 
 public class GameClient : MonoBehaviour
 {
-    Dictionary<int, Player_Controller>     m_Players;
-    [SerializeField]    int         m_MyID;
-    public GameObject               m_PlayerPrefab;
+    public GameObject                   m_PlayerPrefab;
+    public event Action<string>         m_ChatEvent;
 
-    NetClient       m_netClient = null;
-    Stub            m_ClientStub = null;
-    Proxy           m_ClientProxy = null;
+#region private
+    private static GameClient   m_pInstance = null;
+    private NetClient           m_netClient = null;
+    private Stub                m_ClientStub = null;
+    private Proxy               m_ClientProxy = null;
 
-    void Start()
+    [SerializeField] private int                m_MyID;
+    private Dictionary<int, Player_Controller>  m_Players;
+#endregion
+
+    public static GameClient Get_Instance()
     {
-        m_netClient = new NetClient();
-        // 파라미터 정의
-        NetConnectionParam ClientParam = new NetConnectionParam();
-        m_Players = new Dictionary<int, Player_Controller>();
-
-        // 서버와 동일한 protocol version, 입력하지 않아도 됨
-        //cp.protocolVersion.Set(version);
-        // server address
-        ClientParam.serverIP = "localhost";
-        // server port
-        ClientParam.serverPort = 33334;
-
-        InitalizedClient();
-        m_netClient.Connect(ClientParam);
+        if (null == m_pInstance)
+        {
+            m_pInstance = new GameClient();
+            if (REULST.FAIL == m_pInstance.InitalizedClient())
+                return null;
+        }
+        return m_pInstance;
     }
 
     void Update()
@@ -51,10 +51,9 @@ public class GameClient : MonoBehaviour
         m_netClient.Disconnect();
     }
 
-    public void SendMessage(HostID iD = 0)
+    public void Send_Message(String text)
     {
-        //if(0 == iD)
-            //netClient.SendUserMessage(netClient.GetLocalHostID(), RmiContext::Unreliable, data, 100););
+        m_ClientProxy.OnChat(HostID.HostID_Server, RmiContext.ReliableSend, m_MyID, text);
     }
 
     public void ClientMoveMessage(ICommand Command)
@@ -101,18 +100,31 @@ public class GameClient : MonoBehaviour
 
     private bool OnChat(HostID remote, RmiContext rmiContext, int ClienID, string Message)
     {
-        Debug.Log("ClienID : " + ClienID);
-        Debug.Log("ClienID : " + Message);
+        m_ChatEvent.Invoke(Message);
         return true;
     }
 
-    #region Private
-
-    private void InitalizedClient()
+#region Private
+    private REULST InitalizedClient()
     {
+        m_netClient = new NetClient();
+        // 파라미터 정의
+        NetConnectionParam ClientParam = new NetConnectionParam();
+        m_Players = new Dictionary<int, Player_Controller>();
+
+        // 서버와 동일한 protocol version, 입력하지 않아도 됨
+        //cp.protocolVersion.Set(version);
+        // server address
+        ClientParam.serverIP = "localhost";
+        // server port
+        ClientParam.serverPort = 33334;
+
         BindNetClientHandler();
         InitializedSutb();
         InitializedProxy();
+        m_netClient.Connect(ClientParam);
+
+        return REULST.SUCCESS;
     }
 
     private void BindNetClientHandler()
@@ -143,6 +155,6 @@ public class GameClient : MonoBehaviour
         else
             Debug.Log("Player Join Fail");
     }
-    #endregion
+#endregion
 
 }

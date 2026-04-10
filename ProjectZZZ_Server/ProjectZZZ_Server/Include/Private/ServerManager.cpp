@@ -33,6 +33,8 @@ void CServerManager::Release_Server()
     for (auto& iter : m_PlayerList)
         delete iter.second;
 
+    delete  m_pProxy;
+    m_pStub->Release();
     m_PlayerList.clear();
 }
 
@@ -73,10 +75,25 @@ void CServerManager::Update_Player(HostID ID, float PosX, float PosY, float PosZ
     }
 }
 
+void CServerManager::ADD_Chat(HostID ID, string Text)
+{
+    auto iter = m_PlayerList.find(ID);
+    if (iter != m_PlayerList.end())
+    {
+        string Chat = iter->second->NickName + " : " + Text;
+        m_NewChat.push(Chat);
+        cout << "Log ChatMsg :" << Chat << endl;
+    }
+}
+
+void CServerManager::Clear_Chat()
+{
+    m_ChatList.clear();
+}
+
 void CServerManager::Initalized(ErrorInfoPtr Error)
 {
     m_pServer = CNetServer::Create();
-
     m_pEvent = CServer_Event::Create();
     m_pServer->SetEventSink(m_pEvent);
 
@@ -84,12 +101,13 @@ void CServerManager::Initalized(ErrorInfoPtr Error)
     param.m_tcpPorts.push_back(33334);
 
     m_pProxy = new Proxy();
-    m_pStub = new CCustom_Stub();
+    m_pStub = CCustom_Stub::Create();
 
     m_pServer->AttachProxy(m_pProxy);
     m_pServer->AttachStub(m_pStub);
     m_pServer->Start(param, Error);
 
+    m_ChatList.reserve(1000);
     if (Error != nullptr)
         cout << "Server start failed: " << Error->ToString().GetString() << endl;
     else
@@ -112,9 +130,14 @@ void CServerManager::Update(float fTime)
         {
             double Latency = m_pServer->GetRecentPingSec(clientList[i]);
             m_pProxy->OnOtherPlayerUpdated(clientList[i], RmiContext::ReliableSend, pPlayer->hostID, pPlayer->NickName, pPlayer->PosX, pPlayer->PosY, pPlayer->PosZ);
+
+            while (!m_NewChat.empty())
+                m_pProxy->OnChat(clientList[i], RmiContext::ReliableSend, clientList[i], m_NewChat.front());
         }
     }
 
+    while (!m_NewChat.empty())
+        m_NewChat.pop();
 }
 
 void CServerManager::Update_Proxy()
