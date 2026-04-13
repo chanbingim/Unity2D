@@ -22,7 +22,7 @@ public class ChatingUI : MonoBehaviour
     private GameClient                          m_Client = null;
     private int                                 m_ViewBoundIdx = 0;
     private Vector2                             m_PrefabSize = Vector2.zero;
-
+    private Coroutine                           m_HideRoutine;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -81,9 +81,12 @@ public class ChatingUI : MonoBehaviour
         {
             gameObject.SetActive(true);
             m_InputField.Select();
+
+            if(null != m_HideRoutine)
+                StopCoroutine(m_HideRoutine);        
         }
         else
-            StartCoroutine(HideChatAfterDelay(3f));
+            m_HideRoutine = StartCoroutine(HideChatAfterDelay(3f));
     }
 
     IEnumerator HideChatAfterDelay(float time)
