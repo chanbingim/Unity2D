@@ -8,7 +8,9 @@ using static Defines;
 
 public class CUtilyManager
 {
-    private static CUtilyManager pInstance = null;
+    private static CUtilyManager    pInstance = null;
+ 
+
     private Vector2Int vScreenSize;
     private string szNextLevel;
 
@@ -27,12 +29,12 @@ public class CUtilyManager
     #endregion
 
     #region private
-    private REULST Initialize()
+    private RESULT Initialize()
     {
         Debug.Log("Create GameManager");
         vScreenSize = new Vector2Int(Screen.width, Screen.height);
 
-        return REULST.SUCCESS;
+        return RESULT.SUCCESS;
     }
     #endregion
 
@@ -47,7 +49,7 @@ public class CUtilyManager
         if (null == pInstance)
         {
             pInstance = new CUtilyManager();
-            if (REULST.FAIL == pInstance.Initialize())
+            if (RESULT.FAIL == pInstance.Initialize())
                 return null;
         }
         return pInstance;

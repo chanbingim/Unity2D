@@ -1,4 +1,5 @@
 using InputCommand;
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class Player_Controller : CCharacter_Controller
     [SerializeField] Player         m_Character = null;
     [SerializeField] Player_Camera  m_PlayerCam = null;
 
+    private Boolean             m_EnableChating = false;
     private CMoveCommand        m_MoveCommand;
     private CMoveCommand        m_ServerMoveCommand;
     private GameClient          m_Client = null;
@@ -21,6 +23,7 @@ public class Player_Controller : CCharacter_Controller
             m_PlayerCam.Target = m_Character.gameObject;
         }
 
+        GameManager.GetInstance().Add_ListenList(EnableChating);
         m_MoveCommand = new CMoveCommand(m_Character.transform, Vector3.zero, 0.0f, 0.0f);
         m_ServerMoveCommand = new CMoveCommand(m_Character.transform, Vector3.zero, 0.0f, 0.0f);
     }
@@ -29,6 +32,15 @@ public class Player_Controller : CCharacter_Controller
     void Update()
     {
         if (null != m_Character)
+        {
+            if(false == m_EnableChating)
+                InputFocusCharacter();
+        }
+    }
+    
+    private void InputFocusCharacter()
+    {
+        if (false == m_EnableChating)
         {
             Vector3 vDir = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
             if (Vector3.zero != vDir)
@@ -52,10 +64,14 @@ public class Player_Controller : CCharacter_Controller
         }
     }
 
+    public void EnableChating(Boolean bIsEnable)
+    {
+        m_EnableChating = bIsEnable;
+    }
+
     public  void Update_Position(float px, float py, float pz)
     {
         m_ServerMoveCommand.m_vDir = new Vector3(px, py, pz);
-        Debug.Log(m_ServerMoveCommand.m_vDir);
 
         if (m_ServerMoveCommand.m_vDir != m_Character.transform.position)
         {

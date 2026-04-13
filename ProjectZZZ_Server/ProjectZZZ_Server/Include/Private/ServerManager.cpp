@@ -81,8 +81,8 @@ void CServerManager::ADD_Chat(HostID ID, string Text)
     if (iter != m_PlayerList.end())
     {
         string Chat = iter->second->NickName + " : " + Text;
-        m_NewChat.push(Chat);
-        cout << "Log ChatMsg :" << Chat << endl;
+        m_NewChat.push_back(Chat);
+        cout << "Log ChatMsg -" << Chat << endl;
     }
 }
 
@@ -107,7 +107,7 @@ void CServerManager::Initalized(ErrorInfoPtr Error)
     m_pServer->AttachStub(m_pStub);
     m_pServer->Start(param, Error);
 
-    m_ChatList.reserve(1000);
+    m_NewChat.reserve(1000);
     if (Error != nullptr)
         cout << "Server start failed: " << Error->ToString().GetString() << endl;
     else
@@ -131,13 +131,12 @@ void CServerManager::Update(float fTime)
             double Latency = m_pServer->GetRecentPingSec(clientList[i]);
             m_pProxy->OnOtherPlayerUpdated(clientList[i], RmiContext::ReliableSend, pPlayer->hostID, pPlayer->NickName, pPlayer->PosX, pPlayer->PosY, pPlayer->PosZ);
 
-            while (!m_NewChat.empty())
-                m_pProxy->OnChat(clientList[i], RmiContext::ReliableSend, clientList[i], m_NewChat.front());
+            for(auto& Text : m_NewChat)
+                m_pProxy->OnChat(clientList[i], RmiContext::ReliableSend, clientList[i], Text);
         }
     }
 
-    while (!m_NewChat.empty())
-        m_NewChat.pop();
+    m_NewChat.clear();
 }
 
 void CServerManager::Update_Proxy()

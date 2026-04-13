@@ -1,24 +1,39 @@
+using System;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class GameManager : MonoBehaviour
 {
-    CUtilyManager   m_gUtilyMgr = null;
-    GameClient      m_client = null;
+    static GameManager              m_pInstance = null;
+    CUtilyManager                   m_gUtilyMgr = null;
+    CInputManager                   m_pInputManager = null;
 
-
-    public GameClient      GetGameClient() { return m_client; }
-
+    public static GameManager GetInstance() { return m_pInstance; }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        m_gUtilyMgr = CUtilyManager.Get_Instance();
-        m_client = gameObject.GetComponent<GameClient>();
-        Debug.Log("Create Manager");
+        if(null == m_pInstance)
+        {
+            m_pInstance = this;
+            m_gUtilyMgr = CUtilyManager.Get_Instance();
+            m_pInputManager = CInputManager.Create();
+
+            GameClient.Get_Instance();
+            Debug.Log("Create Manager");
+        }
+        else
+            Destroy(m_pInstance);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        m_pInputManager.Update();
     }
+
+    public void Add_ListenList(Action<Boolean> Event)
+    {
+        m_pInputManager.EnableChating += Event;
+    }
+
 }

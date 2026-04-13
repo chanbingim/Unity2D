@@ -5,10 +5,8 @@ using InputCommand;
 using Nettention.Proud;
 using UnityEngine;
 using System.Collections.Generic;
-using static ServerToClient.Stub;
 using System;
 using static Defines;
-using Unity.VisualScripting;
 
 public class GameClient : MonoBehaviour
 {
@@ -16,29 +14,35 @@ public class GameClient : MonoBehaviour
     public event Action<string>         m_ChatEvent;
 
 #region private
-    private static GameClient   m_pInstance = null;
+    private static GameClient m_pInstance = null;
     private NetClient           m_netClient = null;
     private Stub                m_ClientStub = null;
     private Proxy               m_ClientProxy = null;
 
     [SerializeField] private int                m_MyID;
     private Dictionary<int, Player_Controller>  m_Players;
-#endregion
-
-    public static GameClient Get_Instance()
+    #endregion
+    private void Awake()
     {
         if (null == m_pInstance)
         {
-            m_pInstance = new GameClient();
-            if (REULST.FAIL == m_pInstance.InitalizedClient())
-                return null;
+            m_pInstance = this;
+            if (RESULT.FAIL == m_pInstance.InitalizedClient())
+            {
+                Destroy(m_pInstance);
+            }
         }
+    }
+
+    public static GameClient Get_Instance()
+    {
         return m_pInstance;
     }
 
     void Update()
     {
-        m_netClient.FrameMove();
+        if (null != m_netClient)
+            m_netClient.FrameMove();
     }
 
     private void LateUpdate()
@@ -105,7 +109,7 @@ public class GameClient : MonoBehaviour
     }
 
 #region Private
-    private REULST InitalizedClient()
+    private RESULT InitalizedClient()
     {
         m_netClient = new NetClient();
         // 파라미터 정의
@@ -118,13 +122,13 @@ public class GameClient : MonoBehaviour
         ClientParam.serverIP = "localhost";
         // server port
         ClientParam.serverPort = 33334;
-
+      
         BindNetClientHandler();
         InitializedSutb();
         InitializedProxy();
-        m_netClient.Connect(ClientParam);
 
-        return REULST.SUCCESS;
+        m_netClient.Connect(ClientParam);
+        return RESULT.SUCCESS;
     }
 
     private void BindNetClientHandler()

@@ -1,6 +1,6 @@
 public class Defines
 {
-    public enum REULST
+    public enum RESULT
     {
         SUCCESS,
         FAIL

@@ -51,7 +51,7 @@ private :
     unordered_map<int, Player*>         m_PlayerList;
 
     Deque<string>                       m_ChatList;
-    queue<string>                       m_NewChat;
+    vector<string>                      m_NewChat;
 
     Proxy*                              m_pProxy = nullptr;
     CCustom_Stub*                       m_pStub = nullptr;
