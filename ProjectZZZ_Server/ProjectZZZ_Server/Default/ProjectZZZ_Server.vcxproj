@@ -77,7 +77,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>../Bin/Debug/</OutDir>
-    <PublicIncludeDirectories>../Include/;$(PublicIncludeDirectories)</PublicIncludeDirectories>
+    <PublicIncludeDirectories>../Public/;../Private/;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -117,7 +117,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;USE_PROUDNET_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProudNetIncludeDir);$(ProjectIncludeDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../Public/;../Private/;../ProudNet/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -149,18 +149,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Include\Private\ClientRmi_common.cpp" />
-    <ClCompile Include="..\Include\Private\ClientRmi_stub.cpp" />
-    <ClCompile Include="..\Include\Private\Custom_Stub.cpp" />
-    <ClCompile Include="..\Include\Private\ServerEvent.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">pch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="..\Include\Private\ServerManager.cpp" />
-    <ClCompile Include="..\Include\Private\ServerRmi_common.cpp" />
-    <ClCompile Include="..\Include\Private\ServerRmi_proxy.cpp" />
-    <ClCompile Include="..\Include\Private\Timer.cpp" />
-    <ClCompile Include="..\Include\Private\TimerManager.cpp" />
+    <ClCompile Include="..\Private\ClientRmi_common.cpp" />
+    <ClCompile Include="..\Private\ClientRmi_stub.cpp" />
+    <ClCompile Include="..\Private\Custom_Stub.cpp" />
+    <ClCompile Include="..\private\Player.cpp" />
+    <ClCompile Include="..\Private\ServerEvent.cpp" />
+    <ClCompile Include="..\Private\ServerManager.cpp" />
+    <ClCompile Include="..\Private\ServerRmi_common.cpp" />
+    <ClCompile Include="..\Private\ServerRmi_proxy.cpp" />
+    <ClCompile Include="..\private\Session.cpp" />
+    <ClCompile Include="..\Private\Timer.cpp" />
+    <ClCompile Include="..\Private\TimerManager.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
@@ -168,19 +167,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\Include\Public\ClientRmi_common.h" />
-    <ClInclude Include="..\Include\Public\ClientRmi_stub.h" />
-    <ClInclude Include="..\Include\Public\Custom_Stub.h" />
-    <ClInclude Include="..\Include\Public\pch.h" />
-    <ClInclude Include="..\Include\Public\ServerEvent.h" />
-    <ClInclude Include="..\Include\Public\ServerManager.h" />
-    <ClInclude Include="..\Include\Public\ServerRmi_common.h" />
-    <ClInclude Include="..\Include\Public\ServerRmi_proxy.h" />
-    <ClInclude Include="..\Include\Public\Server_Defines.h" />
-    <ClInclude Include="..\Include\Public\Timer.h" />
-    <ClInclude Include="..\Include\Public\TimerManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\util\ServerRmi.pidl">
@@ -196,6 +182,21 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </AdditionalInputs>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Public\ClientRmi_common.h" />
+    <ClInclude Include="..\Public\ClientRmi_stub.h" />
+    <ClInclude Include="..\Public\Custom_Stub.h" />
+    <ClInclude Include="..\Public\pch.h" />
+    <ClInclude Include="..\public\Player.h" />
+    <ClInclude Include="..\Public\ServerEvent.h" />
+    <ClInclude Include="..\Public\ServerManager.h" />
+    <ClInclude Include="..\Public\ServerRmi_common.h" />
+    <ClInclude Include="..\Public\ServerRmi_proxy.h" />
+    <ClInclude Include="..\Public\Server_Defines.h" />
+    <ClInclude Include="..\public\Session.h" />
+    <ClInclude Include="..\Public\Timer.h" />
+    <ClInclude Include="..\Public\TimerManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

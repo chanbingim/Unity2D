@@ -43,78 +43,96 @@
     <Filter Include="100. Global\Define">
       <UniqueIdentifier>{511b04b5-3431-48bc-a05d-7c2823b12afb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05. Session">
+      <UniqueIdentifier>{b2e1e1c7-8a79-4d47-9d8f-3f9a3c0651c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. Session\Player">
+      <UniqueIdentifier>{0bd49fd5-6530-483e-8fc5-046a4bfe47dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ProjectZZZ_Server.cpp" />
-    <ClCompile Include="..\Include\Private\ServerEvent.cpp">
+    <ClCompile Include="..\Private\ClientRmi_common.cpp">
+      <Filter>02. RIMI\Common\Client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ServerRmi_common.cpp">
+      <Filter>02. RIMI\Common\Server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ServerEvent.cpp">
       <Filter>01. ServerEvent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ClientRmi_stub.cpp">
+      <Filter>02. RIMI\Stub\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Custom_Stub.cpp">
+      <Filter>02. RIMI\Stub</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ServerRmi_proxy.cpp">
+      <Filter>02. RIMI\Proxy\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ServerManager.cpp">
+      <Filter>03. ServerManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\TimerManager.cpp">
+      <Filter>04. Timer\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Timer.cpp">
+      <Filter>04. Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\Session.cpp">
+      <Filter>05. Session</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\Player.cpp">
+      <Filter>05. Session\Player</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>100. Global</Filter>
     </ClCompile>
-    <ClCompile Include="..\Include\Private\ServerRmi_proxy.cpp">
-      <Filter>02. RIMI\Proxy\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Include\Private\Custom_Stub.cpp">
-      <Filter>02. RIMI\Stub</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Include\Private\ClientRmi_stub.cpp">
-      <Filter>02. RIMI\Stub\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Include\Private\ClientRmi_common.cpp">
-      <Filter>02. RIMI\Common\Client</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Include\Private\ServerRmi_common.cpp">
-      <Filter>02. RIMI\Common\Server</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Include\Private\ServerManager.cpp">
-      <Filter>03. ServerManager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Include\Private\Timer.cpp">
-      <Filter>04. Timer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Include\Private\TimerManager.cpp">
-      <Filter>04. Timer\Manager</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\Include\Public\pch.h">
-      <Filter>100. Global</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Public\ServerEvent.h">
-      <Filter>01. ServerEvent</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Public\ServerRmi_proxy.h">
-      <Filter>02. RIMI\Proxy\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Public\Custom_Stub.h">
-      <Filter>02. RIMI\Stub</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Public\ClientRmi_stub.h">
-      <Filter>02. RIMI\Stub\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Public\ClientRmi_common.h">
-      <Filter>02. RIMI\Common\Client</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Public\ServerRmi_common.h">
-      <Filter>02. RIMI\Common\Server</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Public\ServerManager.h">
-      <Filter>03. ServerManager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Public\Timer.h">
-      <Filter>04. Timer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Public\Server_Defines.h">
-      <Filter>100. Global\Define</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Public\TimerManager.h">
-      <Filter>04. Timer\Manager</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\util\ServerRmi.pidl">
       <Filter>02. RIMI</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Public\ClientRmi_common.h">
+      <Filter>02. RIMI\Common\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ServerRmi_common.h">
+      <Filter>02. RIMI\Common\Server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ServerEvent.h">
+      <Filter>01. ServerEvent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ClientRmi_stub.h">
+      <Filter>02. RIMI\Stub\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Custom_Stub.h">
+      <Filter>02. RIMI\Stub</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ServerRmi_proxy.h">
+      <Filter>02. RIMI\Proxy\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Server_Defines.h">
+      <Filter>100. Global\Define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ServerManager.h">
+      <Filter>03. ServerManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\TimerManager.h">
+      <Filter>04. Timer\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Timer.h">
+      <Filter>04. Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\pch.h">
+      <Filter>100. Global</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\Session.h">
+      <Filter>05. Session</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\Player.h">
+      <Filter>05. Session\Player</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
