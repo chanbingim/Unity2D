@@ -65,7 +65,7 @@ public class GameClient : MonoBehaviour
         if(null != Command)
         {
             CMoveCommand moveCommand = (CMoveCommand)Command;
-            Vector3 CurPos = moveCommand.m_Transform.position;
+            Vector3 CurPos = moveCommand.m_vCurPos;
             Vector3 NewDir = moveCommand.m_vDir * moveCommand.m_fSpeed * Time.deltaTime;
 
             m_ClientProxy.OnPositionUpdated(HostID.HostID_Server, RmiContext.UnreliableSend, (int)m_MyID,

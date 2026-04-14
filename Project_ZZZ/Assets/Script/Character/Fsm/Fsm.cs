@@ -5,12 +5,11 @@ using UnityEngine;
 
 public class Fsm
 {
-    [SerializeField]
-    protected float m_fMoveSpeed;
+    [SerializeField] protected float m_fMoveSpeed;
     protected Vector3 m_fDirection;
 
     protected Dictionary<string, IFSMState> Dic_State;
-    protected IFSMState m_CurState;
+    protected IFSMState     m_CurState;
 
     // 상태 만들고 상태안에서 이동움직임 처리하자
     public Vector3 Get_Direction() { return m_fDirection; }
@@ -39,9 +38,9 @@ public class Fsm
         }
     }
 
-    public void FSM_Update(ICommand command)
+    public void FSM_Update(Character character, CBaseCommand command)
     {
         if (null != m_CurState)
-            m_CurState.OnUpdate(command);
+            m_CurState.OnUpdate(character, command);
     }
 }

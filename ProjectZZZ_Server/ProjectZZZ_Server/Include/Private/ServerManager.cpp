@@ -36,6 +36,7 @@ void CServerManager::Release_Server()
     delete  m_pProxy;
     m_pStub->Release();
     m_PlayerList.clear();
+    m_pServer->Stop();
 }
 
 void CServerManager::ADD_JoinClient(Player* ClientData)

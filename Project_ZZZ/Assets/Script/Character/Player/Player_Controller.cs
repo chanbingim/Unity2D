@@ -11,7 +11,6 @@ public class Player_Controller : CCharacter_Controller
 
     private Boolean             m_EnableChating = false;
     private CMoveCommand        m_MoveCommand;
-    private CMoveCommand        m_ServerMoveCommand;
     private GameClient          m_Client = null;
 
     void Start()
@@ -24,8 +23,7 @@ public class Player_Controller : CCharacter_Controller
         }
 
         GameManager.GetInstance().Add_ListenList(EnableChating);
-        m_MoveCommand = new CMoveCommand(m_Character.transform, Vector3.zero, 0.0f, 0.0f);
-        m_ServerMoveCommand = new CMoveCommand(m_Character.transform, Vector3.zero, 0.0f, 0.0f);
+        m_MoveCommand = new CMoveCommand(Vector3.zero, Vector3.zero, 0.0f);
     }
 
     // Update is called once per frame
@@ -54,9 +52,9 @@ public class Player_Controller : CCharacter_Controller
                 camForward.Normalize();
                 camRight.Normalize();
 
+                m_MoveCommand.m_vCurPos = gameObject.transform.position;
                 m_MoveCommand.m_vDir = vDir.x * camRight + vDir.z * camForward;
                 m_MoveCommand.m_fSpeed = m_Character.m_fSpeed;
-                m_MoveCommand.m_fRotSpeed = m_Character.m_fRotationSpeed;
 
                 m_Character.Character_LookAt(m_MoveCommand.m_vDir);
                 m_Client.ClientMoveMessage(m_MoveCommand);
@@ -71,11 +69,11 @@ public class Player_Controller : CCharacter_Controller
 
     public  void Update_Position(float px, float py, float pz)
     {
-        m_ServerMoveCommand.m_vDir = new Vector3(px, py, pz);
+        m_MoveCommand.m_vDir = new Vector3(px, py, pz);
 
-        if (m_ServerMoveCommand.m_vDir != m_Character.transform.position)
+        if (m_MoveCommand.m_vDir != m_Character.transform.position)
         {
-            m_Character.HandleCommand("Move", m_ServerMoveCommand);
+            m_Character.HandleCommand("Move", m_MoveCommand);
         }
         else
         {

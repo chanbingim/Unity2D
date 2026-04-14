@@ -1,38 +1,28 @@
 using InputCommand;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public abstract class Actor : MonoBehaviour
+{
+    protected Transform     m_Transform = null;
+    protected Animator      m_Animator = null;
+}
+
+public abstract class Character : Actor
 {
     public float m_fRotationSpeed { get; set; }
     public float m_fSpeed { get; set; }
     public float m_Health { get; set; }
 
-    [SerializeField] protected Fsm m_Character_Fsm = null;
-    [SerializeField] protected string m_CurStateName = "";
+    [SerializeField] protected Fsm      m_Character_Fsm = null;
+    [SerializeField] protected string   m_CurStateName = "";
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public abstract void HandleCommand(string StateName, CBaseCommand command);
+
+    public virtual void Move(Vector3 dir)
     {
-
+        m_Transform.position = dir;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public void HandleCommand(string StateName, ICommand command)
-    {
-        if (null != m_Character_Fsm)
-        {
-            if (m_CurStateName != StateName)
-            {
-                m_CurStateName = StateName;
-                m_Character_Fsm.Change_State(StateName);
-            }
-
-            m_Character_Fsm.FSM_Update(command);
-        }
-    }
+    public virtual void Idle() { }
+    public virtual void Attack() { }
 }

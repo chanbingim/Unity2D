@@ -4,7 +4,7 @@ using UnityEngine;
 public class Player : Character
 {
     public delegate void OnEnter(Transform transform);
-    public OnEnter TirggerEnter;
+    public OnEnter      TirggerEnter;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -13,6 +13,9 @@ public class Player : Character
         m_Health = 1000;
         m_fRotationSpeed = 3;
         m_Character_Fsm = PlayerFSM.CreateFSM();
+
+        m_Transform = gameObject.transform;
+        m_Animator = gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -39,4 +42,33 @@ public class Player : Character
         TirggerEnter.Invoke(null);
     }
 
+    public override void Idle()
+    {
+        m_Animator.SetFloat("Velocity", 0f);
+    }
+
+    public override void Move(Vector3 dir)
+    {
+        m_Animator.SetFloat("Velocity", 1f);
+        base.Move(dir);
+    }
+
+    public override void Attack()
+    {
+
+    }
+
+    public override void HandleCommand(string StateName, CBaseCommand command)
+    {
+        if (null != m_Character_Fsm)
+        {
+            if (m_CurStateName != StateName)
+            {
+                m_CurStateName = StateName;
+                m_Character_Fsm.Change_State(StateName);
+            }
+
+            m_Character_Fsm.FSM_Update(this, command);
+        }
+    }
 }
