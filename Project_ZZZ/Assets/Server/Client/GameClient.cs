@@ -60,6 +60,11 @@ public class GameClient : MonoBehaviour
         m_ClientProxy.OnChat(HostID.HostID_Server, RmiContext.ReliableSend, m_MyID, text);
     }
 
+    public void Log_In(String id, String Password)
+    {
+        m_ClientProxy.OnGameLogin(HostID.HostID_Server, RmiContext.ReliableSend, m_MyID, id, Password);
+    }
+
     public void ClientMoveMessage(ICommand Command)
     {
         if(null != Command)
@@ -95,7 +100,7 @@ public class GameClient : MonoBehaviour
         return true;
     }
 
-    private bool OnPlayerJoined(HostID remote, RmiContext rmiContext, int clientId, float px, float py, float pz)
+    private bool OnPlayerJoined(HostID remote, RmiContext rmiContext, int clientId, string NickName, float px, float py, float pz)
     {
         m_MyID = clientId;
         gameObject.transform.position = new Vector3(px, py, pz);

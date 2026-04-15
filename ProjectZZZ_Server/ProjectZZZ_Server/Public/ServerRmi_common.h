@@ -11,7 +11,11 @@ namespace ServerToClient {
                
     static const ::Proud::RmiID Rmi_OnPositionUpdated = (::Proud::RmiID)(3000+3);
                
-    static const ::Proud::RmiID Rmi_OnChat = (::Proud::RmiID)(3000+4);
+    static const ::Proud::RmiID Rmi_UpdateCharacterAnimState = (::Proud::RmiID)(3000+4);
+               
+    static const ::Proud::RmiID Rmi_ResponseCheckNickname = (::Proud::RmiID)(3000+5);
+               
+    static const ::Proud::RmiID Rmi_OnChat = (::Proud::RmiID)(3000+6);
 
 	// List that has RMI ID.
 	extern ::Proud::RmiID g_RmiIDList[];

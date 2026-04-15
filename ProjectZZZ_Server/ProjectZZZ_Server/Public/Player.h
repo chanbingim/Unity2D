@@ -1,15 +1,6 @@
 #pragma once
 #include "Server_Defines.h"
 
-struct Player_Data
-{
-    int         m_iLevel;
-    string      m_NickName;
-
-    float       m_PosX, m_PosY, m_PosZ;
-    bool        m_bIsDead = false;
-};
-
 class CPlayer
 {
 public :
@@ -18,16 +9,22 @@ public :
     };
 
 public:
-    const Player_Data*      Get_Info() { return &m_pInfo; }
+    const PLAYER_DATA*      Get_Info() { return &m_pInfo; }
+    const STATE_TYPE&       Get_AnimSate() { return m_AnimState; }
+    float                   Get_AnimTime() { return m_fAnimTime; }
 
+    void                    Set_Info(const PLAYER_DATA* pinfo);
     void                    Set_Poisition(float x, float y, float z);
     void                    Set_NickName(const string& szName);
+    void                    Set_AnimSate(STATE_TYPE state, float fTime = 0.f);
     void                    Set_Level(int iLevel);
     void                    Set_Dead();
      
 private:
-    Player_Data             m_pInfo;
+    PLAYER_DATA             m_pInfo;
+
     STATE_TYPE              m_AnimState = STATE_TYPE::END;
+    float                   m_fAnimTime = 0.f;
 
 public :
     static CPlayer*         Create();

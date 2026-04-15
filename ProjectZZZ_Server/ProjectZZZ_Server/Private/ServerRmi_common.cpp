@@ -15,10 +15,14 @@ namespace ServerToClient {
                
 		Rmi_OnPositionUpdated,
                
+		Rmi_UpdateCharacterAnimState,
+               
+		Rmi_ResponseCheckNickname,
+               
 		Rmi_OnChat,
 	};
 
-	int g_RmiIDListCount = 4;
+	int g_RmiIDListCount = 6;
 
 }
 

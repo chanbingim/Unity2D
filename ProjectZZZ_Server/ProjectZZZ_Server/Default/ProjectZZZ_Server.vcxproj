@@ -121,6 +121,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,6 +141,7 @@
       <AdditionalIncludeDirectories>$(ProudNetIncludeDir);$(ProjectIncludeDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -152,6 +154,7 @@
     <ClCompile Include="..\Private\ClientRmi_common.cpp" />
     <ClCompile Include="..\Private\ClientRmi_stub.cpp" />
     <ClCompile Include="..\Private\Custom_Stub.cpp" />
+    <ClCompile Include="..\private\DBManager.cpp" />
     <ClCompile Include="..\private\Player.cpp" />
     <ClCompile Include="..\Private\ServerEvent.cpp" />
     <ClCompile Include="..\Private\ServerManager.cpp" />
@@ -187,6 +190,7 @@
     <ClInclude Include="..\Public\ClientRmi_common.h" />
     <ClInclude Include="..\Public\ClientRmi_stub.h" />
     <ClInclude Include="..\Public\Custom_Stub.h" />
+    <ClInclude Include="..\public\DBManager.h" />
     <ClInclude Include="..\Public\pch.h" />
     <ClInclude Include="..\public\Player.h" />
     <ClInclude Include="..\Public\ServerEvent.h" />
@@ -194,6 +198,7 @@
     <ClInclude Include="..\Public\ServerRmi_common.h" />
     <ClInclude Include="..\Public\ServerRmi_proxy.h" />
     <ClInclude Include="..\Public\Server_Defines.h" />
+    <ClInclude Include="..\Public\Server_Structs.h" />
     <ClInclude Include="..\public\Session.h" />
     <ClInclude Include="..\Public\Timer.h" />
     <ClInclude Include="..\Public\TimerManager.h" />

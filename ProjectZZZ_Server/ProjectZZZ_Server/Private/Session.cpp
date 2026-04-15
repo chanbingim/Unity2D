@@ -31,6 +31,12 @@ void CSession::Set_Dead()
         m_pPlayer->Set_Dead();
 }
 
+void CSession::Set_Info(const PLAYER_DATA* pinfo)
+{
+    if (m_pPlayer)
+        return m_pPlayer->Set_Info(pinfo);
+}
+
 const Player_Data* CSession::Get_Info()
 {
     if (m_pPlayer)
@@ -39,10 +45,10 @@ const Player_Data* CSession::Get_Info()
     return nullptr;
 }
 
-CSession* CSession::Create(int HostID)
+CSession* CSession::Create(int HostID, int TableID, PLAYER_DATA* info)
 {
     CSession* pInstance = new CSession();
-    if (FAILED(pInstance->Initialize(HostID)))
+    if (FAILED(pInstance->Initialize(HostID, TableID, info)))
     {
         delete pInstance;
         pInstance = nullptr;
@@ -57,13 +63,25 @@ void CSession::Release()
     delete m_pPlayer;
 }
 
-HRESULT CSession::Initialize(int HostID)
+HRESULT CSession::Initialize(int HostID, int TableID, PLAYER_DATA* info)
 {
     m_pPlayer = CPlayer::Create();
-    string NickName = "0" + m_hostID;
+    m_hostID = HostID;
+    m_TableID = TableID;
 
-    m_pPlayer->Set_NickName(NickName);
-    cout << "Join Player : " << m_pPlayer->Get_Info()->m_NickName << endl;
+    if (nullptr == info)
+    {
+        string NickName = "Gesut : ";
+        NickName += "0" + m_hostID;
+
+        m_pPlayer->Set_NickName(NickName);
+        cout << "Join Player : " << m_pPlayer->Get_Info()->Name << endl;
+    }
+    else
+    {
+        m_pPlayer->Set_Info(info);
+        cout << "Join Player : " << m_pPlayer->Get_Info()->Name << endl;
+    }
 
     return S_OK;
 }

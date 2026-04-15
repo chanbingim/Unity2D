@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "ServerManager.h"
+#include "DBManager.h"
 #include "ServerEvent.h"
 
 #include "Session.h"
@@ -40,19 +41,63 @@ void CServerManager::Release_Server()
     }
 
     delete  m_pProxy;
+
+    m_pDBManager->Release();
+    delete m_pDBManager;
+
     m_pStub->Release();
     m_SessionList.clear();
     m_pServer->Stop();
 }
 
+#pragma region DB
+bool CServerManager::Login_EXcuteDB(int ClientID, string ID, string Password)
+{
+    if (m_pDBManager)
+        return m_pDBManager->Login_EXcuteDB(ClientID, ID, Password);
+
+    return false;
+}
+
+bool CServerManager::Request_UniqueNickName(int ClientID, string NickName)
+{
+    COdbcRecordset Record;
+
+    if (m_pDBManager)
+        return m_pDBManager->Request_UniqueNickName(ClientID, NickName);
+
+    return false;
+}
+#pragma endregion
+
+#pragma region Client_Event
 void CServerManager::ADD_JoinClient(CSession* ClientData)
 {
     int hostID = ClientData->Get_ID();
     auto iter = m_SessionList.find(hostID);
     if (iter == m_SessionList.end())
     {
-        m_SessionList.emplace(hostID, ClientData);
-        m_pProxy->OnPlayerJoined((HostID)hostID, RmiContext::ReliableSend, hostID, 0, 0, 0);
+        PLAYER_DATA Player_Data;
+        if (m_pDBManager)
+        {
+            if (!m_pDBManager->RequestLoadPlayerData(ClientData->Get_TableID(), Player_Data))
+            {
+                cout << "Not Find Character Data : " << hostID << endl;
+                /*
+                *   나중에 여기서 캐릭터 생성 로직으로 분기
+                */
+
+                return;
+            }
+            else
+            {
+                Player_Data.m_PosX = Player_Data.m_PosY  = Player_Data.m_PosZ = 0;
+
+                ClientData->Set_Info(&Player_Data);
+                m_SessionList.emplace(hostID, ClientData);
+                m_pProxy->OnPlayerJoined((HostID)hostID, RmiContext::ReliableSend, hostID, Player_Data.Name, Player_Data.m_PosX, Player_Data.m_PosY, Player_Data.m_PosZ);
+            }
+        }
     }
     else
     {
@@ -70,6 +115,24 @@ void CServerManager::Leave_Client(int ClientID)
     }
 }
 
+void CServerManager::Clear_DeadClient()
+{
+    for (auto iter = m_SessionList.begin(); iter != m_SessionList.end();)
+    {
+        CSession* pSession = iter->second;
+        const Player_Data* pPlayer_Info = pSession->Get_Info();
+
+        if (pPlayer_Info->m_bIsDead)
+        {
+            delete iter->second;
+            iter = m_SessionList.erase(iter);
+        }
+        else
+            iter++;
+    }
+}
+#pragma endregion
+
 void CServerManager::Update_Player(HostID ID, float PosX, float PosY, float PosZ)
 {
     auto iter = m_SessionList.find(ID);
@@ -77,12 +140,13 @@ void CServerManager::Update_Player(HostID ID, float PosX, float PosY, float PosZ
         iter->second->Set_Poisition(PosX, PosY, PosZ);
 }
 
+#pragma region Chat
 void CServerManager::ADD_Chat(HostID ID, string Text)
 {
     auto iter = m_SessionList.find(ID);
     if (iter != m_SessionList.end())
     {
-        string Chat = iter->second->Get_Info()->m_NickName + " : " + Text;
+        string Chat = iter->second->Get_Info()->Name + " : " + Text;
         m_NewChat.push_back(Chat);
         cout << "Log ChatMsg -" << Chat << endl;
     }
@@ -92,6 +156,7 @@ void CServerManager::Clear_Chat()
 {
     m_ChatList.clear();
 }
+#pragma endregion
 
 void CServerManager::Initalized(ErrorInfoPtr Error)
 {
@@ -109,6 +174,7 @@ void CServerManager::Initalized(ErrorInfoPtr Error)
     m_pServer->AttachStub(m_pStub);
     m_pServer->Start(param, Error);
 
+    m_pDBManager = CDBManager::Create();
     m_NewChat.reserve(1000);
     if (Error != nullptr)
         cout << "Server start failed: " << Error->ToString().GetString() << endl;
@@ -128,13 +194,13 @@ void CServerManager::Update(float fTime)
     for (auto& iter : m_SessionList)
     {
         CSession* pSession = iter.second;
-        const Player_Data* pPlayer_Info = pSession->Get_Info();
+        const PLAYER_DATA* pPlayer_Info = pSession->Get_Info();
 
         for (int i = 0; i < count; i++)
         {
             double Latency = m_pServer->GetRecentPingSec(clientList[i]);
             m_pProxy->OnOtherPlayerUpdated(clientList[i], RmiContext::ReliableSend,
-                pSession->Get_ID(), pPlayer_Info->m_NickName, pPlayer_Info->m_PosX,
+                pSession->Get_ID(), pPlayer_Info->Name, pPlayer_Info->m_PosX,
                 pPlayer_Info->m_PosY, pPlayer_Info->m_PosZ);
 
             for(auto& Text : m_NewChat)
@@ -142,27 +208,6 @@ void CServerManager::Update(float fTime)
         }
     }
 
+    m_pDBManager->Update_DB(m_pProxy);
     m_NewChat.clear();
-}
-
-void CServerManager::Update_Proxy()
-{
-    
-}
-
-void CServerManager::Clear_DeadClient()
-{
-    for (auto iter = m_SessionList.begin();  iter != m_SessionList.end();)
-    {
-        CSession* pSession = iter->second;
-        const Player_Data* pPlayer_Info = pSession->Get_Info();
-
-        if (pPlayer_Info->m_bIsDead)
-        {
-            delete iter->second;
-            iter = m_SessionList.erase(iter);
-        }
-        else
-            iter++;
-    }
 }

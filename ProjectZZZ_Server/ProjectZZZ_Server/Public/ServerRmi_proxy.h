@@ -17,17 +17,23 @@ namespace ServerToClient {
 	class Proxy : public ::Proud::IRmiProxy
 	{
 	public:
-	virtual bool OnPlayerJoined ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & PosX, const float & PosY, const float & PosZ) PN_SEALED; 
-	virtual bool OnPlayerJoined ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & clientId, const float & PosX, const float & PosY, const float & PosZ)   PN_SEALED;  
+	virtual bool OnPlayerJoined ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szNickName, const float & PosX, const float & PosY, const float & PosZ) PN_SEALED; 
+	virtual bool OnPlayerJoined ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & clientId, const string & szNickName, const float & PosX, const float & PosY, const float & PosZ)   PN_SEALED;  
 	virtual bool OnOtherPlayerUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const string & NickName, const float & PosX, const float & PosY, const float & PosZ) PN_SEALED; 
 	virtual bool OnOtherPlayerUpdated ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & ClientID, const string & NickName, const float & PosX, const float & PosY, const float & PosZ)   PN_SEALED;  
 	virtual bool OnPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ) PN_SEALED; 
 	virtual bool OnPositionUpdated ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & clientId, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)   PN_SEALED;  
+	virtual bool UpdateCharacterAnimState ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const int & AnimSate, const float & Time) PN_SEALED; 
+	virtual bool UpdateCharacterAnimState ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & clientId, const int & AnimSate, const float & Time)   PN_SEALED;  
+	virtual bool ResponseCheckNickname ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const bool & bIsAble) PN_SEALED; 
+	virtual bool ResponseCheckNickname ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & clientId, const bool & bIsAble)   PN_SEALED;  
 	virtual bool OnChat ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & message) PN_SEALED; 
 	virtual bool OnChat ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & clientId, const string & message)   PN_SEALED;  
 static const PNTCHAR* RmiName_OnPlayerJoined;
 static const PNTCHAR* RmiName_OnOtherPlayerUpdated;
 static const PNTCHAR* RmiName_OnPositionUpdated;
+static const PNTCHAR* RmiName_UpdateCharacterAnimState;
+static const PNTCHAR* RmiName_ResponseCheckNickname;
 static const PNTCHAR* RmiName_OnChat;
 static const PNTCHAR* RmiName_First;
 		Proxy()

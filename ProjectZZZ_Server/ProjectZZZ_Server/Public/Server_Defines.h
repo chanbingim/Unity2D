@@ -20,5 +20,9 @@
 #include <functional>
 #include <string>
 #include <bitset>
+#include <memory>
+
+// Smart Pointer
+#include "Server_Structs.h"
 
 using namespace std;

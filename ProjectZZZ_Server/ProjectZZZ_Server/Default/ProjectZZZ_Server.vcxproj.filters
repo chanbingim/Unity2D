@@ -49,6 +49,9 @@
     <Filter Include="05. Session\Player">
       <UniqueIdentifier>{0bd49fd5-6530-483e-8fc5-046a4bfe47dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06. DBManager">
+      <UniqueIdentifier>{783902e3-23e2-4de5-93df-0b5ef1b17fa2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ProjectZZZ_Server.cpp" />
@@ -87,6 +90,9 @@
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>100. Global</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\DBManager.cpp">
+      <Filter>06. DBManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +139,12 @@
     </ClInclude>
     <ClInclude Include="..\public\Player.h">
       <Filter>05. Session\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\DBManager.h">
+      <Filter>06. DBManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Server_Structs.h">
+      <Filter>100. Global\Define</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

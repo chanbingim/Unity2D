@@ -43,6 +43,268 @@ namespace ClientToServer {
 					
 		switch((int)__rmiID) // case is to prevent from clang compile error
 		{
+			case Rmi_OnGameLogin:
+				{
+					::Proud::RmiContext ctx;
+					ctx.m_rmiID = __rmiID;
+					ctx.m_sentFrom=pa.GetRemoteHostID();
+					ctx.m_relayed=pa.IsRelayed();
+					ctx.m_hostTag = hostTag;
+					ctx.m_encryptMode = pa.GetEncryptMode();
+					ctx.m_compressMode = pa.GetCompressMode();
+			
+			        if(BeforeDeserialize(remote, ctx, __msg) == false)
+			        {
+			            // The user don't want to call the RMI function. 
+						// So, We fake that it has been already called.
+						__msg.SetReadOffset(__msg.GetLength());
+			            return true;
+			        }
+			
+					int clientId; __msg >> clientId;
+					string szID; __msg >> szID;
+					string szPassWord; __msg >> szPassWord;
+					m_core->PostCheckReadMessage(__msg,RmiName_OnGameLogin);
+					
+			
+					if(m_enableNotifyCallFromStub && !m_internalUse)
+					{
+						::Proud::String parameterString;
+						
+						::Proud::AppendTextOut(parameterString,clientId);	
+										
+						parameterString += _PNT(", ");
+						::Proud::AppendTextOut(parameterString,szID);	
+										
+						parameterString += _PNT(", ");
+						::Proud::AppendTextOut(parameterString,szPassWord);	
+						
+						NotifyCallFromStub(remote, (::Proud::RmiID)Rmi_OnGameLogin, 
+							RmiName_OnGameLogin,parameterString);
+			
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_OnGameLogin, 
+							RmiName_OnGameLogin, parameterString);
+			#endif
+					}
+					else if(!m_internalUse)
+					{
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_OnGameLogin, 
+							RmiName_OnGameLogin, _PNT(""));
+			#endif
+					}
+						
+					int64_t __t0 = 0;
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::BeforeRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_OnGameLogin;
+						summary.m_rmiName = RmiName_OnGameLogin;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						BeforeRmiInvocation(summary);
+			
+						__t0 = ::Proud::GetPreciseCurrentTimeMs();
+					}
+						
+					// Call this method.
+					bool __ret = OnGameLogin (remote,ctx , clientId, szID, szPassWord );
+						
+					if(__ret==false)
+					{
+						// Error: RMI function that a user did not create has been called. 
+						m_core->ShowNotImplementedRmiWarning(RmiName_OnGameLogin);
+					}
+						
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::AfterRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_OnGameLogin;
+						summary.m_rmiName = RmiName_OnGameLogin;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						int64_t __t1;
+			
+						__t1 = ::Proud::GetPreciseCurrentTimeMs();
+			
+						summary.m_elapsedTime = (uint32_t)(__t1 - __t0);
+						AfterRmiInvocation(summary);
+					}
+				}
+				break;
+			case Rmi_Create_Character:
+				{
+					::Proud::RmiContext ctx;
+					ctx.m_rmiID = __rmiID;
+					ctx.m_sentFrom=pa.GetRemoteHostID();
+					ctx.m_relayed=pa.IsRelayed();
+					ctx.m_hostTag = hostTag;
+					ctx.m_encryptMode = pa.GetEncryptMode();
+					ctx.m_compressMode = pa.GetCompressMode();
+			
+			        if(BeforeDeserialize(remote, ctx, __msg) == false)
+			        {
+			            // The user don't want to call the RMI function. 
+						// So, We fake that it has been already called.
+						__msg.SetReadOffset(__msg.GetLength());
+			            return true;
+			        }
+			
+					int clientId; __msg >> clientId;
+					string szNickName; __msg >> szNickName;
+					m_core->PostCheckReadMessage(__msg,RmiName_Create_Character);
+					
+			
+					if(m_enableNotifyCallFromStub && !m_internalUse)
+					{
+						::Proud::String parameterString;
+						
+						::Proud::AppendTextOut(parameterString,clientId);	
+										
+						parameterString += _PNT(", ");
+						::Proud::AppendTextOut(parameterString,szNickName);	
+						
+						NotifyCallFromStub(remote, (::Proud::RmiID)Rmi_Create_Character, 
+							RmiName_Create_Character,parameterString);
+			
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_Create_Character, 
+							RmiName_Create_Character, parameterString);
+			#endif
+					}
+					else if(!m_internalUse)
+					{
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_Create_Character, 
+							RmiName_Create_Character, _PNT(""));
+			#endif
+					}
+						
+					int64_t __t0 = 0;
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::BeforeRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_Create_Character;
+						summary.m_rmiName = RmiName_Create_Character;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						BeforeRmiInvocation(summary);
+			
+						__t0 = ::Proud::GetPreciseCurrentTimeMs();
+					}
+						
+					// Call this method.
+					bool __ret = Create_Character (remote,ctx , clientId, szNickName );
+						
+					if(__ret==false)
+					{
+						// Error: RMI function that a user did not create has been called. 
+						m_core->ShowNotImplementedRmiWarning(RmiName_Create_Character);
+					}
+						
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::AfterRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_Create_Character;
+						summary.m_rmiName = RmiName_Create_Character;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						int64_t __t1;
+			
+						__t1 = ::Proud::GetPreciseCurrentTimeMs();
+			
+						summary.m_elapsedTime = (uint32_t)(__t1 - __t0);
+						AfterRmiInvocation(summary);
+					}
+				}
+				break;
+			case Rmi_RequestCheckNickname:
+				{
+					::Proud::RmiContext ctx;
+					ctx.m_rmiID = __rmiID;
+					ctx.m_sentFrom=pa.GetRemoteHostID();
+					ctx.m_relayed=pa.IsRelayed();
+					ctx.m_hostTag = hostTag;
+					ctx.m_encryptMode = pa.GetEncryptMode();
+					ctx.m_compressMode = pa.GetCompressMode();
+			
+			        if(BeforeDeserialize(remote, ctx, __msg) == false)
+			        {
+			            // The user don't want to call the RMI function. 
+						// So, We fake that it has been already called.
+						__msg.SetReadOffset(__msg.GetLength());
+			            return true;
+			        }
+			
+					int clientId; __msg >> clientId;
+					string szNickName; __msg >> szNickName;
+					m_core->PostCheckReadMessage(__msg,RmiName_RequestCheckNickname);
+					
+			
+					if(m_enableNotifyCallFromStub && !m_internalUse)
+					{
+						::Proud::String parameterString;
+						
+						::Proud::AppendTextOut(parameterString,clientId);	
+										
+						parameterString += _PNT(", ");
+						::Proud::AppendTextOut(parameterString,szNickName);	
+						
+						NotifyCallFromStub(remote, (::Proud::RmiID)Rmi_RequestCheckNickname, 
+							RmiName_RequestCheckNickname,parameterString);
+			
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_RequestCheckNickname, 
+							RmiName_RequestCheckNickname, parameterString);
+			#endif
+					}
+					else if(!m_internalUse)
+					{
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_RequestCheckNickname, 
+							RmiName_RequestCheckNickname, _PNT(""));
+			#endif
+					}
+						
+					int64_t __t0 = 0;
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::BeforeRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_RequestCheckNickname;
+						summary.m_rmiName = RmiName_RequestCheckNickname;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						BeforeRmiInvocation(summary);
+			
+						__t0 = ::Proud::GetPreciseCurrentTimeMs();
+					}
+						
+					// Call this method.
+					bool __ret = RequestCheckNickname (remote,ctx , clientId, szNickName );
+						
+					if(__ret==false)
+					{
+						// Error: RMI function that a user did not create has been called. 
+						m_core->ShowNotImplementedRmiWarning(RmiName_RequestCheckNickname);
+					}
+						
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::AfterRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_RequestCheckNickname;
+						summary.m_rmiName = RmiName_RequestCheckNickname;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						int64_t __t1;
+			
+						__t1 = ::Proud::GetPreciseCurrentTimeMs();
+			
+						summary.m_elapsedTime = (uint32_t)(__t1 - __t0);
+						AfterRmiInvocation(summary);
+					}
+				}
+				break;
 			case Rmi_OnPositionUpdated:
 				{
 					::Proud::RmiContext ctx;
@@ -138,6 +400,96 @@ namespace ClientToServer {
 						::Proud::AfterRmiSummary summary;
 						summary.m_rmiID = (::Proud::RmiID)Rmi_OnPositionUpdated;
 						summary.m_rmiName = RmiName_OnPositionUpdated;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						int64_t __t1;
+			
+						__t1 = ::Proud::GetPreciseCurrentTimeMs();
+			
+						summary.m_elapsedTime = (uint32_t)(__t1 - __t0);
+						AfterRmiInvocation(summary);
+					}
+				}
+				break;
+			case Rmi_OnAnimUpdated:
+				{
+					::Proud::RmiContext ctx;
+					ctx.m_rmiID = __rmiID;
+					ctx.m_sentFrom=pa.GetRemoteHostID();
+					ctx.m_relayed=pa.IsRelayed();
+					ctx.m_hostTag = hostTag;
+					ctx.m_encryptMode = pa.GetEncryptMode();
+					ctx.m_compressMode = pa.GetCompressMode();
+			
+			        if(BeforeDeserialize(remote, ctx, __msg) == false)
+			        {
+			            // The user don't want to call the RMI function. 
+						// So, We fake that it has been already called.
+						__msg.SetReadOffset(__msg.GetLength());
+			            return true;
+			        }
+			
+					int clientId; __msg >> clientId;
+					int AnimStae; __msg >> AnimStae;
+					float Time; __msg >> Time;
+					m_core->PostCheckReadMessage(__msg,RmiName_OnAnimUpdated);
+					
+			
+					if(m_enableNotifyCallFromStub && !m_internalUse)
+					{
+						::Proud::String parameterString;
+						
+						::Proud::AppendTextOut(parameterString,clientId);	
+										
+						parameterString += _PNT(", ");
+						::Proud::AppendTextOut(parameterString,AnimStae);	
+										
+						parameterString += _PNT(", ");
+						::Proud::AppendTextOut(parameterString,Time);	
+						
+						NotifyCallFromStub(remote, (::Proud::RmiID)Rmi_OnAnimUpdated, 
+							RmiName_OnAnimUpdated,parameterString);
+			
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_OnAnimUpdated, 
+							RmiName_OnAnimUpdated, parameterString);
+			#endif
+					}
+					else if(!m_internalUse)
+					{
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_OnAnimUpdated, 
+							RmiName_OnAnimUpdated, _PNT(""));
+			#endif
+					}
+						
+					int64_t __t0 = 0;
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::BeforeRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_OnAnimUpdated;
+						summary.m_rmiName = RmiName_OnAnimUpdated;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						BeforeRmiInvocation(summary);
+			
+						__t0 = ::Proud::GetPreciseCurrentTimeMs();
+					}
+						
+					// Call this method.
+					bool __ret = OnAnimUpdated (remote,ctx , clientId, AnimStae, Time );
+						
+					if(__ret==false)
+					{
+						// Error: RMI function that a user did not create has been called. 
+						m_core->ShowNotImplementedRmiWarning(RmiName_OnAnimUpdated);
+					}
+						
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::AfterRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_OnAnimUpdated;
+						summary.m_rmiName = RmiName_OnAnimUpdated;
 						summary.m_hostID = remote;
 						summary.m_hostTag = hostTag;
 						int64_t __t1;
@@ -246,16 +598,36 @@ __fail:
 		}
 	}
 	#ifdef USE_RMI_NAME_STRING
+	const PNTCHAR* Stub::RmiName_OnGameLogin =_PNT("OnGameLogin");
+	#else
+	const PNTCHAR* Stub::RmiName_OnGameLogin =_PNT("");
+	#endif
+	#ifdef USE_RMI_NAME_STRING
+	const PNTCHAR* Stub::RmiName_Create_Character =_PNT("Create_Character");
+	#else
+	const PNTCHAR* Stub::RmiName_Create_Character =_PNT("");
+	#endif
+	#ifdef USE_RMI_NAME_STRING
+	const PNTCHAR* Stub::RmiName_RequestCheckNickname =_PNT("RequestCheckNickname");
+	#else
+	const PNTCHAR* Stub::RmiName_RequestCheckNickname =_PNT("");
+	#endif
+	#ifdef USE_RMI_NAME_STRING
 	const PNTCHAR* Stub::RmiName_OnPositionUpdated =_PNT("OnPositionUpdated");
 	#else
 	const PNTCHAR* Stub::RmiName_OnPositionUpdated =_PNT("");
+	#endif
+	#ifdef USE_RMI_NAME_STRING
+	const PNTCHAR* Stub::RmiName_OnAnimUpdated =_PNT("OnAnimUpdated");
+	#else
+	const PNTCHAR* Stub::RmiName_OnAnimUpdated =_PNT("");
 	#endif
 	#ifdef USE_RMI_NAME_STRING
 	const PNTCHAR* Stub::RmiName_OnChat =_PNT("OnChat");
 	#else
 	const PNTCHAR* Stub::RmiName_OnChat =_PNT("");
 	#endif
-	const PNTCHAR* Stub::RmiName_First = RmiName_OnPositionUpdated;
+	const PNTCHAR* Stub::RmiName_First = RmiName_OnGameLogin;
 
 }
 

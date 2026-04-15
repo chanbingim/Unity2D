@@ -10,8 +10,8 @@ void CServer_Event::OnClientJoin(CNetClientInfo* clientInfo)
         return;
 
 	cout << "Join : " << clientInfo->m_HostID << endl;
-    CSession*  pSession = CSession::Create(clientInfo->m_HostID);
-    m_pServerMgr_Instance->ADD_JoinClient(pSession);
+   /* CSession*  pSession = CSession::Create(clientInfo->m_HostID);
+    m_pServerMgr_Instance->ADD_JoinClient(pSession);*/
 }
 
 void CServer_Event::OnClientLeave(CNetClientInfo* clientInfo, ErrorInfo* errorinfo, const ByteArray& comment)

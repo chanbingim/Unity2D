@@ -21,6 +21,36 @@ namespace ClientToServer {
 	{
 	public:
                
+		virtual bool OnGameLogin ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const string & , const string & )		{ 
+			return false;
+		} 
+
+#define DECRMI_ClientToServer_OnGameLogin bool OnGameLogin ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szID, const string & szPassWord) PN_OVERRIDE
+
+#define DEFRMI_ClientToServer_OnGameLogin(DerivedClass) bool DerivedClass::OnGameLogin ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szID, const string & szPassWord)
+#define CALL_ClientToServer_OnGameLogin OnGameLogin ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szID, const string & szPassWord)
+#define PARAM_ClientToServer_OnGameLogin ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szID, const string & szPassWord)
+               
+		virtual bool Create_Character ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const string & )		{ 
+			return false;
+		} 
+
+#define DECRMI_ClientToServer_Create_Character bool Create_Character ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szNickName) PN_OVERRIDE
+
+#define DEFRMI_ClientToServer_Create_Character(DerivedClass) bool DerivedClass::Create_Character ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szNickName)
+#define CALL_ClientToServer_Create_Character Create_Character ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szNickName)
+#define PARAM_ClientToServer_Create_Character ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szNickName)
+               
+		virtual bool RequestCheckNickname ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const string & )		{ 
+			return false;
+		} 
+
+#define DECRMI_ClientToServer_RequestCheckNickname bool RequestCheckNickname ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szNickName) PN_OVERRIDE
+
+#define DEFRMI_ClientToServer_RequestCheckNickname(DerivedClass) bool DerivedClass::RequestCheckNickname ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szNickName)
+#define CALL_ClientToServer_RequestCheckNickname RequestCheckNickname ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szNickName)
+#define PARAM_ClientToServer_RequestCheckNickname ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szNickName)
+               
 		virtual bool OnPositionUpdated ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & , const float & , const float & , const float & )		{ 
 			return false;
 		} 
@@ -30,6 +60,16 @@ namespace ClientToServer {
 #define DEFRMI_ClientToServer_OnPositionUpdated(DerivedClass) bool DerivedClass::OnPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)
 #define CALL_ClientToServer_OnPositionUpdated OnPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)
 #define PARAM_ClientToServer_OnPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)
+               
+		virtual bool OnAnimUpdated ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const float & )		{ 
+			return false;
+		} 
+
+#define DECRMI_ClientToServer_OnAnimUpdated bool OnAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const int & AnimStae, const float & Time) PN_OVERRIDE
+
+#define DEFRMI_ClientToServer_OnAnimUpdated(DerivedClass) bool DerivedClass::OnAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const int & AnimStae, const float & Time)
+#define CALL_ClientToServer_OnAnimUpdated OnAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const int & AnimStae, const float & Time)
+#define PARAM_ClientToServer_OnAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const int & AnimStae, const float & Time)
                
 		virtual bool OnChat ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const string & )		{ 
 			return false;
@@ -42,7 +82,11 @@ namespace ClientToServer {
 #define PARAM_ClientToServer_OnChat ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & message)
  
 		virtual bool ProcessReceivedMessage(::Proud::CReceivedMessage &pa, void* hostTag) PN_OVERRIDE;
+		static const PNTCHAR* RmiName_OnGameLogin;
+		static const PNTCHAR* RmiName_Create_Character;
+		static const PNTCHAR* RmiName_RequestCheckNickname;
 		static const PNTCHAR* RmiName_OnPositionUpdated;
+		static const PNTCHAR* RmiName_OnAnimUpdated;
 		static const PNTCHAR* RmiName_OnChat;
 		static const PNTCHAR* RmiName_First;
 		virtual ::Proud::RmiID* GetRmiIDList() PN_OVERRIDE { return g_RmiIDList; }
@@ -55,12 +99,48 @@ namespace ClientToServer {
 	{
 	public:
                
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const string & , const string & ) > OnGameLogin_Function;
+		virtual bool OnGameLogin ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szID, const string & szPassWord) 
+		{ 
+			if (OnGameLogin_Function==nullptr) 
+				return true; 
+			return OnGameLogin_Function(remote,rmiContext, clientId, szID, szPassWord); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const string & ) > Create_Character_Function;
+		virtual bool Create_Character ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szNickName) 
+		{ 
+			if (Create_Character_Function==nullptr) 
+				return true; 
+			return Create_Character_Function(remote,rmiContext, clientId, szNickName); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const string & ) > RequestCheckNickname_Function;
+		virtual bool RequestCheckNickname ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szNickName) 
+		{ 
+			if (RequestCheckNickname_Function==nullptr) 
+				return true; 
+			return RequestCheckNickname_Function(remote,rmiContext, clientId, szNickName); 
+		}
+
+               
 		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & , const float & , const float & , const float & ) > OnPositionUpdated_Function;
 		virtual bool OnPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ) 
 		{ 
 			if (OnPositionUpdated_Function==nullptr) 
 				return true; 
 			return OnPositionUpdated_Function(remote,rmiContext, clientId, PosX, PosY, PosZ, DirX, DirY, DirZ); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const float & ) > OnAnimUpdated_Function;
+		virtual bool OnAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const int & AnimStae, const float & Time) 
+		{ 
+			if (OnAnimUpdated_Function==nullptr) 
+				return true; 
+			return OnAnimUpdated_Function(remote,rmiContext, clientId, AnimStae, Time); 
 		}
 
                

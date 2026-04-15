@@ -20,6 +20,31 @@ DEFRMI_ClientToServer_OnChat(CCustom_Stub)
     return true;
 }
 
+DEFRMI_ClientToServer_OnGameLogin(CCustom_Stub)
+{
+    m_pInstance->Login_EXcuteDB(clientId, szID, szPassWord);
+    return true;
+}
+
+DEFRMI_ClientToServer_OnAnimUpdated(CCustom_Stub)
+{
+
+    return true;
+}
+
+DEFRMI_ClientToServer_RequestCheckNickname(CCustom_Stub)
+{
+    m_pInstance->Request_UniqueNickName(clientId, szNickName);
+    return true;
+}
+
+DEFRMI_ClientToServer_Create_Character(CCustom_Stub)
+{
+    //m_pInstance->Get_ExcuteDB();
+    return true;
+}
+
+
 CCustom_Stub* CCustom_Stub::Create()
 {
     CCustom_Stub* pInstance = new CCustom_Stub();
@@ -34,6 +59,7 @@ CCustom_Stub* CCustom_Stub::Create()
 
 void CCustom_Stub::Release()
 {
+
 }
 
 HRESULT CCustom_Stub::Initialize()

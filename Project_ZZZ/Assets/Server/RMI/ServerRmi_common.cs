@@ -16,12 +16,16 @@ namespace ServerToClient
 			public const Nettention.Proud.RmiID OnPlayerJoined = (Nettention.Proud.RmiID)3000+1;
 			public const Nettention.Proud.RmiID OnOtherPlayerUpdated = (Nettention.Proud.RmiID)3000+2;
 			public const Nettention.Proud.RmiID OnPositionUpdated = (Nettention.Proud.RmiID)3000+3;
-			public const Nettention.Proud.RmiID OnChat = (Nettention.Proud.RmiID)3000+4;
+			public const Nettention.Proud.RmiID UpdateCharacterAnimState = (Nettention.Proud.RmiID)3000+4;
+			public const Nettention.Proud.RmiID ResponseCheckNickname = (Nettention.Proud.RmiID)3000+5;
+			public const Nettention.Proud.RmiID OnChat = (Nettention.Proud.RmiID)3000+6;
 		// List that has RMI ID.
 		public static Nettention.Proud.RmiID[] RmiIDList = new Nettention.Proud.RmiID[] {
 			OnPlayerJoined,
 			OnOtherPlayerUpdated,
 			OnPositionUpdated,
+			UpdateCharacterAnimState,
+			ResponseCheckNickname,
 			OnChat,
 		};
 	}

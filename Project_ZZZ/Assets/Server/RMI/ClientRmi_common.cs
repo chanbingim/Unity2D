@@ -13,11 +13,19 @@ namespace ClientToServer
 	internal class Common
 	{
 		// Message ID that replies to each RMI method. 
-			public const Nettention.Proud.RmiID OnPositionUpdated = (Nettention.Proud.RmiID)2000+1;
-			public const Nettention.Proud.RmiID OnChat = (Nettention.Proud.RmiID)2000+2;
+			public const Nettention.Proud.RmiID OnGameLogin = (Nettention.Proud.RmiID)2000+1;
+			public const Nettention.Proud.RmiID Create_Character = (Nettention.Proud.RmiID)2000+2;
+			public const Nettention.Proud.RmiID RequestCheckNickname = (Nettention.Proud.RmiID)2000+3;
+			public const Nettention.Proud.RmiID OnPositionUpdated = (Nettention.Proud.RmiID)2000+4;
+			public const Nettention.Proud.RmiID OnAnimUpdated = (Nettention.Proud.RmiID)2000+5;
+			public const Nettention.Proud.RmiID OnChat = (Nettention.Proud.RmiID)2000+6;
 		// List that has RMI ID.
 		public static Nettention.Proud.RmiID[] RmiIDList = new Nettention.Proud.RmiID[] {
+			OnGameLogin,
+			Create_Character,
+			RequestCheckNickname,
 			OnPositionUpdated,
+			OnAnimUpdated,
 			OnChat,
 		};
 	}

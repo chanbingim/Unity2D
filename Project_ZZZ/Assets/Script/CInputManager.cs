@@ -20,6 +20,12 @@ public class CInputManager
             m_EnableChating = !m_EnableChating;
             EnableChating.Invoke(m_EnableChating);
         }
+
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            var gameClient = GameClient.Get_Instance();
+            gameClient.Log_In("A", "1234");
+        }
     }
 
     #region private
