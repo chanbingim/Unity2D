@@ -22,7 +22,7 @@ public class Player_Controller : CCharacter_Controller
             m_PlayerCam.Target = m_Character.gameObject;
         }
 
-        GameManager.GetInstance().Add_ListenList(EnableChating);
+        GameManager.Get_Instance().Add_ListenList(EnableChating);
         m_MoveCommand = new CMoveCommand(Vector3.zero, Vector3.zero, 0.0f);
     }
 

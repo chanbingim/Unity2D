@@ -26,7 +26,7 @@ public class Loading_Level : MonoBehaviour
         if (0 < LoadSceneEvent.GetPersistentEventCount())
             LoadSceneEvent.Invoke();
 
-        StartCoroutine(LoadingAsync(CUtilyManager.Get_Instance().Get_NextLevel()));
+        StartCoroutine(LoadingAsync(GameManager.Get_Instance().Get_NextLevel()));
     }
 
     // ÄÚ·çÆ¾ 
