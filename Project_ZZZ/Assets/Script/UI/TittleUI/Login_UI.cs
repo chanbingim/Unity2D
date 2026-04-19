@@ -1,9 +1,9 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using static UIManager;
 
-public class Login_UI : MonoBehaviour
+public class Login_UI : CPopupBase
 {
     public UnityEvent                           m_OutBoundClick;
     public UnityEvent                           m_LoginSuccessEvent;
@@ -11,16 +11,14 @@ public class Login_UI : MonoBehaviour
     [SerializeField] private CUIAnimComponent   m_AnimComponent;
     [SerializeField] private InputField         m_InputFieldID;
     [SerializeField] private InputField         m_InputFieldPW;
-
-    private RectTransform                       m_RectTransform;
-    private bool                                m_bIsActive = false;
-    private GameClient                          m_gameClient = null;
+    private string                              m_ErrorMsg = "";
 
     void Awake()
     {
         m_AnimComponent = GetComponent<CUIAnimComponent>();
         m_RectTransform = GetComponent<RectTransform>();
         m_gameClient = GameClient.Get_Instance();
+
     }
 
     // Update is called once per frame
@@ -63,7 +61,7 @@ public class Login_UI : MonoBehaviour
     {
         //m_gameClient.Log_In(m_InputFieldID.text, m_InputFieldPW.text);
         //m_gameClient.m_LoginEvent += Login_Event;
-        Login_Event(true);
+        Login_Event(false);
     }
 
     public void Login_Event(bool bIsSuccess)
@@ -74,7 +72,16 @@ public class Login_UI : MonoBehaviour
         }
         else
         {
+            m_ErrorMsg = "test Show show how";
 
+            UIManager pUImgr = UIManager.Get_Instance();
+            pUImgr.Show_UI(POPUP_TYPE.ERREOR, Show_Erreor);
         }
+    }
+
+    public void Show_Erreor(CPopupBase Popup)
+    {
+        ErrorPopupComponent ErrorCom = Popup.gameObject.GetComponent<ErrorPopupComponent>();
+        ErrorCom.Open_Popup(m_ErrorMsg);
     }
 }

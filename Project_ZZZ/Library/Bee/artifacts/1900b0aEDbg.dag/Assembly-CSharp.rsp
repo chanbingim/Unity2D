@@ -482,6 +482,8 @@
 "Assets/Script/Server/RMI/ClientRmi_proxy.cs"
 "Assets/Script/Server/RMI/ServerRmi_common.cs"
 "Assets/Script/Server/RMI/ServerRmi_stub.cs"
+"Assets/Script/UI/Default/CObjectPool.cs"
+"Assets/Script/UI/Default/CPopupBase.cs"
 "Assets/Script/UI/Default/CPopupComponent.cs"
 "Assets/Script/UI/Default/CUIAnimComponent.cs"
 "Assets/Script/UI/Default/CUIFadeAnim.cs"

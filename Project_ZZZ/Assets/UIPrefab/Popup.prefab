@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6979182613934771740}
   - component: {fileID: 7502027585617067030}
   m_Layer: 5
-  m_Name: Text
+  m_Name: MainMsg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -200,8 +200,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2892978281241308979}
-        m_TargetAssemblyTypeName: PopUpUI, Assembly-CSharp
+      - m_Target: {fileID: 7949652286971455462}
+        m_TargetAssemblyTypeName: ErrorPopupComponent, Assembly-CSharp
         m_MethodName: Close
         m_Mode: 1
         m_Arguments:
@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 5997519586231559995}
   - component: {fileID: 2549380846576240026}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ButMsg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -302,7 +302,7 @@ GameObject:
   - component: {fileID: 5630127639563945261}
   - component: {fileID: 6025093973436117445}
   - component: {fileID: 3937975163730541656}
-  - component: {fileID: 2892978281241308979}
+  - component: {fileID: 7949652286971455462}
   m_Layer: 5
   m_Name: Popup
   m_TagString: Untagged
@@ -359,8 +359,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -369,7 +369,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2892978281241308979
+--- !u!114 &7949652286971455462
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -378,7 +378,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8021504879295236687}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce0d22f891225614fb6b1388a9f8aabf, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b27642a8db04a5449d064f1952f3f74, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PopUpUI
+  m_EditorClassIdentifier: Assembly-CSharp::ErrorPopupComponent
   m_Text: {fileID: 7502027585617067030}

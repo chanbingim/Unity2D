@@ -734,6 +734,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5410a6e6b1690d544a028d281576b344, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
+  m_PopupPrefabList:
+  - type: 1
+    prefab: {fileID: 7949652286971455462, guid: cd66229178f379b4ebc7c4de1d839deb, type: 3}
+  m_Canvas: {fileID: 1261463100}
 --- !u!1 &1639333871
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,22 +1,24 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PopUpUI : MonoBehaviour
+public class ErrorPopupComponent : CPopupBase
 {
     [SerializeField] private Text   m_Text = null;
 
-    void Start()
+    void Awake()
     {
-        
+
     }
 
-    public void Open_Popup(string text)
+    public void Open_Popup(string szMsg)
     {
-        m_Text.text = text;
+        m_Text.text = szMsg;
     }
 
     public void Close()
     {
-        gameObject.SetActive(false);
+        UIManager UIMgr = UIManager.Get_Instance();
+        UIMgr.Close_ActivePopup(gameObject.GetComponent<CPopupBase>());
     }
 }
