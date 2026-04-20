@@ -27,7 +27,7 @@ HRESULT CDBManager::Connection_Test()
         L"Driver={MySQL ODBC 9.6 Unicode Driver};"
         L"Server=127.0.0.1;"
         L"Port=3306;"
-        L"Database=Item_Table;"
+        L"Database=User_DB;"
         L"Uid=root;"
         L"Pwd=chanbin@1013;"
         L"Option=3;";
@@ -54,25 +54,18 @@ HRESULT CDBManager::Connection_Test()
 
 HRESULT CDBManager::Excute_Test()
 {
-    int id, Level;
-    Proud::String name;
-
     COdbcWarnings       Warnings;
     COdbcRecordset      record;       // Äõ¸® °á°ú¸¦ ´ãÀ» °´Ã¼
 
     try
     {
-        auto result = m_Conn.Execute(record, _PNT("SELECT * FROM player"), &Warnings);
+        auto result = m_Conn.Execute(record, _PNT("SELECT * FROM player_info"), &Warnings);
         for (int i = 0; i < Warnings.Count; ++i)
             cout << Warnings[i].GetSqlErrorCode() << " : " << Warnings[i].what() << '\n';
 
         while (record.MoveNext())
         {
-            id = record.GetFieldValue(_PNT("id"));
-            name = record.GetFieldValue(_PNT("name"));
-            Level = record.GetFieldValue(_PNT("level"));
-
-            wprintf(L"ID : %d | Name : %s | Level : %d\n", id, name.GetString(), Level);
+           
         }
     }
     catch (COdbcException& error)
@@ -91,28 +84,53 @@ void CDBManager::Release()
 
 bool CDBManager::Login_EXcuteDB(int ClientID, string ID, string Password)
 {
-    COdbcWarnings       Warnings;
-    COdbcRecordset      record;       // Äõ¸® °á°ú¸¦ ´ãÀ» °´Ã¼
+	COdbcWarnings       Warnings;
+	COdbcRecordset      record;       // Äõ¸® °á°ú¸¦ ´ãÀ» °´Ã¼
 
-    try
-    {
-        Proud::String Query = Proud::String::NewFormat(
-            L"SELECT * FROM users WHERE User_ID = '%s' AND Password = '%s'",
-            Proud::String(ID.c_str()).GetString(),
-            Proud::String(Password.c_str()).GetString());
-        
-        auto result = m_Conn.Execute(record, Query, &Warnings);
-        for (int i = 0; i < Warnings.Count; ++i)
-            cout << Warnings[i].GetSqlErrorCode() << " : " << Warnings[i].what() << '\n';
+	try
+	{
+		int Table_id(-1);
 
-        int Table_id;
-        while (record.MoveNext())
-        {
-            Table_id = record.GetFieldValue(L"Table_id");
-        }
+#pragma region ID_CHECK
+		Proud::String Query = Proud::String::NewFormat(
+			L"SELECT id, password FROM users WHERE user_id = '%s'",
+			Proud::String(ID.c_str()).GetString());
 
-        m_DBJobs.push(make_shared<USER_INFO>(ClientID, DB_TABLE_TYPE::REQUEST_ID, Table_id));
-    }
+		auto result = m_Conn.Execute(record, Query, &Warnings);
+		for (int i = 0; i < Warnings.Count; ++i)
+			cout << Warnings[i].GetSqlErrorCode() << " : " << Warnings[i].what() << '\n';
+
+		if (0 == record.GetRowCount())
+		{
+			m_DBJobs.push(make_shared<LOGIN_RESULT>(ClientID, DB_TABLE_TYPE::REQUEST_ID, Table_id, LOGIN_MSG::ID_FAIL));
+			return false;
+		}
+#pragma endregion
+
+#pragma region PW_CHECK
+		Query = Proud::String::NewFormat(
+			L"SELECT id, password FROM users WHERE password = '%s'",
+			Proud::String(Password.c_str()).GetString());
+
+		result = m_Conn.Execute(record, Query, &Warnings);
+		for (int i = 0; i < Warnings.Count; ++i)
+			cout << Warnings[i].GetSqlErrorCode() << " : " << Warnings[i].what() << '\n';
+
+		if (0 == record.GetRowCount())
+		{
+			m_DBJobs.push(make_shared<LOGIN_RESULT>(ClientID, DB_TABLE_TYPE::REQUEST_ID, Table_id, LOGIN_MSG::PW_FAIL));
+			return false;
+		}
+#pragma endregion
+		
+		while (record.MoveNext())
+		{
+			Table_id = record.GetFieldValue(L"id");
+		}
+
+		m_DBJobs.push(make_shared<LOGIN_RESULT>(ClientID, DB_TABLE_TYPE::REQUEST_ID, Table_id, LOGIN_MSG::SUCCESS));
+
+	}
     catch (COdbcException& error)
     {
         cout << "Error : " << error.GetSqlErrorCode() << " => " << error.what() << '\n';
@@ -130,7 +148,7 @@ bool CDBManager::Request_UniqueNickName(int ClientID, string NickName)
     try
     {
         Proud::String Query = Proud::String::NewFormat(
-            L"SELECT * FROM player WHERE nickname = '%s' LIMIT 1", NickName);
+            L"SELECT * FROM player_info WHERE nickname = '%s' LIMIT 1", NickName);
 
         auto result = m_Conn.Execute(record, Query, &Warnings);
         for (int i = 0; i < Warnings.Count; ++i)
@@ -152,12 +170,43 @@ bool CDBManager::RequestLoadPlayerData(int TableID, PLAYER_DATA& playerData)
     COdbcWarnings       Warnings;
     COdbcRecordset      record;       // Äõ¸® °á°ú¸¦ ´ãÀ» °´Ã¼
 
+    Proud::String  NickName;
     try
     {
         Proud::String Query = Proud::String::NewFormat(
-            L"SELECT * FROM player WHERE id = '%d' LIMIT 1", TableID);
+            L"SELECT * FROM player_info WHERE id = '%d' LIMIT 1", TableID);
 
         auto result = m_Conn.Execute(record, Query, &Warnings);
+        while (record.MoveNext())
+        {
+            playerData.iID = record.GetFieldValue(_PNT("user_id"));
+            NickName = record.GetFieldValue(_PNT("nickname"));
+            playerData.szName = string(NickName);
+
+            playerData.iLevel = record.GetFieldValue(_PNT("level"));
+            playerData.iMaxExp = record.GetFieldValue(_PNT("exp"));
+
+            playerData.iMaxHP = record.GetFieldValue(_PNT("hp"));
+            playerData.iMaxMP = record.GetFieldValue(_PNT("mp"));
+            playerData.iGlod = record.GetFieldValue(_PNT("Gold"));
+
+            playerData.fPosX = record.GetFieldValue(_PNT("pos_x"));
+            playerData.fPosY = record.GetFieldValue(_PNT("pos_y"));
+            playerData.fPosZ = record.GetFieldValue(_PNT("pos_z"));
+
+            wprintf(L"-------------Find Success-------------\n");
+            wprintf(L"ID : %d\n", playerData.iID);
+            wprintf(L"NickName : %s\n", playerData.szName.c_str());
+            wprintf(L"Level : %d\n", playerData.iLevel);
+            wprintf(L"Exp : %d\n", playerData.iMaxExp);
+            wprintf(L"HP : %d\n", playerData.iMaxHP);
+            wprintf(L"MP : %d\n", playerData.iMaxMP);
+            wprintf(L"Gold : %d\n", playerData.iGlod);
+            wprintf(L"Position : %f, %f, %f \n", playerData.fPosX, playerData.fPosY, playerData.fPosZ);
+            wprintf(L"-----------------------------------\n");
+
+        }
+
         for (int i = 0; i < Warnings.Count; ++i)
             cout << Warnings[i].GetSqlErrorCode() << " : " << Warnings[i].what() << '\n';
     }
@@ -182,10 +231,16 @@ void CDBManager::Update_DB(ServerToClient::Proxy* pProxy)
         {
         case DB_TABLE_TYPE::REQUEST_ID:
         {
-            USER_INFO* pUserInfo = static_cast<USER_INFO*>(Data.get());
-            CServerManager::Get_Instance()->ADD_JoinClient(CSession::Create(pUserInfo->ClientID, pUserInfo->TableID));
+			LOGIN_RESULT* pUserInfo = static_cast<LOGIN_RESULT*>(Data.get());
+			if (LOGIN_MSG::SUCCESS == pUserInfo->Login_Msg)
+			{
+				CServerManager::Get_Instance()->ADD_JoinClient(pUserInfo->ClientID, CSession::Create(pUserInfo->ClientID, pUserInfo->TableID), pUserInfo->Login_Msg);
+				cout << "LOG | Log In : SUCCESS" << endl;
+			}
+			else
+				CServerManager::Get_Instance()->ADD_JoinClient(pUserInfo->ClientID, nullptr, pUserInfo->Login_Msg);
 
-            cout << "LOG | Log In : SUCCESS" << endl;
+          
             break;
         }
         case DB_TABLE_TYPE::REQUEST_NAME:

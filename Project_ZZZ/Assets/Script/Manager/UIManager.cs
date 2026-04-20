@@ -132,6 +132,7 @@ public class UIManager : MonoBehaviour
         {
             m_pInstance = this;
             m_pInstance.Initialize();
+            DontDestroyOnLoad(m_pInstance);
             Debug.Log("Create UI Manager");
         }
         else

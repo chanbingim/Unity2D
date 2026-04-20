@@ -2,6 +2,8 @@ C:\Users\gimch\Document\Unity2D\ProjectZZZ_Server\ProjectZZZ_Server\Private\Clie
 C:\Users\gimch\Document\Unity2D\ProjectZZZ_Server\ProjectZZZ_Server\Private\ClientRmi_stub.cpp;C:\Users\gimch\Document\Unity2D\ProjectZZZ_Server\ProjectZZZ_Server\Default\x64\Debug\ClientRmi_stub.obj
 C:\Users\gimch\Document\Unity2D\ProjectZZZ_Server\ProjectZZZ_Server\Private\Custom_Stub.cpp;C:\Users\gimch\Document\Unity2D\ProjectZZZ_Server\ProjectZZZ_Server\Default\x64\Debug\Custom_Stub.obj
 C:\Users\gimch\Document\Unity2D\ProjectZZZ_Server\ProjectZZZ_Server\private\DBManager.cpp;C:\Users\gimch\Document\Unity2D\ProjectZZZ_Server\ProjectZZZ_Server\Default\x64\Debug\DBManager.obj
+C:\Users\gimch\Document\Unity2D\ProjectZZZ_Server\ProjectZZZ_Server\private\Level.cpp;C:\Users\gimch\Document\Unity2D\ProjectZZZ_Server\ProjectZZZ_Server\Default\x64\Debug\Level.obj
+C:\Users\gimch\Document\Unity2D\ProjectZZZ_Server\ProjectZZZ_Server\private\MapManager.cpp;C:\Users\gimch\Document\Unity2D\ProjectZZZ_Server\ProjectZZZ_Server\Default\x64\Debug\MapManager.obj
 C:\Users\gimch\Document\Unity2D\ProjectZZZ_Server\ProjectZZZ_Server\private\Player.cpp;C:\Users\gimch\Document\Unity2D\ProjectZZZ_Server\ProjectZZZ_Server\Default\x64\Debug\Player.obj
 C:\Users\gimch\Document\Unity2D\ProjectZZZ_Server\ProjectZZZ_Server\Private\ServerEvent.cpp;C:\Users\gimch\Document\Unity2D\ProjectZZZ_Server\ProjectZZZ_Server\Default\x64\Debug\ServerEvent.obj
 C:\Users\gimch\Document\Unity2D\ProjectZZZ_Server\ProjectZZZ_Server\Private\ServerManager.cpp;C:\Users\gimch\Document\Unity2D\ProjectZZZ_Server\ProjectZZZ_Server\Default\x64\Debug\ServerManager.obj

@@ -41,6 +41,26 @@ namespace ClientToServer {
 #define CALL_ClientToServer_Create_Character Create_Character ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szNickName)
 #define PARAM_ClientToServer_Create_Character ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szNickName)
                
+		virtual bool SpawnObjectEvent ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const int & )		{ 
+			return false;
+		} 
+
+#define DECRMI_ClientToServer_SpawnObjectEvent bool SpawnObjectEvent ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & LevelID, const int & SpawnPointID, const int & Type) PN_OVERRIDE
+
+#define DEFRMI_ClientToServer_SpawnObjectEvent(DerivedClass) bool DerivedClass::SpawnObjectEvent ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & LevelID, const int & SpawnPointID, const int & Type)
+#define CALL_ClientToServer_SpawnObjectEvent SpawnObjectEvent ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & LevelID, const int & SpawnPointID, const int & Type)
+#define PARAM_ClientToServer_SpawnObjectEvent ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & LevelID, const int & SpawnPointID, const int & Type)
+               
+		virtual bool SpawnPlayerEvent ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & )		{ 
+			return false;
+		} 
+
+#define DECRMI_ClientToServer_SpawnPlayerEvent bool SpawnPlayerEvent ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const int & iLevelID) PN_OVERRIDE
+
+#define DEFRMI_ClientToServer_SpawnPlayerEvent(DerivedClass) bool DerivedClass::SpawnPlayerEvent ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const int & iLevelID)
+#define CALL_ClientToServer_SpawnPlayerEvent SpawnPlayerEvent ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const int & iLevelID)
+#define PARAM_ClientToServer_SpawnPlayerEvent ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const int & iLevelID)
+               
 		virtual bool RequestCheckNickname ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const string & )		{ 
 			return false;
 		} 
@@ -61,6 +81,16 @@ namespace ClientToServer {
 #define CALL_ClientToServer_OnPositionUpdated OnPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)
 #define PARAM_ClientToServer_OnPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)
                
+		virtual bool OnActorPositionUpdated ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & , const float & , const float & , const float & )		{ 
+			return false;
+		} 
+
+#define DECRMI_ClientToServer_OnActorPositionUpdated bool OnActorPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ) PN_OVERRIDE
+
+#define DEFRMI_ClientToServer_OnActorPositionUpdated(DerivedClass) bool DerivedClass::OnActorPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)
+#define CALL_ClientToServer_OnActorPositionUpdated OnActorPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)
+#define PARAM_ClientToServer_OnActorPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)
+               
 		virtual bool OnAnimUpdated ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const float & )		{ 
 			return false;
 		} 
@@ -70,6 +100,16 @@ namespace ClientToServer {
 #define DEFRMI_ClientToServer_OnAnimUpdated(DerivedClass) bool DerivedClass::OnAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const int & AnimStae, const float & Time)
 #define CALL_ClientToServer_OnAnimUpdated OnAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const int & AnimStae, const float & Time)
 #define PARAM_ClientToServer_OnAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const int & AnimStae, const float & Time)
+               
+		virtual bool OnActorAnimUpdated ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const float & )		{ 
+			return false;
+		} 
+
+#define DECRMI_ClientToServer_OnActorAnimUpdated bool OnActorAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const int & AnimStae, const float & Time) PN_OVERRIDE
+
+#define DEFRMI_ClientToServer_OnActorAnimUpdated(DerivedClass) bool DerivedClass::OnActorAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const int & AnimStae, const float & Time)
+#define CALL_ClientToServer_OnActorAnimUpdated OnActorAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const int & AnimStae, const float & Time)
+#define PARAM_ClientToServer_OnActorAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const int & AnimStae, const float & Time)
                
 		virtual bool OnChat ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const string & )		{ 
 			return false;
@@ -84,9 +124,13 @@ namespace ClientToServer {
 		virtual bool ProcessReceivedMessage(::Proud::CReceivedMessage &pa, void* hostTag) PN_OVERRIDE;
 		static const PNTCHAR* RmiName_OnGameLogin;
 		static const PNTCHAR* RmiName_Create_Character;
+		static const PNTCHAR* RmiName_SpawnObjectEvent;
+		static const PNTCHAR* RmiName_SpawnPlayerEvent;
 		static const PNTCHAR* RmiName_RequestCheckNickname;
 		static const PNTCHAR* RmiName_OnPositionUpdated;
+		static const PNTCHAR* RmiName_OnActorPositionUpdated;
 		static const PNTCHAR* RmiName_OnAnimUpdated;
+		static const PNTCHAR* RmiName_OnActorAnimUpdated;
 		static const PNTCHAR* RmiName_OnChat;
 		static const PNTCHAR* RmiName_First;
 		virtual ::Proud::RmiID* GetRmiIDList() PN_OVERRIDE { return g_RmiIDList; }
@@ -117,6 +161,24 @@ namespace ClientToServer {
 		}
 
                
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const int & ) > SpawnObjectEvent_Function;
+		virtual bool SpawnObjectEvent ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & LevelID, const int & SpawnPointID, const int & Type) 
+		{ 
+			if (SpawnObjectEvent_Function==nullptr) 
+				return true; 
+			return SpawnObjectEvent_Function(remote,rmiContext, LevelID, SpawnPointID, Type); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & ) > SpawnPlayerEvent_Function;
+		virtual bool SpawnPlayerEvent ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const int & iLevelID) 
+		{ 
+			if (SpawnPlayerEvent_Function==nullptr) 
+				return true; 
+			return SpawnPlayerEvent_Function(remote,rmiContext, clientId, iLevelID); 
+		}
+
+               
 		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const string & ) > RequestCheckNickname_Function;
 		virtual bool RequestCheckNickname ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szNickName) 
 		{ 
@@ -135,12 +197,30 @@ namespace ClientToServer {
 		}
 
                
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & , const float & , const float & , const float & ) > OnActorPositionUpdated_Function;
+		virtual bool OnActorPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ) 
+		{ 
+			if (OnActorPositionUpdated_Function==nullptr) 
+				return true; 
+			return OnActorPositionUpdated_Function(remote,rmiContext, templeteID, PosX, PosY, PosZ, DirX, DirY, DirZ); 
+		}
+
+               
 		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const float & ) > OnAnimUpdated_Function;
 		virtual bool OnAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const int & AnimStae, const float & Time) 
 		{ 
 			if (OnAnimUpdated_Function==nullptr) 
 				return true; 
 			return OnAnimUpdated_Function(remote,rmiContext, clientId, AnimStae, Time); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const float & ) > OnActorAnimUpdated_Function;
+		virtual bool OnActorAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const int & AnimStae, const float & Time) 
+		{ 
+			if (OnActorAnimUpdated_Function==nullptr) 
+				return true; 
+			return OnActorAnimUpdated_Function(remote,rmiContext, templeteID, AnimStae, Time); 
 		}
 
                

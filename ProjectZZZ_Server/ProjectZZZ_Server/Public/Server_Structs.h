@@ -5,19 +5,21 @@
 #include "BasicTypes.h"
 #include "OdbcWrap.h"
 
-enum DB_TABLE_TYPE { REQUEST_ID, REQUEST_NAME, PLAYER, ITEM, END };
+
 
 typedef struct Player_Data
 {
-    int ID;
-    int Level;
-    string Name;
+    int iID;
+    int iLevel;
+    string szName;
 
-    int CurrentHP, MaxHP;
-    int CurrentMP, MaxMP;
+    int iCurrentHP, iMaxHP;
+    int iCurrentMP, iMaxMP;
+    int iCurrentExp, iMaxExp;
+    int iGlod;
 
-    float       m_PosX, m_PosY, m_PosZ;
-    bool        m_bIsDead = false;
+    float       fPosX, fPosY, fPosZ;
+    bool        bIsDead = false;
 }PLAYER_DATA;
 
 typedef struct Item_Data
@@ -30,6 +32,12 @@ typedef struct Item_Data
     int CurrentMP, MaxMP;
 }ITEM_DATA;
 
+typedef struct Defualt_Error
+{
+    Defualt_Error(string errorMsg) : szErrorMsg(errorMsg) {}
+    string      szErrorMsg;
+}DEFUALT_ERROR;
+
 typedef struct DB_Result
 {
     DB_Result(int Id, DB_TABLE_TYPE Type) :
@@ -39,14 +47,22 @@ typedef struct DB_Result
     DB_TABLE_TYPE           eType;
 }DB_RESULT;
 
-
-typedef struct UserInfo : public DB_RESULT
+typedef struct Login_Result : public DB_RESULT
 {
-    UserInfo(int Id, DB_TABLE_TYPE Type, int tableID) : 
-        DB_Result(Id, Type), TableID(tableID) {}
+    Login_Result(int Id, DB_TABLE_TYPE Type, int tableID, LOGIN_MSG  Msg) :
+        DB_Result(Id, Type), TableID(tableID), Login_Msg(Msg) {}
 
-    int TableID;
-}USER_INFO;
+    int         TableID;
+    LOGIN_MSG   Login_Msg;
+
+}LOGIN_RESULT;
+
+typedef struct Login_Error : public DEFUALT_ERROR
+{
+    Login_Error(string ErrorMsg, LOGIN_MSG eLoginMsg) : DEFUALT_ERROR(ErrorMsg), eLoginMsg(eLoginMsg) {}
+    LOGIN_MSG   eLoginMsg;
+}LOGIN_ERROR;
+
 
 typedef struct DB_Respone_Data : public DB_RESULT
 {

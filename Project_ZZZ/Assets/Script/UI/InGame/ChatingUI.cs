@@ -14,6 +14,8 @@ public class ChatingUI : MonoBehaviour
     [SerializeField] private GameObject     m_ViewPrefab = null;
 
     [SerializeField] private List<String>       m_ChatingText;
+    [SerializeField] private GameObject         m_ChatingView = null;
+
     [SerializeField] private InputField         m_InputField = null;
     [SerializeField] private List<GameObject>   m_ViewList;
     [SerializeField] private Scrollbar          m_Scrollbar = null;
@@ -30,13 +32,13 @@ public class ChatingUI : MonoBehaviour
         m_ChatingText = new List<String>();
         if(null != m_ViewPrefab)
         {
-            RectTransform ParentRectTransform = GetComponent<RectTransform>();
+            RectTransform ParentRectTransform = m_ChatingView.GetComponent<RectTransform>();
             RectTransform PrefabRectTransform = m_ViewPrefab.GetComponent<RectTransform>();
             m_PrefabSize = new Vector2((ParentRectTransform.rect.width - 10.0f) * 0.5f, ParentRectTransform.rect.height / m_ViewChatList);
 
             for (int i = 0; i < m_ViewChatObject; ++i)
             {
-                m_ViewList.Add(GameObject.Instantiate(m_ViewPrefab, gameObject.transform));
+                m_ViewList.Add(GameObject.Instantiate(m_ViewPrefab, m_ChatingView.gameObject.transform));
                 m_ViewList[i].SetActive(false);
 
                 PrefabRectTransform = m_ViewList[i].GetComponent<RectTransform>();
@@ -50,7 +52,7 @@ public class ChatingUI : MonoBehaviour
 
         m_Scrollbar.onValueChanged.AddListener(Refesh_ChatingView);
         m_Client = GameClient.Get_Instance();
-        m_Client.m_ChatEvent += BoardCastChatingMessage;
+        m_Client.ServerChatHandler.ChatEvent += BoardCastChatingMessage;
     }
 
     // Update is called once per frame
@@ -72,6 +74,11 @@ public class ChatingUI : MonoBehaviour
 
             m_Scrollbar.value = 1.0f;
        }
+    }
+
+    private void OnDestroy()
+    {
+        m_Client.ServerChatHandler.ChatEvent -= BoardCastChatingMessage;
     }
 
     private void Enable_Chating(Boolean bIsEnable)

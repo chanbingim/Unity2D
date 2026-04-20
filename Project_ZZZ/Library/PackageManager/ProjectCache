@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 639121788929489279
-    m_Hash: 762096862
+      ticks: 639122719892865853
+    m_Hash: 229749376
   m_LockFileStatus:
     m_FilePath: C:/Users/gimch/Document/Unity2D/Project_ZZZ/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 639121788929524304
-    m_Hash: 777513936
+      ticks: 639122719948660723
+    m_Hash: 13757871
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -1015,6 +1015,113 @@ m_ResolvedPackages:
     compatibilityLevel: 0
     minimumPackageVersion: 1.0.0
     minimumUnityVersion: 
+  compliance:
+    status: 0
+    violation:
+      scopePatternExpression: 
+      message: 
+      readMoreLink: 
+- packageId: com.unity.ugui@2.0.0
+  testable: 0
+  isDirectDependency: 1
+  version: 2.0.0
+  source: 2
+  resolvedPath: C:\Users\gimch\Document\Unity2D\Project_ZZZ\Library\PackageCache\com.unity.ugui@1890c14c96ff
+  assetPath: Packages/com.unity.ugui
+  name: com.unity.ugui
+  displayName: uGUI
+  author:
+    name: 
+    email: 
+    url: 
+  category: 
+  type: 
+  description: "uGUI (Unity UI) is a set of tools for developing user interfaces
+    for games and applications. It is a GameObject-based UI system that uses Components
+    and the Game View to arrange, position, and style user interfaces. \u200B You
+    cannot use Unity UI to create or change user interfaces in the Unity Editor."
+  errors: []
+  versions:
+    all:
+    - 2.0.0
+    compatible:
+    - 2.0.0
+    recommended: 2.0.0
+    deprecated: []
+  dependencies:
+  - name: com.unity.modules.ui
+    version: 1.0.0
+  - name: com.unity.modules.imgui
+    version: 1.0.0
+  resolvedDependencies:
+  - name: com.unity.modules.ui
+    version: 1.0.0
+  - name: com.unity.modules.imgui
+    version: 1.0.0
+  keywords:
+  - UI
+  - ugui
+  - Unity UI
+  - Canvas
+  - TextMeshPro
+  - TextMesh Pro
+  - Text
+  - TMP
+  - SDF
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+    configSource: 0
+    compliance:
+      status: 0
+      violations: []
+  hideInEditor: 1
+  entitlements:
+    licensingModel: 0
+  isAssetStorePackage: 0
+  datePublishedTicks: 0
+  documentationUrl: 
+  hasRepository: 0
+  repository:
+    type: 
+    url: 
+    revision: 
+    path: 
+  unityLifecycle:
+    version: 2.0.0
+    nextVersion: 
+    recommendedVersion: 
+    isDeprecated: 0
+    deprecationMessage: 
+    isDiscoverable: 1
+  isDeprecated: 0
+  deprecationMessage: 
+  git:
+    hash: 
+    revision: 
+  upmReserved: 
+  signature:
+    status: 0
+    reason: 
+    attestation:
+      format: 
+      publishingChannel: 
+      entitlementKeys: []
+      ownerOrgName: 
+      ownerOrgId: 
+      publisherName: 
+    errorCode: 
+  assetStore:
+    productId: 
+  fingerprint: 1890c14c96ff76161b5301b2798bcfba3176042a
+  editorCompatibility:
+    compatibilityLevel: 0
+    minimumPackageVersion: 2.0.0
+    minimumUnityVersion: 2019.2
   compliance:
     status: 0
     violation:
@@ -4268,113 +4375,6 @@ m_ResolvedPackages:
     compatibilityLevel: 0
     minimumPackageVersion: 1.0.0
     minimumUnityVersion: 
-  compliance:
-    status: 0
-    violation:
-      scopePatternExpression: 
-      message: 
-      readMoreLink: 
-- packageId: com.unity.ugui@2.0.0
-  testable: 0
-  isDirectDependency: 0
-  version: 2.0.0
-  source: 2
-  resolvedPath: C:\Users\gimch\Document\Unity2D\Project_ZZZ\Library\PackageCache\com.unity.ugui@1890c14c96ff
-  assetPath: Packages/com.unity.ugui
-  name: com.unity.ugui
-  displayName: uGUI
-  author:
-    name: 
-    email: 
-    url: 
-  category: 
-  type: 
-  description: "uGUI (Unity UI) is a set of tools for developing user interfaces
-    for games and applications. It is a GameObject-based UI system that uses Components
-    and the Game View to arrange, position, and style user interfaces. \u200B You
-    cannot use Unity UI to create or change user interfaces in the Unity Editor."
-  errors: []
-  versions:
-    all:
-    - 2.0.0
-    compatible:
-    - 2.0.0
-    recommended: 2.0.0
-    deprecated: []
-  dependencies:
-  - name: com.unity.modules.ui
-    version: 1.0.0
-  - name: com.unity.modules.imgui
-    version: 1.0.0
-  resolvedDependencies:
-  - name: com.unity.modules.ui
-    version: 1.0.0
-  - name: com.unity.modules.imgui
-    version: 1.0.0
-  keywords:
-  - UI
-  - ugui
-  - Unity UI
-  - Canvas
-  - TextMeshPro
-  - TextMesh Pro
-  - Text
-  - TMP
-  - SDF
-  registry:
-    id: main
-    name: 
-    url: https://packages.unity.com
-    scopes: []
-    isDefault: 1
-    capabilities: 7
-    configSource: 0
-    compliance:
-      status: 0
-      violations: []
-  hideInEditor: 1
-  entitlements:
-    licensingModel: 0
-  isAssetStorePackage: 0
-  datePublishedTicks: 0
-  documentationUrl: 
-  hasRepository: 0
-  repository:
-    type: 
-    url: 
-    revision: 
-    path: 
-  unityLifecycle:
-    version: 2.0.0
-    nextVersion: 
-    recommendedVersion: 
-    isDeprecated: 0
-    deprecationMessage: 
-    isDiscoverable: 1
-  isDeprecated: 0
-  deprecationMessage: 
-  git:
-    hash: 
-    revision: 
-  upmReserved: 
-  signature:
-    status: 0
-    reason: 
-    attestation:
-      format: 
-      publishingChannel: 
-      entitlementKeys: []
-      ownerOrgName: 
-      ownerOrgId: 
-      publisherName: 
-    errorCode: 
-  assetStore:
-    productId: 
-  fingerprint: 1890c14c96ff76161b5301b2798bcfba3176042a
-  editorCompatibility:
-    compatibilityLevel: 0
-    minimumPackageVersion: 2.0.0
-    minimumUnityVersion: 2019.2
   compliance:
     status: 0
     violation:

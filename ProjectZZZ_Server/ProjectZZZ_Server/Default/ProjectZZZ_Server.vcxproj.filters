@@ -52,6 +52,12 @@
     <Filter Include="06. DBManager">
       <UniqueIdentifier>{783902e3-23e2-4de5-93df-0b5ef1b17fa2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="07, MapManager">
+      <UniqueIdentifier>{31eb6f65-1f23-4ba4-bf17-e686dc8722b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07, MapManager\Level">
+      <UniqueIdentifier>{6d4c0054-b017-4805-a470-5397d38de706}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ProjectZZZ_Server.cpp" />
@@ -94,6 +100,10 @@
     <ClCompile Include="..\private\DBManager.cpp">
       <Filter>06. DBManager</Filter>
     </ClCompile>
+    <ClCompile Include="..\private\MapManager.cpp">
+      <Filter>07, MapManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\Level.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\util\ServerRmi.pidl">
@@ -146,5 +156,12 @@
     <ClInclude Include="..\Public\Server_Structs.h">
       <Filter>100. Global\Define</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Server_Enum.h">
+      <Filter>100. Global\Define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\MapManager.h">
+      <Filter>07, MapManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\Level.h" />
   </ItemGroup>
 </Project>

@@ -18,7 +18,7 @@ public class Login_UI : CPopupBase
         m_AnimComponent = GetComponent<CUIAnimComponent>();
         m_RectTransform = GetComponent<RectTransform>();
         m_gameClient = GameClient.Get_Instance();
-
+        m_gameClient.ServerLoginHandler.ResultEvent += Login_Event;
     }
 
     // Update is called once per frame
@@ -42,7 +42,7 @@ public class Login_UI : CPopupBase
 
     private void OnDestroy()
     {
-        //m_gameClient.m_LoginEvent -= Login_Event;
+        m_gameClient.ServerLoginHandler.ResultEvent -= Login_Event;
     }
 
     public void Active_LoginUI()
@@ -59,12 +59,10 @@ public class Login_UI : CPopupBase
 
     public void Login_Button()
     {
-        //m_gameClient.Log_In(m_InputFieldID.text, m_InputFieldPW.text);
-        //m_gameClient.m_LoginEvent += Login_Event;
-        Login_Event(false);
+        m_gameClient.Log_In(m_InputFieldID.text, m_InputFieldPW.text);
     }
 
-    public void Login_Event(bool bIsSuccess)
+    public void Login_Event(bool bIsSuccess, int LoginMsg)
     {
         if(bIsSuccess)
         {
@@ -72,7 +70,10 @@ public class Login_UI : CPopupBase
         }
         else
         {
-            m_ErrorMsg = "test Show show how";
+            if(1 == LoginMsg)
+                m_ErrorMsg = "아이디가 틀렸습니다.";
+            else if (2 == LoginMsg)
+                m_ErrorMsg = "비밀번호가 틀렸습니다";
 
             UIManager pUImgr = UIManager.Get_Instance();
             pUImgr.Show_UI(POPUP_TYPE.ERREOR, Show_Erreor);

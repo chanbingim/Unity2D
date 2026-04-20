@@ -13,16 +13,24 @@ namespace ClientToServer {
                
 		Rmi_Create_Character,
                
+		Rmi_SpawnObjectEvent,
+               
+		Rmi_SpawnPlayerEvent,
+               
 		Rmi_RequestCheckNickname,
                
 		Rmi_OnPositionUpdated,
                
+		Rmi_OnActorPositionUpdated,
+               
 		Rmi_OnAnimUpdated,
+               
+		Rmi_OnActorAnimUpdated,
                
 		Rmi_OnChat,
 	};
 
-	int g_RmiIDListCount = 6;
+	int g_RmiIDListCount = 10;
 
 }
 

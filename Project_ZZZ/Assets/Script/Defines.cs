@@ -5,4 +5,9 @@ public class Defines
         SUCCESS,
         FAIL
     };
+
+    public enum CREATE_TYPE
+    {
+        PLAYER, MONSTER, SKILL
+    }
 }

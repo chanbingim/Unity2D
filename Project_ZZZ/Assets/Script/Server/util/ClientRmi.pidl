@@ -2,13 +2,22 @@ global ClientToServer 2000
 {
     OnGameLogin([in] int clientId, [in] string szID, [in] string szPassWord);
     Create_Character([in] int clientId, [in] string szNickName);
+
+    SpawnObjectEvent([in] int LevelID, [in] int SpawnPointID, [in] int Type);
+    SpawnPlayerEvent([in] int clientId, [in] int iLevelID);
+
     RequestCheckNickname([in] int clientId, [in] string szNickName);
 
     OnPositionUpdated([in] int clientId, 
                       [in] float PosX, [in] float PosY, [in] float PosZ, 
                       [in] float DirX, [in] float DirY, [in] float DirZ);
 
+    OnActorPositionUpdated([in] int templeteID, 
+                      [in] float PosX, [in] float PosY, [in] float PosZ, 
+                      [in] float DirX, [in] float DirY, [in] float DirZ);
+
     OnAnimUpdated([in] int clientId, [in] int AnimStae, [in] float Time);
+    OnActorAnimUpdated([in] int templeteID, [in] int AnimStae, [in] float Time);
 
     OnChat([in] int clientId, [in] string message);
 }

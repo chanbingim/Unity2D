@@ -15,17 +15,25 @@ namespace ClientToServer
 		// Message ID that replies to each RMI method. 
 			public const Nettention.Proud.RmiID OnGameLogin = (Nettention.Proud.RmiID)2000+1;
 			public const Nettention.Proud.RmiID Create_Character = (Nettention.Proud.RmiID)2000+2;
-			public const Nettention.Proud.RmiID RequestCheckNickname = (Nettention.Proud.RmiID)2000+3;
-			public const Nettention.Proud.RmiID OnPositionUpdated = (Nettention.Proud.RmiID)2000+4;
-			public const Nettention.Proud.RmiID OnAnimUpdated = (Nettention.Proud.RmiID)2000+5;
-			public const Nettention.Proud.RmiID OnChat = (Nettention.Proud.RmiID)2000+6;
+			public const Nettention.Proud.RmiID SpawnObjectEvent = (Nettention.Proud.RmiID)2000+3;
+			public const Nettention.Proud.RmiID SpawnPlayerEvent = (Nettention.Proud.RmiID)2000+4;
+			public const Nettention.Proud.RmiID RequestCheckNickname = (Nettention.Proud.RmiID)2000+5;
+			public const Nettention.Proud.RmiID OnPositionUpdated = (Nettention.Proud.RmiID)2000+6;
+			public const Nettention.Proud.RmiID OnActorPositionUpdated = (Nettention.Proud.RmiID)2000+7;
+			public const Nettention.Proud.RmiID OnAnimUpdated = (Nettention.Proud.RmiID)2000+8;
+			public const Nettention.Proud.RmiID OnActorAnimUpdated = (Nettention.Proud.RmiID)2000+9;
+			public const Nettention.Proud.RmiID OnChat = (Nettention.Proud.RmiID)2000+10;
 		// List that has RMI ID.
 		public static Nettention.Proud.RmiID[] RmiIDList = new Nettention.Proud.RmiID[] {
 			OnGameLogin,
 			Create_Character,
+			SpawnObjectEvent,
+			SpawnPlayerEvent,
 			RequestCheckNickname,
 			OnPositionUpdated,
+			OnActorPositionUpdated,
 			OnAnimUpdated,
+			OnActorAnimUpdated,
 			OnChat,
 		};
 	}

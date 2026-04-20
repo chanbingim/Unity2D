@@ -10,27 +10,24 @@ using static Defines;
 
 public class GameClient : MonoBehaviour
 {
-    public GameObject                   m_PlayerPrefab;
-    public event Action<string>         m_ChatEvent;
-    public event Action<bool>           m_LoginEvent;
+    public ServerLoginEventHandler      ServerLoginHandler = new ServerLoginEventHandler();
+    public ServerChatEventHandler       ServerChatHandler = new ServerChatEventHandler();
+    public ServerActorUpdateHandler     ServerActorUpdateHandler = new ServerActorUpdateHandler();
+    public int                          ClientHostID => m_MyID;
 
     #region private
+    [SerializeField] private int m_MyID;
+
     private NetClient           m_netClient = null;
     private Stub                m_ClientStub = null;
     private Proxy               m_ClientProxy = null;
 
-    [SerializeField] private int                m_MyID;
-    private Dictionary<int, Player_Controller>  m_Players;
+  
     #endregion
 
     void Update()
     {
         m_netClient.FrameMove();
-    }
-
-    private void LateUpdate()
-    {
-        
     }
 
     private void OnDestroy()
@@ -61,39 +58,14 @@ public class GameClient : MonoBehaviour
         }
     }
 
-    private bool OnOtherPlayerUpdated(HostID remote, RmiContext rmiContext, int clientId, string NickName, float px, float py, float pz)
+    public void Spawn_PlayerEvent(int iLeveLID)
     {
-        Player_Controller pController = null;
-        if (m_Players.ContainsKey(clientId))
-        {
-            pController = m_Players[clientId];
-            pController.Update_Position(px, py, pz);
-        }
-        else
-        {
-            GameObject pNewPlayer = GameObject.Instantiate(m_PlayerPrefab);
-            if(clientId == m_MyID)
-                pNewPlayer.name = "Player";
-            else
-                pNewPlayer.name = "other" + clientId;
-
-            m_Players.Add(clientId, pNewPlayer.GetComponent<Player_Controller>());
-        }
-        
-        return true;
+        m_ClientProxy.SpawnPlayerEvent(HostID.HostID_Server, RmiContext.ReliableSend, m_MyID, iLeveLID);
     }
 
-    private bool OnPlayerJoined(HostID remote, RmiContext rmiContext, int clientId, string NickName, float px, float py, float pz)
+    public void Spawn_Event(int iLeveLID, int iObjectID, int iSpawnPointID)
     {
-        m_MyID = clientId;
-        gameObject.transform.position = new Vector3(px, py, pz);
-        return true;
-    }
-
-    private bool OnChat(HostID remote, RmiContext rmiContext, int ClienID, string Message)
-    {
-        m_ChatEvent.Invoke(Message);
-        return true;
+        m_ClientProxy.SpawnObjectEvent(HostID.HostID_Server, RmiContext.ReliableSend, iLeveLID, iObjectID, iSpawnPointID);
     }
 
     #region Private
@@ -102,8 +74,6 @@ public class GameClient : MonoBehaviour
             m_netClient = new NetClient();
             // 파라미터 정의
             NetConnectionParam ClientParam = new NetConnectionParam();
-            m_Players = new Dictionary<int, Player_Controller>();
-
             // 서버와 동일한 protocol version, 입력하지 않아도 됨
             //cp.protocolVersion.Set(version);
             // server address
@@ -127,9 +97,10 @@ public class GameClient : MonoBehaviour
         private void InitializedSutb()
         {
             m_ClientStub = new Stub();
-            m_ClientStub.OnChat += OnChat;
-            m_ClientStub.OnPlayerJoined += OnPlayerJoined;
-            m_ClientStub.OnOtherPlayerUpdated += OnOtherPlayerUpdated;
+            m_ClientStub.OnChat += ServerChatHandler.OnChat;
+            m_ClientStub.ResponseLoginEvent += ServerLoginHandler.ResponseLoginEvent;
+            m_ClientStub.OnPlayerJoined += ServerActorUpdateHandler.OnPlayerJoined;
+            m_ClientStub.OnOtherPlayerUpdated += ServerActorUpdateHandler.OnOtherPlayerUpdated;
 
             m_netClient.AttachStub(m_ClientStub);
         }
@@ -143,7 +114,10 @@ public class GameClient : MonoBehaviour
         void OnServerJoinComplete(ErrorInfo info, ByteArray replyFromServer)
         {
             if(info.errorType == ErrorType.Ok)
+            {
+                m_MyID = (int)m_netClient.GetLocalHostID();
                 Debug.Log("Player Join");
+            }
             else
                 Debug.Log("Player Join Fail");
         }
@@ -159,6 +133,7 @@ public class GameClient : MonoBehaviour
         {
             m_pInstance = this;
             m_pInstance.InitalizedClient();
+            DontDestroyOnLoad(m_pInstance);
             Debug.Log("Create Game Client");
         }
         else

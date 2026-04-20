@@ -75,12 +75,12 @@ HRESULT CSession::Initialize(int HostID, int TableID, PLAYER_DATA* info)
         NickName += "0" + m_hostID;
 
         m_pPlayer->Set_NickName(NickName);
-        cout << "Join Player : " << m_pPlayer->Get_Info()->Name << endl;
+        cout << "Join Player : " << m_pPlayer->Get_Info()->szName << endl;
     }
     else
     {
         m_pPlayer->Set_Info(info);
-        cout << "Join Player : " << m_pPlayer->Get_Info()->Name << endl;
+        cout << "Join Player : " << m_pPlayer->Get_Info()->szName << endl;
     }
 
     return S_OK;

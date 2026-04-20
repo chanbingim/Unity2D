@@ -9,20 +9,34 @@ namespace ServerToClient {
 
 	::Proud::RmiID g_RmiIDList[] = {
                
+		Rmi_ResponseLoginEvent,
+               
+		Rmi_ResponseCheckNickname,
+               
 		Rmi_OnPlayerJoined,
                
 		Rmi_OnOtherPlayerUpdated,
                
+		Rmi_OnOtherPlayerAnimUpdated,
+               
+		Rmi_SpawnObjectEvent,
+               
+		Rmi_OnOtherActorUpdated,
+               
+		Rmi_OnOtherActorAnimUpdated,
+               
 		Rmi_OnPositionUpdated,
+               
+		Rmi_OnActorPositionUpdated,
                
 		Rmi_UpdateCharacterAnimState,
                
-		Rmi_ResponseCheckNickname,
+		Rmi_UpdateActorAnimState,
                
 		Rmi_OnChat,
 	};
 
-	int g_RmiIDListCount = 6;
+	int g_RmiIDListCount = 13;
 
 }
 

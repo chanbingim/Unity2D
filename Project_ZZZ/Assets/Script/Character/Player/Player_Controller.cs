@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Player_Controller : CCharacter_Controller
 {
-   
     [SerializeField] Player         m_Character = null;
     [SerializeField] Player_Camera  m_PlayerCam = null;
 

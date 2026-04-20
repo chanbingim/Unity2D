@@ -2,6 +2,23 @@
 #include "Custom_Stub.h"
 #include "ServerManager.h"
 
+DEFRMI_ClientToServer_OnGameLogin(CCustom_Stub)
+{
+    m_pInstance->Login_EXcuteDB(clientId, szID, szPassWord);
+    return true;
+}
+
+DEFRMI_ClientToServer_SpawnPlayerEvent(CCustom_Stub)
+{
+    m_pInstance->Spawn_Player(clientId, iLevelID);
+    return true;
+}
+
+DEFRMI_ClientToServer_SpawnObjectEvent(CCustom_Stub)
+{
+    return true;
+}
+
 DEFRMI_ClientToServer_OnPositionUpdated(CCustom_Stub)
 {
     cout << "Move Pos : " << PosX << PosY << PosZ << endl;
@@ -14,23 +31,18 @@ DEFRMI_ClientToServer_OnPositionUpdated(CCustom_Stub)
     return true;
 }
 
+DEFRMI_ClientToServer_OnAnimUpdated(CCustom_Stub)
+{
+
+    return true;
+}
+
 DEFRMI_ClientToServer_OnChat(CCustom_Stub)
 {
     m_pInstance->ADD_Chat((HostID)clientId, message);
     return true;
 }
 
-DEFRMI_ClientToServer_OnGameLogin(CCustom_Stub)
-{
-    m_pInstance->Login_EXcuteDB(clientId, szID, szPassWord);
-    return true;
-}
-
-DEFRMI_ClientToServer_OnAnimUpdated(CCustom_Stub)
-{
-
-    return true;
-}
 
 DEFRMI_ClientToServer_RequestCheckNickname(CCustom_Stub)
 {
@@ -44,6 +56,16 @@ DEFRMI_ClientToServer_Create_Character(CCustom_Stub)
     return true;
 }
 
+
+DEFRMI_ClientToServer_OnActorPositionUpdated(CCustom_Stub)
+{
+    return true;
+}
+
+DEFRMI_ClientToServer_OnActorAnimUpdated(CCustom_Stub)
+{
+    return true;
+}
 
 CCustom_Stub* CCustom_Stub::Create()
 {

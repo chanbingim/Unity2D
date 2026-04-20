@@ -1,0 +1,4 @@
+#pragma once
+
+enum class LOGIN_MSG { SUCCESS, ID_FAIL, PW_FAIL, END };
+enum class DB_TABLE_TYPE { REQUEST_ID, REQUEST_NAME, PLAYER, ITEM, END };

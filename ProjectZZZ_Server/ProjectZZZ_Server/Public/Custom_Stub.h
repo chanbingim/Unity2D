@@ -14,12 +14,18 @@ private:
 public:
     // Stub
     DECRMI_ClientToServer_OnGameLogin;
+    DECRMI_ClientToServer_SpawnPlayerEvent;
+    DECRMI_ClientToServer_SpawnObjectEvent;
+
     DECRMI_ClientToServer_Create_Character;
     DECRMI_ClientToServer_RequestCheckNickname;
 
     DECRMI_ClientToServer_OnPositionUpdated;
     DECRMI_ClientToServer_OnAnimUpdated;
     DECRMI_ClientToServer_OnChat;
+
+    DECRMI_ClientToServer_OnActorPositionUpdated;
+    DECRMI_ClientToServer_OnActorAnimUpdated;
  
 public:
     static  CCustom_Stub*       Create();

@@ -13,14 +13,14 @@ void CPlayer::Set_Info(const PLAYER_DATA* pinfo)
 
 void CPlayer::Set_Poisition(float x, float y, float z)
 {
-    m_pInfo.m_PosX = x;
-    m_pInfo.m_PosY = y;
-    m_pInfo.m_PosZ = z;
+    m_pInfo.fPosX = x;
+    m_pInfo.fPosY = y;
+    m_pInfo.fPosZ = z;
 }
 
 void CPlayer::Set_NickName(const string& szName)
 {
-    m_pInfo.Name = szName;
+    m_pInfo.szName = szName;
 }
 
 void CPlayer::Set_AnimSate(STATE_TYPE state, float fTime)
@@ -31,12 +31,12 @@ void CPlayer::Set_AnimSate(STATE_TYPE state, float fTime)
 
 void CPlayer::Set_Level(int iLevel)
 {
-    m_pInfo.Level = iLevel;
+    m_pInfo.iLevel = iLevel;
 }
 
 void CPlayer::Set_Dead()
 {
-    m_pInfo.m_bIsDead = true;
+    m_pInfo.bIsDead = true;
 }
 
 CPlayer* CPlayer::Create()
@@ -58,10 +58,10 @@ void CPlayer::Release()
 
 HRESULT CPlayer::Initialize()
 {
-    m_pInfo.Level = 1;
-    m_pInfo.Name = "";
-    m_pInfo.m_PosX = m_pInfo.m_PosY = m_pInfo.m_PosZ = 0.f;
-    m_pInfo.m_bIsDead = false;
+    m_pInfo.iLevel = 1;
+    m_pInfo.szName = "";
+    m_pInfo.fPosX = m_pInfo.fPosY = m_pInfo.fPosZ = 0.f;
+    m_pInfo.bIsDead = false;
     m_AnimState = STATE_TYPE::END;
 
     return S_OK;

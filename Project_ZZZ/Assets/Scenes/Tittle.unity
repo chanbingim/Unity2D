@@ -671,9 +671,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1541676639}
+  - component: {fileID: 1541676642}
   - component: {fileID: 1541676640}
   - component: {fileID: 1541676643}
-  - component: {fileID: 1541676642}
+  - component: {fileID: 1541676644}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -720,7 +721,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a843d79f41cf5640ad0c25ebb2c0a4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameClient
-  m_PlayerPrefab: {fileID: 19588385245968726, guid: 8ee08d04ad5df46fbb2e97260b63420b, type: 3}
   m_MyID: 0
 --- !u!114 &1541676643
 MonoBehaviour:
@@ -738,6 +738,21 @@ MonoBehaviour:
   - type: 1
     prefab: {fileID: 7949652286971455462, guid: cd66229178f379b4ebc7c4de1d839deb, type: 3}
   m_Canvas: {fileID: 1261463100}
+--- !u!114 &1541676644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541676637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f38fa8657275a334caa18ffca62802b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CResourceManager
+  m_PrefabList:
+  - Key: Player
+    Value: {fileID: 19588385245968726, guid: 8ee08d04ad5df46fbb2e97260b63420b, type: 3}
 --- !u!1 &1639333871
 GameObject:
   m_ObjectHideFlags: 0

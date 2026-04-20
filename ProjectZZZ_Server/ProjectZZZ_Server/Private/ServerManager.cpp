@@ -71,37 +71,49 @@ bool CServerManager::Request_UniqueNickName(int ClientID, string NickName)
 #pragma endregion
 
 #pragma region Client_Event
-void CServerManager::ADD_JoinClient(CSession* ClientData)
+void CServerManager::ADD_JoinClient(int hostID, CSession* ClientData, LOGIN_MSG Msg)
 {
-    int hostID = ClientData->Get_ID();
-    auto iter = m_SessionList.find(hostID);
-    if (iter == m_SessionList.end())
+    try
     {
-        PLAYER_DATA Player_Data;
-        if (m_pDBManager)
+        if (nullptr == ClientData)
+            throw runtime_error("Log : Login Fail");
+
+        int hostID = ClientData->Get_ID();
+        auto iter = m_SessionList.find(hostID);
+        if (iter == m_SessionList.end())
         {
-            if (!m_pDBManager->RequestLoadPlayerData(ClientData->Get_TableID(), Player_Data))
-            {
-                cout << "Not Find Character Data : " << hostID << endl;
-                /*
-                *   나중에 여기서 캐릭터 생성 로직으로 분기
-                */
+            PLAYER_DATA Player_Data;
+            Player_Data.fPosX = Player_Data.fPosY = Player_Data.fPosZ = 0;
 
-                return;
-            }
-            else
+            if (m_pDBManager)
             {
-                Player_Data.m_PosX = Player_Data.m_PosY  = Player_Data.m_PosZ = 0;
+                if (!m_pDBManager->RequestLoadPlayerData(ClientData->Get_TableID(), Player_Data))
+                {
+                    cout << "Not Find Character Data : " << hostID << endl;
+                    /*
+                    *   나중에 여기서 캐릭터 생성 로직으로 분기
+                    */
 
-                ClientData->Set_Info(&Player_Data);
-                m_SessionList.emplace(hostID, ClientData);
-                m_pProxy->OnPlayerJoined((HostID)hostID, RmiContext::ReliableSend, hostID, Player_Data.Name, Player_Data.m_PosX, Player_Data.m_PosY, Player_Data.m_PosZ);
+                    return;
+                }
+                else
+                {
+                    ClientData->Set_Info(&Player_Data);
+                    m_SessionList.emplace(hostID, ClientData);
+                    m_pProxy->ResponseLoginEvent((HostID)hostID, RmiContext::ReliableSend, true, static_cast<int>(Msg));
+                    //m_pProxy->OnPlayerJoined((HostID)hostID, RmiContext::ReliableSend, hostID, Player_Data.szName, Player_Data.fPosX, Player_Data.fPosY, Player_Data.fPosZ);
+                }
             }
         }
+        else
+        {
+            cout << "AlReady Join Player ID : " << hostID << endl;
+        }
     }
-    else
+    catch (const exception& Error)
     {
-        cout << "AlReady Join Player ID : " << hostID << endl;
+        cout << "Error: " << Error.what() << endl;
+        m_pProxy->ResponseLoginEvent((HostID)hostID, RmiContext::ReliableSend, false, static_cast<int>(Msg));
     }
 }
 
@@ -115,6 +127,17 @@ void CServerManager::Leave_Client(int ClientID)
     }
 }
 
+void CServerManager::Spawn_Player(const int clientId, const int iLevelID)
+{
+    auto iter = m_SessionList.find(clientId);
+    if (iter != m_SessionList.end())
+    {
+        const Player_Data* pPlayer_Info = iter->second->Get_Info();
+        m_pProxy->OnPlayerJoined((HostID)clientId, RmiContext::ReliableSend, clientId,
+            pPlayer_Info->szName, pPlayer_Info->fPosX, pPlayer_Info->fPosY, pPlayer_Info->fPosZ);
+    }
+}
+
 void CServerManager::Clear_DeadClient()
 {
     for (auto iter = m_SessionList.begin(); iter != m_SessionList.end();)
@@ -122,7 +145,7 @@ void CServerManager::Clear_DeadClient()
         CSession* pSession = iter->second;
         const Player_Data* pPlayer_Info = pSession->Get_Info();
 
-        if (pPlayer_Info->m_bIsDead)
+        if (pPlayer_Info->bIsDead)
         {
             delete iter->second;
             iter = m_SessionList.erase(iter);
@@ -146,7 +169,7 @@ void CServerManager::ADD_Chat(HostID ID, string Text)
     auto iter = m_SessionList.find(ID);
     if (iter != m_SessionList.end())
     {
-        string Chat = iter->second->Get_Info()->Name + " : " + Text;
+        string Chat = iter->second->Get_Info()->szName + " : " + Text;
         m_NewChat.push_back(Chat);
         cout << "Log ChatMsg -" << Chat << endl;
     }
@@ -200,8 +223,8 @@ void CServerManager::Update(float fTime)
         {
             double Latency = m_pServer->GetRecentPingSec(clientList[i]);
             m_pProxy->OnOtherPlayerUpdated(clientList[i], RmiContext::ReliableSend,
-                pSession->Get_ID(), pPlayer_Info->Name, pPlayer_Info->m_PosX,
-                pPlayer_Info->m_PosY, pPlayer_Info->m_PosZ);
+                pSession->Get_ID(), pPlayer_Info->szName, pPlayer_Info->fPosX,
+                pPlayer_Info->fPosY, pPlayer_Info->fPosZ);
 
             for(auto& Text : m_NewChat)
                 m_pProxy->OnChat(clientList[i], RmiContext::ReliableSend, clientList[i], Text);

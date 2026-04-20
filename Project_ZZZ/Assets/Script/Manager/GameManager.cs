@@ -33,12 +33,21 @@ public class GameManager : MonoBehaviour
 
     public string   Get_NextLevel() { return m_szNextLevel; }
     public void     Add_ListenList(Action<Boolean> Event) { EnableChating += Event; }
+    public void     Initialize_Scene(Scene LoadScene, LoadSceneMode SceneMode)
+    {
+        if ("Loading" == LoadScene.name)
+            return;
+
+        GameClient gameClient = GameClient.Get_Instance();
+        gameClient.Spawn_PlayerEvent(1);
+    }
+
     #endregion
 
     #region Private
     private void Initialize()
     {
-
+        SceneManager.sceneLoaded += Initialize_Scene;
     }
     #endregion
 
@@ -52,6 +61,7 @@ public class GameManager : MonoBehaviour
         {
             m_pInstance = this;
             m_pInstance.Initialize();
+            DontDestroyOnLoad(m_pInstance);
             Debug.Log("Create Game Manager");
         }
         else

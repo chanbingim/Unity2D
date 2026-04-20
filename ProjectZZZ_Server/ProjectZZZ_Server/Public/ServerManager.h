@@ -23,6 +23,11 @@ public :
     void                    Release_Server();
     void                    Leave_Client(int ClientID);
 
+#pragma region Spawn Actor
+    void                    Spawn_Player(const int clientId, const int iLevelID);
+
+#pragma endregion
+
     void                    Update_Player(HostID ID, float PosX, float PosY, float PosZ);
 
 #pragma region Chat
@@ -35,7 +40,7 @@ public :
     bool                    Request_UniqueNickName(int ClientID, string NickName);
 #pragma endregion
 
-    void                    ADD_JoinClient(CSession* ClientData);
+    void                    ADD_JoinClient(int hostID, CSession* ClientData, LOGIN_MSG Msg);
 
     void                    Update(float fTime);
     void                    Clear_DeadClient();
