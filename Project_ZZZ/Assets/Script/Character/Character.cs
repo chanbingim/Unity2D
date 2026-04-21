@@ -15,12 +15,14 @@ public abstract class Character : Actor
 
     [SerializeField] protected Fsm      m_Character_Fsm = null;
     [SerializeField] protected string   m_CurStateName = "";
+    protected   GameClient              m_GameClient = null;
+
 
     public abstract void HandleCommand(string StateName, CBaseCommand command);
 
     public virtual void Move(Vector3 dir)
     {
-        m_Transform.position = dir;
+        m_Transform.position += dir;
     }
 
     public virtual void Idle() { }

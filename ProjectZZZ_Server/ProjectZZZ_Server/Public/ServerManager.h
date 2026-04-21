@@ -28,7 +28,11 @@ public :
 
 #pragma endregion
 
+#pragma region Update_PlayerData
     void                    Update_Player(HostID ID, float PosX, float PosY, float PosZ);
+    void                    Update_PlayerAnimation(HostID ID, int iAnimState, float fTime);
+
+#pragma endregion
 
 #pragma region Chat
     void                    ADD_Chat(HostID ID, string Text);

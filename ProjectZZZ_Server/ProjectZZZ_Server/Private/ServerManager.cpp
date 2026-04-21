@@ -163,6 +163,13 @@ void CServerManager::Update_Player(HostID ID, float PosX, float PosY, float PosZ
         iter->second->Set_Poisition(PosX, PosY, PosZ);
 }
 
+void CServerManager::Update_PlayerAnimation(HostID ID, int iAnimState, float fTime)
+{
+    auto iter = m_SessionList.find(ID);
+    if (iter != m_SessionList.end())
+        iter->second->Set_AnimState(iAnimState, fTime);
+}
+
 #pragma region Chat
 void CServerManager::ADD_Chat(HostID ID, string Text)
 {
@@ -221,7 +228,7 @@ void CServerManager::Update(float fTime)
 
         for (int i = 0; i < count; i++)
         {
-            double Latency = m_pServer->GetRecentPingSec(clientList[i]);
+            //double Latency = m_pServer->GetRecentPingSec(clientList[i]);
             m_pProxy->OnOtherPlayerUpdated(clientList[i], RmiContext::ReliableSend,
                 pSession->Get_ID(), pPlayer_Info->szName, pPlayer_Info->fPosX,
                 pPlayer_Info->fPosY, pPlayer_Info->fPosZ);

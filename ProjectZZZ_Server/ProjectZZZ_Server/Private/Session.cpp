@@ -31,6 +31,11 @@ void CSession::Set_Dead()
         m_pPlayer->Set_Dead();
 }
 
+void CSession::Set_AnimState(int iAnimState, float fTime)
+{
+    m_pPlayer->Set_AnimSate(CPlayer::STATE_TYPE(iAnimState), fTime);
+}
+
 void CSession::Set_Info(const PLAYER_DATA* pinfo)
 {
     if (m_pPlayer)

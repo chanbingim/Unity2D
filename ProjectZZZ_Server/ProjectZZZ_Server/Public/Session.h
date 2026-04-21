@@ -14,6 +14,7 @@ public :
     void                    Set_NickName(const string& szName);
     void                    Set_Level(int iLevel);
     void                    Set_Dead();
+    void                    Set_AnimState(int iAnimState, float fTime);
 
     void                    Set_Info(const PLAYER_DATA* pinfo);
     const PLAYER_DATA*      Get_Info();

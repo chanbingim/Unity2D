@@ -103,7 +103,9 @@
     <ClCompile Include="..\private\MapManager.cpp">
       <Filter>07, MapManager</Filter>
     </ClCompile>
-    <ClCompile Include="..\private\Level.cpp" />
+    <ClCompile Include="..\private\Level.cpp">
+      <Filter>07, MapManager\Level</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\util\ServerRmi.pidl">
@@ -162,6 +164,8 @@
     <ClInclude Include="..\public\MapManager.h">
       <Filter>07, MapManager</Filter>
     </ClInclude>
-    <ClInclude Include="..\public\Level.h" />
+    <ClInclude Include="..\public\Level.h">
+      <Filter>07, MapManager\Level</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

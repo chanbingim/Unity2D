@@ -9,4 +9,9 @@ namespace GameFSM
         public void OnUpdate(Character character, ICommand Command);
         public void Exit();
     }
+
+    public interface IFSMState<TType> : IFSMState
+    {
+        TType Type { get; }
+    }
 }

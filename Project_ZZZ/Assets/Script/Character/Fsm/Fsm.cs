@@ -13,7 +13,7 @@ public class Fsm
 
     // 상태 만들고 상태안에서 이동움직임 처리하자
     public Vector3 Get_Direction() { return m_fDirection; }
-    public void Change_State(string StateName)
+    public virtual void Change_State(string StateName)
     {
         IFSMState NewState = null;
         if (Dic_State.ContainsKey(StateName))

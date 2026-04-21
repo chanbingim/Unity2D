@@ -16,13 +16,11 @@ public class GameClient : MonoBehaviour
     public int                          ClientHostID => m_MyID;
 
     #region private
-    [SerializeField] private int m_MyID;
+    [SerializeField] private int    m_MyID;
+    private NetClient               m_netClient = null;
+    private Stub                    m_ClientStub = null;
+    private Proxy                   m_ClientProxy = null;
 
-    private NetClient           m_netClient = null;
-    private Stub                m_ClientStub = null;
-    private Proxy               m_ClientProxy = null;
-
-  
     #endregion
 
     void Update()
@@ -33,6 +31,11 @@ public class GameClient : MonoBehaviour
     private void OnDestroy()
     {
         m_netClient.Disconnect();
+    }
+
+    public void UpdateAnimation(int AnimState, float AnimTime)
+    {
+
     }
 
     public void Send_Message(String text)

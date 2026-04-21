@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class PlayerFSM : Fsm
 {
+    public enum ANIM_STATE : int { IDLE, MOVE, ATTACK, HIT, END };
+
+    public ANIM_STATE CurState => m_CurAnimState;
+    public ANIM_STATE PreState => m_PreAnimState;
+
+    ANIM_STATE m_CurAnimState = ANIM_STATE.IDLE;
+    ANIM_STATE m_PreAnimState = ANIM_STATE.END;
+
     public static PlayerFSM CreateFSM()
     {
         PlayerFSM FSM = new PlayerFSM();
@@ -11,6 +19,17 @@ public class PlayerFSM : Fsm
             return FSM;
 
         return null;
+    }
+
+    public override void Change_State(string StateName)
+    {
+        IFSMState<ANIM_STATE> AnimState = m_CurState as IFSMState<ANIM_STATE>;
+        m_PreAnimState = AnimState.Type;
+
+        base.Change_State(StateName);
+
+        AnimState = m_CurState as IFSMState<ANIM_STATE>;
+        m_CurAnimState = AnimState.Type;
     }
 
     private bool Initalize()

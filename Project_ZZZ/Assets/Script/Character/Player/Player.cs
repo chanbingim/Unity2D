@@ -6,16 +6,19 @@ public class Player : Character
     public delegate void OnEnter(Transform transform);
     public OnEnter      TirggerEnter;
 
+    private PlayerFSM   m_playerFSM;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        m_fSpeed = 10;
+        m_fSpeed = 5;
         m_Health = 1000;
-        m_fRotationSpeed = 3;
+        m_fRotationSpeed = 5;
         m_Character_Fsm = PlayerFSM.CreateFSM();
 
         m_Transform = gameObject.transform;
         m_Animator = gameObject.GetComponent<Animator>();
+        m_playerFSM = m_Character_Fsm as PlayerFSM;
+        m_GameClient = GameClient.Get_Instance();
     }
 
     // Update is called once per frame
@@ -27,7 +30,7 @@ public class Player : Character
     {
         Quaternion NewRot = Quaternion.LookRotation(vDir);
         transform.rotation = Quaternion.Lerp(
-            transform.rotation, NewRot, m_fSpeed * Time.deltaTime);
+            transform.rotation, NewRot, m_fRotationSpeed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -45,11 +48,14 @@ public class Player : Character
     public override void Idle()
     {
         m_Animator.SetFloat("Velocity", 0f);
+        m_GameClient.UpdateAnimation((int)m_playerFSM.CurState, 0f);
     }
 
     public override void Move(Vector3 dir)
     {
         m_Animator.SetFloat("Velocity", 1f);
+        m_GameClient.UpdateAnimation((int)m_playerFSM.CurState, 0f);
+
         base.Move(dir);
     }
 

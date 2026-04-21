@@ -51,12 +51,18 @@ public class Player_Controller : CCharacter_Controller
                 camForward.Normalize();
                 camRight.Normalize();
 
-                m_MoveCommand.m_vCurPos = gameObject.transform.position;
+                m_MoveCommand.m_vCurPos = m_Character.transform.position;
                 m_MoveCommand.m_vDir = vDir.x * camRight + vDir.z * camForward;
+                m_MoveCommand.m_vDir = m_MoveCommand.m_vDir.normalized;
                 m_MoveCommand.m_fSpeed = m_Character.m_fSpeed;
 
                 m_Character.Character_LookAt(m_MoveCommand.m_vDir);
+                m_Character.HandleCommand("Move", m_MoveCommand);
                 m_Client.ClientMoveMessage(m_MoveCommand);
+            }
+            else
+            {
+                m_Character.HandleCommand("Idle", null);
             }
         }
     }
@@ -70,13 +76,10 @@ public class Player_Controller : CCharacter_Controller
     {
         m_MoveCommand.m_vDir = new Vector3(px, py, pz);
 
-        if (m_MoveCommand.m_vDir != m_Character.transform.position)
+        Vector3 diff = m_Character.transform.position - m_MoveCommand.m_vDir;
+        if (diff.sqrMagnitude > 0.5f * 0.5f)
         {
-            m_Character.HandleCommand("Move", m_MoveCommand);
-        }
-        else
-        {
-            m_Character.HandleCommand("Idle", null);
+            m_Character.transform.position = m_MoveCommand.m_vDir;
         }
     }
 }

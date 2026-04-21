@@ -33,7 +33,7 @@ DEFRMI_ClientToServer_OnPositionUpdated(CCustom_Stub)
 
 DEFRMI_ClientToServer_OnAnimUpdated(CCustom_Stub)
 {
-
+    m_pInstance->Update_PlayerAnimation((HostID)clientId, AnimStae, Time);
     return true;
 }
 

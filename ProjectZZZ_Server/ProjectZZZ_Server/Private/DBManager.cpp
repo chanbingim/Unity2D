@@ -194,6 +194,7 @@ bool CDBManager::RequestLoadPlayerData(int TableID, PLAYER_DATA& playerData)
             playerData.fPosY = record.GetFieldValue(_PNT("pos_y"));
             playerData.fPosZ = record.GetFieldValue(_PNT("pos_z"));
 
+#pragma region print_Log
             wprintf(L"-------------Find Success-------------\n");
             wprintf(L"ID : %d\n", playerData.iID);
             wprintf(L"NickName : %s\n", playerData.szName.c_str());
@@ -204,7 +205,7 @@ bool CDBManager::RequestLoadPlayerData(int TableID, PLAYER_DATA& playerData)
             wprintf(L"Gold : %d\n", playerData.iGlod);
             wprintf(L"Position : %f, %f, %f \n", playerData.fPosX, playerData.fPosY, playerData.fPosZ);
             wprintf(L"-----------------------------------\n");
-
+#pragma endregion
         }
 
         for (int i = 0; i < Warnings.Count; ++i)
