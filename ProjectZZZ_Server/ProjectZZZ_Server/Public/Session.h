@@ -17,12 +17,17 @@ public :
     void                    Set_AnimState(int iAnimState, float fTime);
 
     void                    Set_Info(const PLAYER_DATA* pinfo);
+    int                     Get_AnimSate();
+    float                   Get_AnimTime();
+
     const PLAYER_DATA*      Get_Info();
 
 private:
     int                     m_hostID;
     int                     m_TableID;
+
     CPlayer*                m_pPlayer = nullptr;
+    
 
 public :
     static CSession*        Create(int HostID, int TableID, PLAYER_DATA* info = nullptr);

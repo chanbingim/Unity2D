@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Session.h"
+
 #include "Player.h"
 
 CSession::CSession()
@@ -48,6 +49,22 @@ const Player_Data* CSession::Get_Info()
         return m_pPlayer->Get_Info();
 
     return nullptr;
+}
+
+int CSession::Get_AnimSate()
+{
+    if (m_pPlayer)
+        return static_cast<int>(m_pPlayer->Get_AnimSate());
+
+    return -1;
+}
+
+float CSession::Get_AnimTime()
+{
+    if (m_pPlayer)
+        return m_pPlayer->Get_AnimTime();
+
+    return 0.f;
 }
 
 CSession* CSession::Create(int HostID, int TableID, PLAYER_DATA* info)
