@@ -3,11 +3,6 @@
 
 #include "Player.h"
 
-CSession::CSession()
-{
-
-}
-
 void CSession::Set_Poisition(float x, float y, float z)
 {
     if (m_pPlayer)
@@ -18,6 +13,11 @@ void CSession::Set_NickName(const string& szName)
 {
     if (m_pPlayer)
         m_pPlayer->Set_NickName(szName);
+}
+
+void CSession::Set_MapID(int iMapID)
+{
+    m_EnterMapID = iMapID;
 }
 
 void CSession::Set_Level(int iLevel)
@@ -67,14 +67,16 @@ float CSession::Get_AnimTime()
     return 0.f;
 }
 
-CSession* CSession::Create(int HostID, int TableID, PLAYER_DATA* info)
+int CSession::Get_MapID()
 {
-    CSession* pInstance = new CSession();
+    return m_EnterMapID;
+}
+
+shared_ptr<CSession> CSession::Create(int HostID, int TableID, PLAYER_DATA* info)
+{
+    shared_ptr<CSession> pInstance = make_shared<CSession>();
     if (FAILED(pInstance->Initialize(HostID, TableID, info)))
-    {
-        delete pInstance;
         pInstance = nullptr;
-    }
 
     return pInstance;
 }

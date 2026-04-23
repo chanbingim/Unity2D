@@ -1,7 +1,7 @@
 #pragma once
-#include "Server_Defines.h"
+#include "Base.h"
 
-class CDBManager
+class CDBManager : public CBase
 {
 public :
     bool                    Login_EXcuteDB(int ClientID, string ID, string Password);
@@ -16,12 +16,10 @@ private :
     queue<shared_ptr<DB_RESULT>>    m_DBJobs;
 
 public :
-    static CDBManager*      Create();
-    void                    Release();
+    static shared_ptr<CDBManager>       Create();
+    virtual void                        Release();
 
 private :
-    CDBManager();
-
     HRESULT                 Initialize();
 
     // DB ¿¬°á Test

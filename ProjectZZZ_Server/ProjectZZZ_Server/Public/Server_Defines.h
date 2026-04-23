@@ -24,5 +24,6 @@
 
 #include "Server_Enum.h"
 #include "Server_Structs.h"
+#include "Server_Func.h"
 
 using namespace std;

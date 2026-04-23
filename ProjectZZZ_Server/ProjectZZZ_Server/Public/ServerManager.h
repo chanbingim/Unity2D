@@ -5,7 +5,6 @@
 class CCustom_Stub;
 class CTimerManager;
 class CServer_Event;
-class CDBManager;
 class CSession;
 
 using namespace ServerToClient;
@@ -44,7 +43,7 @@ public :
     bool                    Request_UniqueNickName(int ClientID, string NickName);
 #pragma endregion
 
-    void                    ADD_JoinClient(int hostID, CSession* ClientData, LOGIN_MSG Msg);
+    void                    ADD_JoinClient(int hostID, shared_ptr<CSession> ClientData, LOGIN_MSG Msg);
 
     void                    Update(float fTime);
     void                    Clear_DeadClient();
@@ -57,9 +56,11 @@ private :
 
 private :
     static CServerManager*              m_pGameInstance;
-    unordered_map<int, CSession*>       m_SessionList;
 
-    CDBManager*                         m_pDBManager;
+    unordered_map<int, shared_ptr<CSession>>            m_SessionList;
+    shared_ptr<class CDBManager>                        m_pDBManager = nullptr;
+    shared_ptr<class CMapManager>                       m_pMapManager = nullptr;
+
     Deque<string>                       m_ChatList;
     vector<string>                      m_NewChat;
 

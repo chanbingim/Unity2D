@@ -1,32 +1,36 @@
 #pragma once
-#include "Server_Defines.h"
+#include "Base.h"
 
 class CActor;
 class CSession;
 
-class CLevel
+class CLevel : public CBase
 {
 public :
     void                Join_Session(shared_ptr<CSession> pSession);
     void                Join_Actor(shared_ptr<CActor> pActor);
 
     void                Update();
-
-
-private :
-    int                         m_iLevelID;
-
-    list<weak_ptr<CSession>>    m_JoinedSession;
-    list<weak_ptr<CActor>>      m_ActorList;
-    ServerToClient::Proxy*      m_pProxy = nullptr;
+    bool                Get_Dead();
 
 private :
-    CLevel();
-    CLevel(int iID);
+    int                             m_iLevelID;
+
+    list<shared_ptr<CSession>>      m_JoinedSession;
+    list<shared_ptr<CActor>>        m_ActorList;
+    ServerToClient::Proxy*          m_pProxy = nullptr;
+
+private :
     HRESULT             Initialize();
+    void                Broadcast_Session();
+    void                Broadcast_Actor();
 
 public :
-    static CLevel*      Create(int iLevelID);
+    CLevel();
+    CLevel(int iID);
+
+    static shared_ptr<CLevel>       Create(int iLevelID);
+    void                            Release();
 
 };
 

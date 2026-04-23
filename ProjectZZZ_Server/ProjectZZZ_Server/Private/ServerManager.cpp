@@ -1,8 +1,10 @@
 #include "pch.h"
 #include "ServerManager.h"
-#include "DBManager.h"
-#include "ServerEvent.h"
 
+#include "DBManager.h"
+#include "MapManager.h"
+
+#include "ServerEvent.h"
 #include "Session.h"
 #include "Player.h"
 
@@ -35,19 +37,16 @@ CServerManager* CServerManager::Get_Instance()
 void CServerManager::Release_Server()
 {
     for (auto& iter : m_SessionList)
-    {
         iter.second->Release();
-        delete iter.second;
-    }
 
-    delete  m_pProxy;
-
+    m_pMapManager->Release();
     m_pDBManager->Release();
-    delete m_pDBManager;
 
     m_pStub->Release();
     m_SessionList.clear();
     m_pServer->Stop();
+
+    delete  m_pProxy;
 }
 
 #pragma region DB
@@ -71,7 +70,7 @@ bool CServerManager::Request_UniqueNickName(int ClientID, string NickName)
 #pragma endregion
 
 #pragma region Client_Event
-void CServerManager::ADD_JoinClient(int hostID, CSession* ClientData, LOGIN_MSG Msg)
+void CServerManager::ADD_JoinClient(int hostID, shared_ptr<CSession> ClientData, LOGIN_MSG Msg)
 {
     try
     {
@@ -132,9 +131,7 @@ void CServerManager::Spawn_Player(const int clientId, const int iLevelID)
     auto iter = m_SessionList.find(clientId);
     if (iter != m_SessionList.end())
     {
-        const Player_Data* pPlayer_Info = iter->second->Get_Info();
-        m_pProxy->OnPlayerJoined((HostID)clientId, RmiContext::ReliableSend, clientId,
-            pPlayer_Info->szName, pPlayer_Info->fPosX, pPlayer_Info->fPosY, pPlayer_Info->fPosZ);
+        m_pMapManager->Join_Level(iter->second, iLevelID);
     }
 }
 
@@ -142,14 +139,11 @@ void CServerManager::Clear_DeadClient()
 {
     for (auto iter = m_SessionList.begin(); iter != m_SessionList.end();)
     {
-        CSession* pSession = iter->second;
+        CSession* pSession = iter->second.get();
         const Player_Data* pPlayer_Info = pSession->Get_Info();
 
         if (pPlayer_Info->bIsDead)
-        {
-            delete iter->second;
             iter = m_SessionList.erase(iter);
-        }
         else
             iter++;
     }
@@ -204,7 +198,9 @@ void CServerManager::Initalized(ErrorInfoPtr Error)
     m_pServer->AttachStub(m_pStub);
     m_pServer->Start(param, Error);
 
-    m_pDBManager = CDBManager::Create();
+    m_pDBManager = make_shared<CDBManager>();
+    m_pMapManager = make_shared<CMapManager>();
+
     m_NewChat.reserve(1000);
     if (Error != nullptr)
         cout << "Server start failed: " << Error->ToString().GetString() << endl;
@@ -215,7 +211,9 @@ void CServerManager::Initalized(ErrorInfoPtr Error)
 void CServerManager::Update(float fTime)
 {
    // Tick처리를 위한 데이터를 여기서 뿌리자
-   
+    m_pDBManager->Update_DB(m_pProxy);
+    m_pMapManager->Update();
+
     HostID clientList[256];
     int count = m_pServer->GetClientHostIDs(clientList, 256);
 
@@ -223,21 +221,16 @@ void CServerManager::Update(float fTime)
     // 일단 접속된 클라이언트의 좌표를 모두 뿌려보자
     for (auto& iter : m_SessionList)
     {
-        CSession* pSession = iter.second;
+        CSession* pSession = iter.second.get();
         const PLAYER_DATA* pPlayer_Info = pSession->Get_Info();
 
         for (int i = 0; i < count; i++)
         {
-            //double Latency = m_pServer->GetRecentPingSec(clientList[i]);
-            m_pProxy->OnOtherPlayerUpdated(clientList[i], RmiContext::ReliableSend,
-                pSession->Get_ID(), pPlayer_Info->szName, pPlayer_Info->fPosX,
-                pPlayer_Info->fPosY, pPlayer_Info->fPosZ);
-
             for(auto& Text : m_NewChat)
                 m_pProxy->OnChat(clientList[i], RmiContext::ReliableSend, clientList[i], Text);
         }
     }
 
-    m_pDBManager->Update_DB(m_pProxy);
+    
     m_NewChat.clear();
 }

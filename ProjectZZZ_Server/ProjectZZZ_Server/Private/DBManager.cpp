@@ -4,10 +4,6 @@
 #include "ServerManager.h"
 #include "Session.h"
 
-CDBManager::CDBManager()
-{
-}
-
 HRESULT CDBManager::Initialize()
 {
     // 여기서 DB 연결 Test
@@ -254,14 +250,11 @@ void CDBManager::Update_DB(ServerToClient::Proxy* pProxy)
     }
 }
 
-CDBManager* CDBManager::Create()
+shared_ptr<CDBManager>  CDBManager::Create()
 {
-    CDBManager* pInstance = new CDBManager();
+    shared_ptr<CDBManager> pInstance = make_shared<CDBManager>();
     if (FAILED(pInstance->Initialize()))
-    {
-        delete pInstance;
         pInstance = nullptr;
-    }
 
     return pInstance;
 }
