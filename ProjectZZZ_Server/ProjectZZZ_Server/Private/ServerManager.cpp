@@ -199,7 +199,12 @@ void CServerManager::Initalized(ErrorInfoPtr Error)
     m_pServer->Start(param, Error);
 
     m_pDBManager = make_shared<CDBManager>();
+    if(FAILED(m_pDBManager->Initialize()))
+        return;
+
     m_pMapManager = make_shared<CMapManager>();
+    if (FAILED(m_pMapManager->Initialize()))
+        return;
 
     m_NewChat.reserve(1000);
     if (Error != nullptr)

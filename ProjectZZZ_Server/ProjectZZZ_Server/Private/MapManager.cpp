@@ -17,15 +17,19 @@ void CMapManager::Update()
 
 void CMapManager::Join_Level(shared_ptr<class CSession> pSession,  int LevelID)
 {
+    shared_ptr<CLevel> plevel = nullptr;
     auto iter = m_MapList.find(LevelID);
     if (iter == m_MapList.end())
     {
-        auto pLevel = CLevel::Create(LevelID);
-        m_MapList.emplace(LevelID, pLevel);
-        m_LevelList.push_back(pLevel);
+        plevel = CLevel::Create(LevelID);
+        m_MapList.emplace(LevelID, plevel);
+        m_LevelList.push_back(plevel);
     }
+    else
+        plevel = iter->second;
 
-    m_MapList[LevelID]->Join_Session(pSession);
+    pSession->Set_MapID(LevelID);
+    plevel->Join_Session(pSession);
 }
 
 void CMapManager::Leave_Level(shared_ptr<class CSession> pSession, int LevelID)

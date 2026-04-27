@@ -8,7 +8,7 @@ public class Fsm
     [SerializeField] protected float m_fMoveSpeed;
     protected Vector3 m_fDirection;
 
-    protected Dictionary<string, IFSMState> Dic_State;
+    protected Dictionary<string, IFSMState> Dic_State = new Dictionary<string, IFSMState>();
     protected IFSMState     m_CurState;
 
     // 상태 만들고 상태안에서 이동움직임 처리하자

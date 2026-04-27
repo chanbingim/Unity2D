@@ -5,23 +5,35 @@ global ServerToClient 3000
     ResponseCheckNickname([in] int clientId, [in] bool bIsAble);
 
     OnPlayerJoined([in] int clientId, [in] string szNickName, [in] float PosX, [in] float PosY, [in] float PosZ);
-    OnOtherPlayerUpdated([in] int ClientID, [in] string NickName, [in] float PosX, [in] float PosY, [in] float PosZ );
-    OnOtherPlayerAnimUpdated([in] int ClientID, [in] int AnimState, [in] int AnimTime);
-
     SpawnObjectEvent([in] string Key, [in] int templetedID, [in] float px, [in] float py, [in] float pz);
-    OnOtherActorUpdated([in] int templeteID, [in] float PosX, [in] float PosY, [in] float PosZ );
-    OnOtherActorAnimUpdated([in] int templeteID, [in] int AnimState, [in] int AnimTime);
+    
+    OtherPlayerTransformUpdated([in] int ClientID, [in] string NickName, 
+                                [in] float ScaleX, [in] float ScaleY, [in] float ScaleZ,
+                                [in] float AngleX, [in] float AngleY, [in] float AngleZ, [int] float AngleW
+                                [in] float PosX, [in] float PosY, [in] float PosZ); 
 
-    OnPositionUpdated([in] int clientId, 
-                      [in] float PosX, [in] float PosY, [in] float PosZ, 
-                      [in] float DirX, [in] float DirY, [in] float DirZ);
+    OnPlayerTransformUpdated([in] int clientId, 
+                             [in] float ScaleX, [in] float ScaleY, [in] float ScaleZ,
+                             [in] float AngleX, [in] float AngleY, [in] float AngleZ, [int] float AngleW
+                             [in] float PosX, [in] float PosY, [in] float PosZ, 
+                             [in] float DirX, [in] float DirY, [in] float DirZ);
+    
+    OtherActorTransformUpdated([in] int templeteID, 
+                               [in] float ScaleX, [in] float ScaleY, [in] float ScaleZ,
+                               [in] float AngleX, [in] float AngleY, [in] float AngleZ, [int] float AngleW
+                               [in] float PosX, [in] float PosY, [in] float PosZ);
 
-    OnActorPositionUpdated([in] int templeteID, 
+    ActorTransformUpdated([in] int templeteID, 
+                      [in] float ScaleX, [in] float ScaleY, [in] float ScaleZ,
+                      [in] float AngleX, [in] float AngleY, [in] float AngleZ, [int] float AngleW
                       [in] float PosX, [in] float PosY, [in] float PosZ, 
                       [in] float DirX, [in] float DirY, [in] float DirZ);
 
     UpdateCharacterAnimState([in] int clientId, [in] int AnimSate, [in] float Time);
+    OnOtherPlayerAnimUpdated([in] int ClientID, [in] int AnimState, [in] int AnimTime);
+
     UpdateActorAnimState([in] int templeteID, [in] int AnimSate, [in] float Time);
-    
+    OnOtherActorAnimUpdated([in] int templeteID, [in] int AnimState, [in] int AnimTime);
+
     OnChat([in] int clientId, [in] string message);
 }

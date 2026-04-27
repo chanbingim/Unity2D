@@ -2,7 +2,6 @@ using Nettention.Proud;
 using System;
 using System.Collections.Generic;
 using System.Resources;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class ServerActorUpdateHandler
@@ -56,9 +55,9 @@ public class ServerActorUpdateHandler
     public bool OnOtherPlayerUpdated(HostID remote, RmiContext rmiContext, int clientId, string NickName, float px, float py, float pz)
     {
         if (m_Players.ContainsKey(clientId))
-        {
             m_Players[clientId].controller.Update_Position(px, py, pz);
-        }
+        else
+            OnPlayerJoined(remote, rmiContext, clientId, NickName, px, py, pz);
 
         return true;
     }

@@ -57,12 +57,15 @@ typedef struct Login_Result : public DB_RESULT
 
 }LOGIN_RESULT;
 
-typedef struct Login_Error : public DEFUALT_ERROR
+typedef struct Create_Id_Result : public DB_RESULT
 {
-    Login_Error(string ErrorMsg, LOGIN_MSG eLoginMsg) : DEFUALT_ERROR(ErrorMsg), eLoginMsg(eLoginMsg) {}
-    LOGIN_MSG   eLoginMsg;
-}LOGIN_ERROR;
+    Create_Id_Result(int Id, DB_TABLE_TYPE Type, CREATEID_MSG  Msg) :
+        DB_Result(Id, Type), eMsg(Msg) {
+    }
 
+    CREATEID_MSG    eMsg;
+
+}CREATE_ID_RESULT;
 
 typedef struct DB_Respone_Data : public DB_RESULT
 {

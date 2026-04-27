@@ -24,7 +24,8 @@ public class PlayerFSM : Fsm
     public override void Change_State(string StateName)
     {
         IFSMState<ANIM_STATE> AnimState = m_CurState as IFSMState<ANIM_STATE>;
-        m_PreAnimState = AnimState.Type;
+        if (null != AnimState)
+            m_PreAnimState = AnimState.Type;
 
         base.Change_State(StateName);
 
@@ -34,7 +35,6 @@ public class PlayerFSM : Fsm
 
     private bool Initalize()
     {
-        Dic_State = new Dictionary<string, IFSMState>();
         Dic_State.Add("Move", new MoveState());
         Dic_State.Add("Idle", new IdleState());
 

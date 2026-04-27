@@ -73,6 +73,66 @@ HRESULT CDBManager::Excute_Test()
     return S_OK;
 }
 
+#pragma region Login
+int CDBManager::Request_LoginID(const string& ID)
+{
+    COdbcWarnings       Warnings;
+    COdbcRecordset      record;       // Äõ¸® °á°ú¸¦ ´ãÀ» °´Ã¼
+
+    try
+    {
+        Proud::String Query = Proud::String::NewFormat(
+            L"SELECT id FROM users WHERE user_id = '%s'",
+            Proud::String(ID.c_str()).GetString());
+
+        auto result = m_Conn.Execute(record, Query, &Warnings);
+        for (int i = 0; i < Warnings.Count; ++i)
+            cout << Warnings[i].GetSqlErrorCode() << " : " << Warnings[i].what() << '\n';
+
+        int TableId(0);
+        while (record.MoveNext())
+        {
+            TableId = record.GetFieldValue(_PNT("id"));
+        }
+
+        return TableId;
+    }
+    catch (COdbcException& error)
+    {
+        cout << "Error : " << error.GetSqlErrorCode() << " => " << error.what() << '\n';
+        return false;
+    }
+
+    return false;
+}
+
+bool CDBManager::Request_LoginPassWord(const string& Pw)
+{
+    COdbcWarnings       Warnings;
+    COdbcRecordset      record;       // Äõ¸® °á°ú¸¦ ´ãÀ» °´Ã¼
+
+    try
+    {
+        string Query = Proud::String::NewFormat(
+            L"SELECT password FROM users WHERE password = '%s'",
+            Proud::String(Pw.c_str()).GetString());
+
+        auto result = m_Conn.Execute(record, Query, &Warnings);
+        for (int i = 0; i < Warnings.Count; ++i)
+            cout << Warnings[i].GetSqlErrorCode() << " : " << Warnings[i].what() << '\n';
+
+        return 0 == record.GetRowCount() ? false : true;
+    }
+    catch (COdbcException& error)
+    {
+        cout << "Error : " << error.GetSqlErrorCode() << " => " << error.what() << '\n';
+        return false;
+    }
+
+    return false;
+}
+#pragma endregion
+
 void CDBManager::Release()
 {
     m_Conn.Close();
@@ -88,41 +148,20 @@ bool CDBManager::Login_EXcuteDB(int ClientID, string ID, string Password)
 		int Table_id(-1);
 
 #pragma region ID_CHECK
-		Proud::String Query = Proud::String::NewFormat(
-			L"SELECT id, password FROM users WHERE user_id = '%s'",
-			Proud::String(ID.c_str()).GetString());
-
-		auto result = m_Conn.Execute(record, Query, &Warnings);
-		for (int i = 0; i < Warnings.Count; ++i)
-			cout << Warnings[i].GetSqlErrorCode() << " : " << Warnings[i].what() << '\n';
-
-		if (0 == record.GetRowCount())
-		{
-			m_DBJobs.push(make_shared<LOGIN_RESULT>(ClientID, DB_TABLE_TYPE::REQUEST_ID, Table_id, LOGIN_MSG::ID_FAIL));
-			return false;
-		}
+        if (!Request_LoginID(ID))
+        {
+            m_DBJobs.push(make_shared<LOGIN_RESULT>(ClientID, DB_TABLE_TYPE::REQUEST_ID, Table_id, LOGIN_MSG::ID_FAIL));
+            return false;
+        }
 #pragma endregion
 
 #pragma region PW_CHECK
-		Query = Proud::String::NewFormat(
-			L"SELECT id, password FROM users WHERE password = '%s'",
-			Proud::String(Password.c_str()).GetString());
-
-		result = m_Conn.Execute(record, Query, &Warnings);
-		for (int i = 0; i < Warnings.Count; ++i)
-			cout << Warnings[i].GetSqlErrorCode() << " : " << Warnings[i].what() << '\n';
-
-		if (0 == record.GetRowCount())
-		{
-			m_DBJobs.push(make_shared<LOGIN_RESULT>(ClientID, DB_TABLE_TYPE::REQUEST_ID, Table_id, LOGIN_MSG::PW_FAIL));
-			return false;
-		}
+        if (!Request_LoginPassWord(Password))
+        {
+            m_DBJobs.push(make_shared<LOGIN_RESULT>(ClientID, DB_TABLE_TYPE::REQUEST_ID, Table_id, LOGIN_MSG::PW_FAIL));
+            return false;
+        }
 #pragma endregion
-		
-		while (record.MoveNext())
-		{
-			Table_id = record.GetFieldValue(L"id");
-		}
 
 		m_DBJobs.push(make_shared<LOGIN_RESULT>(ClientID, DB_TABLE_TYPE::REQUEST_ID, Table_id, LOGIN_MSG::SUCCESS));
 
@@ -134,6 +173,32 @@ bool CDBManager::Login_EXcuteDB(int ClientID, string ID, string Password)
     }
 
     return true;
+}
+
+void CDBManager::Insert_NewID(int ClientID, string ID, string Password, string Email)
+{
+    COdbcWarnings       Warnings;
+    COdbcRecordset      record;       // Äõ¸® °á°ú¸¦ ´ãÀ» °´Ã¼
+
+    try
+    {
+        int Table_id(-1);
+
+        if (Request_LoginID(ID))
+            m_DBJobs.push(make_shared<CREATE_ID_RESULT>(ClientID, DB_TABLE_TYPE::CREATE_ID, CREATEID_MSG::SAME_ID));
+        else
+        {
+            Proud::String Query = Proud::String::NewFormat(
+                L"Insert INTO users(user_id, password, email) VALUES"
+                L"(%s, %s, alice@gmail.com)", ID, Password);
+
+            auto result = m_Conn.Execute(record, Query, &Warnings);
+        }
+    }
+    catch (COdbcException& error)
+    {
+        cout << "Error : " << error.GetSqlErrorCode() << " => " << error.what() << '\n';
+    }
 }
 
 bool CDBManager::Request_UniqueNickName(int ClientID, string NickName)
@@ -246,8 +311,20 @@ void CDBManager::Update_DB(ServerToClient::Proxy* pProxy)
             pProxy->ResponseCheckNickname((HostID)ClientID, RmiContext::ReliableSend, ClientID, pResponeData->bIsSuccess);
             break;
         }
+        case DB_TABLE_TYPE::CREATE_ID:
+        {
+            CREATE_ID_RESULT* pCreateIDData = static_cast<CREATE_ID_RESULT*>(Data.get());
+            if (CREATEID_MSG::SUCCESS != pCreateIDData->eMsg)
+                //pProxy->ResponseCheckNickname((HostID)ClientID, RmiContext::ReliableSend, ClientID, pResponeData->bIsSuccess);
+            break;
+        }
         }
     }
+}
+
+bool CDBManager::SavePlayerData(int TableID, PLAYER_DATA& playerData)
+{
+    return false;
 }
 
 shared_ptr<CDBManager>  CDBManager::Create()

@@ -1,26 +1,27 @@
 using GameFSM;
 using InputCommand;
-using UnityEngine.TextCore.Text;
+using UnityEngine;
 
 public class IdleState : IFSMState<PlayerFSM.ANIM_STATE>
 {
-    public PlayerFSM.ANIM_STATE Type => PlayerFSM.ANIM_STATE.IDLE;
+    PlayerFSM.ANIM_STATE IFSMState<PlayerFSM.ANIM_STATE>.Type => PlayerFSM.ANIM_STATE.IDLE;
+
     public IdleState()
     {
 
     }
 
-    public void OnEnter()
+    void IFSMState.OnEnter()
     {
 
     }
 
-    public void OnUpdate(Character character, ICommand Command)
+    void IFSMState.OnUpdate(Character character, ICommand Command)
     {
         character.Idle();
     }
     
-    public void Exit()
+    void IFSMState.Exit()
     {
 
     }
