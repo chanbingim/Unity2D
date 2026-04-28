@@ -420,6 +420,8 @@
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Assembly-CSharp-firstpass.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Assembly-CSharp.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/PPv2URPConverters.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.2D.Sprite.AIIntegration.Editor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.2D.Sprite.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.Burst.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.Burst.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.Collections.Editor.ref.dll"

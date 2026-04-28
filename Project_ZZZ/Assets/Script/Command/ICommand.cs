@@ -25,4 +25,16 @@ namespace InputCommand
             m_fSpeed = Speed;
         }
     }
+
+    class CATK_Command : CBaseCommand
+    {
+        public float    m_fATK_Damage;
+        public float    m_fATK_Speed;
+
+        public CATK_Command(float damage, float Speed)
+        {
+            m_fATK_Damage = damage;
+            m_fATK_Speed = Speed;
+        }
+    }
 }

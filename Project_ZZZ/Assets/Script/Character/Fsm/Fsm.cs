@@ -13,6 +13,8 @@ public class Fsm
 
     // 상태 만들고 상태안에서 이동움직임 처리하자
     public Vector3 Get_Direction() { return m_fDirection; }
+    protected GameClient            m_GameClient = null;
+
     public virtual void Change_State(string StateName)
     {
         IFSMState NewState = null;
@@ -38,7 +40,7 @@ public class Fsm
         }
     }
 
-    public void FSM_Update(Character character, CBaseCommand command)
+    public virtual void FSM_Update(Character character, CBaseCommand command)
     {
         if (null != m_CurState)
             m_CurState.OnUpdate(character, command);

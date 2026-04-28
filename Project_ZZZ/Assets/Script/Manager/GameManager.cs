@@ -24,6 +24,15 @@ public class GameManager : MonoBehaviour
     }
 
     #region public
+    public void Exit_Game()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+
     public void Change_Level(string szLevel)
     {
         m_szNextLevel = szLevel;
@@ -42,7 +51,7 @@ public class GameManager : MonoBehaviour
         gameClient.Spawn_PlayerEvent(1);
     }
 
-    #endregion
+#endregion
 
     #region Private
     private void Initialize()

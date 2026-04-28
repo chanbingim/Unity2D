@@ -27,4 +27,5 @@ public abstract class Character : Actor
 
     public virtual void Idle() { }
     public virtual void Attack() { }
+    public virtual void Attack_End() { }
 }
