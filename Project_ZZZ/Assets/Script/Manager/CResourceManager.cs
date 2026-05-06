@@ -11,8 +11,8 @@ public class CResourceManager : MonoBehaviour
         public string       Key;
         public GameObject   Value;
     }
-    [SerializeField] private List<PrefabEntry> m_PrefabList = new List<PrefabEntry>();
-     private Dictionary<string, GameObject> m_Prefabs = new Dictionary<string, GameObject>();
+    [SerializeField] private List<PrefabEntry>      m_PrefabList = new List<PrefabEntry>();
+     private Dictionary<string, GameObject>         m_Prefabs = new Dictionary<string, GameObject>();
 
     void Update()
     {

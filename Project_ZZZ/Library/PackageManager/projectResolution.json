@@ -58,23 +58,23 @@
       "source": "builtin",
       "testable": false
     },
-    "com.unity.timeline@1.8.10": {
+    "com.unity.timeline@1.8.12": {
       "name": "com.unity.timeline",
       "displayName": "Timeline",
-      "resolvedPath": "C:\\Users\\gimch\\Document\\Unity2D\\Project_ZZZ\\Library\\PackageCache\\com.unity.timeline@7f8b2fb101b6",
-      "fingerprint": "7f8b2fb101b6053cc7472330401e94ff0c17b204",
+      "resolvedPath": "C:\\Users\\gimch\\Document\\Unity2D\\Project_ZZZ\\Library\\PackageCache\\com.unity.timeline@8cd8509afae5",
+      "fingerprint": "8cd8509afae5d2655af4657a214db1b563c28425",
       "editorCompatibility": "2022.3.0a1",
-      "version": "1.8.10",
+      "version": "1.8.12",
       "source": "registry",
       "testable": false
     },
-    "com.unity.visualscripting@1.9.9": {
+    "com.unity.visualscripting@1.9.11": {
       "name": "com.unity.visualscripting",
       "displayName": "Visual Scripting",
-      "resolvedPath": "C:\\Users\\gimch\\Document\\Unity2D\\Project_ZZZ\\Library\\PackageCache\\com.unity.visualscripting@191c0d7e3b69",
-      "fingerprint": "191c0d7e3b69bc0df1b6fed3a997c4c3a765ef6a",
+      "resolvedPath": "C:\\Users\\gimch\\Document\\Unity2D\\Project_ZZZ\\Library\\PackageCache\\com.unity.visualscripting@8bed5ad90189",
+      "fingerprint": "8bed5ad901895f10b7d0e524c4738cab14cef692",
       "editorCompatibility": "2021.3.0a1",
-      "version": "1.9.9",
+      "version": "1.9.11",
       "source": "registry",
       "testable": false
     },

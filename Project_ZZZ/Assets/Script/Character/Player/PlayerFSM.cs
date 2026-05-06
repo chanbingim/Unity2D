@@ -26,7 +26,7 @@ public class PlayerFSM : Fsm
     public override void FSM_Update(Character character, CBaseCommand command)
     {
         base.FSM_Update(character, command);
-        m_GameClient.UpdateAnimation((int)m_CurAnimState, 0);
+       // m_GameClient.UpdateAnimation((int)m_CurAnimState, 0);
     }
 
     public override void Change_State(string StateName)

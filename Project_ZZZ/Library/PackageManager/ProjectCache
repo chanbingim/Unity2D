@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 639129819193316676
-    m_Hash: 1534894062
+      ticks: 639136661786948502
+    m_Hash: 1120826486
   m_LockFileStatus:
     m_FilePath: C:/Users/gimch/Document/Unity2D/Project_ZZZ/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 639129819193316676
-    m_Hash: 3730393395
+      ticks: 639136661787093326
+    m_Hash: 939029125
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -675,12 +675,12 @@ m_ResolvedPackages:
       scopePatternExpression: 
       message: 
       readMoreLink: 
-- packageId: com.unity.timeline@1.8.10
+- packageId: com.unity.timeline@1.8.12
   testable: 0
   isDirectDependency: 1
-  version: 1.8.10
+  version: 1.8.12
   source: 1
-  resolvedPath: C:\Users\gimch\Document\Unity2D\Project_ZZZ\Library\PackageCache\com.unity.timeline@7f8b2fb101b6
+  resolvedPath: C:\Users\gimch\Document\Unity2D\Project_ZZZ\Library\PackageCache\com.unity.timeline@8cd8509afae5
   assetPath: Packages/com.unity.timeline
   name: com.unity.timeline
   displayName: Timeline
@@ -832,13 +832,13 @@ m_ResolvedPackages:
   entitlements:
     licensingModel: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 639010941520280000
+  datePublishedTicks: 639096350260850000
   documentationUrl: https://docs.unity3d.com/Packages/com.unity.timeline@1.8/manual/index.html
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/com.unity.timeline.git
-    revision: a83681b24217526a0f539d70ddca4abf270a5ada
+    revision: ebb3d9b85ccc1dba717b152782ebb2c5251ac79e
     path: 
   unityLifecycle:
     version: 1.8.10
@@ -852,25 +852,22 @@ m_ResolvedPackages:
   git:
     hash: 
     revision: 
-  upmReserved: '{"changelog":"### Fixed\n\n- Fix compilation error for version 2023.2
-    of the editor (TB-352)\n- Fixed an issue where it was possible for 2 clips to
-    have a micro overlap that was not detected as a blend, resulting in both clips
-    playing at the same time with a weight of one. (TB-345)"}'
+  upmReserved: '{"changelog":"### Fixed\n\n- Fix double clicking on TimelineAsset
+    or console log throwing an error on 6000.0 (UUM-136605)"}'
   signature:
-    status: 2
-    reason: 'Signed attestation validation failed: Validation of signer''s certificate
-      failed: The certificate is either not yet valid or expired'
+    status: 1
+    reason: Signature is ok
     attestation:
-      format: 
-      publishingChannel: 
+      format: archive
+      publishingChannel: unity
       entitlementKeys: []
       ownerOrgName: 
       ownerOrgId: 
       publisherName: 
-    errorCode: ERR_SIGNED_ATTESTATION_VALIDATION_FAILED
+    errorCode: 
   assetStore:
     productId: 
-  fingerprint: 7f8b2fb101b6053cc7472330401e94ff0c17b204
+  fingerprint: 8cd8509afae5d2655af4657a214db1b563c28425
   editorCompatibility:
     compatibilityLevel: 0
     minimumPackageVersion: 1.8.10
@@ -881,12 +878,12 @@ m_ResolvedPackages:
       scopePatternExpression: 
       message: 
       readMoreLink: 
-- packageId: com.unity.visualscripting@1.9.9
+- packageId: com.unity.visualscripting@1.9.11
   testable: 0
   isDirectDependency: 1
-  version: 1.9.9
+  version: 1.9.11
   source: 1
-  resolvedPath: C:\Users\gimch\Document\Unity2D\Project_ZZZ\Library\PackageCache\com.unity.visualscripting@191c0d7e3b69
+  resolvedPath: C:\Users\gimch\Document\Unity2D\Project_ZZZ\Library\PackageCache\com.unity.visualscripting@8bed5ad90189
   assetPath: Packages/com.unity.visualscripting
   name: com.unity.visualscripting
   displayName: Visual Scripting
@@ -895,7 +892,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: 
-  type: tool
+  type: 
   description: 'Visual scripting is a workflow that uses visual, node-based graphs
     to design behaviors rather than write lines of C# script.
 
@@ -976,13 +973,13 @@ m_ResolvedPackages:
   entitlements:
     licensingModel: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 638965671307960000
-  documentationUrl: 
+  datePublishedTicks: 639089344800930000
+  documentationUrl: https://docs.unity3d.com/Packages/com.unity.visualscripting@1.9/manual/index.html
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/com.unity.visualscripting.git
-    revision: 2bb93a09becf00b2343d1c670afbf3836f170f55
+    revision: e45076a785db38aa81ea919d98739fa8bcb6cdbc
     path: 
   unityLifecycle:
     version: 1.9.9
@@ -996,24 +993,23 @@ m_ResolvedPackages:
   git:
     hash: 
     revision: 
-  upmReserved: '{"changelog":"### Fixed\n- Fixed broken links to example codes in
-    API documentation.\n\n### Changed\n- Adds alt texts to images in documentation
-    to increase accessibility for screen readers."}'
+  upmReserved: '{"changelog":"### Changed\n- Replaced remaining internal use of InstanceIDs
+    with the new EntityId (Unity 6.4+).\n- Replaced internal calls to the deprecated
+    `FindObjectsByType<T>(FindObjectsSortMode)` method (Unity 6.4+)."}'
   signature:
-    status: 2
-    reason: 'Signed attestation validation failed: Validation of signer''s certificate
-      failed: The certificate is either not yet valid or expired'
+    status: 1
+    reason: Signature is ok
     attestation:
-      format: 
-      publishingChannel: 
+      format: archive
+      publishingChannel: unity
       entitlementKeys: []
       ownerOrgName: 
       ownerOrgId: 
       publisherName: 
-    errorCode: ERR_SIGNED_ATTESTATION_VALIDATION_FAILED
+    errorCode: 
   assetStore:
     productId: 
-  fingerprint: 191c0d7e3b69bc0df1b6fed3a997c4c3a765ef6a
+  fingerprint: 8bed5ad901895f10b7d0e524c4738cab14cef692
   editorCompatibility:
     compatibilityLevel: 0
     minimumPackageVersion: 1.9.9

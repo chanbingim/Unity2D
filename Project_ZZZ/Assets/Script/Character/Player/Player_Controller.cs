@@ -4,11 +4,15 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player_Controller : CCharacter_Controller
 {
     [SerializeField] Player         m_Character = null;
     [SerializeField] Player_Camera  m_PlayerCam = null;
+
+    [SerializeField] UnityEvent     m_InteractionEvent;
+
 
     Dictionary<string, ICommand>    m_Commands = new Dictionary<string, ICommand>();
 
@@ -73,6 +77,9 @@ public class Player_Controller : CCharacter_Controller
         {
             if(Input.GetKeyDown(KeyCode.Mouse0))
                 Input_Attack();
+
+            if (Input.GetKeyDown(KeyCode.K))
+                m_InteractionEvent.Invoke();
 
             Input_Move();
         }
