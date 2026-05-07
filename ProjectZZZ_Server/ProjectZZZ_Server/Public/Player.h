@@ -14,7 +14,12 @@ public:
     float                   Get_AnimTime() { return m_fAnimTime; }
 
     void                    Set_Info(const PLAYER_DATA* pinfo);
+
+    // Transform
+    void                    Set_Scale(float x, float y, float z);
+    void                    Set_Rotation(float x, float y, float z, float w);
     void                    Set_Poisition(float x, float y, float z);
+
     void                    Set_NickName(const string& szName);
     void                    Set_AnimSate(STATE_TYPE state, float fTime = 0.f);
     void                    Set_Level(int iLevel);

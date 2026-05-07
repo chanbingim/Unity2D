@@ -5,7 +5,20 @@
 #include "BasicTypes.h"
 #include "OdbcWrap.h"
 
+struct Transform
+{
+    Transform() : vScale(Vector3::Zero), vRotation(Vector4::Zero), vPosition(Vector3::Zero) {}
+    Transform(Vector3 Scale) : vScale(Scale), vRotation(Vector4::Zero), vPosition(Vector3::Zero) {}
+    Transform(Vector3 Scale, Vector4 Rotation) : vScale(Scale), vRotation(Rotation), vPosition(Vector3::Zero) {}
 
+    Transform(Vector3 Scale, Vector4 Rotation, Vector3 Pos) :
+        vScale(Scale), vRotation(Rotation), vPosition(Pos) {}
+    
+    Vector3     vScale;
+    Vector4     vRotation;
+    Vector3     vPosition;
+
+};
 
 typedef struct Player_Data
 {
@@ -18,18 +31,25 @@ typedef struct Player_Data
     int iCurrentExp, iMaxExp;
     int iGlod;
 
-    float       fPosX, fPosY, fPosZ;
+    Transform   Transform;
     bool        bIsDead = false;
 }PLAYER_DATA;
 
+struct ItemSlot
+{
+    int iSlotIndex;
+    int iItemCount;
+    int iItemID;
+};
+
 typedef struct Item_Data
 {
-    int ID;
-    int Level;
-    string Name;
+    int         ID;
+    string      Name;
 
-    int CurrentHP, MaxHP;
-    int CurrentMP, MaxMP;
+    int         MaxCount;
+    int         ItemType;
+
 }ITEM_DATA;
 
 typedef struct Defualt_Error

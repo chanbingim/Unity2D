@@ -82,7 +82,10 @@ void CServerManager::ADD_JoinClient(int hostID, shared_ptr<CSession> ClientData,
         if (iter == m_SessionList.end())
         {
             PLAYER_DATA Player_Data;
-            Player_Data.fPosX = Player_Data.fPosY = Player_Data.fPosZ = 0;
+
+            Player_Data.Transform.vScale = Vector3::One;
+            Player_Data.Transform.vRotation = Vector4::Zero;
+            Player_Data.Transform.vPosition = Vector3::Zero;
 
             if (m_pDBManager)
             {

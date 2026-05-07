@@ -109,74 +109,6 @@ __msg << PosZ;
 			RmiName_OnPlayerJoined, (::Proud::RmiID)Rmi_OnPlayerJoined);
 	}
         
-	bool Proxy::OnOtherPlayerUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const string & NickName, const float & PosX, const float & PosY, const float & PosZ)	{
-		::Proud::CMessage __msg;
-__msg.UseInternalBuffer();
-__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
-
-::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_OnOtherPlayerUpdated;
-__msg.Write(__msgid); 
-	
-__msg << ClientID;
-__msg << NickName;
-__msg << PosX;
-__msg << PosY;
-__msg << PosZ;
-		
-		return RmiSend(&remote,1,rmiContext,__msg,
-			RmiName_OnOtherPlayerUpdated, (::Proud::RmiID)Rmi_OnOtherPlayerUpdated);
-	}
-
-	bool Proxy::OnOtherPlayerUpdated ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & ClientID, const string & NickName, const float & PosX, const float & PosY, const float & PosZ)  	{
-		::Proud::CMessage __msg;
-__msg.UseInternalBuffer();
-__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
-
-::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_OnOtherPlayerUpdated;
-__msg.Write(__msgid); 
-	
-__msg << ClientID;
-__msg << NickName;
-__msg << PosX;
-__msg << PosY;
-__msg << PosZ;
-		
-		return RmiSend(remotes,remoteCount,rmiContext,__msg,
-			RmiName_OnOtherPlayerUpdated, (::Proud::RmiID)Rmi_OnOtherPlayerUpdated);
-	}
-        
-	bool Proxy::OnOtherPlayerAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const int & AnimState, const int & AnimTime)	{
-		::Proud::CMessage __msg;
-__msg.UseInternalBuffer();
-__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
-
-::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_OnOtherPlayerAnimUpdated;
-__msg.Write(__msgid); 
-	
-__msg << ClientID;
-__msg << AnimState;
-__msg << AnimTime;
-		
-		return RmiSend(&remote,1,rmiContext,__msg,
-			RmiName_OnOtherPlayerAnimUpdated, (::Proud::RmiID)Rmi_OnOtherPlayerAnimUpdated);
-	}
-
-	bool Proxy::OnOtherPlayerAnimUpdated ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & ClientID, const int & AnimState, const int & AnimTime)  	{
-		::Proud::CMessage __msg;
-__msg.UseInternalBuffer();
-__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
-
-::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_OnOtherPlayerAnimUpdated;
-__msg.Write(__msgid); 
-	
-__msg << ClientID;
-__msg << AnimState;
-__msg << AnimTime;
-		
-		return RmiSend(remotes,remoteCount,rmiContext,__msg,
-			RmiName_OnOtherPlayerAnimUpdated, (::Proud::RmiID)Rmi_OnOtherPlayerAnimUpdated);
-	}
-        
 	bool Proxy::SpawnObjectEvent ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const string & Key, const int & templetedID, const float & px, const float & py, const float & pz)	{
 		::Proud::CMessage __msg;
 __msg.UseInternalBuffer();
@@ -213,150 +145,198 @@ __msg << pz;
 			RmiName_SpawnObjectEvent, (::Proud::RmiID)Rmi_SpawnObjectEvent);
 	}
         
-	bool Proxy::OnOtherActorUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & PosX, const float & PosY, const float & PosZ)	{
+	bool Proxy::OtherPlayerTransformUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const string & NickName, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ)	{
 		::Proud::CMessage __msg;
 __msg.UseInternalBuffer();
 __msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
 
-::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_OnOtherActorUpdated;
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_OtherPlayerTransformUpdated;
 __msg.Write(__msgid); 
 	
-__msg << templeteID;
+__msg << ClientID;
+__msg << NickName;
+__msg << ScaleX;
+__msg << ScaleY;
+__msg << ScaleZ;
+__msg << AngleX;
+__msg << AngleY;
+__msg << AngleZ;
+__msg << AngleW;
 __msg << PosX;
 __msg << PosY;
 __msg << PosZ;
 		
 		return RmiSend(&remote,1,rmiContext,__msg,
-			RmiName_OnOtherActorUpdated, (::Proud::RmiID)Rmi_OnOtherActorUpdated);
+			RmiName_OtherPlayerTransformUpdated, (::Proud::RmiID)Rmi_OtherPlayerTransformUpdated);
 	}
 
-	bool Proxy::OnOtherActorUpdated ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & templeteID, const float & PosX, const float & PosY, const float & PosZ)  	{
+	bool Proxy::OtherPlayerTransformUpdated ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & ClientID, const string & NickName, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ)  	{
 		::Proud::CMessage __msg;
 __msg.UseInternalBuffer();
 __msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
 
-::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_OnOtherActorUpdated;
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_OtherPlayerTransformUpdated;
 __msg.Write(__msgid); 
 	
-__msg << templeteID;
+__msg << ClientID;
+__msg << NickName;
+__msg << ScaleX;
+__msg << ScaleY;
+__msg << ScaleZ;
+__msg << AngleX;
+__msg << AngleY;
+__msg << AngleZ;
+__msg << AngleW;
 __msg << PosX;
 __msg << PosY;
 __msg << PosZ;
 		
 		return RmiSend(remotes,remoteCount,rmiContext,__msg,
-			RmiName_OnOtherActorUpdated, (::Proud::RmiID)Rmi_OnOtherActorUpdated);
+			RmiName_OtherPlayerTransformUpdated, (::Proud::RmiID)Rmi_OtherPlayerTransformUpdated);
 	}
         
-	bool Proxy::OnOtherActorAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const int & AnimState, const int & AnimTime)	{
+	bool Proxy::OnPlayerTransformUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ)	{
 		::Proud::CMessage __msg;
 __msg.UseInternalBuffer();
 __msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
 
-::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_OnOtherActorAnimUpdated;
-__msg.Write(__msgid); 
-	
-__msg << templeteID;
-__msg << AnimState;
-__msg << AnimTime;
-		
-		return RmiSend(&remote,1,rmiContext,__msg,
-			RmiName_OnOtherActorAnimUpdated, (::Proud::RmiID)Rmi_OnOtherActorAnimUpdated);
-	}
-
-	bool Proxy::OnOtherActorAnimUpdated ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & templeteID, const int & AnimState, const int & AnimTime)  	{
-		::Proud::CMessage __msg;
-__msg.UseInternalBuffer();
-__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
-
-::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_OnOtherActorAnimUpdated;
-__msg.Write(__msgid); 
-	
-__msg << templeteID;
-__msg << AnimState;
-__msg << AnimTime;
-		
-		return RmiSend(remotes,remoteCount,rmiContext,__msg,
-			RmiName_OnOtherActorAnimUpdated, (::Proud::RmiID)Rmi_OnOtherActorAnimUpdated);
-	}
-        
-	bool Proxy::OnPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)	{
-		::Proud::CMessage __msg;
-__msg.UseInternalBuffer();
-__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
-
-::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_OnPositionUpdated;
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_OnPlayerTransformUpdated;
 __msg.Write(__msgid); 
 	
 __msg << clientId;
+__msg << ScaleX;
+__msg << ScaleY;
+__msg << ScaleZ;
+__msg << AngleX;
+__msg << AngleY;
+__msg << AngleZ;
+__msg << AngleW;
 __msg << PosX;
 __msg << PosY;
 __msg << PosZ;
-__msg << DirX;
-__msg << DirY;
-__msg << DirZ;
 		
 		return RmiSend(&remote,1,rmiContext,__msg,
-			RmiName_OnPositionUpdated, (::Proud::RmiID)Rmi_OnPositionUpdated);
+			RmiName_OnPlayerTransformUpdated, (::Proud::RmiID)Rmi_OnPlayerTransformUpdated);
 	}
 
-	bool Proxy::OnPositionUpdated ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & clientId, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)  	{
+	bool Proxy::OnPlayerTransformUpdated ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & clientId, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ)  	{
 		::Proud::CMessage __msg;
 __msg.UseInternalBuffer();
 __msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
 
-::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_OnPositionUpdated;
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_OnPlayerTransformUpdated;
 __msg.Write(__msgid); 
 	
 __msg << clientId;
+__msg << ScaleX;
+__msg << ScaleY;
+__msg << ScaleZ;
+__msg << AngleX;
+__msg << AngleY;
+__msg << AngleZ;
+__msg << AngleW;
 __msg << PosX;
 __msg << PosY;
 __msg << PosZ;
-__msg << DirX;
-__msg << DirY;
-__msg << DirZ;
 		
 		return RmiSend(remotes,remoteCount,rmiContext,__msg,
-			RmiName_OnPositionUpdated, (::Proud::RmiID)Rmi_OnPositionUpdated);
+			RmiName_OnPlayerTransformUpdated, (::Proud::RmiID)Rmi_OnPlayerTransformUpdated);
 	}
         
-	bool Proxy::OnActorPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)	{
+	bool Proxy::OtherActorTransformUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ)	{
 		::Proud::CMessage __msg;
 __msg.UseInternalBuffer();
 __msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
 
-::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_OnActorPositionUpdated;
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_OtherActorTransformUpdated;
 __msg.Write(__msgid); 
 	
 __msg << templeteID;
+__msg << ScaleX;
+__msg << ScaleY;
+__msg << ScaleZ;
+__msg << AngleX;
+__msg << AngleY;
+__msg << AngleZ;
+__msg << AngleW;
 __msg << PosX;
 __msg << PosY;
 __msg << PosZ;
-__msg << DirX;
-__msg << DirY;
-__msg << DirZ;
 		
 		return RmiSend(&remote,1,rmiContext,__msg,
-			RmiName_OnActorPositionUpdated, (::Proud::RmiID)Rmi_OnActorPositionUpdated);
+			RmiName_OtherActorTransformUpdated, (::Proud::RmiID)Rmi_OtherActorTransformUpdated);
 	}
 
-	bool Proxy::OnActorPositionUpdated ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & templeteID, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)  	{
+	bool Proxy::OtherActorTransformUpdated ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & templeteID, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ)  	{
 		::Proud::CMessage __msg;
 __msg.UseInternalBuffer();
 __msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
 
-::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_OnActorPositionUpdated;
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_OtherActorTransformUpdated;
 __msg.Write(__msgid); 
 	
 __msg << templeteID;
+__msg << ScaleX;
+__msg << ScaleY;
+__msg << ScaleZ;
+__msg << AngleX;
+__msg << AngleY;
+__msg << AngleZ;
+__msg << AngleW;
 __msg << PosX;
 __msg << PosY;
 __msg << PosZ;
-__msg << DirX;
-__msg << DirY;
-__msg << DirZ;
 		
 		return RmiSend(remotes,remoteCount,rmiContext,__msg,
-			RmiName_OnActorPositionUpdated, (::Proud::RmiID)Rmi_OnActorPositionUpdated);
+			RmiName_OtherActorTransformUpdated, (::Proud::RmiID)Rmi_OtherActorTransformUpdated);
+	}
+        
+	bool Proxy::ActorTransformUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ)	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_ActorTransformUpdated;
+__msg.Write(__msgid); 
+	
+__msg << templeteID;
+__msg << ScaleX;
+__msg << ScaleY;
+__msg << ScaleZ;
+__msg << AngleX;
+__msg << AngleY;
+__msg << AngleZ;
+__msg << AngleW;
+__msg << PosX;
+__msg << PosY;
+__msg << PosZ;
+		
+		return RmiSend(&remote,1,rmiContext,__msg,
+			RmiName_ActorTransformUpdated, (::Proud::RmiID)Rmi_ActorTransformUpdated);
+	}
+
+	bool Proxy::ActorTransformUpdated ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & templeteID, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ)  	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_ActorTransformUpdated;
+__msg.Write(__msgid); 
+	
+__msg << templeteID;
+__msg << ScaleX;
+__msg << ScaleY;
+__msg << ScaleZ;
+__msg << AngleX;
+__msg << AngleY;
+__msg << AngleZ;
+__msg << AngleW;
+__msg << PosX;
+__msg << PosY;
+__msg << PosZ;
+		
+		return RmiSend(remotes,remoteCount,rmiContext,__msg,
+			RmiName_ActorTransformUpdated, (::Proud::RmiID)Rmi_ActorTransformUpdated);
 	}
         
 	bool Proxy::UpdateCharacterAnimState ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const int & AnimSate, const float & Time)	{
@@ -391,6 +371,38 @@ __msg << Time;
 			RmiName_UpdateCharacterAnimState, (::Proud::RmiID)Rmi_UpdateCharacterAnimState);
 	}
         
+	bool Proxy::OnOtherPlayerAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const int & AnimState, const int & AnimTime)	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_OnOtherPlayerAnimUpdated;
+__msg.Write(__msgid); 
+	
+__msg << ClientID;
+__msg << AnimState;
+__msg << AnimTime;
+		
+		return RmiSend(&remote,1,rmiContext,__msg,
+			RmiName_OnOtherPlayerAnimUpdated, (::Proud::RmiID)Rmi_OnOtherPlayerAnimUpdated);
+	}
+
+	bool Proxy::OnOtherPlayerAnimUpdated ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & ClientID, const int & AnimState, const int & AnimTime)  	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_OnOtherPlayerAnimUpdated;
+__msg.Write(__msgid); 
+	
+__msg << ClientID;
+__msg << AnimState;
+__msg << AnimTime;
+		
+		return RmiSend(remotes,remoteCount,rmiContext,__msg,
+			RmiName_OnOtherPlayerAnimUpdated, (::Proud::RmiID)Rmi_OnOtherPlayerAnimUpdated);
+	}
+        
 	bool Proxy::UpdateActorAnimState ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const int & AnimSate, const float & Time)	{
 		::Proud::CMessage __msg;
 __msg.UseInternalBuffer();
@@ -421,6 +433,162 @@ __msg << Time;
 		
 		return RmiSend(remotes,remoteCount,rmiContext,__msg,
 			RmiName_UpdateActorAnimState, (::Proud::RmiID)Rmi_UpdateActorAnimState);
+	}
+        
+	bool Proxy::OnOtherActorAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const int & AnimState, const int & AnimTime)	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_OnOtherActorAnimUpdated;
+__msg.Write(__msgid); 
+	
+__msg << templeteID;
+__msg << AnimState;
+__msg << AnimTime;
+		
+		return RmiSend(&remote,1,rmiContext,__msg,
+			RmiName_OnOtherActorAnimUpdated, (::Proud::RmiID)Rmi_OnOtherActorAnimUpdated);
+	}
+
+	bool Proxy::OnOtherActorAnimUpdated ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & templeteID, const int & AnimState, const int & AnimTime)  	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_OnOtherActorAnimUpdated;
+__msg.Write(__msgid); 
+	
+__msg << templeteID;
+__msg << AnimState;
+__msg << AnimTime;
+		
+		return RmiSend(remotes,remoteCount,rmiContext,__msg,
+			RmiName_OnOtherActorAnimUpdated, (::Proud::RmiID)Rmi_OnOtherActorAnimUpdated);
+	}
+        
+	bool Proxy::Request_AddItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID, const int & iItemCount)	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Request_AddItem;
+__msg.Write(__msgid); 
+	
+__msg << iClientID;
+__msg << iItemID;
+__msg << iItemCount;
+		
+		return RmiSend(&remote,1,rmiContext,__msg,
+			RmiName_Request_AddItem, (::Proud::RmiID)Rmi_Request_AddItem);
+	}
+
+	bool Proxy::Request_AddItem ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & iClientID, const int & iItemID, const int & iItemCount)  	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Request_AddItem;
+__msg.Write(__msgid); 
+	
+__msg << iClientID;
+__msg << iItemID;
+__msg << iItemCount;
+		
+		return RmiSend(remotes,remoteCount,rmiContext,__msg,
+			RmiName_Request_AddItem, (::Proud::RmiID)Rmi_Request_AddItem);
+	}
+        
+	bool Proxy::Request_RemoveItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID, const int & iItemCount)	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Request_RemoveItem;
+__msg.Write(__msgid); 
+	
+__msg << iClientID;
+__msg << iItemID;
+__msg << iItemCount;
+		
+		return RmiSend(&remote,1,rmiContext,__msg,
+			RmiName_Request_RemoveItem, (::Proud::RmiID)Rmi_Request_RemoveItem);
+	}
+
+	bool Proxy::Request_RemoveItem ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & iClientID, const int & iItemID, const int & iItemCount)  	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Request_RemoveItem;
+__msg.Write(__msgid); 
+	
+__msg << iClientID;
+__msg << iItemID;
+__msg << iItemCount;
+		
+		return RmiSend(remotes,remoteCount,rmiContext,__msg,
+			RmiName_Request_RemoveItem, (::Proud::RmiID)Rmi_Request_RemoveItem);
+	}
+        
+	bool Proxy::Request_ItemData ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID)	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Request_ItemData;
+__msg.Write(__msgid); 
+	
+__msg << iClientID;
+__msg << iItemID;
+		
+		return RmiSend(&remote,1,rmiContext,__msg,
+			RmiName_Request_ItemData, (::Proud::RmiID)Rmi_Request_ItemData);
+	}
+
+	bool Proxy::Request_ItemData ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & iClientID, const int & iItemID)  	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Request_ItemData;
+__msg.Write(__msgid); 
+	
+__msg << iClientID;
+__msg << iItemID;
+		
+		return RmiSend(remotes,remoteCount,rmiContext,__msg,
+			RmiName_Request_ItemData, (::Proud::RmiID)Rmi_Request_ItemData);
+	}
+        
+	bool Proxy::Request_AddGold ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const int & GoldAmount)	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Request_AddGold;
+__msg.Write(__msgid); 
+	
+__msg << ClientID;
+__msg << GoldAmount;
+		
+		return RmiSend(&remote,1,rmiContext,__msg,
+			RmiName_Request_AddGold, (::Proud::RmiID)Rmi_Request_AddGold);
+	}
+
+	bool Proxy::Request_AddGold ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & ClientID, const int & GoldAmount)  	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Request_AddGold;
+__msg.Write(__msgid); 
+	
+__msg << ClientID;
+__msg << GoldAmount;
+		
+		return RmiSend(remotes,remoteCount,rmiContext,__msg,
+			RmiName_Request_AddGold, (::Proud::RmiID)Rmi_Request_AddGold);
 	}
         
 	bool Proxy::OnChat ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & message)	{
@@ -468,39 +636,29 @@ const PNTCHAR* Proxy::RmiName_OnPlayerJoined =_PNT("OnPlayerJoined");
 const PNTCHAR* Proxy::RmiName_OnPlayerJoined =_PNT("");
 #endif
 #ifdef USE_RMI_NAME_STRING
-const PNTCHAR* Proxy::RmiName_OnOtherPlayerUpdated =_PNT("OnOtherPlayerUpdated");
-#else
-const PNTCHAR* Proxy::RmiName_OnOtherPlayerUpdated =_PNT("");
-#endif
-#ifdef USE_RMI_NAME_STRING
-const PNTCHAR* Proxy::RmiName_OnOtherPlayerAnimUpdated =_PNT("OnOtherPlayerAnimUpdated");
-#else
-const PNTCHAR* Proxy::RmiName_OnOtherPlayerAnimUpdated =_PNT("");
-#endif
-#ifdef USE_RMI_NAME_STRING
 const PNTCHAR* Proxy::RmiName_SpawnObjectEvent =_PNT("SpawnObjectEvent");
 #else
 const PNTCHAR* Proxy::RmiName_SpawnObjectEvent =_PNT("");
 #endif
 #ifdef USE_RMI_NAME_STRING
-const PNTCHAR* Proxy::RmiName_OnOtherActorUpdated =_PNT("OnOtherActorUpdated");
+const PNTCHAR* Proxy::RmiName_OtherPlayerTransformUpdated =_PNT("OtherPlayerTransformUpdated");
 #else
-const PNTCHAR* Proxy::RmiName_OnOtherActorUpdated =_PNT("");
+const PNTCHAR* Proxy::RmiName_OtherPlayerTransformUpdated =_PNT("");
 #endif
 #ifdef USE_RMI_NAME_STRING
-const PNTCHAR* Proxy::RmiName_OnOtherActorAnimUpdated =_PNT("OnOtherActorAnimUpdated");
+const PNTCHAR* Proxy::RmiName_OnPlayerTransformUpdated =_PNT("OnPlayerTransformUpdated");
 #else
-const PNTCHAR* Proxy::RmiName_OnOtherActorAnimUpdated =_PNT("");
+const PNTCHAR* Proxy::RmiName_OnPlayerTransformUpdated =_PNT("");
 #endif
 #ifdef USE_RMI_NAME_STRING
-const PNTCHAR* Proxy::RmiName_OnPositionUpdated =_PNT("OnPositionUpdated");
+const PNTCHAR* Proxy::RmiName_OtherActorTransformUpdated =_PNT("OtherActorTransformUpdated");
 #else
-const PNTCHAR* Proxy::RmiName_OnPositionUpdated =_PNT("");
+const PNTCHAR* Proxy::RmiName_OtherActorTransformUpdated =_PNT("");
 #endif
 #ifdef USE_RMI_NAME_STRING
-const PNTCHAR* Proxy::RmiName_OnActorPositionUpdated =_PNT("OnActorPositionUpdated");
+const PNTCHAR* Proxy::RmiName_ActorTransformUpdated =_PNT("ActorTransformUpdated");
 #else
-const PNTCHAR* Proxy::RmiName_OnActorPositionUpdated =_PNT("");
+const PNTCHAR* Proxy::RmiName_ActorTransformUpdated =_PNT("");
 #endif
 #ifdef USE_RMI_NAME_STRING
 const PNTCHAR* Proxy::RmiName_UpdateCharacterAnimState =_PNT("UpdateCharacterAnimState");
@@ -508,9 +666,39 @@ const PNTCHAR* Proxy::RmiName_UpdateCharacterAnimState =_PNT("UpdateCharacterAni
 const PNTCHAR* Proxy::RmiName_UpdateCharacterAnimState =_PNT("");
 #endif
 #ifdef USE_RMI_NAME_STRING
+const PNTCHAR* Proxy::RmiName_OnOtherPlayerAnimUpdated =_PNT("OnOtherPlayerAnimUpdated");
+#else
+const PNTCHAR* Proxy::RmiName_OnOtherPlayerAnimUpdated =_PNT("");
+#endif
+#ifdef USE_RMI_NAME_STRING
 const PNTCHAR* Proxy::RmiName_UpdateActorAnimState =_PNT("UpdateActorAnimState");
 #else
 const PNTCHAR* Proxy::RmiName_UpdateActorAnimState =_PNT("");
+#endif
+#ifdef USE_RMI_NAME_STRING
+const PNTCHAR* Proxy::RmiName_OnOtherActorAnimUpdated =_PNT("OnOtherActorAnimUpdated");
+#else
+const PNTCHAR* Proxy::RmiName_OnOtherActorAnimUpdated =_PNT("");
+#endif
+#ifdef USE_RMI_NAME_STRING
+const PNTCHAR* Proxy::RmiName_Request_AddItem =_PNT("Request_AddItem");
+#else
+const PNTCHAR* Proxy::RmiName_Request_AddItem =_PNT("");
+#endif
+#ifdef USE_RMI_NAME_STRING
+const PNTCHAR* Proxy::RmiName_Request_RemoveItem =_PNT("Request_RemoveItem");
+#else
+const PNTCHAR* Proxy::RmiName_Request_RemoveItem =_PNT("");
+#endif
+#ifdef USE_RMI_NAME_STRING
+const PNTCHAR* Proxy::RmiName_Request_ItemData =_PNT("Request_ItemData");
+#else
+const PNTCHAR* Proxy::RmiName_Request_ItemData =_PNT("");
+#endif
+#ifdef USE_RMI_NAME_STRING
+const PNTCHAR* Proxy::RmiName_Request_AddGold =_PNT("Request_AddGold");
+#else
+const PNTCHAR* Proxy::RmiName_Request_AddGold =_PNT("");
 #endif
 #ifdef USE_RMI_NAME_STRING
 const PNTCHAR* Proxy::RmiName_OnChat =_PNT("OnChat");

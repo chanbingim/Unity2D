@@ -156,6 +156,7 @@
     <ClCompile Include="..\Private\ClientRmi_stub.cpp" />
     <ClCompile Include="..\Private\Custom_Stub.cpp" />
     <ClCompile Include="..\private\DBManager.cpp" />
+    <ClCompile Include="..\private\Inventory.cpp" />
     <ClCompile Include="..\private\Level.cpp" />
     <ClCompile Include="..\private\MapManager.cpp" />
     <ClCompile Include="..\private\Player.cpp" />
@@ -166,6 +167,9 @@
     <ClCompile Include="..\private\Session.cpp" />
     <ClCompile Include="..\Private\Timer.cpp" />
     <ClCompile Include="..\Private\TimerManager.cpp" />
+    <ClCompile Include="..\private\Vector2.cpp" />
+    <ClCompile Include="..\Private\Vector3.cpp" />
+    <ClCompile Include="..\private\Vector4.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
@@ -193,8 +197,10 @@
     <ClInclude Include="..\public\Base.h" />
     <ClInclude Include="..\Public\ClientRmi_common.h" />
     <ClInclude Include="..\Public\ClientRmi_stub.h" />
+    <ClInclude Include="..\Public\CustomMath.h" />
     <ClInclude Include="..\Public\Custom_Stub.h" />
     <ClInclude Include="..\public\DBManager.h" />
+    <ClInclude Include="..\public\Inventory.h" />
     <ClInclude Include="..\public\Level.h" />
     <ClInclude Include="..\public\MapManager.h" />
     <ClInclude Include="..\Public\pch.h" />
@@ -206,10 +212,14 @@
     <ClInclude Include="..\Public\Server_Defines.h" />
     <ClInclude Include="..\Public\Server_Enum.h" />
     <ClInclude Include="..\Public\Server_Func.h" />
+    <ClInclude Include="..\Public\Server_Mecro.h" />
     <ClInclude Include="..\Public\Server_Structs.h" />
     <ClInclude Include="..\public\Session.h" />
     <ClInclude Include="..\Public\Timer.h" />
     <ClInclude Include="..\Public\TimerManager.h" />
+    <ClInclude Include="..\public\Vector2.h" />
+    <ClInclude Include="..\Public\Vector3.h" />
+    <ClInclude Include="..\public\Vector4.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

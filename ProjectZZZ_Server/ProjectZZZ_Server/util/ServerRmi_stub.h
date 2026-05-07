@@ -51,26 +51,6 @@ namespace ServerToClient {
 #define CALL_ServerToClient_OnPlayerJoined OnPlayerJoined ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szNickName, const float & PosX, const float & PosY, const float & PosZ)
 #define PARAM_ServerToClient_OnPlayerJoined ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szNickName, const float & PosX, const float & PosY, const float & PosZ)
                
-		virtual bool OnOtherPlayerUpdated ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const string & , const float & , const float & , const float & )		{ 
-			return false;
-		} 
-
-#define DECRMI_ServerToClient_OnOtherPlayerUpdated bool OnOtherPlayerUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const string & NickName, const float & PosX, const float & PosY, const float & PosZ) PN_OVERRIDE
-
-#define DEFRMI_ServerToClient_OnOtherPlayerUpdated(DerivedClass) bool DerivedClass::OnOtherPlayerUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const string & NickName, const float & PosX, const float & PosY, const float & PosZ)
-#define CALL_ServerToClient_OnOtherPlayerUpdated OnOtherPlayerUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const string & NickName, const float & PosX, const float & PosY, const float & PosZ)
-#define PARAM_ServerToClient_OnOtherPlayerUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const string & NickName, const float & PosX, const float & PosY, const float & PosZ)
-               
-		virtual bool OnOtherPlayerAnimUpdated ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const int & )		{ 
-			return false;
-		} 
-
-#define DECRMI_ServerToClient_OnOtherPlayerAnimUpdated bool OnOtherPlayerAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const int & AnimState, const int & AnimTime) PN_OVERRIDE
-
-#define DEFRMI_ServerToClient_OnOtherPlayerAnimUpdated(DerivedClass) bool DerivedClass::OnOtherPlayerAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const int & AnimState, const int & AnimTime)
-#define CALL_ServerToClient_OnOtherPlayerAnimUpdated OnOtherPlayerAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const int & AnimState, const int & AnimTime)
-#define PARAM_ServerToClient_OnOtherPlayerAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const int & AnimState, const int & AnimTime)
-               
 		virtual bool SpawnObjectEvent ( ::Proud::HostID, ::Proud::RmiContext& , const string & , const int & , const float & , const float & , const float & )		{ 
 			return false;
 		} 
@@ -81,45 +61,45 @@ namespace ServerToClient {
 #define CALL_ServerToClient_SpawnObjectEvent SpawnObjectEvent ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const string & Key, const int & templetedID, const float & px, const float & py, const float & pz)
 #define PARAM_ServerToClient_SpawnObjectEvent ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const string & Key, const int & templetedID, const float & px, const float & py, const float & pz)
                
-		virtual bool OnOtherActorUpdated ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & )		{ 
+		virtual bool OtherPlayerTransformUpdated ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const string & , const float & , const float & , const float & , const float & , const float & , const float & , const float & , const float & , const float & , const float & )		{ 
 			return false;
 		} 
 
-#define DECRMI_ServerToClient_OnOtherActorUpdated bool OnOtherActorUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & PosX, const float & PosY, const float & PosZ) PN_OVERRIDE
+#define DECRMI_ServerToClient_OtherPlayerTransformUpdated bool OtherPlayerTransformUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const string & NickName, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ) PN_OVERRIDE
 
-#define DEFRMI_ServerToClient_OnOtherActorUpdated(DerivedClass) bool DerivedClass::OnOtherActorUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & PosX, const float & PosY, const float & PosZ)
-#define CALL_ServerToClient_OnOtherActorUpdated OnOtherActorUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & PosX, const float & PosY, const float & PosZ)
-#define PARAM_ServerToClient_OnOtherActorUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & PosX, const float & PosY, const float & PosZ)
+#define DEFRMI_ServerToClient_OtherPlayerTransformUpdated(DerivedClass) bool DerivedClass::OtherPlayerTransformUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const string & NickName, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ)
+#define CALL_ServerToClient_OtherPlayerTransformUpdated OtherPlayerTransformUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const string & NickName, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ)
+#define PARAM_ServerToClient_OtherPlayerTransformUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const string & NickName, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ)
                
-		virtual bool OnOtherActorAnimUpdated ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const int & )		{ 
+		virtual bool OnPlayerTransformUpdated ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & , const float & , const float & , const float & , const float & , const float & , const float & , const float & )		{ 
 			return false;
 		} 
 
-#define DECRMI_ServerToClient_OnOtherActorAnimUpdated bool OnOtherActorAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const int & AnimState, const int & AnimTime) PN_OVERRIDE
+#define DECRMI_ServerToClient_OnPlayerTransformUpdated bool OnPlayerTransformUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ) PN_OVERRIDE
 
-#define DEFRMI_ServerToClient_OnOtherActorAnimUpdated(DerivedClass) bool DerivedClass::OnOtherActorAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const int & AnimState, const int & AnimTime)
-#define CALL_ServerToClient_OnOtherActorAnimUpdated OnOtherActorAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const int & AnimState, const int & AnimTime)
-#define PARAM_ServerToClient_OnOtherActorAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const int & AnimState, const int & AnimTime)
+#define DEFRMI_ServerToClient_OnPlayerTransformUpdated(DerivedClass) bool DerivedClass::OnPlayerTransformUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ)
+#define CALL_ServerToClient_OnPlayerTransformUpdated OnPlayerTransformUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ)
+#define PARAM_ServerToClient_OnPlayerTransformUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ)
                
-		virtual bool OnPositionUpdated ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & , const float & , const float & , const float & )		{ 
+		virtual bool OtherActorTransformUpdated ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & , const float & , const float & , const float & , const float & , const float & , const float & , const float & )		{ 
 			return false;
 		} 
 
-#define DECRMI_ServerToClient_OnPositionUpdated bool OnPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ) PN_OVERRIDE
+#define DECRMI_ServerToClient_OtherActorTransformUpdated bool OtherActorTransformUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ) PN_OVERRIDE
 
-#define DEFRMI_ServerToClient_OnPositionUpdated(DerivedClass) bool DerivedClass::OnPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)
-#define CALL_ServerToClient_OnPositionUpdated OnPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)
-#define PARAM_ServerToClient_OnPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)
+#define DEFRMI_ServerToClient_OtherActorTransformUpdated(DerivedClass) bool DerivedClass::OtherActorTransformUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ)
+#define CALL_ServerToClient_OtherActorTransformUpdated OtherActorTransformUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ)
+#define PARAM_ServerToClient_OtherActorTransformUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ)
                
-		virtual bool OnActorPositionUpdated ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & , const float & , const float & , const float & )		{ 
+		virtual bool ActorTransformUpdated ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & , const float & , const float & , const float & , const float & , const float & , const float & , const float & )		{ 
 			return false;
 		} 
 
-#define DECRMI_ServerToClient_OnActorPositionUpdated bool OnActorPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ) PN_OVERRIDE
+#define DECRMI_ServerToClient_ActorTransformUpdated bool ActorTransformUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ) PN_OVERRIDE
 
-#define DEFRMI_ServerToClient_OnActorPositionUpdated(DerivedClass) bool DerivedClass::OnActorPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)
-#define CALL_ServerToClient_OnActorPositionUpdated OnActorPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)
-#define PARAM_ServerToClient_OnActorPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)
+#define DEFRMI_ServerToClient_ActorTransformUpdated(DerivedClass) bool DerivedClass::ActorTransformUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ)
+#define CALL_ServerToClient_ActorTransformUpdated ActorTransformUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ)
+#define PARAM_ServerToClient_ActorTransformUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ)
                
 		virtual bool UpdateCharacterAnimState ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const float & )		{ 
 			return false;
@@ -131,6 +111,16 @@ namespace ServerToClient {
 #define CALL_ServerToClient_UpdateCharacterAnimState UpdateCharacterAnimState ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const int & AnimSate, const float & Time)
 #define PARAM_ServerToClient_UpdateCharacterAnimState ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const int & AnimSate, const float & Time)
                
+		virtual bool OnOtherPlayerAnimUpdated ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const int & )		{ 
+			return false;
+		} 
+
+#define DECRMI_ServerToClient_OnOtherPlayerAnimUpdated bool OnOtherPlayerAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const int & AnimState, const int & AnimTime) PN_OVERRIDE
+
+#define DEFRMI_ServerToClient_OnOtherPlayerAnimUpdated(DerivedClass) bool DerivedClass::OnOtherPlayerAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const int & AnimState, const int & AnimTime)
+#define CALL_ServerToClient_OnOtherPlayerAnimUpdated OnOtherPlayerAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const int & AnimState, const int & AnimTime)
+#define PARAM_ServerToClient_OnOtherPlayerAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const int & AnimState, const int & AnimTime)
+               
 		virtual bool UpdateActorAnimState ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const float & )		{ 
 			return false;
 		} 
@@ -140,6 +130,56 @@ namespace ServerToClient {
 #define DEFRMI_ServerToClient_UpdateActorAnimState(DerivedClass) bool DerivedClass::UpdateActorAnimState ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const int & AnimSate, const float & Time)
 #define CALL_ServerToClient_UpdateActorAnimState UpdateActorAnimState ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const int & AnimSate, const float & Time)
 #define PARAM_ServerToClient_UpdateActorAnimState ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const int & AnimSate, const float & Time)
+               
+		virtual bool OnOtherActorAnimUpdated ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const int & )		{ 
+			return false;
+		} 
+
+#define DECRMI_ServerToClient_OnOtherActorAnimUpdated bool OnOtherActorAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const int & AnimState, const int & AnimTime) PN_OVERRIDE
+
+#define DEFRMI_ServerToClient_OnOtherActorAnimUpdated(DerivedClass) bool DerivedClass::OnOtherActorAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const int & AnimState, const int & AnimTime)
+#define CALL_ServerToClient_OnOtherActorAnimUpdated OnOtherActorAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const int & AnimState, const int & AnimTime)
+#define PARAM_ServerToClient_OnOtherActorAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const int & AnimState, const int & AnimTime)
+               
+		virtual bool Request_AddItem ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const int & )		{ 
+			return false;
+		} 
+
+#define DECRMI_ServerToClient_Request_AddItem bool Request_AddItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID, const int & iItemCount) PN_OVERRIDE
+
+#define DEFRMI_ServerToClient_Request_AddItem(DerivedClass) bool DerivedClass::Request_AddItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID, const int & iItemCount)
+#define CALL_ServerToClient_Request_AddItem Request_AddItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID, const int & iItemCount)
+#define PARAM_ServerToClient_Request_AddItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID, const int & iItemCount)
+               
+		virtual bool Request_RemoveItem ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const int & )		{ 
+			return false;
+		} 
+
+#define DECRMI_ServerToClient_Request_RemoveItem bool Request_RemoveItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID, const int & iItemCount) PN_OVERRIDE
+
+#define DEFRMI_ServerToClient_Request_RemoveItem(DerivedClass) bool DerivedClass::Request_RemoveItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID, const int & iItemCount)
+#define CALL_ServerToClient_Request_RemoveItem Request_RemoveItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID, const int & iItemCount)
+#define PARAM_ServerToClient_Request_RemoveItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID, const int & iItemCount)
+               
+		virtual bool Request_ItemData ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & )		{ 
+			return false;
+		} 
+
+#define DECRMI_ServerToClient_Request_ItemData bool Request_ItemData ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID) PN_OVERRIDE
+
+#define DEFRMI_ServerToClient_Request_ItemData(DerivedClass) bool DerivedClass::Request_ItemData ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID)
+#define CALL_ServerToClient_Request_ItemData Request_ItemData ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID)
+#define PARAM_ServerToClient_Request_ItemData ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID)
+               
+		virtual bool Request_AddGold ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & )		{ 
+			return false;
+		} 
+
+#define DECRMI_ServerToClient_Request_AddGold bool Request_AddGold ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const int & GoldAmount) PN_OVERRIDE
+
+#define DEFRMI_ServerToClient_Request_AddGold(DerivedClass) bool DerivedClass::Request_AddGold ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const int & GoldAmount)
+#define CALL_ServerToClient_Request_AddGold Request_AddGold ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const int & GoldAmount)
+#define PARAM_ServerToClient_Request_AddGold ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const int & GoldAmount)
                
 		virtual bool OnChat ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const string & )		{ 
 			return false;
@@ -155,15 +195,19 @@ namespace ServerToClient {
 		static const PNTCHAR* RmiName_ResponseLoginEvent;
 		static const PNTCHAR* RmiName_ResponseCheckNickname;
 		static const PNTCHAR* RmiName_OnPlayerJoined;
-		static const PNTCHAR* RmiName_OnOtherPlayerUpdated;
-		static const PNTCHAR* RmiName_OnOtherPlayerAnimUpdated;
 		static const PNTCHAR* RmiName_SpawnObjectEvent;
-		static const PNTCHAR* RmiName_OnOtherActorUpdated;
-		static const PNTCHAR* RmiName_OnOtherActorAnimUpdated;
-		static const PNTCHAR* RmiName_OnPositionUpdated;
-		static const PNTCHAR* RmiName_OnActorPositionUpdated;
+		static const PNTCHAR* RmiName_OtherPlayerTransformUpdated;
+		static const PNTCHAR* RmiName_OnPlayerTransformUpdated;
+		static const PNTCHAR* RmiName_OtherActorTransformUpdated;
+		static const PNTCHAR* RmiName_ActorTransformUpdated;
 		static const PNTCHAR* RmiName_UpdateCharacterAnimState;
+		static const PNTCHAR* RmiName_OnOtherPlayerAnimUpdated;
 		static const PNTCHAR* RmiName_UpdateActorAnimState;
+		static const PNTCHAR* RmiName_OnOtherActorAnimUpdated;
+		static const PNTCHAR* RmiName_Request_AddItem;
+		static const PNTCHAR* RmiName_Request_RemoveItem;
+		static const PNTCHAR* RmiName_Request_ItemData;
+		static const PNTCHAR* RmiName_Request_AddGold;
 		static const PNTCHAR* RmiName_OnChat;
 		static const PNTCHAR* RmiName_First;
 		virtual ::Proud::RmiID* GetRmiIDList() PN_OVERRIDE { return g_RmiIDList; }
@@ -203,24 +247,6 @@ namespace ServerToClient {
 		}
 
                
-		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const string & , const float & , const float & , const float & ) > OnOtherPlayerUpdated_Function;
-		virtual bool OnOtherPlayerUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const string & NickName, const float & PosX, const float & PosY, const float & PosZ) 
-		{ 
-			if (OnOtherPlayerUpdated_Function==nullptr) 
-				return true; 
-			return OnOtherPlayerUpdated_Function(remote,rmiContext, ClientID, NickName, PosX, PosY, PosZ); 
-		}
-
-               
-		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const int & ) > OnOtherPlayerAnimUpdated_Function;
-		virtual bool OnOtherPlayerAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const int & AnimState, const int & AnimTime) 
-		{ 
-			if (OnOtherPlayerAnimUpdated_Function==nullptr) 
-				return true; 
-			return OnOtherPlayerAnimUpdated_Function(remote,rmiContext, ClientID, AnimState, AnimTime); 
-		}
-
-               
 		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const string & , const int & , const float & , const float & , const float & ) > SpawnObjectEvent_Function;
 		virtual bool SpawnObjectEvent ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const string & Key, const int & templetedID, const float & px, const float & py, const float & pz) 
 		{ 
@@ -230,39 +256,39 @@ namespace ServerToClient {
 		}
 
                
-		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & ) > OnOtherActorUpdated_Function;
-		virtual bool OnOtherActorUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & PosX, const float & PosY, const float & PosZ) 
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const string & , const float & , const float & , const float & , const float & , const float & , const float & , const float & , const float & , const float & , const float & ) > OtherPlayerTransformUpdated_Function;
+		virtual bool OtherPlayerTransformUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const string & NickName, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ) 
 		{ 
-			if (OnOtherActorUpdated_Function==nullptr) 
+			if (OtherPlayerTransformUpdated_Function==nullptr) 
 				return true; 
-			return OnOtherActorUpdated_Function(remote,rmiContext, templeteID, PosX, PosY, PosZ); 
+			return OtherPlayerTransformUpdated_Function(remote,rmiContext, ClientID, NickName, ScaleX, ScaleY, ScaleZ, AngleX, AngleY, AngleZ, AngleW, PosX, PosY, PosZ); 
 		}
 
                
-		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const int & ) > OnOtherActorAnimUpdated_Function;
-		virtual bool OnOtherActorAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const int & AnimState, const int & AnimTime) 
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & , const float & , const float & , const float & , const float & , const float & , const float & , const float & ) > OnPlayerTransformUpdated_Function;
+		virtual bool OnPlayerTransformUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ) 
 		{ 
-			if (OnOtherActorAnimUpdated_Function==nullptr) 
+			if (OnPlayerTransformUpdated_Function==nullptr) 
 				return true; 
-			return OnOtherActorAnimUpdated_Function(remote,rmiContext, templeteID, AnimState, AnimTime); 
+			return OnPlayerTransformUpdated_Function(remote,rmiContext, clientId, ScaleX, ScaleY, ScaleZ, AngleX, AngleY, AngleZ, AngleW, PosX, PosY, PosZ); 
 		}
 
                
-		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & , const float & , const float & , const float & ) > OnPositionUpdated_Function;
-		virtual bool OnPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ) 
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & , const float & , const float & , const float & , const float & , const float & , const float & , const float & ) > OtherActorTransformUpdated_Function;
+		virtual bool OtherActorTransformUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ) 
 		{ 
-			if (OnPositionUpdated_Function==nullptr) 
+			if (OtherActorTransformUpdated_Function==nullptr) 
 				return true; 
-			return OnPositionUpdated_Function(remote,rmiContext, clientId, PosX, PosY, PosZ, DirX, DirY, DirZ); 
+			return OtherActorTransformUpdated_Function(remote,rmiContext, templeteID, ScaleX, ScaleY, ScaleZ, AngleX, AngleY, AngleZ, AngleW, PosX, PosY, PosZ); 
 		}
 
                
-		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & , const float & , const float & , const float & ) > OnActorPositionUpdated_Function;
-		virtual bool OnActorPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ) 
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & , const float & , const float & , const float & , const float & , const float & , const float & , const float & ) > ActorTransformUpdated_Function;
+		virtual bool ActorTransformUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & ScaleX, const float & ScaleY, const float & ScaleZ, const float & AngleX, const float & AngleY, const float & AngleZ, const float & AngleW, const float & PosX, const float & PosY, const float & PosZ) 
 		{ 
-			if (OnActorPositionUpdated_Function==nullptr) 
+			if (ActorTransformUpdated_Function==nullptr) 
 				return true; 
-			return OnActorPositionUpdated_Function(remote,rmiContext, templeteID, PosX, PosY, PosZ, DirX, DirY, DirZ); 
+			return ActorTransformUpdated_Function(remote,rmiContext, templeteID, ScaleX, ScaleY, ScaleZ, AngleX, AngleY, AngleZ, AngleW, PosX, PosY, PosZ); 
 		}
 
                
@@ -275,12 +301,66 @@ namespace ServerToClient {
 		}
 
                
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const int & ) > OnOtherPlayerAnimUpdated_Function;
+		virtual bool OnOtherPlayerAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const int & AnimState, const int & AnimTime) 
+		{ 
+			if (OnOtherPlayerAnimUpdated_Function==nullptr) 
+				return true; 
+			return OnOtherPlayerAnimUpdated_Function(remote,rmiContext, ClientID, AnimState, AnimTime); 
+		}
+
+               
 		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const float & ) > UpdateActorAnimState_Function;
 		virtual bool UpdateActorAnimState ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const int & AnimSate, const float & Time) 
 		{ 
 			if (UpdateActorAnimState_Function==nullptr) 
 				return true; 
 			return UpdateActorAnimState_Function(remote,rmiContext, templeteID, AnimSate, Time); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const int & ) > OnOtherActorAnimUpdated_Function;
+		virtual bool OnOtherActorAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const int & AnimState, const int & AnimTime) 
+		{ 
+			if (OnOtherActorAnimUpdated_Function==nullptr) 
+				return true; 
+			return OnOtherActorAnimUpdated_Function(remote,rmiContext, templeteID, AnimState, AnimTime); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const int & ) > Request_AddItem_Function;
+		virtual bool Request_AddItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID, const int & iItemCount) 
+		{ 
+			if (Request_AddItem_Function==nullptr) 
+				return true; 
+			return Request_AddItem_Function(remote,rmiContext, iClientID, iItemID, iItemCount); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const int & ) > Request_RemoveItem_Function;
+		virtual bool Request_RemoveItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID, const int & iItemCount) 
+		{ 
+			if (Request_RemoveItem_Function==nullptr) 
+				return true; 
+			return Request_RemoveItem_Function(remote,rmiContext, iClientID, iItemID, iItemCount); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & ) > Request_ItemData_Function;
+		virtual bool Request_ItemData ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID) 
+		{ 
+			if (Request_ItemData_Function==nullptr) 
+				return true; 
+			return Request_ItemData_Function(remote,rmiContext, iClientID, iItemID); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & ) > Request_AddGold_Function;
+		virtual bool Request_AddGold ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const int & GoldAmount) 
+		{ 
+			if (Request_AddGold_Function==nullptr) 
+				return true; 
+			return Request_AddGold_Function(remote,rmiContext, ClientID, GoldAmount); 
 		}
 
                

@@ -16,30 +16,38 @@ namespace ServerToClient
 			public const Nettention.Proud.RmiID ResponseLoginEvent = (Nettention.Proud.RmiID)3000+1;
 			public const Nettention.Proud.RmiID ResponseCheckNickname = (Nettention.Proud.RmiID)3000+2;
 			public const Nettention.Proud.RmiID OnPlayerJoined = (Nettention.Proud.RmiID)3000+3;
-			public const Nettention.Proud.RmiID OnOtherPlayerUpdated = (Nettention.Proud.RmiID)3000+4;
-			public const Nettention.Proud.RmiID OnOtherPlayerAnimUpdated = (Nettention.Proud.RmiID)3000+5;
-			public const Nettention.Proud.RmiID SpawnObjectEvent = (Nettention.Proud.RmiID)3000+6;
-			public const Nettention.Proud.RmiID OnOtherActorUpdated = (Nettention.Proud.RmiID)3000+7;
-			public const Nettention.Proud.RmiID OnOtherActorAnimUpdated = (Nettention.Proud.RmiID)3000+8;
-			public const Nettention.Proud.RmiID OnPositionUpdated = (Nettention.Proud.RmiID)3000+9;
-			public const Nettention.Proud.RmiID OnActorPositionUpdated = (Nettention.Proud.RmiID)3000+10;
-			public const Nettention.Proud.RmiID UpdateCharacterAnimState = (Nettention.Proud.RmiID)3000+11;
-			public const Nettention.Proud.RmiID UpdateActorAnimState = (Nettention.Proud.RmiID)3000+12;
-			public const Nettention.Proud.RmiID OnChat = (Nettention.Proud.RmiID)3000+13;
+			public const Nettention.Proud.RmiID SpawnObjectEvent = (Nettention.Proud.RmiID)3000+4;
+			public const Nettention.Proud.RmiID OtherPlayerTransformUpdated = (Nettention.Proud.RmiID)3000+5;
+			public const Nettention.Proud.RmiID OnPlayerTransformUpdated = (Nettention.Proud.RmiID)3000+6;
+			public const Nettention.Proud.RmiID OtherActorTransformUpdated = (Nettention.Proud.RmiID)3000+7;
+			public const Nettention.Proud.RmiID ActorTransformUpdated = (Nettention.Proud.RmiID)3000+8;
+			public const Nettention.Proud.RmiID UpdateCharacterAnimState = (Nettention.Proud.RmiID)3000+9;
+			public const Nettention.Proud.RmiID OnOtherPlayerAnimUpdated = (Nettention.Proud.RmiID)3000+10;
+			public const Nettention.Proud.RmiID UpdateActorAnimState = (Nettention.Proud.RmiID)3000+11;
+			public const Nettention.Proud.RmiID OnOtherActorAnimUpdated = (Nettention.Proud.RmiID)3000+12;
+			public const Nettention.Proud.RmiID Request_AddItem = (Nettention.Proud.RmiID)3000+13;
+			public const Nettention.Proud.RmiID Request_RemoveItem = (Nettention.Proud.RmiID)3000+14;
+			public const Nettention.Proud.RmiID Request_ItemData = (Nettention.Proud.RmiID)3000+15;
+			public const Nettention.Proud.RmiID Request_AddGold = (Nettention.Proud.RmiID)3000+16;
+			public const Nettention.Proud.RmiID OnChat = (Nettention.Proud.RmiID)3000+17;
 		// List that has RMI ID.
 		public static Nettention.Proud.RmiID[] RmiIDList = new Nettention.Proud.RmiID[] {
 			ResponseLoginEvent,
 			ResponseCheckNickname,
 			OnPlayerJoined,
-			OnOtherPlayerUpdated,
-			OnOtherPlayerAnimUpdated,
 			SpawnObjectEvent,
-			OnOtherActorUpdated,
-			OnOtherActorAnimUpdated,
-			OnPositionUpdated,
-			OnActorPositionUpdated,
+			OtherPlayerTransformUpdated,
+			OnPlayerTransformUpdated,
+			OtherActorTransformUpdated,
+			ActorTransformUpdated,
 			UpdateCharacterAnimState,
+			OnOtherPlayerAnimUpdated,
 			UpdateActorAnimState,
+			OnOtherActorAnimUpdated,
+			Request_AddItem,
+			Request_RemoveItem,
+			Request_ItemData,
+			Request_AddGold,
 			OnChat,
 		};
 	}

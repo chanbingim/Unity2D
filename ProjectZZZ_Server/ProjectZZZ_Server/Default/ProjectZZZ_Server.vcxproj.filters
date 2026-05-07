@@ -61,9 +61,23 @@
     <Filter Include="101. Base">
       <UniqueIdentifier>{334dace3-aa9d-4f26-8598-7a96760b2f3b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="100. Global\Math">
+      <UniqueIdentifier>{1800b70d-7236-48ca-b9f6-68494dd271c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="100. Global\Math\Vector3">
+      <UniqueIdentifier>{64df649c-4357-4e26-95a5-f1cfd2f97906}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="100. Global\Math\Vector2">
+      <UniqueIdentifier>{d3cb3383-c166-4207-b1ef-613fd80d7772}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="100. Global\Math\Vector4">
+      <UniqueIdentifier>{0e542cb9-410b-44e4-9e9b-72f13fa9d48c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08.Inventory">
+      <UniqueIdentifier>{6196531e-653f-423a-8e16-fd47009fc312}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ProjectZZZ_Server.cpp" />
     <ClCompile Include="..\Private\ClientRmi_common.cpp">
       <Filter>02. RIMI\Common\Client</Filter>
     </ClCompile>
@@ -111,6 +125,21 @@
     </ClCompile>
     <ClCompile Include="..\private\Base.cpp">
       <Filter>101. Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\Vector4.cpp">
+      <Filter>100. Global\Math\Vector4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\Vector2.cpp">
+      <Filter>100. Global\Math\Vector2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Vector3.cpp">
+      <Filter>100. Global\Math\Vector3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\Inventory.cpp">
+      <Filter>08.Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectZZZ_Server.cpp">
+      <Filter>08.Inventory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +207,24 @@
     </ClInclude>
     <ClInclude Include="..\public\Base.h">
       <Filter>101. Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\Vector4.h">
+      <Filter>100. Global\Math\Vector4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\Vector2.h">
+      <Filter>100. Global\Math\Vector2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CustomMath.h">
+      <Filter>100. Global\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Vector3.h">
+      <Filter>100. Global\Math\Vector3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\Inventory.h">
+      <Filter>08.Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Server_Mecro.h">
+      <Filter>100. Global\Define</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

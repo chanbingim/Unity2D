@@ -36,9 +36,12 @@ void CLevel::Broadcast_Session()
             for (auto& OtherSession : m_JoinedSession)
             {
                 const PLAYER_DATA* Data = OtherSession->Get_Info();
+                const Transform* Transform = &Data->Transform;
 
-                m_pProxy->OnOtherPlayerUpdated((HostID)SessionID, RmiContext::ReliableSend, OtherSession->Get_ID(),
-                    Data->szName, Data->fPosX, Data->fPosY, Data->fPosZ);
+                m_pProxy->OnPlayerTransformUpdated((HostID)SessionID, RmiContext::ReliableSend, OtherSession->Get_ID(),
+                                                    Transform->vScale.X, Transform->vScale.Y, Transform->vScale.Z,
+                                                    Transform->vRotation.X, Transform->vRotation.Y, Transform->vRotation.Z, Transform->vRotation.W,
+                                                    Transform->vPosition.X, Transform->vPosition.Y, Transform->vPosition.Z);
 
                 m_pProxy->OnOtherPlayerAnimUpdated((HostID)SessionID, RmiContext::ReliableSend,
                     OtherSession->Get_ID(), OtherSession->Get_AnimSate(), OtherSession->Get_AnimTime());
@@ -86,9 +89,12 @@ void CLevel::Join_Session(shared_ptr<CSession> pSession)
     m_JoinedSession.push_back(pSession);
 
     int ClientID = pSession->Get_ID();
+
     const Player_Data* pPlayer_Info = pSession->Get_Info();
+    const Transform* Transform = &pPlayer_Info->Transform;
+
     m_pProxy->OnPlayerJoined((HostID)ClientID, RmiContext::ReliableSend, ClientID,
-        pPlayer_Info->szName, pPlayer_Info->fPosX, pPlayer_Info->fPosY, pPlayer_Info->fPosZ);
+        pPlayer_Info->szName, Transform->vPosition.X, Transform->vPosition.Y, Transform->vPosition.Z);
 }
 
 void CLevel::Join_Actor(shared_ptr<CActor> pActor)

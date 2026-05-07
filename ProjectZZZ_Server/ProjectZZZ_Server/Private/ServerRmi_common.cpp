@@ -15,28 +15,36 @@ namespace ServerToClient {
                
 		Rmi_OnPlayerJoined,
                
-		Rmi_OnOtherPlayerUpdated,
-               
-		Rmi_OnOtherPlayerAnimUpdated,
-               
 		Rmi_SpawnObjectEvent,
                
-		Rmi_OnOtherActorUpdated,
+		Rmi_OtherPlayerTransformUpdated,
                
-		Rmi_OnOtherActorAnimUpdated,
+		Rmi_OnPlayerTransformUpdated,
                
-		Rmi_OnPositionUpdated,
+		Rmi_OtherActorTransformUpdated,
                
-		Rmi_OnActorPositionUpdated,
+		Rmi_ActorTransformUpdated,
                
 		Rmi_UpdateCharacterAnimState,
                
+		Rmi_OnOtherPlayerAnimUpdated,
+               
 		Rmi_UpdateActorAnimState,
+               
+		Rmi_OnOtherActorAnimUpdated,
+               
+		Rmi_Request_AddItem,
+               
+		Rmi_Request_RemoveItem,
+               
+		Rmi_Request_ItemData,
+               
+		Rmi_Request_AddGold,
                
 		Rmi_OnChat,
 	};
 
-	int g_RmiIDListCount = 13;
+	int g_RmiIDListCount = 17;
 
 }
 

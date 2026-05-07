@@ -251,21 +251,12 @@ bool CDBManager::RequestLoadPlayerData(int TableID, PLAYER_DATA& playerData)
             playerData.iMaxMP = record.GetFieldValue(_PNT("mp"));
             playerData.iGlod = record.GetFieldValue(_PNT("Gold"));
 
-            playerData.fPosX = record.GetFieldValue(_PNT("pos_x"));
-            playerData.fPosY = record.GetFieldValue(_PNT("pos_y"));
-            playerData.fPosZ = record.GetFieldValue(_PNT("pos_z"));
+            playerData.Transform.vPosition.X = record.GetFieldValue(_PNT("pos_x"));
+            playerData.Transform.vPosition.Y = record.GetFieldValue(_PNT("pos_y"));
+            playerData.Transform.vPosition.Z = record.GetFieldValue(_PNT("pos_z"));
 
 #pragma region print_Log
             wprintf(L"-------------Find Success-------------\n");
-            wprintf(L"ID : %d\n", playerData.iID);
-            wprintf(L"NickName : %s\n", playerData.szName.c_str());
-            wprintf(L"Level : %d\n", playerData.iLevel);
-            wprintf(L"Exp : %d\n", playerData.iMaxExp);
-            wprintf(L"HP : %d\n", playerData.iMaxHP);
-            wprintf(L"MP : %d\n", playerData.iMaxMP);
-            wprintf(L"Gold : %d\n", playerData.iGlod);
-            wprintf(L"Position : %f, %f, %f \n", playerData.fPosX, playerData.fPosY, playerData.fPosZ);
-            wprintf(L"-----------------------------------\n");
 #pragma endregion
         }
 

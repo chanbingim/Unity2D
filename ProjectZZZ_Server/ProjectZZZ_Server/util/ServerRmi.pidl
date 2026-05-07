@@ -9,31 +9,37 @@ global ServerToClient 3000
     
     OtherPlayerTransformUpdated([in] int ClientID, [in] string NickName, 
                                 [in] float ScaleX, [in] float ScaleY, [in] float ScaleZ,
-                                [in] float AngleX, [in] float AngleY, [in] float AngleZ, [int] float AngleW
+                                [in] float AngleX, [in] float AngleY, [in] float AngleZ, [in] float AngleW,
                                 [in] float PosX, [in] float PosY, [in] float PosZ); 
 
     OnPlayerTransformUpdated([in] int clientId, 
                              [in] float ScaleX, [in] float ScaleY, [in] float ScaleZ,
-                             [in] float AngleX, [in] float AngleY, [in] float AngleZ, [int] float AngleW
-                             [in] float PosX, [in] float PosY, [in] float PosZ, 
-                             [in] float DirX, [in] float DirY, [in] float DirZ);
+                             [in] float AngleX, [in] float AngleY, [in] float AngleZ, [in] float AngleW,
+                             [in] float PosX, [in] float PosY, [in] float PosZ);
     
     OtherActorTransformUpdated([in] int templeteID, 
                                [in] float ScaleX, [in] float ScaleY, [in] float ScaleZ,
-                               [in] float AngleX, [in] float AngleY, [in] float AngleZ, [int] float AngleW
+                               [in] float AngleX, [in] float AngleY, [in] float AngleZ, [in] float AngleW,
                                [in] float PosX, [in] float PosY, [in] float PosZ);
 
     ActorTransformUpdated([in] int templeteID, 
                       [in] float ScaleX, [in] float ScaleY, [in] float ScaleZ,
-                      [in] float AngleX, [in] float AngleY, [in] float AngleZ, [int] float AngleW
-                      [in] float PosX, [in] float PosY, [in] float PosZ, 
-                      [in] float DirX, [in] float DirY, [in] float DirZ);
+                      [in] float AngleX, [in] float AngleY, [in] float AngleZ, [in] float AngleW,
+                      [in] float PosX, [in] float PosY, [in] float PosZ);
 
+    
     UpdateCharacterAnimState([in] int clientId, [in] int AnimSate, [in] float Time);
     OnOtherPlayerAnimUpdated([in] int ClientID, [in] int AnimState, [in] int AnimTime);
 
     UpdateActorAnimState([in] int templeteID, [in] int AnimSate, [in] float Time);
     OnOtherActorAnimUpdated([in] int templeteID, [in] int AnimState, [in] int AnimTime);
+
+    // Inventory Item에 관한 데이터
+    Request_AddItem([in] int iClientID, [in] int iItemID, [in] int iItemCount);
+    Request_RemoveItem([in] int iClientID, [in] int iItemID, [in] int iItemCount);
+    Request_ItemData([in] int iClientID, [in] int iItemID);
+
+    Request_AddGold([in] int ClientID, [in] int GoldAmount);
 
     OnChat([in] int clientId, [in] string message);
 }

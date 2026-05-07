@@ -11,11 +11,26 @@ void CPlayer::Set_Info(const PLAYER_DATA* pinfo)
     m_pInfo = *pinfo;
 }
 
+void CPlayer::Set_Scale(float x, float y, float z)
+{
+    m_pInfo.Transform.vScale.X = x;
+    m_pInfo.Transform.vScale.Y = y;
+    m_pInfo.Transform.vScale.Z = z;
+}
+
+void CPlayer::Set_Rotation(float x, float y, float z, float w)
+{
+    m_pInfo.Transform.vRotation.X = x;
+    m_pInfo.Transform.vRotation.Y = y;
+    m_pInfo.Transform.vRotation.Z = z;
+    m_pInfo.Transform.vRotation.W = w;
+}
+
 void CPlayer::Set_Poisition(float x, float y, float z)
 {
-    m_pInfo.fPosX = x;
-    m_pInfo.fPosY = y;
-    m_pInfo.fPosZ = z;
+    m_pInfo.Transform.vPosition.X = x;
+    m_pInfo.Transform.vPosition.Y = y;
+    m_pInfo.Transform.vPosition.Z = z;
 }
 
 void CPlayer::Set_NickName(const string& szName)
@@ -60,7 +75,11 @@ HRESULT CPlayer::Initialize()
 {
     m_pInfo.iLevel = 1;
     m_pInfo.szName = "";
-    m_pInfo.fPosX = m_pInfo.fPosY = m_pInfo.fPosZ = 0.f;
+
+    m_pInfo.Transform.vScale = Vector3::Zero;
+    m_pInfo.Transform.vRotation = Vector4::Zero;
+    m_pInfo.Transform.vPosition = Vector3::Zero;
+
     m_pInfo.bIsDead = false;
     m_AnimState = STATE_TYPE::END;
 
