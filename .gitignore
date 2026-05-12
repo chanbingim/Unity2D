@@ -99,11 +99,12 @@ InitTestScene*.unity*
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
 
 
-# Firebase / Native plugin large binaries
-# Uncomment if you want to fully ignore Firebase native binaries
-# *.so
-# *.aar
-# *.bundle
+# Firebase / Native binaries
+**/*.so
+**/*.aar
+**/*.bundle
+**/*.symbols.zip
 
-# Android native debug symbols
-*.symbols.zip
+# Keep Unity meta files
+!*.meta
+
