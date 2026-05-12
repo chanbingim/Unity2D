@@ -18,6 +18,7 @@ namespace Google.Impl {
   using System;
   using System.Collections.Generic;
   using System.Runtime.InteropServices;
+    using UnityEngine;
 
   internal class GoogleSignInImpl : BaseObject, ISignInImpl {
 
@@ -175,10 +176,24 @@ namespace Google.Impl {
     // For iOS, this returns Zero.
     private static IntPtr GetPlayerActivity() {
 #if UNITY_ANDROID
-      UnityEngine.AndroidJavaClass jc = new UnityEngine.AndroidJavaClass(
-        "com.unity3d.player.UnityPlayer");
-      return jc.GetStatic<UnityEngine.AndroidJavaObject>("currentActivity")
-               .GetRawObject();
+            try
+            {
+                AndroidJavaClass jc =
+                    new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+
+                AndroidJavaObject activity =
+                    jc.GetStatic<AndroidJavaObject>("currentActivity");
+
+                Debug.Log(activity != null ? "SUCCESS" : "NULL");
+                return activity.GetRawObject();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                return IntPtr.Zero;
+            }
+
+           
 #else
       return IntPtr.Zero;
 #endif

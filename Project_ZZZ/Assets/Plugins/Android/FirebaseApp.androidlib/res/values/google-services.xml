@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id">
+  <string name="gcm_defaultSenderId" translatable="false">520178323790</string>
+  <string name="google_storage_bucket" translatable="false">unitynetwork-f1dc1.firebasestorage.app</string>
+  <string name="project_id" translatable="false">unitynetwork-f1dc1</string>
+  <string name="google_api_key" translatable="false">AIzaSyA7n4NsujWjxgUAD15KzLO71TX1BDk3BKE</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyA7n4NsujWjxgUAD15KzLO71TX1BDk3BKE</string>
+  <string name="google_app_id" translatable="false">1:520178323790:android:ee08ac5b7f71efdbe6ce1f</string>
+  <string name="default_web_client_id" translatable="false">520178323790-98mo2qmb7728sict5h06b3upkl6er2u2.apps.googleusercontent.com</string>
+</resources>
