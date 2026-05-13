@@ -10,4 +10,9 @@ public class Defines
     {
         PLAYER, MONSTER, SKILL
     }
+
+    public enum LOGIN_TYPE
+    {
+        LOCAL, GOOGLE, APPLE, END
+    }
 }

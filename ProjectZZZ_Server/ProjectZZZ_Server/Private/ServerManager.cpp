@@ -50,10 +50,10 @@ void CServerManager::Release_Server()
 }
 
 #pragma region DB
-bool CServerManager::Login_EXcuteDB(int ClientID, string ID, string Password)
+bool CServerManager::Login_EXcuteDB(int ClientID, int LoginType, string ID, string Password, string uid)
 {
     if (m_pDBManager)
-        return m_pDBManager->Login_EXcuteDB(ClientID, ID, Password);
+        return m_pDBManager->Login_EXcuteDB(ClientID, LoginType, ID, Password, uid);
 
     return false;
 }
@@ -213,7 +213,7 @@ void CServerManager::Initalized(ErrorInfoPtr Error)
     if (Error != nullptr)
         cout << "Server start failed: " << Error->ToString().GetString() << endl;
     else
-        cout << "Server started on UDP 33334" << endl;
+        cout << "Server started on TCP 33334" << endl;
 }
 
 void CServerManager::Update(float fTime)

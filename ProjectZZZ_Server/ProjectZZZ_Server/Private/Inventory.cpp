@@ -10,6 +10,12 @@ shared_ptr<CInventory> CInventory::Create()
     return pInstance;
 }
 
+HRESULT CInventory::Initialize()
+{
+
+    return S_OK;
+}
+
 void CInventory::ADD_Gold(int Amount)
 {
     m_Gold += Amount;
@@ -50,29 +56,29 @@ int CInventory::ADD_Item(int ItemID, int ItemCount)
     return ItemCount;
 }
 
-bool CInventory::Remove_Item(int SlotType, int ItemID, int ItemCount)
-{
-    for (auto& slot : m_Slots[SlotType])
-    {
-        if (0 == slot.iItemID)
-            continue;
-
-        if (0 >= ItemCount)
-            break;
-
-        if (slot.iItemID == ItemID)
-        {
-            slot.iItemCount -= ItemCount;
-            if (0 > slot.iItemCount)
-            {
-                ItemCount = slot.iItemCount * -1;
-                slot.iItemCount = 0;
-            }
-        }
-    }
-
-    return 0 >= ItemCount ? false : true;
-}
+//bool CInventory::Remove_Item(int SlotType, int ItemID, int ItemCount)
+//{
+//    for (auto& slot : m_Slots[SlotType])
+//    {
+//        if (0 == slot.iItemID)
+//            continue;
+//
+//        if (0 >= ItemCount)
+//            break;
+//
+//        if (slot.iItemID == ItemID)
+//        {
+//            slot.iItemCount -= ItemCount;
+//            if (0 > slot.iItemCount)
+//            {
+//                ItemCount = slot.iItemCount * -1;
+//                slot.iItemCount = 0;
+//            }
+//        }
+//    }
+//
+//    return 0 >= ItemCount ? false : true;
+//}
 
 bool CInventory::Remove_Item(int SlotType, int SlotIndex, int ItemCount)
 {
@@ -116,4 +122,6 @@ bool CInventory::Swap_Data(int SlotType, int FromSlotIdx, int ToSlotIdx)
 
     m_Slots[SlotType][ToSlotIdx].iItemID = Temp.iItemID;
     m_Slots[SlotType][ToSlotIdx].iItemCount = Temp.iItemCount;
+
+    return true;
 }

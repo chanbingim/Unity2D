@@ -73,7 +73,7 @@
     <Filter Include="100. Global\Math\Vector4">
       <UniqueIdentifier>{0e542cb9-410b-44e4-9e9b-72f13fa9d48c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="08.Inventory">
+    <Filter Include="08. Inventory">
       <UniqueIdentifier>{6196531e-653f-423a-8e16-fd47009fc312}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -136,10 +136,10 @@
       <Filter>100. Global\Math\Vector3</Filter>
     </ClCompile>
     <ClCompile Include="..\private\Inventory.cpp">
-      <Filter>08.Inventory</Filter>
+      <Filter>08. Inventory</Filter>
     </ClCompile>
     <ClCompile Include="ProjectZZZ_Server.cpp">
-      <Filter>08.Inventory</Filter>
+      <Filter>08. Inventory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -221,7 +221,7 @@
       <Filter>100. Global\Math\Vector3</Filter>
     </ClInclude>
     <ClInclude Include="..\public\Inventory.h">
-      <Filter>08.Inventory</Filter>
+      <Filter>08. Inventory</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Server_Mecro.h">
       <Filter>100. Global\Define</Filter>

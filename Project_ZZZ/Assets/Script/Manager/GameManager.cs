@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.F5))
-            GameClient.Get_Instance().Log_In("Tom456", "hashed_pw_2");
+            GameClient.Get_Instance().Log_In(0, "Tom456", "hashed_pw_2", "");
     }
 
     #region public

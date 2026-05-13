@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: 3d3a1d97541746c4a8bd48c96d23234e
+guid: 47a16119035d25743a81958461c5a4f2
 labels:
-- gpsr
+- gvh
 PluginImporter:
   externalObjects: {}
   serializedVersion: 3
@@ -15,14 +15,32 @@ PluginImporter:
   platformData:
     Android:
       enabled: 0
-      settings: {}
+      settings:
+        Is16KbAligned: false
     Any:
-      enabled: 0
+      enabled: 1
       settings: {}
     Editor:
       enabled: 0
       settings:
+        CPU: x86_64
         DefaultValueInitialized: true
+    Linux64:
+      enabled: 1
+      settings:
+        CPU: x86_64
+    OSXUniversal:
+      enabled: 1
+      settings:
+        CPU: x86_64
+    Win:
+      enabled: 0
+      settings:
+        CPU: None
+    Win64:
+      enabled: 1
+      settings:
+        CPU: x86_64
   userData: 
   assetBundleName: 
   assetBundleVariant: 

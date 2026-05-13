@@ -39,7 +39,7 @@ public :
 #pragma endregion
 
 #pragma region DB
-    bool                    Login_EXcuteDB(int ClientID, string ID, string Password);
+    bool                    Login_EXcuteDB(int ClientID, int LoginType, string ID, string Password, string uid);
     bool                    Request_UniqueNickName(int ClientID, string NickName);
 #pragma endregion
 

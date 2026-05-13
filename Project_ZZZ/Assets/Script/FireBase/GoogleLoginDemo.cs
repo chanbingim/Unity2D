@@ -1,12 +1,14 @@
+using Firebase;
+using Firebase.Auth;
+using Google;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Firebase;
-using Firebase.Auth;
-using Google;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
+using static Defines;
 
 public class GoogleSignInDemo : MonoBehaviour
 {
@@ -14,7 +16,10 @@ public class GoogleSignInDemo : MonoBehaviour
     public string webClientId = "520178323790-98mo2qmb7728sict5h06b3upkl6er2u2.apps.googleusercontent.com";
 
     private FirebaseAuth auth;
+
+    public UnityEvent<int, string, string, string>   Login_SuccessEvent;
     private GoogleSignInConfiguration configuration;
+    
 
     private void Awake()
     {
@@ -111,6 +116,9 @@ public class GoogleSignInDemo : MonoBehaviour
             else
             {
                 AddToInformation("Sign In Successful.");
+                FirebaseUser user = auth.CurrentUser;
+                
+                Login_SuccessEvent.Invoke((int)LOGIN_TYPE.GOOGLE, "", "", user.UserId);
             }
         });
     }

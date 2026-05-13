@@ -1,6 +1,6 @@
 global ClientToServer 2000
 {
-    OnGameLogin([in] int clientId, [in] string szID, [in] string szPassWord);
+    OnGameLogin([in] int clientId,[in] int LoginType, [in] string szID, [in] string szPassWord, [in] string uid);
     Create_Character([in] int clientId, [in] string szNickName);
 
     SpawnObjectEvent([in] int LevelID, [in] int SpawnPointID, [in] int Type);

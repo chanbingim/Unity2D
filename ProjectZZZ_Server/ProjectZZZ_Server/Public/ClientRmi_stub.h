@@ -21,15 +21,15 @@ namespace ClientToServer {
 	{
 	public:
                
-		virtual bool OnGameLogin ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const string & , const string & )		{ 
+		virtual bool OnGameLogin ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const string & , const string & , const string & )		{ 
 			return false;
 		} 
 
-#define DECRMI_ClientToServer_OnGameLogin bool OnGameLogin ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szID, const string & szPassWord) PN_OVERRIDE
+#define DECRMI_ClientToServer_OnGameLogin bool OnGameLogin ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const int & LoginType, const string & szID, const string & szPassWord, const string & uid) PN_OVERRIDE
 
-#define DEFRMI_ClientToServer_OnGameLogin(DerivedClass) bool DerivedClass::OnGameLogin ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szID, const string & szPassWord)
-#define CALL_ClientToServer_OnGameLogin OnGameLogin ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szID, const string & szPassWord)
-#define PARAM_ClientToServer_OnGameLogin ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szID, const string & szPassWord)
+#define DEFRMI_ClientToServer_OnGameLogin(DerivedClass) bool DerivedClass::OnGameLogin ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const int & LoginType, const string & szID, const string & szPassWord, const string & uid)
+#define CALL_ClientToServer_OnGameLogin OnGameLogin ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const int & LoginType, const string & szID, const string & szPassWord, const string & uid)
+#define PARAM_ClientToServer_OnGameLogin ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const int & LoginType, const string & szID, const string & szPassWord, const string & uid)
                
 		virtual bool Create_Character ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const string & )		{ 
 			return false;
@@ -143,12 +143,12 @@ namespace ClientToServer {
 	{
 	public:
                
-		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const string & , const string & ) > OnGameLogin_Function;
-		virtual bool OnGameLogin ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & szID, const string & szPassWord) 
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const string & , const string & , const string & ) > OnGameLogin_Function;
+		virtual bool OnGameLogin ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const int & LoginType, const string & szID, const string & szPassWord, const string & uid) 
 		{ 
 			if (OnGameLogin_Function==nullptr) 
 				return true; 
-			return OnGameLogin_Function(remote,rmiContext, clientId, szID, szPassWord); 
+			return OnGameLogin_Function(remote,rmiContext, clientId, LoginType, szID, szPassWord, uid); 
 		}
 
                

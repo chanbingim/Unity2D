@@ -131,6 +131,61 @@ bool CDBManager::Request_LoginPassWord(const string& Pw)
 
     return false;
 }
+
+int CDBManager::Request_UID(const string& uid)
+{
+    COdbcWarnings       Warnings;
+    COdbcRecordset      record;       // Äõ¸® °á°ú¸¦ ´ãÀ» °´Ã¼
+
+    try
+    {
+        string Query = Proud::String::NewFormat(
+            L"SELECT uid FROM users WHERE uid = '%s'",
+            Proud::String(uid.c_str()).GetString());
+
+        auto result = m_Conn.Execute(record, Query, &Warnings);
+        for (int i = 0; i < Warnings.Count; ++i)
+            cout << Warnings[i].GetSqlErrorCode() << " : " << Warnings[i].what() << '\n';
+
+        int TableId(0);
+        while (record.MoveNext())
+        {
+            TableId = record.GetFieldValue(_PNT("id"));
+        }
+
+        return TableId;
+    }
+    catch (COdbcException& error)
+    {
+        cout << "Error : " << error.GetSqlErrorCode() << " => " << error.what() << '\n';
+        return false;
+    }
+
+    return false;
+}
+
+void CDBManager::ADD_LoginData(const string& ID, const string& Pw, const string& uid)
+{
+    COdbcWarnings       Warnings;
+    COdbcRecordset      record;       // Äõ¸® °á°ú¸¦ ´ãÀ» °´Ã¼
+
+    try
+    {
+        string Query = Proud::String::NewFormat(
+            L"INSERT INTO users (id, pw, uid) VALUES('%s', '%s', '%s');",
+            Proud::String(ID.c_str()).GetString(),
+            Proud::String(Pw.c_str()).GetString(),
+            Proud::String(uid.c_str()).GetString());
+
+        auto result = m_Conn.Execute(record, Query, &Warnings);
+        for (int i = 0; i < Warnings.Count; ++i)
+            cout << Warnings[i].GetSqlErrorCode() << " : " << Warnings[i].what() << '\n';
+    }
+    catch (COdbcException& error)
+    {
+        cout << "Error : " << error.GetSqlErrorCode() << " => " << error.what() << '\n';
+    }
+}
 #pragma endregion
 
 void CDBManager::Release()
@@ -138,33 +193,43 @@ void CDBManager::Release()
     m_Conn.Close();
 }
 
-bool CDBManager::Login_EXcuteDB(int ClientID, string ID, string Password)
+bool CDBManager::Login_EXcuteDB(int ClientID, int LoginType, string ID, string Password, string uid)
 {
 	COdbcWarnings       Warnings;
 	COdbcRecordset      record;       // Äõ¸® °á°ú¸¦ ´ãÀ» °´Ã¼
-
+    int                 Table_id;
 	try
 	{
-		int Table_id(-1);
-
-#pragma region ID_CHECK
-        if (!Request_LoginID(ID))
+        if (0 == LoginType)
         {
-            m_DBJobs.push(make_shared<LOGIN_RESULT>(ClientID, DB_TABLE_TYPE::REQUEST_ID, Table_id, LOGIN_MSG::ID_FAIL));
-            return false;
-        }
+#pragma region ID_CHECK
+            Table_id = Request_LoginID(ID);
+            if (0 >= Table_id)
+            {
+                m_DBJobs.push(make_shared<LOGIN_RESULT>(ClientID, DB_TABLE_TYPE::REQUEST_ID, Table_id, LOGIN_MSG::ID_FAIL));
+                return false;
+            }
 #pragma endregion
 
 #pragma region PW_CHECK
-        if (!Request_LoginPassWord(Password))
-        {
-            m_DBJobs.push(make_shared<LOGIN_RESULT>(ClientID, DB_TABLE_TYPE::REQUEST_ID, Table_id, LOGIN_MSG::PW_FAIL));
-            return false;
-        }
+            if (!Request_LoginPassWord(Password))
+            {
+                m_DBJobs.push(make_shared<LOGIN_RESULT>(ClientID, DB_TABLE_TYPE::REQUEST_ID, Table_id, LOGIN_MSG::PW_FAIL));
+                return false;
+            }
 #pragma endregion
+        }
+        else
+        {
+            Table_id = Request_UID(uid);
+            if (0 >= Table_id)
+            {
+                ADD_LoginData("", "", uid);
+                return true;
+            }
+        }
 
 		m_DBJobs.push(make_shared<LOGIN_RESULT>(ClientID, DB_TABLE_TYPE::REQUEST_ID, Table_id, LOGIN_MSG::SUCCESS));
-
 	}
     catch (COdbcException& error)
     {

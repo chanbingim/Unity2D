@@ -1034,6 +1034,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GoogleSignInDemo
   infoText: {fileID: 127834412}
   webClientId: 520178323790-98mo2qmb7728sict5h06b3upkl6er2u2.apps.googleusercontent.com
+  Login_SuccessEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1793729780
 GameObject:
   m_ObjectHideFlags: 0

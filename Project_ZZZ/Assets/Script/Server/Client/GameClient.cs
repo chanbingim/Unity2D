@@ -43,9 +43,9 @@ public class GameClient : MonoBehaviour
         m_ClientProxy.OnChat(HostID.HostID_Server, RmiContext.ReliableSend, m_MyID, text);
     }
 
-    public void Log_In(String id, String Password)
+    public void Log_In(int Type, String id, String Password, String Uid)
     {
-        m_ClientProxy.OnGameLogin(HostID.HostID_Server, RmiContext.ReliableSend, m_MyID, id, Password);
+        m_ClientProxy.OnGameLogin(HostID.HostID_Server, RmiContext.ReliableSend, m_MyID, Type, id, Password, Uid);
     }
 
     public void ClientMoveMessage(ICommand Command)
