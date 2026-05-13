@@ -19,8 +19,13 @@ public :
     static  CServerManager* Get_Instance(ErrorInfoPtr Error);
     static  CServerManager* Get_Instance();
     
-    void                    Release_Server();
+    void                    Update(float fTime);
+
+#pragma region Session
+    void                    ADD_JoinClient(int hostID, shared_ptr<CSession> ClientData, LOGIN_MSG Msg);
     void                    Leave_Client(int ClientID);
+    void                    Clear_DeadClient();
+#pragma endregion
 
 #pragma region Spawn Actor
     void                    Spawn_Player(const int clientId, const int iLevelID);
@@ -39,16 +44,18 @@ public :
 #pragma endregion
 
 #pragma region DB
-    bool                    Login_EXcuteDB(int ClientID, int LoginType, string ID, string Password, string uid);
+    bool                    Login_EXcuteDB(int ClientID, int LoginType, string ID, string Password, string uid, string email);
     bool                    Request_UniqueNickName(int ClientID, string NickName);
 #pragma endregion
 
-    void                    ADD_JoinClient(int hostID, shared_ptr<CSession> ClientData, LOGIN_MSG Msg);
+#pragma region Add_Item
+    void                    ADD_Gold(int iHostID, int Amount);
+    int                     ADD_Item(int iHostID, int ItemID, int ItemCount);
+#pragma endregion
 
-    void                    Update(float fTime);
-    void                    Clear_DeadClient();
 
     Proxy*                  Get_Proxy()     { return m_pProxy; }
+    void                    Release_Server();
 
 private :
     void                    Initalized(ErrorInfoPtr Error);

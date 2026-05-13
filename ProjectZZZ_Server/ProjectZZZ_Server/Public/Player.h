@@ -1,6 +1,8 @@
 #pragma once
 #include "Server_Defines.h"
 
+class CInventory;
+
 class CPlayer
 {
 public :
@@ -24,12 +26,19 @@ public:
     void                    Set_AnimSate(STATE_TYPE state, float fTime = 0.f);
     void                    Set_Level(int iLevel);
     void                    Set_Dead();
-     
+    
+#pragma region Inventory
+    void                    ADD_Gold(int Amount);
+    int                     Picked_Item(int ItemID, int ItemCount);
+#pragma endregion
+
 private:
     PLAYER_DATA             m_pInfo;
 
     STATE_TYPE              m_AnimState = STATE_TYPE::END;
     float                   m_fAnimTime = 0.f;
+
+    shared_ptr<CInventory>  m_pInventory = nullptr;
 
 public :
     static CPlayer*         Create();

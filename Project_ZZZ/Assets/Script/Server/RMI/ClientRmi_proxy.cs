@@ -13,7 +13,7 @@ namespace ClientToServer
 {
 	internal class Proxy:Nettention.Proud.RmiProxy
 	{
-public bool OnGameLogin(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int clientId, int LoginType, string szID, string szPassWord, string uid)
+public bool OnGameLogin(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int clientId, int LoginType, string szID, string szPassWord, string uid, string email)
 {
 	using (Nettention.Proud.FreeListPopper<Nettention.Proud.Message> freeList = new Nettention.Proud.FreeListPopper<Nettention.Proud.Message>())
 		{
@@ -27,6 +27,7 @@ public bool OnGameLogin(Nettention.Proud.HostID remote,Nettention.Proud.RmiConte
 		Nettention.Proud.Marshaler.Write(__msg, szID);
 		Nettention.Proud.Marshaler.Write(__msg, szPassWord);
 		Nettention.Proud.Marshaler.Write(__msg, uid);
+		Nettention.Proud.Marshaler.Write(__msg, email);
 		
 	Nettention.Proud.HostID[] __list = new Nettention.Proud.HostID[1];
 	__list[0] = remote;
@@ -36,7 +37,7 @@ public bool OnGameLogin(Nettention.Proud.HostID remote,Nettention.Proud.RmiConte
         }
 }
 
-public bool OnGameLogin(Nettention.Proud.HostID[] remotes,Nettention.Proud.RmiContext rmiContext, int clientId, int LoginType, string szID, string szPassWord, string uid)
+public bool OnGameLogin(Nettention.Proud.HostID[] remotes,Nettention.Proud.RmiContext rmiContext, int clientId, int LoginType, string szID, string szPassWord, string uid, string email)
 {
 	using (Nettention.Proud.FreeListPopper<Nettention.Proud.Message> freeList = new Nettention.Proud.FreeListPopper<Nettention.Proud.Message>())
 {
@@ -50,6 +51,7 @@ Nettention.Proud.Marshaler.Write(__msg, LoginType);
 Nettention.Proud.Marshaler.Write(__msg, szID);
 Nettention.Proud.Marshaler.Write(__msg, szPassWord);
 Nettention.Proud.Marshaler.Write(__msg, uid);
+Nettention.Proud.Marshaler.Write(__msg, email);
 		
 	return RmiSend(remotes,rmiContext,__msg,
 		RmiName_OnGameLogin, Common.OnGameLogin);

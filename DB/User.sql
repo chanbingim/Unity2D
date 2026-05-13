@@ -5,8 +5,9 @@ drop table users;
 
 CREATE TABLE users (
     id          INT PRIMARY KEY AUTO_INCREMENT,
-    user_id     VARCHAR(30) NOT NULL UNIQUE,  -- 아이디
-    password    VARCHAR(256) NOT NULL,         -- 암호화 저장!
+	uid    		VARCHAR(30) NOT NULL UNIQUE,  	-- 아이디
+    user_id     VARCHAR(30) UNIQUE,         	-- 암호화 저장!
+    password    VARCHAR(30) NOT NULL,         	-- 암호화 저장!
     email       VARCHAR(100) UNIQUE,
     created_at  DATETIME DEFAULT NOW(),        -- 가입일
     last_login  DATETIME,                      -- 마지막 로그인
@@ -40,12 +41,13 @@ CREATE TABLE player_inventory (
     FOREIGN KEY (player_id) REFERENCES player_info(id)
 );
 
-INSERT INTO users(user_id, password, email) VALUES
-("Alice123",  "hashed_pw_1", "alice@gmail.com"),
-("Tom456",    "hashed_pw_2", "tom@gmail.com"),
-("Bob789",    "hashed_pw_3", "bob@gmail.com"),
-("Jenny007",  "hashed_pw_4", "jenny@gmail.com"),
-("Chris999",  "hashed_pw_5", "chris@gmail.com");
+INSERT INTO users(uid, user_id, password, email) VALUES
+("Test_uid1", "Alice123",  "hashed_pw_1", "alice@gmail.com"),
+("Test_uid2", "Tom456",    "hashed_pw_2", "tom@gmail.com"),
+("Test_uid3", "Bob789",    "hashed_pw_3", "bob@gmail.com"),
+("Test_uid4", "Jenny007",  "hashed_pw_4", "jenny@gmail.com"),
+("Test_uid5", "Chris999",  "hashed_pw_5", "chris@gmail.com"),
+("Test_uid6", NULL,  "", "Test@gmail.com");
 
 -- 인게임 캐릭터 테이블
 INSERT INTO player_info(user_id, nickname, level, exp, hp, mp, gold, map_id, pos_x, pos_y, pos_z) VALUES

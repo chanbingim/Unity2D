@@ -4,7 +4,7 @@
 
 DEFRMI_ClientToServer_OnGameLogin(CCustom_Stub)
 {
-    m_pInstance->Login_EXcuteDB(clientId, LoginType, szID, szPassWord, uid);
+    m_pInstance->Login_EXcuteDB(clientId, LoginType, szID, szPassWord, uid, email);
     return true;
 }
 

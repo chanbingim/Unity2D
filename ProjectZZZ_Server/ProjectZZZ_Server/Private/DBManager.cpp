@@ -140,7 +140,7 @@ int CDBManager::Request_UID(const string& uid)
     try
     {
         string Query = Proud::String::NewFormat(
-            L"SELECT uid FROM users WHERE uid = '%s'",
+            L"SELECT id FROM users WHERE uid = '%s'",
             Proud::String(uid.c_str()).GetString());
 
         auto result = m_Conn.Execute(record, Query, &Warnings);
@@ -164,7 +164,7 @@ int CDBManager::Request_UID(const string& uid)
     return false;
 }
 
-void CDBManager::ADD_LoginData(const string& ID, const string& Pw, const string& uid)
+void CDBManager::ADD_LoginData(const string& ID, const string& Pw, const string& uid, const string& email)
 {
     COdbcWarnings       Warnings;
     COdbcRecordset      record;       // Äõ¸® °á°ú¸¦ ´ãÀ» °´Ã¼
@@ -172,10 +172,11 @@ void CDBManager::ADD_LoginData(const string& ID, const string& Pw, const string&
     try
     {
         string Query = Proud::String::NewFormat(
-            L"INSERT INTO users (id, pw, uid) VALUES('%s', '%s', '%s');",
-            Proud::String(ID.c_str()).GetString(),
+            L"INSERT INTO users (uid, password, email)  VALUES('%s', '%s', '%s');",
+            Proud::String(uid.c_str()).GetString(),
+            //Proud::String(ID.c_str()).GetString(),
             Proud::String(Pw.c_str()).GetString(),
-            Proud::String(uid.c_str()).GetString());
+            Proud::String(email.c_str()).GetString());
 
         auto result = m_Conn.Execute(record, Query, &Warnings);
         for (int i = 0; i < Warnings.Count; ++i)
@@ -193,7 +194,7 @@ void CDBManager::Release()
     m_Conn.Close();
 }
 
-bool CDBManager::Login_EXcuteDB(int ClientID, int LoginType, string ID, string Password, string uid)
+bool CDBManager::Login_EXcuteDB(int ClientID, int LoginType, string ID, string Password, string uid, string email)
 {
 	COdbcWarnings       Warnings;
 	COdbcRecordset      record;       // Äõ¸® °á°ú¸¦ ´ãÀ» °´Ã¼
@@ -224,8 +225,8 @@ bool CDBManager::Login_EXcuteDB(int ClientID, int LoginType, string ID, string P
             Table_id = Request_UID(uid);
             if (0 >= Table_id)
             {
-                ADD_LoginData("", "", uid);
-                return true;
+                ADD_LoginData(ID, Password, uid, email);
+                Table_id = Request_UID(uid);
             }
         }
 

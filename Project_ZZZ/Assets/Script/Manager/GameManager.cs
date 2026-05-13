@@ -1,7 +1,10 @@
+using Client_Structs;
 using System;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.SceneManagement;
+
+using static Defines;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,7 +23,10 @@ public class GameManager : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.F5))
-            GameClient.Get_Instance().Log_In(0, "Tom456", "hashed_pw_2", "");
+            GameClient.Get_Instance().Log_In(0, new LOGIN_INFO("Tom456", "hashed_pw_2", "", ""));
+
+        if (Input.GetKeyDown(KeyCode.F6))
+            GameClient.Get_Instance().Log_In((int)LOGIN_TYPE.GOOGLE, new LOGIN_INFO("", "", "Test_Uid7", "Test2@gmail.com"));
     }
 
     #region public

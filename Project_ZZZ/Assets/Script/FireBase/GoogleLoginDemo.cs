@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using static Defines;
+using Client_Structs;
 
 public class GoogleSignInDemo : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class GoogleSignInDemo : MonoBehaviour
 
     private FirebaseAuth auth;
 
-    public UnityEvent<int, string, string, string>   Login_SuccessEvent;
+    public UnityEvent<int, LOGIN_INFO>   Login_SuccessEvent;
     private GoogleSignInConfiguration configuration;
     
 
@@ -117,8 +118,8 @@ public class GoogleSignInDemo : MonoBehaviour
             {
                 AddToInformation("Sign In Successful.");
                 FirebaseUser user = auth.CurrentUser;
-                
-                Login_SuccessEvent.Invoke((int)LOGIN_TYPE.GOOGLE, "", "", user.UserId);
+
+                Login_SuccessEvent.Invoke((int)LOGIN_TYPE.GOOGLE, new LOGIN_INFO("", "", user.UserId, user.Email));
             }
         });
     }

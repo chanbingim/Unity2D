@@ -8,7 +8,7 @@ public :
     int                     ADD_Item(int ItemID, int ItemCount);
 
     bool                    Remove_Item(int SlotType, int ItemID, int ItemCount);
-    //bool                    Remove_Item(int SlotType, int SlotIndex, int ItemCount);
+    //bool                  Remove_Item(int SlotType, int SlotIndex, int ItemCount);
 
     bool                    Swap_Data(int SlotType, int FromSlotIdx, int ToSlotIdx);
 

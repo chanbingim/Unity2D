@@ -7,6 +7,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 using static Defines;
+using Client_Structs;
 
 public class GameClient : MonoBehaviour
 {
@@ -43,9 +44,11 @@ public class GameClient : MonoBehaviour
         m_ClientProxy.OnChat(HostID.HostID_Server, RmiContext.ReliableSend, m_MyID, text);
     }
 
-    public void Log_In(int Type, String id, String Password, String Uid)
+    public void Log_In(int Type, LOGIN_INFO LoginInfo)
     {
-        m_ClientProxy.OnGameLogin(HostID.HostID_Server, RmiContext.ReliableSend, m_MyID, Type, id, Password, Uid);
+        m_ClientProxy.OnGameLogin(HostID.HostID_Server, RmiContext.ReliableSend, m_MyID, Type, 
+                                  LoginInfo.user_id, LoginInfo.Password,
+                                  LoginInfo.UID, LoginInfo.Email);
     }
 
     public void ClientMoveMessage(ICommand Command)

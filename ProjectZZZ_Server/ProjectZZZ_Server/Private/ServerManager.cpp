@@ -50,10 +50,10 @@ void CServerManager::Release_Server()
 }
 
 #pragma region DB
-bool CServerManager::Login_EXcuteDB(int ClientID, int LoginType, string ID, string Password, string uid)
+bool CServerManager::Login_EXcuteDB(int ClientID, int LoginType, string ID, string Password, string uid, string email)
 {
     if (m_pDBManager)
-        return m_pDBManager->Login_EXcuteDB(ClientID, LoginType, ID, Password, uid);
+        return m_pDBManager->Login_EXcuteDB(ClientID, LoginType, ID, Password, uid, email);
 
     return false;
 }
@@ -67,7 +67,29 @@ bool CServerManager::Request_UniqueNickName(int ClientID, string NickName)
 
     return false;
 }
+
 #pragma endregion
+
+#pragma region Player
+void CServerManager::ADD_Gold(int iHostID, int Amount)
+{
+    auto iter = m_SessionList.find(iHostID);
+    if (iter == m_SessionList.end())
+        return;
+
+    return iter->second->GetPlayer()->ADD_Gold(Amount);
+}
+
+int CServerManager::ADD_Item(int iHostID, int ItemID, int ItemCount)
+{
+    auto iter = m_SessionList.find(iHostID);
+    if (iter == m_SessionList.end())
+        return;
+
+    return iter->second->GetPlayer()->Picked_Item(ItemID, ItemCount);
+}
+#pragma endregion
+
 
 #pragma region Client_Event
 void CServerManager::ADD_JoinClient(int hostID, shared_ptr<CSession> ClientData, LOGIN_MSG Msg)

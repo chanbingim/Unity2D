@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Player.h"
 
+#include "Inventory.h"
+
 CPlayer::CPlayer()
 {
 
@@ -54,6 +56,22 @@ void CPlayer::Set_Dead()
     m_pInfo.bIsDead = true;
 }
 
+void CPlayer::ADD_Gold(int Amount)
+{
+    if (nullptr == m_pInventory)
+        return;
+
+    m_pInventory->ADD_Gold(Amount);
+}
+
+int CPlayer::Picked_Item(int ItemID, int ItemCount)
+{
+    if (nullptr == m_pInventory)
+        return -1;
+
+    return m_pInventory->ADD_Item(ItemID, ItemCount);
+}
+
 CPlayer* CPlayer::Create()
 {
     CPlayer* pInstance = new CPlayer();
@@ -82,6 +100,8 @@ HRESULT CPlayer::Initialize()
 
     m_pInfo.bIsDead = false;
     m_AnimState = STATE_TYPE::END;
+
+    m_pInventory = CInventory::Create();
 
     return S_OK;
 }

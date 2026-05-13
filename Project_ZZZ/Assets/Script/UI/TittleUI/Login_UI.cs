@@ -3,6 +3,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using static UIManager;
 using static Defines;
+using Client_Structs;
 
 public class Login_UI : CPopupBase
 {
@@ -60,7 +61,7 @@ public class Login_UI : CPopupBase
 
     public void Login_Button()
     {
-        m_gameClient.Log_In((int)LOGIN_TYPE.LOCAL, m_InputFieldID.text, m_InputFieldPW.text, "");
+        m_gameClient.Log_In((int)LOGIN_TYPE.LOCAL, new LOGIN_INFO(m_InputFieldID.text, m_InputFieldPW.text, "", ""));
     }
 
     public void Login_Event(bool bIsSuccess, int LoginMsg)

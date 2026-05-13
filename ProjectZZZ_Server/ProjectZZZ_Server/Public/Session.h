@@ -23,13 +23,14 @@ public :
     int                     Get_MapID();
 
     const PLAYER_DATA*      Get_Info();
+    CPlayer*                GetPlayer() const { return m_pPlayer.get(); }
 
 private:
     int                     m_hostID;
     int                     m_TableID;
     int                     m_EnterMapID;
 
-    CPlayer*                m_pPlayer = nullptr;
+    unique_ptr<CPlayer>    m_pPlayer = nullptr;
     
 
 public :

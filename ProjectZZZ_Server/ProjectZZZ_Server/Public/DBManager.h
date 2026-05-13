@@ -7,7 +7,7 @@ public :
     HRESULT                 Initialize();
 
 #pragma region Login Event
-    bool                    Login_EXcuteDB(int ClientID, int LoginType, string ID, string Password, string uid);
+    bool                    Login_EXcuteDB(int ClientID, int LoginType, string ID, string Password, string uid, string email);
     void                    Insert_NewID(int ClientID, string ID, string Password, string Email);
 #pragma endregion
 
@@ -42,7 +42,7 @@ private :
     bool                   Request_LoginPassWord(const string& Pw);
     int                    Request_UID(const string& uid);
 
-    void                   ADD_LoginData(const string& ID, const string& Pw, const string& uid);
+    void                   ADD_LoginData(const string& ID, const string& Pw, const string& uid, const string& email);
 #pragma endregion
 };
 
