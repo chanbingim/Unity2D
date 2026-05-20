@@ -31,7 +31,6 @@ private:
     int                     m_EnterMapID;
 
     unique_ptr<CPlayer>    m_pPlayer = nullptr;
-    
 
 public :
     static shared_ptr<CSession>     Create(int HostID, int TableID, PLAYER_DATA* info = nullptr);

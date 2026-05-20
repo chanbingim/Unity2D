@@ -121,7 +121,7 @@ bool CDBManager::Request_LoginPassWord(const string& Pw)
         for (int i = 0; i < Warnings.Count; ++i)
             cout << Warnings[i].GetSqlErrorCode() << " : " << Warnings[i].what() << '\n';
 
-        return 0 == record.GetRowCount() ? false : true;
+        return (record.IsEof()) ? false : true;
     }
     catch (COdbcException& error)
     {

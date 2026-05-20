@@ -23,7 +23,7 @@ int main()
     {
         pInstance->Clear_DeadClient();
         TimeAcc += pTimerManager->Get_TimeDelta("ServerTimer");
-        if (TimeAcc >= 1.f / 144)
+        if (TimeAcc >= 3.f)
         {
             pInstance->Update(pTimerManager->Get_TimeDelta("Timer_Frame"));
             TimeAcc = 0.f;

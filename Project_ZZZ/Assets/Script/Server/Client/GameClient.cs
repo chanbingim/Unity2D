@@ -106,7 +106,7 @@ public class GameClient : MonoBehaviour
             m_ClientStub.OnChat += ServerChatHandler.OnChat;
             m_ClientStub.ResponseLoginEvent += ServerLoginHandler.ResponseLoginEvent;
             m_ClientStub.OnPlayerJoined += ServerActorUpdateHandler.OnPlayerJoined;
-            m_ClientStub.OnOtherPlayerUpdated += ServerActorUpdateHandler.OnOtherPlayerUpdated;
+            m_ClientStub.OtherPlayerTransformUpdated += ServerActorUpdateHandler.OnOtherPlayerUpdated;
 
             m_netClient.AttachStub(m_ClientStub);
         }

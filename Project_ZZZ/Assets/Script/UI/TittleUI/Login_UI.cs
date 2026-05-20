@@ -15,12 +15,13 @@ public class Login_UI : CPopupBase
     [SerializeField] private InputField         m_InputFieldPW;
     private string                              m_ErrorMsg = "";
 
-    void Awake()
+    void Start()
     {
         m_AnimComponent = GetComponent<CUIAnimComponent>();
         m_RectTransform = GetComponent<RectTransform>();
         m_gameClient = GameClient.Get_Instance();
         m_gameClient.ServerLoginHandler.ResultEvent += Login_Event;
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame

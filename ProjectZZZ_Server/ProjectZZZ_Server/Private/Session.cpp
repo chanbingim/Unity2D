@@ -84,12 +84,11 @@ shared_ptr<CSession> CSession::Create(int HostID, int TableID, PLAYER_DATA* info
 void CSession::Release()
 {
     m_pPlayer->Release();
-    delete m_pPlayer;
 }
 
 HRESULT CSession::Initialize(int HostID, int TableID, PLAYER_DATA* info)
 {
-    m_pPlayer = CPlayer::Create();
+    m_pPlayer = move(CPlayer::Create());
     m_hostID = HostID;
     m_TableID = TableID;
 

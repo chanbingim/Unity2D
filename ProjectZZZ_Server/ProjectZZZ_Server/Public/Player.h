@@ -1,9 +1,9 @@
 #pragma once
-#include "Server_Defines.h"
+#include "Actor.h"
 
 class CInventory;
 
-class CPlayer
+class CPlayer : public CActor
 {
 public :
     enum class STATE_TYPE {
@@ -32,20 +32,27 @@ public:
     int                     Picked_Item(int ItemID, int ItemCount);
 #pragma endregion
 
+    void                        ADD_NearObject(HostID iHostID, CActor* pActor);
+    void                        Remove_NearObject(HostID iHostID, CActor* pActor);
+
+    HostID*                     Get_HostList();
+    size_t                      Get_Hosts() { return m_NearHostID.size(); }
+
 private:
-    PLAYER_DATA             m_pInfo;
+    PLAYER_DATA                 m_pInfo;
+    STATE_TYPE                  m_AnimState = STATE_TYPE::END;
+    float                       m_fAnimTime = 0.f;
 
-    STATE_TYPE              m_AnimState = STATE_TYPE::END;
-    float                   m_fAnimTime = 0.f;
+    vector<HostID>              m_NearHostID;
+    vector<CActor*>             m_NearVisible;
 
-    shared_ptr<CInventory>  m_pInventory = nullptr;
+    shared_ptr<CInventory>      m_pInventory = nullptr;
 
 public :
-    static CPlayer*         Create();
-    void                    Release();
+    static unique_ptr<CPlayer>  Create();
+    void                        Release();
 
 private :
-    CPlayer();
     HRESULT                 Initialize();
 
 };

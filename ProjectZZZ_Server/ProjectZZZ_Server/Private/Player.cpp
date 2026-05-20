@@ -3,11 +3,6 @@
 
 #include "Inventory.h"
 
-CPlayer::CPlayer()
-{
-
-}
-
 void CPlayer::Set_Info(const PLAYER_DATA* pinfo)
 {
     m_pInfo = *pinfo;
@@ -72,13 +67,41 @@ int CPlayer::Picked_Item(int ItemID, int ItemCount)
     return m_pInventory->ADD_Item(ItemID, ItemCount);
 }
 
-CPlayer* CPlayer::Create()
+void CPlayer::ADD_NearObject(HostID iHostID, CActor* pActor)
 {
-    CPlayer* pInstance = new CPlayer();
+    auto iter = find(m_NearHostID.begin(), m_NearHostID.end(), iHostID);
+    if (iter == m_NearHostID.end())
+        m_NearHostID.push_back(iHostID);
+}
+
+void CPlayer::Remove_NearObject(HostID iHostID, CActor* pActor)
+{
+    int iNumActors = m_NearHostID.size();
+    for (int i = 0; i < iNumActors; ++i)
+    {
+        if (iHostID == m_NearHostID[i])
+        {
+            m_NearHostID[i] = m_NearHostID.back();
+            m_NearHostID.pop_back();
+            return;
+        }
+    }
+}
+
+HostID* CPlayer::Get_HostList()
+{
+    if (m_NearHostID.empty())
+        return nullptr;
+
+    return m_NearHostID.data();
+}
+
+unique_ptr<CPlayer> CPlayer::Create()
+{
+    unique_ptr<CPlayer> pInstance = make_unique<CPlayer>();
     if (FAILED(pInstance->Initialize()))
     {
-        delete pInstance;
-        pInstance = nullptr;
+        return nullptr;
     }
 
     return pInstance;
@@ -94,7 +117,7 @@ HRESULT CPlayer::Initialize()
     m_pInfo.iLevel = 1;
     m_pInfo.szName = "";
 
-    m_pInfo.Transform.vScale = Vector3::Zero;
+    m_pInfo.Transform.vScale = Vector3::One;
     m_pInfo.Transform.vRotation = Vector4::Zero;
     m_pInfo.Transform.vPosition = Vector3::Zero;
 

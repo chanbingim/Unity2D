@@ -1,8 +1,6 @@
 using InputCommand;
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -17,6 +15,8 @@ public class Player_Controller : CCharacter_Controller
     Dictionary<string, ICommand>    m_Commands = new Dictionary<string, ICommand>();
 
     private Boolean             m_EnableChating = false;
+    private Boolean             m_DisableInput = false;
+
     private GameClient          m_Client = null;
 
     void Start()
@@ -26,6 +26,7 @@ public class Player_Controller : CCharacter_Controller
         {
             m_PlayerCam = Camera.main.GetComponent<Player_Camera>();
             m_PlayerCam.Target = m_Character.gameObject;
+            m_DisableInput = true;
         }
 
         ADD_CommandList();
@@ -37,7 +38,7 @@ public class Player_Controller : CCharacter_Controller
     {
         if (null != m_Character)
         {
-            if(false == m_EnableChating)
+            if(false == m_EnableChating && m_DisableInput)
                 InputFocusCharacter();
         }
     }
@@ -47,7 +48,14 @@ public class Player_Controller : CCharacter_Controller
         m_EnableChating = bIsEnable;
     }
 
-    public  void Update_Position(float px, float py, float pz)
+    public void Update_Transform(Vector3 vScale, Quaternion vRot, Vector3 vPos)
+    {
+        m_Character.transform.localScale = vScale;
+        m_Character.transform.rotation = vRot;
+        Update_Position(vPos.x, vPos.y, vPos.z);
+    }
+
+    void Update_Position(float px, float py, float pz)
     {
         CMoveCommand MoveCommand = m_Commands["Move"] as CMoveCommand;
         if (null == MoveCommand)

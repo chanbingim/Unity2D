@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\private\Actor.cpp" />
     <ClCompile Include="..\private\Base.cpp" />
     <ClCompile Include="..\Private\ClientRmi_common.cpp" />
     <ClCompile Include="..\Private\ClientRmi_stub.cpp" />
@@ -194,6 +195,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\public\Actor.h" />
     <ClInclude Include="..\public\Base.h" />
     <ClInclude Include="..\Public\ClientRmi_common.h" />
     <ClInclude Include="..\Public\ClientRmi_stub.h" />

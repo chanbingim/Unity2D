@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using UnityEditor;
@@ -30,8 +31,9 @@ public class MultiplayerBuildAndRun
         string exePath = Path.Combine(buildFolder, projectName + ".exe");
         Directory.CreateDirectory(buildFolder);
 
-        BuildReport report = BuildPipeline.BuildPlayer(GetScenePaths(), exePath,
-            BuildTarget.StandaloneWindows64, BuildOptions.None);
+        BuildReport report = BuildPipeline.BuildPlayer(
+            GetEnabledScenePaths(), exePath,
+            BuildTarget.StandaloneWindows64, BuildPlayerOptions());
 
         if (report.summary.result != BuildResult.Succeeded)
         {
@@ -78,8 +80,9 @@ public class MultiplayerBuildAndRun
         string appPath = Path.Combine(buildFolder, projectName + ".app");
         Directory.CreateDirectory(buildFolder);
 
-        BuildReport report = BuildPipeline.BuildPlayer(GetScenePaths(), appPath,
-            BuildTarget.StandaloneOSX, BuildOptions.None);
+        BuildReport report = BuildPipeline.BuildPlayer(
+            GetEnabledScenePaths(), appPath,
+            BuildTarget.StandaloneOSX, BuildPlayerOptions());
 
         if (report.summary.result != BuildResult.Succeeded)
         {
@@ -105,12 +108,38 @@ public class MultiplayerBuildAndRun
         return Path.GetFileName(Path.GetDirectoryName(Application.dataPath));
     }
 
-    static string[] GetScenePaths()
+    /// <summary>
+    /// Matches File → Build Settings: only scenes with the checkbox enabled are built.
+    /// Including disabled scenes changes build order and the startup scene, which can
+    /// break rendering (e.g. pink materials if the first scene is not the real game scene).
+    /// </summary>
+    static string[] GetEnabledScenePaths()
     {
-        string[] scenes = new string[EditorBuildSettings.scenes.Length];
-        for (int i = 0; i < scenes.Length; i++)
-            scenes[i] = EditorBuildSettings.scenes[i].path;
-        return scenes;
+        var scenes = new List<string>();
+        foreach (EditorBuildSettingsScene s in EditorBuildSettings.scenes)
+        {
+            if (s.enabled && !string.IsNullOrEmpty(s.path))
+                scenes.Add(s.path);
+        }
+
+        if (scenes.Count == 0)
+            UnityEngine.Debug.LogError("Multiplayer build: no scenes enabled in File → Build Settings.");
+
+        return scenes.ToArray();
+    }
+
+    static BuildOptions BuildPlayerOptions()
+    {
+        BuildOptions o = BuildOptions.None;
+        if (EditorUserBuildSettings.development)
+            o |= BuildOptions.Development;
+        if (EditorUserBuildSettings.allowDebugging)
+            o |= BuildOptions.AllowDebugging;
+        if (EditorUserBuildSettings.connectProfiler)
+            o |= BuildOptions.ConnectWithProfiler;
+        if (EditorUserBuildSettings.buildWithDeepProfilingSupport)
+            o |= BuildOptions.EnableDeepProfilingSupport;
+        return o;
     }
 }
 #endif

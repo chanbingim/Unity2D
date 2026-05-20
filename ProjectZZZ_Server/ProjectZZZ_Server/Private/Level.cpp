@@ -2,6 +2,7 @@
 #include "Level.h"
 
 #include "Session.h"
+#include "Player.h"
 #include "ServerManager.h"
 
 CLevel::CLevel()
@@ -24,31 +25,22 @@ HRESULT CLevel::Initialize()
 
 void CLevel::Broadcast_Session()
 {
-    for (auto session = m_JoinedSession.begin(); session != m_JoinedSession.end();)
+    for (auto& pSession : m_JoinedSession)
     {
-        if (m_iLevelID != (*session)->Get_MapID())
-        {
-            session = m_JoinedSession.erase(session);
-        }
-        else
-        {
-            int SessionID = (*session)->Get_ID();
-            for (auto& OtherSession : m_JoinedSession)
-            {
-                const PLAYER_DATA* Data = OtherSession->Get_Info();
-                const Transform* Transform = &Data->Transform;
+        const PLAYER_DATA* Data = pSession->Get_Info();
+        const Transform* Transform = &Data->Transform;
 
-                m_pProxy->OnPlayerTransformUpdated((HostID)SessionID, RmiContext::ReliableSend, OtherSession->Get_ID(),
-                                                    Transform->vScale.X, Transform->vScale.Y, Transform->vScale.Z,
-                                                    Transform->vRotation.X, Transform->vRotation.Y, Transform->vRotation.Z, Transform->vRotation.W,
-                                                    Transform->vPosition.X, Transform->vPosition.Y, Transform->vPosition.Z);
+        HostID* HostList = pSession->GetPlayer()->Get_HostList();
+        int     iHostCount = pSession->GetPlayer()->Get_Hosts();
+        int     SessionHostID = pSession->Get_ID();
 
-                m_pProxy->OnOtherPlayerAnimUpdated((HostID)SessionID, RmiContext::ReliableSend,
-                    OtherSession->Get_ID(), OtherSession->Get_AnimSate(), OtherSession->Get_AnimTime());
-            }
+        m_pProxy->OtherPlayerTransformUpdated(HostList, iHostCount, RmiContext::UnreliableSend, SessionHostID, Data->szName,
+            Transform->vScale.X, Transform->vScale.Y, Transform->vScale.Z,
+            Transform->vRotation.X, Transform->vRotation.Y, Transform->vRotation.Z, Transform->vRotation.W,
+            Transform->vPosition.X, Transform->vPosition.Y, Transform->vPosition.Z);
 
-            session++;
-        }
+        m_pProxy->OnOtherPlayerAnimUpdated(HostList, iHostCount, RmiContext::UnreliableSend,
+            SessionHostID, pSession->Get_AnimSate(), pSession->Get_AnimTime());
     }
 }
 
@@ -104,6 +96,28 @@ void CLevel::Join_Actor(shared_ptr<CActor> pActor)
 
 void CLevel::Update()
 {
+    int NearDistance = 1600;
+    for (auto& pSrc : m_JoinedSession)
+    {
+        for (auto& pDest : m_JoinedSession)
+        {
+            auto SrcInfo = pSrc->GetPlayer()->Get_Info();
+            auto DestInfo = pDest->GetPlayer()->Get_Info();
+
+            Vector3 vDis = DestInfo->Transform.vPosition - SrcInfo->Transform.vPosition;
+
+            if (vDis.Get_SqrtLength() <= NearDistance)
+            {
+                pSrc->GetPlayer()->ADD_NearObject((HostID)pDest->Get_ID(), pDest->GetPlayer());
+            }
+            else
+            {
+                pSrc->GetPlayer()->Remove_NearObject((HostID)pDest->Get_ID(), pDest->GetPlayer());
+            }
+        }
+    }
+
+
     Broadcast_Actor();
     Broadcast_Session();
 }

@@ -25,8 +25,13 @@ struct Vector4
         return Vector4(X / other.X, Y / other.Y, Z / other.Z, W / other.W);
     }
 
-    Vector4 operator=(const Vector4& other) const {
-        return Vector4(other);
+    Vector4& operator=(const Vector4& other)
+    {
+        X = other.X;
+        Y = other.Y;
+        Z = other.Z;
+        W = other.W;
+        return *this;
     }
 
     // Normalize( Unit Vector )

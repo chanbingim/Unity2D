@@ -76,6 +76,9 @@
     <Filter Include="08. Inventory">
       <UniqueIdentifier>{6196531e-653f-423a-8e16-fd47009fc312}</UniqueIdentifier>
     </Filter>
+    <Filter Include="09. Actor">
+      <UniqueIdentifier>{7f134447-8799-4319-a3b8-39333777e011}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\ClientRmi_common.cpp">
@@ -140,6 +143,9 @@
     </ClCompile>
     <ClCompile Include="ProjectZZZ_Server.cpp">
       <Filter>08. Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\Actor.cpp">
+      <Filter>09. Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -225,6 +231,9 @@
     </ClInclude>
     <ClInclude Include="..\Public\Server_Mecro.h">
       <Filter>100. Global\Define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\Actor.h">
+      <Filter>09. Actor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

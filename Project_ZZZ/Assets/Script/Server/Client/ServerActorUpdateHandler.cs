@@ -20,7 +20,7 @@ public class ServerActorUpdateHandler
         if (!m_Monsters.ContainsKey(templetedID))
         {
             GameObject Prefab = CResourceManager.Get_Instance().Get_Prefab(Key);
-            //GameObject pNewPlayer = GameObject.Instantiate(Prefab);
+            GameObject pNewPlayer = GameObject.Instantiate(Prefab);
 
       /*      Player_Info player;
             player.player = pNewPlayer.GetComponent<Player>();
@@ -52,21 +52,33 @@ public class ServerActorUpdateHandler
         return true;
     }
 
-    public bool OnOtherPlayerUpdated(HostID remote, RmiContext rmiContext, int clientId, string NickName, float px, float py, float pz)
+    public bool OnOtherPlayerUpdated(HostID remote, RmiContext rmiContext, int clientId, string NickName, 
+                                    float ScaleX, float ScaleY, float ScaleZ,
+                                    float RotX, float RotY, float RotZ, float RotW,
+                                    float px, float py, float pz)
     {
         if (m_Players.ContainsKey(clientId))
-            m_Players[clientId].controller.Update_Position(px, py, pz);
+        {
+            m_Players[clientId].controller.Update_Transform(new Vector3(ScaleX, ScaleY, ScaleZ),
+                                                            new Quaternion(RotX, RotY, RotZ, RotW),
+                                                            new Vector3(px, py, pz));
+        }
         else
             OnPlayerJoined(remote, rmiContext, clientId, NickName, px, py, pz);
 
         return true;
     }
 
-    public bool OnOtherActorUpdated(HostID remote, RmiContext rmiContext, int templetedID, string NickName, float px, float py, float pz)
+    public bool OnOtherActorUpdated(HostID remote, RmiContext rmiContext, int templetedID, string NickName,
+                                    float ScaleX, float ScaleY, float ScaleZ,
+                                    float RotX, float RotY, float RotZ, float RotW,
+                                    float px, float py, float pz)
     {
         if (m_Players.ContainsKey(templetedID))
         {
-            m_Players[templetedID].controller.Update_Position(px, py, pz);
+            m_Players[templetedID].controller.Update_Transform( new Vector3(ScaleX, ScaleY, ScaleZ),
+                                                                new Quaternion(RotX, RotY, RotZ, RotW),
+                                                                new Vector3(px, py, pz));
         }
 
         return true;

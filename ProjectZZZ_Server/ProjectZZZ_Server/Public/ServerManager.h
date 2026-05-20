@@ -76,4 +76,3 @@ private :
     CNetServer*                         m_pServer = nullptr;
     CServer_Event*                      m_pEvent = nullptr;
 };
-

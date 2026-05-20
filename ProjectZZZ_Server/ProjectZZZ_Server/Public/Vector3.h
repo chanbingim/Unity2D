@@ -25,8 +25,12 @@ struct Vector3
         return Vector3(X / other.X, Y / other.Y, Z / other.Z);
     }
 
-    Vector3 operator=(const Vector3& other) const {
-        return Vector3(other);
+    Vector3& operator=(const Vector3& other)
+    {
+        X = other.X;
+        Y = other.Y;
+        Z = other.Z;
+        return *this;
     }
 
     // Normalize( Unit Vector )

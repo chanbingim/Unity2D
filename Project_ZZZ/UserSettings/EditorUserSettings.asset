@@ -9,24 +9,33 @@ EditorUserSettings:
       value: 18134705175a055722080a3115371d4a0d55006876786860616b0471b8b76d69acb166b9b763686a6c54bd691972432ffb1a0c07ff050f2d0402f13a08ef153d10c81d87408a3d09c2150883e41393fe
       flags: 0
     RecentlyUsedSceneGuid-0:
-      value: 5b035500540c0c5f5a580d7a152708441015492e287d2264782a4a6bb2e43560
-      flags: 0
-    RecentlyUsedSceneGuid-1:
-      value: 570502075c535f585d56097514740c4414154d727f7175682c7b1864bbb43069
-      flags: 0
-    RecentlyUsedSceneGuid-2:
-      value: 550102000450505f59585e231170094447161c7c7d7f20667e714e37b2b56c3c
-      flags: 0
-    RecentlyUsedSceneGuid-3:
-      value: 5352030357570a590c08547040770647134f402e792c7132287e4936bab83760
-      flags: 0
-    RecentlyUsedSceneGuid-4:
       value: 515050535d560f0359595e2011275c4440154b73747120642f284435bbb1606e
       flags: 0
+    RecentlyUsedSceneGuid-1:
+      value: 56070c5651070b5f080f552415260a44144e1c2c7c2976612c7c1863e7b13260
+      flags: 0
+    RecentlyUsedSceneGuid-2:
+      value: 5a0150525701580b080b5f7644205b444e15497a7e70246629281861e0b2656d
+      flags: 0
+    RecentlyUsedSceneGuid-3:
+      value: 5702560401575d0c595c582413710a44424e417a742975317c7f4430b5b93139
+      flags: 0
+    RecentlyUsedSceneGuid-4:
+      value: 520150005301515e54595471477a5b444e4f1a7829717267292d4c64b0e4356f
+      flags: 0
     RecentlyUsedSceneGuid-5:
-      value: 5a5757560101590a5d0c0e24427b5d44434e4c7a7b7a23677f2b4565b7b5353a
+      value: 01050d03500c0d0c5d560f7116730d44134f1d7f7a7d7467742d1f35b1e6646f
       flags: 0
     RecentlyUsedSceneGuid-6:
+      value: 0750025f540208095457097014705a4446151d7f752c24657b7f4e32b7b16061
+      flags: 0
+    RecentlyUsedSceneGuid-7:
+      value: 5001025307505c595f08547711710d44404e1d2f2a7e70357d2a4962b6b2646e
+      flags: 0
+    RecentlyUsedSceneGuid-8:
+      value: 5a5757560101590a5d0c0e24427b5d44434e4c7a7b7a23677f2b4565b7b5353a
+      flags: 0
+    RecentlyUsedSceneGuid-9:
       value: 56060c05525759035b0f097116215d4447151e737b2970607a7a1835e3e4613d
       flags: 0
     lightmappingBakingProfile:

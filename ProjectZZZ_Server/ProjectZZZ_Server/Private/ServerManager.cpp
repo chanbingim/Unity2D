@@ -84,7 +84,7 @@ int CServerManager::ADD_Item(int iHostID, int ItemID, int ItemCount)
 {
     auto iter = m_SessionList.find(iHostID);
     if (iter == m_SessionList.end())
-        return;
+        return -1;
 
     return iter->second->GetPlayer()->Picked_Item(ItemID, ItemCount);
 }
@@ -105,7 +105,7 @@ void CServerManager::ADD_JoinClient(int hostID, shared_ptr<CSession> ClientData,
         {
             PLAYER_DATA Player_Data;
 
-            Player_Data.Transform.vScale = Vector3::One;
+            
             Player_Data.Transform.vRotation = Vector4::Zero;
             Player_Data.Transform.vPosition = Vector3::Zero;
 
@@ -114,18 +114,15 @@ void CServerManager::ADD_JoinClient(int hostID, shared_ptr<CSession> ClientData,
                 if (!m_pDBManager->RequestLoadPlayerData(ClientData->Get_TableID(), Player_Data))
                 {
                     cout << "Not Find Character Data : " << hostID << endl;
-                    /*
-                    *   ³ªÁß¿¡ ¿©±â¼­ Ä³¸¯ÅÍ »ý¼º ·ÎÁ÷À¸·Î ºÐ±â
-                    */
 
                     return;
                 }
                 else
                 {
+                    Player_Data.Transform.vScale = Vector3::One;
                     ClientData->Set_Info(&Player_Data);
                     m_SessionList.emplace(hostID, ClientData);
                     m_pProxy->ResponseLoginEvent((HostID)hostID, RmiContext::ReliableSend, true, static_cast<int>(Msg));
-                    //m_pProxy->OnPlayerJoined((HostID)hostID, RmiContext::ReliableSend, hostID, Player_Data.szName, Player_Data.fPosX, Player_Data.fPosY, Player_Data.fPosZ);
                 }
             }
         }
@@ -146,7 +143,7 @@ void CServerManager::Leave_Client(int ClientID)
     auto iter = m_SessionList.find(ClientID);
     if (iter != m_SessionList.end())
     {
-        // ¿©±â¼­ ³ª°£ Å¬¶óÀÌ¾ðÆ®¸¦ Á¦¿ÜÇÑ ¸ðµÎ¿¡°Ô ÀÌº¥Æ® È£ÃâÀ» ÅëÇØ¼­ ¾Ë·ÁÁÖÀÚ.
+        // ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¿ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ® È£ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½.
         iter->second->Set_Dead();
     }
 }
@@ -177,9 +174,15 @@ void CServerManager::Clear_DeadClient()
 
 void CServerManager::Update_Player(HostID ID, float PosX, float PosY, float PosZ)
 {
+    Vector3 vPos(PosX, PosY, PosZ);
     auto iter = m_SessionList.find(ID);
     if (iter != m_SessionList.end())
-        iter->second->Set_Poisition(PosX, PosY, PosZ);
+    {
+        CPlayer* pPlayer = iter->second->GetPlayer();
+        pPlayer->Set_Poisition(PosX, PosY, PosZ);
+
+       
+    }
 }
 
 void CServerManager::Update_PlayerAnimation(HostID ID, int iAnimState, float fTime)
@@ -240,27 +243,16 @@ void CServerManager::Initalized(ErrorInfoPtr Error)
 
 void CServerManager::Update(float fTime)
 {
-   // TickÃ³¸®¸¦ À§ÇÑ µ¥ÀÌÅÍ¸¦ ¿©±â¼­ »Ñ¸®ÀÚ
-    m_pDBManager->Update_DB(m_pProxy);
-    m_pMapManager->Update();
-
     HostID clientList[256];
     int count = m_pServer->GetClientHostIDs(clientList, 256);
 
-    // ¿©±â¼­ ¼­¹öÀÇ 1FPS ¸¶´Ù Ã³¸®
-    // ÀÏ´Ü Á¢¼ÓµÈ Å¬¶óÀÌ¾ðÆ®ÀÇ ÁÂÇ¥¸¦ ¸ðµÎ »Ñ·Áº¸ÀÚ
-    for (auto& iter : m_SessionList)
+    for (auto& Text : m_NewChat)
     {
-        CSession* pSession = iter.second.get();
-        const PLAYER_DATA* pPlayer_Info = pSession->Get_Info();
-
-        for (int i = 0; i < count; i++)
-        {
-            for(auto& Text : m_NewChat)
-                m_pProxy->OnChat(clientList[i], RmiContext::ReliableSend, clientList[i], Text);
-        }
+        m_pProxy->OnChat(clientList, count, RmiContext::ReliableSend, count, Text);
     }
 
-    
     m_NewChat.clear();
+
+    m_pDBManager->Update_DB(m_pProxy);
+    m_pMapManager->Update();
 }
