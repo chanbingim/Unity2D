@@ -555,6 +555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InfomationUI
   m_Hp: {fileID: 288882227}
   m_Stemina: {fileID: 0}
+  m_SkillUI: {fileID: 5925402291695491681}
 --- !u!1001 &540911730
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2902,6 +2903,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7379471865436655968, guid: 77166676df6a1bd49bc7a1fcc594de7c, type: 3}
   m_PrefabInstance: {fileID: 5925402291695491679}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5925402291695491681 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5886478310899704425, guid: 77166676df6a1bd49bc7a1fcc594de7c, type: 3}
+  m_PrefabInstance: {fileID: 5925402291695491679}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 311135a431bd38048961e7d7f6b0efe9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillUI
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
