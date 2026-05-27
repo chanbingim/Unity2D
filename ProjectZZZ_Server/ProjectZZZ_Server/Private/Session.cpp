@@ -37,6 +37,11 @@ void CSession::Set_AnimState(int iAnimState, float fTime)
     m_pPlayer->Set_AnimSate(CPlayer::STATE_TYPE(iAnimState), fTime);
 }
 
+void CSession::Update_HostInventory()
+{
+    m_pPlayer->Inveontory_Update(m_hostID);
+}
+
 void CSession::Set_Info(const PLAYER_DATA* pinfo)
 {
     if (m_pPlayer)

@@ -19,5 +19,12 @@ global ClientToServer 2000
     OnAnimUpdated([in] int clientId, [in] int AnimStae, [in] float Time);
     OnActorAnimUpdated([in] int templeteID, [in] int AnimStae, [in] float Time);
 
+    // Inventory Item에 관한 데이터
+    Request_AddItem([in] int iClientID, [in] int iItemID, [in] int iItemCount);
+    Request_RemoveItem([in] int iClientID, [in] int iItemID, [in] int SlotIndex, [in] int iItemCount);
+    Request_ItemData([in] int iClientID, [in] int iItemID);
+
+    Request_AddGold([in] int ClientID, [in] int GoldAmount);
+
     OnChat([in] int clientId, [in] string message);
 }

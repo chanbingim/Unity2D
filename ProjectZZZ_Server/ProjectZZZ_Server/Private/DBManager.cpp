@@ -3,6 +3,8 @@
 
 #include "ServerManager.h"
 #include "Session.h"
+#include "Player.h"
+#include "Inventory.h"
 
 HRESULT CDBManager::Initialize()
 {
@@ -13,6 +15,30 @@ HRESULT CDBManager::Initialize()
 
     if (FAILED(Excute_Test()))
         return E_FAIL;
+
+    return S_OK;
+}
+
+HRESULT CDBManager::Connection_DB(const string& DBName)
+{
+    COdbcWarnings       Warnings;
+    COdbcRecordset      record;       // Äõ¸® °á°ú¸¦ ´ãÀ» °´Ã¼
+
+    try
+    {
+        Proud::String Query = Proud::String::NewFormat(
+            L"use %s",
+            Proud::String(DBName.c_str()).GetString());
+
+        auto result = m_Conn.Execute(record, Query, &Warnings);
+        for (int i = 0; i < Warnings.Count; ++i)
+            cout << Warnings[i].GetSqlErrorCode() << " : " << Warnings[i].what() << '\n';
+    }
+    catch (COdbcException& error)
+    {
+        cout << "Error : " << error.GetSqlErrorCode() << " => " << error.what() << '\n';
+        return E_FAIL;
+    }
 
     return S_OK;
 }
@@ -187,6 +213,19 @@ void CDBManager::ADD_LoginData(const string& ID, const string& Pw, const string&
         cout << "Error : " << error.GetSqlErrorCode() << " => " << error.what() << '\n';
     }
 }
+
+#pragma endregion
+
+#pragma region  SAVE DATA
+HRESULT CDBManager::Save_Player(const Player_Data* const data)
+{
+    return S_OK;
+}
+
+HRESULT CDBManager::Save_Inventory(const vector<ItemSlot>& const Items)
+{
+    return S_OK;
+}
 #pragma endregion
 
 void CDBManager::Release()
@@ -338,6 +377,49 @@ bool CDBManager::RequestLoadPlayerData(int TableID, PLAYER_DATA& playerData)
     return true;
 }
 
+bool CDBManager::Request_ItemData(int ItemID, ITEM_DATA& Data)
+{
+    COdbcWarnings       Warnings;
+    COdbcRecordset      record;       // Äõ¸® °á°ú¸¦ ´ãÀ» °´Ã¼
+
+    Proud::String  NickName;
+    try
+    {
+        Proud::String Query = Proud::String::NewFormat(
+            L"SELECT * FROM item WHERE ItemID = '%d' LIMIT 1", ItemID);
+
+        auto result = m_Conn.Execute(record, Query, &Warnings);
+        while (record.MoveNext())
+        {
+            Data.ID = record.GetFieldValue(_PNT("ItemID"));
+            NickName = record.GetFieldValue(_PNT("ItemName"));
+            Data.Name = string(NickName);
+
+            Data.ItemType = record.GetFieldValue(_PNT("ItemType"));
+            Data.MaxCount = record.GetFieldValue(_PNT("ItemMaxCount"));
+
+#pragma region print_Log
+            wprintf(L"Item ID : %d\n", Data.ID);
+            printf("Item Name : %s\n", Data.Name.c_str());
+            wprintf(L"Item ItemType : %d\n", Data.ItemType);
+            wprintf(L"Item MaxCount : %d\n", Data.MaxCount);
+
+            wprintf(L"-------------Find Success-------------\n");
+#pragma endregion
+        }
+
+        for (int i = 0; i < Warnings.Count; ++i)
+            cout << Warnings[i].GetSqlErrorCode() << " : " << Warnings[i].what() << '\n';
+    }
+    catch (COdbcException& error)
+    {
+        cout << "Error : " << error.GetSqlErrorCode() << " => " << error.what() << '\n';
+        return false;
+    }
+
+    return true;
+}
+
 void CDBManager::Update_DB(ServerToClient::Proxy* pProxy)
 {
     while (!m_DBJobs.empty())
@@ -379,9 +461,19 @@ void CDBManager::Update_DB(ServerToClient::Proxy* pProxy)
     }
 }
 
-bool CDBManager::SavePlayerData(int TableID, PLAYER_DATA& playerData)
+bool CDBManager::SaveHostData(CSession* pSession)
 {
-    return false;
+    if (FAILED(Save_Player(pSession->Get_Info())))
+        return false;
+
+    CPlayer* pPlayer = pSession->GetPlayer();
+    for (int i = 0; i < EnumToInt(ITEM_TYPE::END); ++i)
+    {
+        if (FAILED(Save_Inventory(pPlayer->Get_InventoryItems(i))))
+            return false;
+    }
+
+    return true;
 }
 
 shared_ptr<CDBManager>  CDBManager::Create()

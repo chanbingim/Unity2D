@@ -67,7 +67,6 @@ bool CServerManager::Request_UniqueNickName(int ClientID, string NickName)
 
     return false;
 }
-
 #pragma endregion
 
 #pragma region Player
@@ -80,16 +79,42 @@ void CServerManager::ADD_Gold(int iHostID, int Amount)
     return iter->second->GetPlayer()->ADD_Gold(Amount);
 }
 
-int CServerManager::ADD_Item(int iHostID, int ItemID, int ItemCount)
+bool CServerManager::ADD_Item(int iHostID, int ItemID, int ItemCount)
 {
     auto iter = m_SessionList.find(iHostID);
     if (iter == m_SessionList.end())
         return -1;
 
-    return iter->second->GetPlayer()->Picked_Item(ItemID, ItemCount);
+    ITEM_DATA Data;
+
+    m_pDBManager->Connection_DB("item_db");
+    m_pDBManager->Request_ItemData(ItemID, Data);
+
+    int AliveItemCnt = iter->second->GetPlayer()->Picked_Item(Data, ItemCount);
+    if (-1 != AliveItemCnt || AliveItemCnt == ItemCount)
+        return false;
+
+    iter->second->Update_HostInventory();
+    return true;
+}
+
+bool CServerManager::Remove_Item(int iHostID, int ItemID, int SlotIndex, int ItemCount)
+{
+    auto iter = m_SessionList.find(iHostID);
+    if (iter == m_SessionList.end())
+        return -1;
+
+    ITEM_DATA Data;
+
+    m_pDBManager->Connection_DB("item_db");
+    m_pDBManager->Request_ItemData(ItemID, Data);
+    if (!iter->second->GetPlayer()->Remove_Item(Data, SlotIndex, ItemCount))
+        return false;
+
+    iter->second->Update_HostInventory();
+    return true;
 }
 #pragma endregion
-
 
 #pragma region Client_Event
 void CServerManager::ADD_JoinClient(int hostID, shared_ptr<CSession> ClientData, LOGIN_MSG Msg)
@@ -145,6 +170,9 @@ void CServerManager::Leave_Client(int ClientID)
     {
         // ���⼭ ���� Ŭ���̾�Ʈ�� ������ ��ο��� �̺�Ʈ ȣ���� ���ؼ� �˷�����.
         iter->second->Set_Dead();
+        m_pDBManager->SaveHostData(iter->second.get());
+
+        m_SessionList.erase(iter);
     }
 }
 
@@ -180,8 +208,6 @@ void CServerManager::Update_Player(HostID ID, float PosX, float PosY, float PosZ
     {
         CPlayer* pPlayer = iter->second->GetPlayer();
         pPlayer->Set_Poisition(PosX, PosY, PosZ);
-
-       
     }
 }
 
@@ -241,8 +267,20 @@ void CServerManager::Initalized(ErrorInfoPtr Error)
         cout << "Server started on TCP 33334" << endl;
 }
 
+void CServerManager::Server_DataUpdate(float fTime)
+{
+    m_pDBManager->Update_DB(m_pProxy);
+
+    for (auto& iter : m_SessionList)
+        m_pDBManager->SaveHostData(iter.second.get());
+}
+
 void CServerManager::Update(float fTime)
 {
+    Item_Data d;
+    m_pDBManager->Connection_DB("item_db");
+    m_pDBManager->Request_ItemData(1001, d);
+
     HostID clientList[256];
     int count = m_pServer->GetClientHostIDs(clientList, 256);
 
@@ -253,6 +291,6 @@ void CServerManager::Update(float fTime)
 
     m_NewChat.clear();
 
-    m_pDBManager->Update_DB(m_pProxy);
+    Server_DataUpdate(fTime);
     m_pMapManager->Update();
 }

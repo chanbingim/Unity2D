@@ -36,6 +36,9 @@ public :
     void                    Update_Player(HostID ID, float PosX, float PosY, float PosZ);
     void                    Update_PlayerAnimation(HostID ID, int iAnimState, float fTime);
 
+    void                    ADD_Gold(int iHostID, int Amount);
+    bool                    ADD_Item(int iHostID, int ItemID, int ItemCount);
+    bool                    Remove_Item(int iHostID, int ItemID, int SlotIndex, int ItemCount);
 #pragma endregion
 
 #pragma region Chat
@@ -49,8 +52,7 @@ public :
 #pragma endregion
 
 #pragma region Add_Item
-    void                    ADD_Gold(int iHostID, int Amount);
-    int                     ADD_Item(int iHostID, int ItemID, int ItemCount);
+   
 #pragma endregion
 
 
@@ -59,7 +61,7 @@ public :
 
 private :
     void                    Initalized(ErrorInfoPtr Error);
-   
+    void                    Server_DataUpdate(float fTime);
 
 private :
     static CServerManager*              m_pGameInstance;
@@ -75,4 +77,6 @@ private :
     CCustom_Stub*                       m_pStub = nullptr;
     CNetServer*                         m_pServer = nullptr;
     CServer_Event*                      m_pEvent = nullptr;
+
+    float                               m_AccSaveTick = 0.f;
 };

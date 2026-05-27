@@ -111,6 +111,46 @@ namespace ClientToServer {
 #define CALL_ClientToServer_OnActorAnimUpdated OnActorAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const int & AnimStae, const float & Time)
 #define PARAM_ClientToServer_OnActorAnimUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const int & AnimStae, const float & Time)
                
+		virtual bool Request_AddItem ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const int & )		{ 
+			return false;
+		} 
+
+#define DECRMI_ClientToServer_Request_AddItem bool Request_AddItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID, const int & iItemCount) PN_OVERRIDE
+
+#define DEFRMI_ClientToServer_Request_AddItem(DerivedClass) bool DerivedClass::Request_AddItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID, const int & iItemCount)
+#define CALL_ClientToServer_Request_AddItem Request_AddItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID, const int & iItemCount)
+#define PARAM_ClientToServer_Request_AddItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID, const int & iItemCount)
+               
+		virtual bool Request_RemoveItem ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const int & , const int & )		{ 
+			return false;
+		} 
+
+#define DECRMI_ClientToServer_Request_RemoveItem bool Request_RemoveItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID, const int & SlotIndex, const int & iItemCount) PN_OVERRIDE
+
+#define DEFRMI_ClientToServer_Request_RemoveItem(DerivedClass) bool DerivedClass::Request_RemoveItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID, const int & SlotIndex, const int & iItemCount)
+#define CALL_ClientToServer_Request_RemoveItem Request_RemoveItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID, const int & SlotIndex, const int & iItemCount)
+#define PARAM_ClientToServer_Request_RemoveItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID, const int & SlotIndex, const int & iItemCount)
+               
+		virtual bool Request_ItemData ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & )		{ 
+			return false;
+		} 
+
+#define DECRMI_ClientToServer_Request_ItemData bool Request_ItemData ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID) PN_OVERRIDE
+
+#define DEFRMI_ClientToServer_Request_ItemData(DerivedClass) bool DerivedClass::Request_ItemData ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID)
+#define CALL_ClientToServer_Request_ItemData Request_ItemData ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID)
+#define PARAM_ClientToServer_Request_ItemData ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID)
+               
+		virtual bool Request_AddGold ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & )		{ 
+			return false;
+		} 
+
+#define DECRMI_ClientToServer_Request_AddGold bool Request_AddGold ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const int & GoldAmount) PN_OVERRIDE
+
+#define DEFRMI_ClientToServer_Request_AddGold(DerivedClass) bool DerivedClass::Request_AddGold ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const int & GoldAmount)
+#define CALL_ClientToServer_Request_AddGold Request_AddGold ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const int & GoldAmount)
+#define PARAM_ClientToServer_Request_AddGold ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const int & GoldAmount)
+               
 		virtual bool OnChat ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const string & )		{ 
 			return false;
 		} 
@@ -131,6 +171,10 @@ namespace ClientToServer {
 		static const PNTCHAR* RmiName_OnActorPositionUpdated;
 		static const PNTCHAR* RmiName_OnAnimUpdated;
 		static const PNTCHAR* RmiName_OnActorAnimUpdated;
+		static const PNTCHAR* RmiName_Request_AddItem;
+		static const PNTCHAR* RmiName_Request_RemoveItem;
+		static const PNTCHAR* RmiName_Request_ItemData;
+		static const PNTCHAR* RmiName_Request_AddGold;
 		static const PNTCHAR* RmiName_OnChat;
 		static const PNTCHAR* RmiName_First;
 		virtual ::Proud::RmiID* GetRmiIDList() PN_OVERRIDE { return g_RmiIDList; }
@@ -221,6 +265,42 @@ namespace ClientToServer {
 			if (OnActorAnimUpdated_Function==nullptr) 
 				return true; 
 			return OnActorAnimUpdated_Function(remote,rmiContext, templeteID, AnimStae, Time); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const int & ) > Request_AddItem_Function;
+		virtual bool Request_AddItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID, const int & iItemCount) 
+		{ 
+			if (Request_AddItem_Function==nullptr) 
+				return true; 
+			return Request_AddItem_Function(remote,rmiContext, iClientID, iItemID, iItemCount); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const int & , const int & ) > Request_RemoveItem_Function;
+		virtual bool Request_RemoveItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID, const int & SlotIndex, const int & iItemCount) 
+		{ 
+			if (Request_RemoveItem_Function==nullptr) 
+				return true; 
+			return Request_RemoveItem_Function(remote,rmiContext, iClientID, iItemID, SlotIndex, iItemCount); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & ) > Request_ItemData_Function;
+		virtual bool Request_ItemData ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID) 
+		{ 
+			if (Request_ItemData_Function==nullptr) 
+				return true; 
+			return Request_ItemData_Function(remote,rmiContext, iClientID, iItemID); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & ) > Request_AddGold_Function;
+		virtual bool Request_AddGold ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const int & GoldAmount) 
+		{ 
+			if (Request_AddGold_Function==nullptr) 
+				return true; 
+			return Request_AddGold_Function(remote,rmiContext, ClientID, GoldAmount); 
 		}
 
                

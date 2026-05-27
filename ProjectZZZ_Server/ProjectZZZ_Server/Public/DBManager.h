@@ -6,6 +6,8 @@ class CDBManager : public CBase
 public :
     HRESULT                 Initialize();
 
+    HRESULT                 Connection_DB(const string& DBName);
+
 #pragma region Login Event
     bool                    Login_EXcuteDB(int ClientID, int LoginType, string ID, string Password, string uid, string email);
     void                    Insert_NewID(int ClientID, string ID, string Password, string Email);
@@ -13,12 +15,12 @@ public :
 
     bool                    Request_UniqueNickName(int ClientID, string NickName);
     bool                    RequestLoadPlayerData(int TableID, PLAYER_DATA& playerData);
+    bool                    Request_ItemData(int ItemID, ITEM_DATA& Data);
 
     void                    Update_DB(ServerToClient::Proxy* pProxy);
 
 #pragma region Save PlayerData
-    bool                    SavePlayerData(int TableID, PLAYER_DATA& playerData);
-
+    bool                    SaveHostData(class CSession* pSession);
 #pragma endregion
 
 private :
@@ -44,5 +46,11 @@ private :
 
     void                   ADD_LoginData(const string& ID, const string& Pw, const string& uid, const string& email);
 #pragma endregion
+
+#pragma region Save_Data
+    HRESULT                 Save_Player(const Player_Data* const data);
+    HRESULT                 Save_Inventory(const vector<ItemSlot>& const Items);
+#pragma endregion
+
 };
 

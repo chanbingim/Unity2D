@@ -29,15 +29,11 @@ namespace ServerToClient {
                
     static const ::Proud::RmiID Rmi_OnOtherActorAnimUpdated = (::Proud::RmiID)(3000+12);
                
-    static const ::Proud::RmiID Rmi_Request_AddItem = (::Proud::RmiID)(3000+13);
+    static const ::Proud::RmiID Rmi_Response_UpdateSlot = (::Proud::RmiID)(3000+13);
                
-    static const ::Proud::RmiID Rmi_Request_RemoveItem = (::Proud::RmiID)(3000+14);
+    static const ::Proud::RmiID Rmi_Response_Gold = (::Proud::RmiID)(3000+14);
                
-    static const ::Proud::RmiID Rmi_Request_ItemData = (::Proud::RmiID)(3000+15);
-               
-    static const ::Proud::RmiID Rmi_Request_AddGold = (::Proud::RmiID)(3000+16);
-               
-    static const ::Proud::RmiID Rmi_OnChat = (::Proud::RmiID)(3000+17);
+    static const ::Proud::RmiID Rmi_OnChat = (::Proud::RmiID)(3000+15);
 
 	// List that has RMI ID.
 	extern ::Proud::RmiID g_RmiIDList[];

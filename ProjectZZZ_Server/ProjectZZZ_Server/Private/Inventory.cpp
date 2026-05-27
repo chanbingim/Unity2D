@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Inventory.h"
 
+#include "ServerManager.h"
+
 shared_ptr<CInventory> CInventory::Create()
 {
     shared_ptr<CInventory> pInstance = make_shared<CInventory>();
@@ -16,25 +18,39 @@ HRESULT CInventory::Initialize()
     return S_OK;
 }
 
+void CInventory::Update(int ihostID)
+{
+    Proxy* pProxy = CServerManager::Get_Instance()->Get_Proxy();
+    while (!m_UpdateSlots.empty())
+    {
+        auto Slot = m_UpdateSlots.front();
+        m_UpdateSlots.pop();
+
+        const ItemSlot& SlotData = m_Slots[Slot.first][Slot.second];
+        pProxy->Response_UpdateSlot((HostID)ihostID, RmiContext::ReliableSend, ihostID,
+                Slot.second, SlotData.iItemID, SlotData.iItemCount);
+    }
+}
+
 void CInventory::ADD_Gold(int Amount)
 {
     m_Gold += Amount;
 }
 
-int CInventory::ADD_Item(int ItemID, int ItemCount)
+int CInventory::ADD_Item(const Item_Data& Data, int ItemCount)
 {
-    Item_Data Data;
-
     for (auto& slot : m_Slots[Data.ItemType])
     {
         if (0 == slot.iItemID)
             continue;
 
-        if (slot.iItemID == ItemID)
+        if (slot.iItemID == Data.ID)
         {
             int AddCount = min(Data.MaxCount - slot.iItemCount, ItemCount);
             slot.iItemCount += AddCount;
             ItemCount -= AddCount;
+
+            m_UpdateSlots.push({ Data.ItemType, slot.iSlotIndex });
         }
     }
 
@@ -47,9 +63,10 @@ int CInventory::ADD_Item(int ItemID, int ItemCount)
         m_FreeSlotIndices[Data.ItemType].pop();
 
         int AddCount = min(Data.MaxCount, ItemCount);
-        m_Slots[Data.ItemType][FreeIndex].iItemID = ItemID;
+        m_Slots[Data.ItemType][FreeIndex].iItemID = Data.ID;
         m_Slots[Data.ItemType][FreeIndex].iItemCount = AddCount;
 
+        m_UpdateSlots.push({ Data.ItemType, FreeIndex });
         ItemCount -= AddCount;
     }
 
@@ -104,6 +121,8 @@ bool CInventory::Remove_Item(int SlotType, int SlotIndex, int ItemCount)
         slot.iItemID = 0;
         slot.iItemCount = 0;
     }
+
+    m_UpdateSlots.push({ SlotType, SlotIndex });
     return true;
 }
 
@@ -123,5 +142,8 @@ bool CInventory::Swap_Data(int SlotType, int FromSlotIdx, int ToSlotIdx)
     m_Slots[SlotType][ToSlotIdx].iItemID = Temp.iItemID;
     m_Slots[SlotType][ToSlotIdx].iItemCount = Temp.iItemCount;
 
+
+    m_UpdateSlots.push({ SlotType, FromSlotIdx });
+    m_UpdateSlots.push({ SlotType, ToSlotIdx });
     return true;
 }

@@ -23,7 +23,15 @@ namespace ClientToServer {
                
     static const ::Proud::RmiID Rmi_OnActorAnimUpdated = (::Proud::RmiID)(2000+9);
                
-    static const ::Proud::RmiID Rmi_OnChat = (::Proud::RmiID)(2000+10);
+    static const ::Proud::RmiID Rmi_Request_AddItem = (::Proud::RmiID)(2000+10);
+               
+    static const ::Proud::RmiID Rmi_Request_RemoveItem = (::Proud::RmiID)(2000+11);
+               
+    static const ::Proud::RmiID Rmi_Request_ItemData = (::Proud::RmiID)(2000+12);
+               
+    static const ::Proud::RmiID Rmi_Request_AddGold = (::Proud::RmiID)(2000+13);
+               
+    static const ::Proud::RmiID Rmi_OnChat = (::Proud::RmiID)(2000+14);
 
 	// List that has RMI ID.
 	extern ::Proud::RmiID g_RmiIDList[];

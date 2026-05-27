@@ -35,11 +35,8 @@ global ServerToClient 3000
     OnOtherActorAnimUpdated([in] int templeteID, [in] int AnimState, [in] int AnimTime);
 
     // Inventory Item에 관한 데이터
-    Request_AddItem([in] int iClientID, [in] int iItemID, [in] int iItemCount);
-    Request_RemoveItem([in] int iClientID, [in] int iItemID, [in] int iItemCount);
-    Request_ItemData([in] int iClientID, [in] int iItemID);
-
-    Request_AddGold([in] int ClientID, [in] int GoldAmount);
+    Response_UpdateSlot([in] int iClientID, [in] int iSlotID, [in] int iItemID, [in] int iItemCount);
+    Response_Gold([in] int ClientID, [in] int Gold);
 
     OnChat([in] int clientId, [in] string message);
 }

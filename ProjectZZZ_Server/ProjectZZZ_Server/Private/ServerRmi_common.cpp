@@ -33,18 +33,14 @@ namespace ServerToClient {
                
 		Rmi_OnOtherActorAnimUpdated,
                
-		Rmi_Request_AddItem,
+		Rmi_Response_UpdateSlot,
                
-		Rmi_Request_RemoveItem,
-               
-		Rmi_Request_ItemData,
-               
-		Rmi_Request_AddGold,
+		Rmi_Response_Gold,
                
 		Rmi_OnChat,
 	};
 
-	int g_RmiIDListCount = 17;
+	int g_RmiIDListCount = 15;
 
 }
 

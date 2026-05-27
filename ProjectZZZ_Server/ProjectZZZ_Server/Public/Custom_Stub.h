@@ -27,6 +27,11 @@ public:
     DECRMI_ClientToServer_OnActorPositionUpdated;
     DECRMI_ClientToServer_OnActorAnimUpdated;
  
+    DECRMI_ClientToServer_Request_AddItem;
+    DECRMI_ClientToServer_Request_AddGold;
+    DECRMI_ClientToServer_Request_RemoveItem;
+    DECRMI_ClientToServer_Request_ItemData;
+
 public:
     static  CCustom_Stub*       Create();
     void                        Release();

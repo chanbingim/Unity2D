@@ -76,23 +76,13 @@ public BeforeRmiInvocationDelegate BeforeRmiInvocation = delegate(Nettention.Pro
 		{ 
 			return false;
 		};
-		public delegate bool Request_AddItemDelegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int iClientID, int iItemID, int iItemCount);  
-		public Request_AddItemDelegate Request_AddItem = delegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int iClientID, int iItemID, int iItemCount)
+		public delegate bool Response_UpdateSlotDelegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int iClientID, int iSlotID, int iItemID, int iItemCount);  
+		public Response_UpdateSlotDelegate Response_UpdateSlot = delegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int iClientID, int iSlotID, int iItemID, int iItemCount)
 		{ 
 			return false;
 		};
-		public delegate bool Request_RemoveItemDelegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int iClientID, int iItemID, int iItemCount);  
-		public Request_RemoveItemDelegate Request_RemoveItem = delegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int iClientID, int iItemID, int iItemCount)
-		{ 
-			return false;
-		};
-		public delegate bool Request_ItemDataDelegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int iClientID, int iItemID);  
-		public Request_ItemDataDelegate Request_ItemData = delegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int iClientID, int iItemID)
-		{ 
-			return false;
-		};
-		public delegate bool Request_AddGoldDelegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int ClientID, int GoldAmount);  
-		public Request_AddGoldDelegate Request_AddGold = delegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int ClientID, int GoldAmount)
+		public delegate bool Response_GoldDelegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int ClientID, int Gold);  
+		public Response_GoldDelegate Response_Gold = delegate(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int ClientID, int Gold)
 		{ 
 			return false;
 		};
@@ -153,17 +143,11 @@ public BeforeRmiInvocationDelegate BeforeRmiInvocation = delegate(Nettention.Pro
         case Common.OnOtherActorAnimUpdated:
             ProcessReceivedMessage_OnOtherActorAnimUpdated(__msg, pa, hostTag, remote);
             break;
-        case Common.Request_AddItem:
-            ProcessReceivedMessage_Request_AddItem(__msg, pa, hostTag, remote);
+        case Common.Response_UpdateSlot:
+            ProcessReceivedMessage_Response_UpdateSlot(__msg, pa, hostTag, remote);
             break;
-        case Common.Request_RemoveItem:
-            ProcessReceivedMessage_Request_RemoveItem(__msg, pa, hostTag, remote);
-            break;
-        case Common.Request_ItemData:
-            ProcessReceivedMessage_Request_ItemData(__msg, pa, hostTag, remote);
-            break;
-        case Common.Request_AddGold:
-            ProcessReceivedMessage_Request_AddGold(__msg, pa, hostTag, remote);
+        case Common.Response_Gold:
+            ProcessReceivedMessage_Response_Gold(__msg, pa, hostTag, remote);
             break;
         case Common.OnChat:
             ProcessReceivedMessage_OnChat(__msg, pa, hostTag, remote);
@@ -908,7 +892,7 @@ parameterString+=AnimTime.ToString()+",";
         AfterRmiInvocation(summary);
         }
     }
-    void ProcessReceivedMessage_Request_AddItem(Nettention.Proud.Message __msg, Nettention.Proud.ReceivedMessage pa, Object hostTag, Nettention.Proud.HostID remote)
+    void ProcessReceivedMessage_Response_UpdateSlot(Nettention.Proud.Message __msg, Nettention.Proud.ReceivedMessage pa, Object hostTag, Nettention.Proud.HostID remote)
     {
         Nettention.Proud.RmiContext ctx = new Nettention.Proud.RmiContext();
         ctx.sentFrom=pa.RemoteHostID;
@@ -916,26 +900,28 @@ parameterString+=AnimTime.ToString()+",";
         ctx.hostTag=hostTag;
         ctx.encryptMode = pa.EncryptMode;
         ctx.compressMode = pa.CompressMode;
-        ctx.rmiID = Common.Request_AddItem;
+        ctx.rmiID = Common.Response_UpdateSlot;
 
         int iClientID; Nettention.Proud.Marshaler.Read(__msg,out iClientID);	
+int iSlotID; Nettention.Proud.Marshaler.Read(__msg,out iSlotID);	
 int iItemID; Nettention.Proud.Marshaler.Read(__msg,out iItemID);	
 int iItemCount; Nettention.Proud.Marshaler.Read(__msg,out iItemCount);	
-core.PostCheckReadMessage(__msg, RmiName_Request_AddItem);
+core.PostCheckReadMessage(__msg, RmiName_Response_UpdateSlot);
         if(enableNotifyCallFromStub==true)
         {
         string parameterString = "";
         parameterString+=iClientID.ToString()+",";
+parameterString+=iSlotID.ToString()+",";
 parameterString+=iItemID.ToString()+",";
 parameterString+=iItemCount.ToString()+",";
-        NotifyCallFromStub(Common.Request_AddItem, RmiName_Request_AddItem,parameterString);
+        NotifyCallFromStub(Common.Response_UpdateSlot, RmiName_Response_UpdateSlot,parameterString);
         }
 
         if(enableStubProfiling)
         {
         Nettention.Proud.BeforeRmiSummary summary = new Nettention.Proud.BeforeRmiSummary();
-        summary.rmiID = Common.Request_AddItem;
-        summary.rmiName = RmiName_Request_AddItem;
+        summary.rmiID = Common.Response_UpdateSlot;
+        summary.rmiName = RmiName_Response_UpdateSlot;
         summary.hostID = remote;
         summary.hostTag = hostTag;
         BeforeRmiInvocation(summary);
@@ -944,26 +930,26 @@ parameterString+=iItemCount.ToString()+",";
         long t0 = Nettention.Proud.PreciseCurrentTime.GetTimeMs();
 
         // Call this method.
-        bool __ret =Request_AddItem (remote,ctx , iClientID, iItemID, iItemCount );
+        bool __ret =Response_UpdateSlot (remote,ctx , iClientID, iSlotID, iItemID, iItemCount );
 
         if(__ret==false)
         {
         // Error: RMI function that a user did not create has been called. 
-        core.ShowNotImplementedRmiWarning(RmiName_Request_AddItem);
+        core.ShowNotImplementedRmiWarning(RmiName_Response_UpdateSlot);
         }
 
         if(enableStubProfiling)
         {
         Nettention.Proud.AfterRmiSummary summary = new Nettention.Proud.AfterRmiSummary();
-        summary.rmiID = Common.Request_AddItem;
-        summary.rmiName = RmiName_Request_AddItem;
+        summary.rmiID = Common.Response_UpdateSlot;
+        summary.rmiName = RmiName_Response_UpdateSlot;
         summary.hostID = remote;
         summary.hostTag = hostTag;
         summary.elapsedTime = Nettention.Proud.PreciseCurrentTime.GetTimeMs()-t0;
         AfterRmiInvocation(summary);
         }
     }
-    void ProcessReceivedMessage_Request_RemoveItem(Nettention.Proud.Message __msg, Nettention.Proud.ReceivedMessage pa, Object hostTag, Nettention.Proud.HostID remote)
+    void ProcessReceivedMessage_Response_Gold(Nettention.Proud.Message __msg, Nettention.Proud.ReceivedMessage pa, Object hostTag, Nettention.Proud.HostID remote)
     {
         Nettention.Proud.RmiContext ctx = new Nettention.Proud.RmiContext();
         ctx.sentFrom=pa.RemoteHostID;
@@ -971,132 +957,24 @@ parameterString+=iItemCount.ToString()+",";
         ctx.hostTag=hostTag;
         ctx.encryptMode = pa.EncryptMode;
         ctx.compressMode = pa.CompressMode;
-        ctx.rmiID = Common.Request_RemoveItem;
-
-        int iClientID; Nettention.Proud.Marshaler.Read(__msg,out iClientID);	
-int iItemID; Nettention.Proud.Marshaler.Read(__msg,out iItemID);	
-int iItemCount; Nettention.Proud.Marshaler.Read(__msg,out iItemCount);	
-core.PostCheckReadMessage(__msg, RmiName_Request_RemoveItem);
-        if(enableNotifyCallFromStub==true)
-        {
-        string parameterString = "";
-        parameterString+=iClientID.ToString()+",";
-parameterString+=iItemID.ToString()+",";
-parameterString+=iItemCount.ToString()+",";
-        NotifyCallFromStub(Common.Request_RemoveItem, RmiName_Request_RemoveItem,parameterString);
-        }
-
-        if(enableStubProfiling)
-        {
-        Nettention.Proud.BeforeRmiSummary summary = new Nettention.Proud.BeforeRmiSummary();
-        summary.rmiID = Common.Request_RemoveItem;
-        summary.rmiName = RmiName_Request_RemoveItem;
-        summary.hostID = remote;
-        summary.hostTag = hostTag;
-        BeforeRmiInvocation(summary);
-        }
-
-        long t0 = Nettention.Proud.PreciseCurrentTime.GetTimeMs();
-
-        // Call this method.
-        bool __ret =Request_RemoveItem (remote,ctx , iClientID, iItemID, iItemCount );
-
-        if(__ret==false)
-        {
-        // Error: RMI function that a user did not create has been called. 
-        core.ShowNotImplementedRmiWarning(RmiName_Request_RemoveItem);
-        }
-
-        if(enableStubProfiling)
-        {
-        Nettention.Proud.AfterRmiSummary summary = new Nettention.Proud.AfterRmiSummary();
-        summary.rmiID = Common.Request_RemoveItem;
-        summary.rmiName = RmiName_Request_RemoveItem;
-        summary.hostID = remote;
-        summary.hostTag = hostTag;
-        summary.elapsedTime = Nettention.Proud.PreciseCurrentTime.GetTimeMs()-t0;
-        AfterRmiInvocation(summary);
-        }
-    }
-    void ProcessReceivedMessage_Request_ItemData(Nettention.Proud.Message __msg, Nettention.Proud.ReceivedMessage pa, Object hostTag, Nettention.Proud.HostID remote)
-    {
-        Nettention.Proud.RmiContext ctx = new Nettention.Proud.RmiContext();
-        ctx.sentFrom=pa.RemoteHostID;
-        ctx.relayed=pa.IsRelayed;
-        ctx.hostTag=hostTag;
-        ctx.encryptMode = pa.EncryptMode;
-        ctx.compressMode = pa.CompressMode;
-        ctx.rmiID = Common.Request_ItemData;
-
-        int iClientID; Nettention.Proud.Marshaler.Read(__msg,out iClientID);	
-int iItemID; Nettention.Proud.Marshaler.Read(__msg,out iItemID);	
-core.PostCheckReadMessage(__msg, RmiName_Request_ItemData);
-        if(enableNotifyCallFromStub==true)
-        {
-        string parameterString = "";
-        parameterString+=iClientID.ToString()+",";
-parameterString+=iItemID.ToString()+",";
-        NotifyCallFromStub(Common.Request_ItemData, RmiName_Request_ItemData,parameterString);
-        }
-
-        if(enableStubProfiling)
-        {
-        Nettention.Proud.BeforeRmiSummary summary = new Nettention.Proud.BeforeRmiSummary();
-        summary.rmiID = Common.Request_ItemData;
-        summary.rmiName = RmiName_Request_ItemData;
-        summary.hostID = remote;
-        summary.hostTag = hostTag;
-        BeforeRmiInvocation(summary);
-        }
-
-        long t0 = Nettention.Proud.PreciseCurrentTime.GetTimeMs();
-
-        // Call this method.
-        bool __ret =Request_ItemData (remote,ctx , iClientID, iItemID );
-
-        if(__ret==false)
-        {
-        // Error: RMI function that a user did not create has been called. 
-        core.ShowNotImplementedRmiWarning(RmiName_Request_ItemData);
-        }
-
-        if(enableStubProfiling)
-        {
-        Nettention.Proud.AfterRmiSummary summary = new Nettention.Proud.AfterRmiSummary();
-        summary.rmiID = Common.Request_ItemData;
-        summary.rmiName = RmiName_Request_ItemData;
-        summary.hostID = remote;
-        summary.hostTag = hostTag;
-        summary.elapsedTime = Nettention.Proud.PreciseCurrentTime.GetTimeMs()-t0;
-        AfterRmiInvocation(summary);
-        }
-    }
-    void ProcessReceivedMessage_Request_AddGold(Nettention.Proud.Message __msg, Nettention.Proud.ReceivedMessage pa, Object hostTag, Nettention.Proud.HostID remote)
-    {
-        Nettention.Proud.RmiContext ctx = new Nettention.Proud.RmiContext();
-        ctx.sentFrom=pa.RemoteHostID;
-        ctx.relayed=pa.IsRelayed;
-        ctx.hostTag=hostTag;
-        ctx.encryptMode = pa.EncryptMode;
-        ctx.compressMode = pa.CompressMode;
-        ctx.rmiID = Common.Request_AddGold;
+        ctx.rmiID = Common.Response_Gold;
 
         int ClientID; Nettention.Proud.Marshaler.Read(__msg,out ClientID);	
-int GoldAmount; Nettention.Proud.Marshaler.Read(__msg,out GoldAmount);	
-core.PostCheckReadMessage(__msg, RmiName_Request_AddGold);
+int Gold; Nettention.Proud.Marshaler.Read(__msg,out Gold);	
+core.PostCheckReadMessage(__msg, RmiName_Response_Gold);
         if(enableNotifyCallFromStub==true)
         {
         string parameterString = "";
         parameterString+=ClientID.ToString()+",";
-parameterString+=GoldAmount.ToString()+",";
-        NotifyCallFromStub(Common.Request_AddGold, RmiName_Request_AddGold,parameterString);
+parameterString+=Gold.ToString()+",";
+        NotifyCallFromStub(Common.Response_Gold, RmiName_Response_Gold,parameterString);
         }
 
         if(enableStubProfiling)
         {
         Nettention.Proud.BeforeRmiSummary summary = new Nettention.Proud.BeforeRmiSummary();
-        summary.rmiID = Common.Request_AddGold;
-        summary.rmiName = RmiName_Request_AddGold;
+        summary.rmiID = Common.Response_Gold;
+        summary.rmiName = RmiName_Response_Gold;
         summary.hostID = remote;
         summary.hostTag = hostTag;
         BeforeRmiInvocation(summary);
@@ -1105,19 +983,19 @@ parameterString+=GoldAmount.ToString()+",";
         long t0 = Nettention.Proud.PreciseCurrentTime.GetTimeMs();
 
         // Call this method.
-        bool __ret =Request_AddGold (remote,ctx , ClientID, GoldAmount );
+        bool __ret =Response_Gold (remote,ctx , ClientID, Gold );
 
         if(__ret==false)
         {
         // Error: RMI function that a user did not create has been called. 
-        core.ShowNotImplementedRmiWarning(RmiName_Request_AddGold);
+        core.ShowNotImplementedRmiWarning(RmiName_Response_Gold);
         }
 
         if(enableStubProfiling)
         {
         Nettention.Proud.AfterRmiSummary summary = new Nettention.Proud.AfterRmiSummary();
-        summary.rmiID = Common.Request_AddGold;
-        summary.rmiName = RmiName_Request_AddGold;
+        summary.rmiID = Common.Response_Gold;
+        summary.rmiName = RmiName_Response_Gold;
         summary.hostID = remote;
         summary.hostTag = hostTag;
         summary.elapsedTime = Nettention.Proud.PreciseCurrentTime.GetTimeMs()-t0;
@@ -1192,10 +1070,8 @@ public const string RmiName_UpdateCharacterAnimState="UpdateCharacterAnimState";
 public const string RmiName_OnOtherPlayerAnimUpdated="OnOtherPlayerAnimUpdated";
 public const string RmiName_UpdateActorAnimState="UpdateActorAnimState";
 public const string RmiName_OnOtherActorAnimUpdated="OnOtherActorAnimUpdated";
-public const string RmiName_Request_AddItem="Request_AddItem";
-public const string RmiName_Request_RemoveItem="Request_RemoveItem";
-public const string RmiName_Request_ItemData="Request_ItemData";
-public const string RmiName_Request_AddGold="Request_AddGold";
+public const string RmiName_Response_UpdateSlot="Response_UpdateSlot";
+public const string RmiName_Response_Gold="Response_Gold";
 public const string RmiName_OnChat="OnChat";
        
 public const string RmiName_First = RmiName_ResponseLoginEvent;
@@ -1214,10 +1090,8 @@ public const string RmiName_UpdateCharacterAnimState="";
 public const string RmiName_OnOtherPlayerAnimUpdated="";
 public const string RmiName_UpdateActorAnimState="";
 public const string RmiName_OnOtherActorAnimUpdated="";
-public const string RmiName_Request_AddItem="";
-public const string RmiName_Request_RemoveItem="";
-public const string RmiName_Request_ItemData="";
-public const string RmiName_Request_AddGold="";
+public const string RmiName_Response_UpdateSlot="";
+public const string RmiName_Response_Gold="";
 public const string RmiName_OnChat="";
        
 public const string RmiName_First = "";

@@ -467,128 +467,68 @@ __msg << AnimTime;
 			RmiName_OnOtherActorAnimUpdated, (::Proud::RmiID)Rmi_OnOtherActorAnimUpdated);
 	}
         
-	bool Proxy::Request_AddItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID, const int & iItemCount)	{
+	bool Proxy::Response_UpdateSlot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iSlotID, const int & iItemID, const int & iItemCount)	{
 		::Proud::CMessage __msg;
 __msg.UseInternalBuffer();
 __msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
 
-::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Request_AddItem;
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Response_UpdateSlot;
 __msg.Write(__msgid); 
 	
 __msg << iClientID;
+__msg << iSlotID;
 __msg << iItemID;
 __msg << iItemCount;
 		
 		return RmiSend(&remote,1,rmiContext,__msg,
-			RmiName_Request_AddItem, (::Proud::RmiID)Rmi_Request_AddItem);
+			RmiName_Response_UpdateSlot, (::Proud::RmiID)Rmi_Response_UpdateSlot);
 	}
 
-	bool Proxy::Request_AddItem ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & iClientID, const int & iItemID, const int & iItemCount)  	{
+	bool Proxy::Response_UpdateSlot ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & iClientID, const int & iSlotID, const int & iItemID, const int & iItemCount)  	{
 		::Proud::CMessage __msg;
 __msg.UseInternalBuffer();
 __msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
 
-::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Request_AddItem;
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Response_UpdateSlot;
 __msg.Write(__msgid); 
 	
 __msg << iClientID;
+__msg << iSlotID;
 __msg << iItemID;
 __msg << iItemCount;
 		
 		return RmiSend(remotes,remoteCount,rmiContext,__msg,
-			RmiName_Request_AddItem, (::Proud::RmiID)Rmi_Request_AddItem);
+			RmiName_Response_UpdateSlot, (::Proud::RmiID)Rmi_Response_UpdateSlot);
 	}
         
-	bool Proxy::Request_RemoveItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID, const int & iItemCount)	{
+	bool Proxy::Response_Gold ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const int & Gold)	{
 		::Proud::CMessage __msg;
 __msg.UseInternalBuffer();
 __msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
 
-::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Request_RemoveItem;
-__msg.Write(__msgid); 
-	
-__msg << iClientID;
-__msg << iItemID;
-__msg << iItemCount;
-		
-		return RmiSend(&remote,1,rmiContext,__msg,
-			RmiName_Request_RemoveItem, (::Proud::RmiID)Rmi_Request_RemoveItem);
-	}
-
-	bool Proxy::Request_RemoveItem ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & iClientID, const int & iItemID, const int & iItemCount)  	{
-		::Proud::CMessage __msg;
-__msg.UseInternalBuffer();
-__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
-
-::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Request_RemoveItem;
-__msg.Write(__msgid); 
-	
-__msg << iClientID;
-__msg << iItemID;
-__msg << iItemCount;
-		
-		return RmiSend(remotes,remoteCount,rmiContext,__msg,
-			RmiName_Request_RemoveItem, (::Proud::RmiID)Rmi_Request_RemoveItem);
-	}
-        
-	bool Proxy::Request_ItemData ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & iClientID, const int & iItemID)	{
-		::Proud::CMessage __msg;
-__msg.UseInternalBuffer();
-__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
-
-::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Request_ItemData;
-__msg.Write(__msgid); 
-	
-__msg << iClientID;
-__msg << iItemID;
-		
-		return RmiSend(&remote,1,rmiContext,__msg,
-			RmiName_Request_ItemData, (::Proud::RmiID)Rmi_Request_ItemData);
-	}
-
-	bool Proxy::Request_ItemData ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & iClientID, const int & iItemID)  	{
-		::Proud::CMessage __msg;
-__msg.UseInternalBuffer();
-__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
-
-::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Request_ItemData;
-__msg.Write(__msgid); 
-	
-__msg << iClientID;
-__msg << iItemID;
-		
-		return RmiSend(remotes,remoteCount,rmiContext,__msg,
-			RmiName_Request_ItemData, (::Proud::RmiID)Rmi_Request_ItemData);
-	}
-        
-	bool Proxy::Request_AddGold ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & ClientID, const int & GoldAmount)	{
-		::Proud::CMessage __msg;
-__msg.UseInternalBuffer();
-__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
-
-::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Request_AddGold;
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Response_Gold;
 __msg.Write(__msgid); 
 	
 __msg << ClientID;
-__msg << GoldAmount;
+__msg << Gold;
 		
 		return RmiSend(&remote,1,rmiContext,__msg,
-			RmiName_Request_AddGold, (::Proud::RmiID)Rmi_Request_AddGold);
+			RmiName_Response_Gold, (::Proud::RmiID)Rmi_Response_Gold);
 	}
 
-	bool Proxy::Request_AddGold ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & ClientID, const int & GoldAmount)  	{
+	bool Proxy::Response_Gold ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & ClientID, const int & Gold)  	{
 		::Proud::CMessage __msg;
 __msg.UseInternalBuffer();
 __msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
 
-::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Request_AddGold;
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Response_Gold;
 __msg.Write(__msgid); 
 	
 __msg << ClientID;
-__msg << GoldAmount;
+__msg << Gold;
 		
 		return RmiSend(remotes,remoteCount,rmiContext,__msg,
-			RmiName_Request_AddGold, (::Proud::RmiID)Rmi_Request_AddGold);
+			RmiName_Response_Gold, (::Proud::RmiID)Rmi_Response_Gold);
 	}
         
 	bool Proxy::OnChat ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const string & message)	{
@@ -681,24 +621,14 @@ const PNTCHAR* Proxy::RmiName_OnOtherActorAnimUpdated =_PNT("OnOtherActorAnimUpd
 const PNTCHAR* Proxy::RmiName_OnOtherActorAnimUpdated =_PNT("");
 #endif
 #ifdef USE_RMI_NAME_STRING
-const PNTCHAR* Proxy::RmiName_Request_AddItem =_PNT("Request_AddItem");
+const PNTCHAR* Proxy::RmiName_Response_UpdateSlot =_PNT("Response_UpdateSlot");
 #else
-const PNTCHAR* Proxy::RmiName_Request_AddItem =_PNT("");
+const PNTCHAR* Proxy::RmiName_Response_UpdateSlot =_PNT("");
 #endif
 #ifdef USE_RMI_NAME_STRING
-const PNTCHAR* Proxy::RmiName_Request_RemoveItem =_PNT("Request_RemoveItem");
+const PNTCHAR* Proxy::RmiName_Response_Gold =_PNT("Response_Gold");
 #else
-const PNTCHAR* Proxy::RmiName_Request_RemoveItem =_PNT("");
-#endif
-#ifdef USE_RMI_NAME_STRING
-const PNTCHAR* Proxy::RmiName_Request_ItemData =_PNT("Request_ItemData");
-#else
-const PNTCHAR* Proxy::RmiName_Request_ItemData =_PNT("");
-#endif
-#ifdef USE_RMI_NAME_STRING
-const PNTCHAR* Proxy::RmiName_Request_AddGold =_PNT("Request_AddGold");
-#else
-const PNTCHAR* Proxy::RmiName_Request_AddGold =_PNT("");
+const PNTCHAR* Proxy::RmiName_Response_Gold =_PNT("");
 #endif
 #ifdef USE_RMI_NAME_STRING
 const PNTCHAR* Proxy::RmiName_OnChat =_PNT("OnChat");

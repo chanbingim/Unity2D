@@ -7,6 +7,8 @@ class   CPlayer;
 class CSession : CBase
 {
 public :
+    void                    Update_HostInventory();
+
     int                     Get_ID() { return m_hostID; }
     int                     Get_TableID() { return m_TableID; }
 

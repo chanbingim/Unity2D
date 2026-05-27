@@ -885,6 +885,362 @@ namespace ClientToServer {
 					}
 				}
 				break;
+			case Rmi_Request_AddItem:
+				{
+					::Proud::RmiContext ctx;
+					ctx.m_rmiID = __rmiID;
+					ctx.m_sentFrom=pa.GetRemoteHostID();
+					ctx.m_relayed=pa.IsRelayed();
+					ctx.m_hostTag = hostTag;
+					ctx.m_encryptMode = pa.GetEncryptMode();
+					ctx.m_compressMode = pa.GetCompressMode();
+			
+			        if(BeforeDeserialize(remote, ctx, __msg) == false)
+			        {
+			            // The user don't want to call the RMI function. 
+						// So, We fake that it has been already called.
+						__msg.SetReadOffset(__msg.GetLength());
+			            return true;
+			        }
+			
+					int iClientID; __msg >> iClientID;
+					int iItemID; __msg >> iItemID;
+					int iItemCount; __msg >> iItemCount;
+					m_core->PostCheckReadMessage(__msg,RmiName_Request_AddItem);
+					
+			
+					if(m_enableNotifyCallFromStub && !m_internalUse)
+					{
+						::Proud::String parameterString;
+						
+						::Proud::AppendTextOut(parameterString,iClientID);	
+										
+						parameterString += _PNT(", ");
+						::Proud::AppendTextOut(parameterString,iItemID);	
+										
+						parameterString += _PNT(", ");
+						::Proud::AppendTextOut(parameterString,iItemCount);	
+						
+						NotifyCallFromStub(remote, (::Proud::RmiID)Rmi_Request_AddItem, 
+							RmiName_Request_AddItem,parameterString);
+			
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_Request_AddItem, 
+							RmiName_Request_AddItem, parameterString);
+			#endif
+					}
+					else if(!m_internalUse)
+					{
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_Request_AddItem, 
+							RmiName_Request_AddItem, _PNT(""));
+			#endif
+					}
+						
+					int64_t __t0 = 0;
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::BeforeRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_Request_AddItem;
+						summary.m_rmiName = RmiName_Request_AddItem;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						BeforeRmiInvocation(summary);
+			
+						__t0 = ::Proud::GetPreciseCurrentTimeMs();
+					}
+						
+					// Call this method.
+					bool __ret = Request_AddItem (remote,ctx , iClientID, iItemID, iItemCount );
+						
+					if(__ret==false)
+					{
+						// Error: RMI function that a user did not create has been called. 
+						m_core->ShowNotImplementedRmiWarning(RmiName_Request_AddItem);
+					}
+						
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::AfterRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_Request_AddItem;
+						summary.m_rmiName = RmiName_Request_AddItem;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						int64_t __t1;
+			
+						__t1 = ::Proud::GetPreciseCurrentTimeMs();
+			
+						summary.m_elapsedTime = (uint32_t)(__t1 - __t0);
+						AfterRmiInvocation(summary);
+					}
+				}
+				break;
+			case Rmi_Request_RemoveItem:
+				{
+					::Proud::RmiContext ctx;
+					ctx.m_rmiID = __rmiID;
+					ctx.m_sentFrom=pa.GetRemoteHostID();
+					ctx.m_relayed=pa.IsRelayed();
+					ctx.m_hostTag = hostTag;
+					ctx.m_encryptMode = pa.GetEncryptMode();
+					ctx.m_compressMode = pa.GetCompressMode();
+			
+			        if(BeforeDeserialize(remote, ctx, __msg) == false)
+			        {
+			            // The user don't want to call the RMI function. 
+						// So, We fake that it has been already called.
+						__msg.SetReadOffset(__msg.GetLength());
+			            return true;
+			        }
+			
+					int iClientID; __msg >> iClientID;
+					int iItemID; __msg >> iItemID;
+					int SlotIndex; __msg >> SlotIndex;
+					int iItemCount; __msg >> iItemCount;
+					m_core->PostCheckReadMessage(__msg,RmiName_Request_RemoveItem);
+					
+			
+					if(m_enableNotifyCallFromStub && !m_internalUse)
+					{
+						::Proud::String parameterString;
+						
+						::Proud::AppendTextOut(parameterString,iClientID);	
+										
+						parameterString += _PNT(", ");
+						::Proud::AppendTextOut(parameterString,iItemID);	
+										
+						parameterString += _PNT(", ");
+						::Proud::AppendTextOut(parameterString,SlotIndex);	
+										
+						parameterString += _PNT(", ");
+						::Proud::AppendTextOut(parameterString,iItemCount);	
+						
+						NotifyCallFromStub(remote, (::Proud::RmiID)Rmi_Request_RemoveItem, 
+							RmiName_Request_RemoveItem,parameterString);
+			
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_Request_RemoveItem, 
+							RmiName_Request_RemoveItem, parameterString);
+			#endif
+					}
+					else if(!m_internalUse)
+					{
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_Request_RemoveItem, 
+							RmiName_Request_RemoveItem, _PNT(""));
+			#endif
+					}
+						
+					int64_t __t0 = 0;
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::BeforeRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_Request_RemoveItem;
+						summary.m_rmiName = RmiName_Request_RemoveItem;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						BeforeRmiInvocation(summary);
+			
+						__t0 = ::Proud::GetPreciseCurrentTimeMs();
+					}
+						
+					// Call this method.
+					bool __ret = Request_RemoveItem (remote,ctx , iClientID, iItemID, SlotIndex, iItemCount );
+						
+					if(__ret==false)
+					{
+						// Error: RMI function that a user did not create has been called. 
+						m_core->ShowNotImplementedRmiWarning(RmiName_Request_RemoveItem);
+					}
+						
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::AfterRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_Request_RemoveItem;
+						summary.m_rmiName = RmiName_Request_RemoveItem;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						int64_t __t1;
+			
+						__t1 = ::Proud::GetPreciseCurrentTimeMs();
+			
+						summary.m_elapsedTime = (uint32_t)(__t1 - __t0);
+						AfterRmiInvocation(summary);
+					}
+				}
+				break;
+			case Rmi_Request_ItemData:
+				{
+					::Proud::RmiContext ctx;
+					ctx.m_rmiID = __rmiID;
+					ctx.m_sentFrom=pa.GetRemoteHostID();
+					ctx.m_relayed=pa.IsRelayed();
+					ctx.m_hostTag = hostTag;
+					ctx.m_encryptMode = pa.GetEncryptMode();
+					ctx.m_compressMode = pa.GetCompressMode();
+			
+			        if(BeforeDeserialize(remote, ctx, __msg) == false)
+			        {
+			            // The user don't want to call the RMI function. 
+						// So, We fake that it has been already called.
+						__msg.SetReadOffset(__msg.GetLength());
+			            return true;
+			        }
+			
+					int iClientID; __msg >> iClientID;
+					int iItemID; __msg >> iItemID;
+					m_core->PostCheckReadMessage(__msg,RmiName_Request_ItemData);
+					
+			
+					if(m_enableNotifyCallFromStub && !m_internalUse)
+					{
+						::Proud::String parameterString;
+						
+						::Proud::AppendTextOut(parameterString,iClientID);	
+										
+						parameterString += _PNT(", ");
+						::Proud::AppendTextOut(parameterString,iItemID);	
+						
+						NotifyCallFromStub(remote, (::Proud::RmiID)Rmi_Request_ItemData, 
+							RmiName_Request_ItemData,parameterString);
+			
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_Request_ItemData, 
+							RmiName_Request_ItemData, parameterString);
+			#endif
+					}
+					else if(!m_internalUse)
+					{
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_Request_ItemData, 
+							RmiName_Request_ItemData, _PNT(""));
+			#endif
+					}
+						
+					int64_t __t0 = 0;
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::BeforeRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_Request_ItemData;
+						summary.m_rmiName = RmiName_Request_ItemData;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						BeforeRmiInvocation(summary);
+			
+						__t0 = ::Proud::GetPreciseCurrentTimeMs();
+					}
+						
+					// Call this method.
+					bool __ret = Request_ItemData (remote,ctx , iClientID, iItemID );
+						
+					if(__ret==false)
+					{
+						// Error: RMI function that a user did not create has been called. 
+						m_core->ShowNotImplementedRmiWarning(RmiName_Request_ItemData);
+					}
+						
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::AfterRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_Request_ItemData;
+						summary.m_rmiName = RmiName_Request_ItemData;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						int64_t __t1;
+			
+						__t1 = ::Proud::GetPreciseCurrentTimeMs();
+			
+						summary.m_elapsedTime = (uint32_t)(__t1 - __t0);
+						AfterRmiInvocation(summary);
+					}
+				}
+				break;
+			case Rmi_Request_AddGold:
+				{
+					::Proud::RmiContext ctx;
+					ctx.m_rmiID = __rmiID;
+					ctx.m_sentFrom=pa.GetRemoteHostID();
+					ctx.m_relayed=pa.IsRelayed();
+					ctx.m_hostTag = hostTag;
+					ctx.m_encryptMode = pa.GetEncryptMode();
+					ctx.m_compressMode = pa.GetCompressMode();
+			
+			        if(BeforeDeserialize(remote, ctx, __msg) == false)
+			        {
+			            // The user don't want to call the RMI function. 
+						// So, We fake that it has been already called.
+						__msg.SetReadOffset(__msg.GetLength());
+			            return true;
+			        }
+			
+					int ClientID; __msg >> ClientID;
+					int GoldAmount; __msg >> GoldAmount;
+					m_core->PostCheckReadMessage(__msg,RmiName_Request_AddGold);
+					
+			
+					if(m_enableNotifyCallFromStub && !m_internalUse)
+					{
+						::Proud::String parameterString;
+						
+						::Proud::AppendTextOut(parameterString,ClientID);	
+										
+						parameterString += _PNT(", ");
+						::Proud::AppendTextOut(parameterString,GoldAmount);	
+						
+						NotifyCallFromStub(remote, (::Proud::RmiID)Rmi_Request_AddGold, 
+							RmiName_Request_AddGold,parameterString);
+			
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_Request_AddGold, 
+							RmiName_Request_AddGold, parameterString);
+			#endif
+					}
+					else if(!m_internalUse)
+					{
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_Request_AddGold, 
+							RmiName_Request_AddGold, _PNT(""));
+			#endif
+					}
+						
+					int64_t __t0 = 0;
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::BeforeRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_Request_AddGold;
+						summary.m_rmiName = RmiName_Request_AddGold;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						BeforeRmiInvocation(summary);
+			
+						__t0 = ::Proud::GetPreciseCurrentTimeMs();
+					}
+						
+					// Call this method.
+					bool __ret = Request_AddGold (remote,ctx , ClientID, GoldAmount );
+						
+					if(__ret==false)
+					{
+						// Error: RMI function that a user did not create has been called. 
+						m_core->ShowNotImplementedRmiWarning(RmiName_Request_AddGold);
+					}
+						
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::AfterRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_Request_AddGold;
+						summary.m_rmiName = RmiName_Request_AddGold;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						int64_t __t1;
+			
+						__t1 = ::Proud::GetPreciseCurrentTimeMs();
+			
+						summary.m_elapsedTime = (uint32_t)(__t1 - __t0);
+						AfterRmiInvocation(summary);
+					}
+				}
+				break;
 			case Rmi_OnChat:
 				{
 					::Proud::RmiContext ctx;
@@ -1025,6 +1381,26 @@ __fail:
 	const PNTCHAR* Stub::RmiName_OnActorAnimUpdated =_PNT("OnActorAnimUpdated");
 	#else
 	const PNTCHAR* Stub::RmiName_OnActorAnimUpdated =_PNT("");
+	#endif
+	#ifdef USE_RMI_NAME_STRING
+	const PNTCHAR* Stub::RmiName_Request_AddItem =_PNT("Request_AddItem");
+	#else
+	const PNTCHAR* Stub::RmiName_Request_AddItem =_PNT("");
+	#endif
+	#ifdef USE_RMI_NAME_STRING
+	const PNTCHAR* Stub::RmiName_Request_RemoveItem =_PNT("Request_RemoveItem");
+	#else
+	const PNTCHAR* Stub::RmiName_Request_RemoveItem =_PNT("");
+	#endif
+	#ifdef USE_RMI_NAME_STRING
+	const PNTCHAR* Stub::RmiName_Request_ItemData =_PNT("Request_ItemData");
+	#else
+	const PNTCHAR* Stub::RmiName_Request_ItemData =_PNT("");
+	#endif
+	#ifdef USE_RMI_NAME_STRING
+	const PNTCHAR* Stub::RmiName_Request_AddGold =_PNT("Request_AddGold");
+	#else
+	const PNTCHAR* Stub::RmiName_Request_AddGold =_PNT("");
 	#endif
 	#ifdef USE_RMI_NAME_STRING
 	const PNTCHAR* Stub::RmiName_OnChat =_PNT("OnChat");

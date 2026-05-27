@@ -25,11 +25,9 @@ namespace ServerToClient
 			public const Nettention.Proud.RmiID OnOtherPlayerAnimUpdated = (Nettention.Proud.RmiID)3000+10;
 			public const Nettention.Proud.RmiID UpdateActorAnimState = (Nettention.Proud.RmiID)3000+11;
 			public const Nettention.Proud.RmiID OnOtherActorAnimUpdated = (Nettention.Proud.RmiID)3000+12;
-			public const Nettention.Proud.RmiID Request_AddItem = (Nettention.Proud.RmiID)3000+13;
-			public const Nettention.Proud.RmiID Request_RemoveItem = (Nettention.Proud.RmiID)3000+14;
-			public const Nettention.Proud.RmiID Request_ItemData = (Nettention.Proud.RmiID)3000+15;
-			public const Nettention.Proud.RmiID Request_AddGold = (Nettention.Proud.RmiID)3000+16;
-			public const Nettention.Proud.RmiID OnChat = (Nettention.Proud.RmiID)3000+17;
+			public const Nettention.Proud.RmiID Response_UpdateSlot = (Nettention.Proud.RmiID)3000+13;
+			public const Nettention.Proud.RmiID Response_Gold = (Nettention.Proud.RmiID)3000+14;
+			public const Nettention.Proud.RmiID OnChat = (Nettention.Proud.RmiID)3000+15;
 		// List that has RMI ID.
 		public static Nettention.Proud.RmiID[] RmiIDList = new Nettention.Proud.RmiID[] {
 			ResponseLoginEvent,
@@ -44,10 +42,8 @@ namespace ServerToClient
 			OnOtherPlayerAnimUpdated,
 			UpdateActorAnimState,
 			OnOtherActorAnimUpdated,
-			Request_AddItem,
-			Request_RemoveItem,
-			Request_ItemData,
-			Request_AddGold,
+			Response_UpdateSlot,
+			Response_Gold,
 			OnChat,
 		};
 	}

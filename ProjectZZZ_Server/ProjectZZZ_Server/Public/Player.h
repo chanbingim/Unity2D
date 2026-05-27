@@ -28,8 +28,12 @@ public:
     void                    Set_Dead();
     
 #pragma region Inventory
-    void                    ADD_Gold(int Amount);
-    int                     Picked_Item(int ItemID, int ItemCount);
+    void                        Inveontory_Update(int ihostID);
+
+    void                        ADD_Gold(int Amount);
+    int                         Picked_Item(const ITEM_DATA& Data, int ItemCount);
+    bool                        Remove_Item(const ITEM_DATA& Data, int SlotIndex, int ItemCount);
+    const vector<ItemSlot>&     Get_InventoryItems(int SlotType);
 #pragma endregion
 
     void                        ADD_NearObject(HostID iHostID, CActor* pActor);

@@ -27,10 +27,18 @@ namespace ClientToServer {
                
 		Rmi_OnActorAnimUpdated,
                
+		Rmi_Request_AddItem,
+               
+		Rmi_Request_RemoveItem,
+               
+		Rmi_Request_ItemData,
+               
+		Rmi_Request_AddGold,
+               
 		Rmi_OnChat,
 	};
 
-	int g_RmiIDListCount = 10;
+	int g_RmiIDListCount = 14;
 
 }
 

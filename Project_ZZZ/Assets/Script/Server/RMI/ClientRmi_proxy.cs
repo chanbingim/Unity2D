@@ -371,6 +371,156 @@ Nettention.Proud.Marshaler.Write(__msg, Time);
 		RmiName_OnActorAnimUpdated, Common.OnActorAnimUpdated);
         }
 }
+public bool Request_AddItem(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int iClientID, int iItemID, int iItemCount)
+{
+	using (Nettention.Proud.FreeListPopper<Nettention.Proud.Message> freeList = new Nettention.Proud.FreeListPopper<Nettention.Proud.Message>())
+		{
+		Nettention.Proud.Message __msg=freeList.GetObject();
+		__msg.Clear();
+		__msg.SimplePacketMode = core.IsSimplePacketMode();
+		Nettention.Proud.RmiID __msgid= Common.Request_AddItem;
+		__msg.Write(__msgid);
+		Nettention.Proud.Marshaler.Write(__msg, iClientID);
+		Nettention.Proud.Marshaler.Write(__msg, iItemID);
+		Nettention.Proud.Marshaler.Write(__msg, iItemCount);
+		
+	Nettention.Proud.HostID[] __list = new Nettention.Proud.HostID[1];
+	__list[0] = remote;
+		
+	return RmiSend(__list,rmiContext,__msg,
+		RmiName_Request_AddItem, Common.Request_AddItem);
+        }
+}
+
+public bool Request_AddItem(Nettention.Proud.HostID[] remotes,Nettention.Proud.RmiContext rmiContext, int iClientID, int iItemID, int iItemCount)
+{
+	using (Nettention.Proud.FreeListPopper<Nettention.Proud.Message> freeList = new Nettention.Proud.FreeListPopper<Nettention.Proud.Message>())
+{
+Nettention.Proud.Message __msg=freeList.GetObject();
+__msg.Clear();
+__msg.SimplePacketMode = core.IsSimplePacketMode();
+Nettention.Proud.RmiID __msgid= Common.Request_AddItem;
+__msg.Write(__msgid);
+Nettention.Proud.Marshaler.Write(__msg, iClientID);
+Nettention.Proud.Marshaler.Write(__msg, iItemID);
+Nettention.Proud.Marshaler.Write(__msg, iItemCount);
+		
+	return RmiSend(remotes,rmiContext,__msg,
+		RmiName_Request_AddItem, Common.Request_AddItem);
+        }
+}
+public bool Request_RemoveItem(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int iClientID, int iItemID, int SlotIndex, int iItemCount)
+{
+	using (Nettention.Proud.FreeListPopper<Nettention.Proud.Message> freeList = new Nettention.Proud.FreeListPopper<Nettention.Proud.Message>())
+		{
+		Nettention.Proud.Message __msg=freeList.GetObject();
+		__msg.Clear();
+		__msg.SimplePacketMode = core.IsSimplePacketMode();
+		Nettention.Proud.RmiID __msgid= Common.Request_RemoveItem;
+		__msg.Write(__msgid);
+		Nettention.Proud.Marshaler.Write(__msg, iClientID);
+		Nettention.Proud.Marshaler.Write(__msg, iItemID);
+		Nettention.Proud.Marshaler.Write(__msg, SlotIndex);
+		Nettention.Proud.Marshaler.Write(__msg, iItemCount);
+		
+	Nettention.Proud.HostID[] __list = new Nettention.Proud.HostID[1];
+	__list[0] = remote;
+		
+	return RmiSend(__list,rmiContext,__msg,
+		RmiName_Request_RemoveItem, Common.Request_RemoveItem);
+        }
+}
+
+public bool Request_RemoveItem(Nettention.Proud.HostID[] remotes,Nettention.Proud.RmiContext rmiContext, int iClientID, int iItemID, int SlotIndex, int iItemCount)
+{
+	using (Nettention.Proud.FreeListPopper<Nettention.Proud.Message> freeList = new Nettention.Proud.FreeListPopper<Nettention.Proud.Message>())
+{
+Nettention.Proud.Message __msg=freeList.GetObject();
+__msg.Clear();
+__msg.SimplePacketMode = core.IsSimplePacketMode();
+Nettention.Proud.RmiID __msgid= Common.Request_RemoveItem;
+__msg.Write(__msgid);
+Nettention.Proud.Marshaler.Write(__msg, iClientID);
+Nettention.Proud.Marshaler.Write(__msg, iItemID);
+Nettention.Proud.Marshaler.Write(__msg, SlotIndex);
+Nettention.Proud.Marshaler.Write(__msg, iItemCount);
+		
+	return RmiSend(remotes,rmiContext,__msg,
+		RmiName_Request_RemoveItem, Common.Request_RemoveItem);
+        }
+}
+public bool Request_ItemData(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int iClientID, int iItemID)
+{
+	using (Nettention.Proud.FreeListPopper<Nettention.Proud.Message> freeList = new Nettention.Proud.FreeListPopper<Nettention.Proud.Message>())
+		{
+		Nettention.Proud.Message __msg=freeList.GetObject();
+		__msg.Clear();
+		__msg.SimplePacketMode = core.IsSimplePacketMode();
+		Nettention.Proud.RmiID __msgid= Common.Request_ItemData;
+		__msg.Write(__msgid);
+		Nettention.Proud.Marshaler.Write(__msg, iClientID);
+		Nettention.Proud.Marshaler.Write(__msg, iItemID);
+		
+	Nettention.Proud.HostID[] __list = new Nettention.Proud.HostID[1];
+	__list[0] = remote;
+		
+	return RmiSend(__list,rmiContext,__msg,
+		RmiName_Request_ItemData, Common.Request_ItemData);
+        }
+}
+
+public bool Request_ItemData(Nettention.Proud.HostID[] remotes,Nettention.Proud.RmiContext rmiContext, int iClientID, int iItemID)
+{
+	using (Nettention.Proud.FreeListPopper<Nettention.Proud.Message> freeList = new Nettention.Proud.FreeListPopper<Nettention.Proud.Message>())
+{
+Nettention.Proud.Message __msg=freeList.GetObject();
+__msg.Clear();
+__msg.SimplePacketMode = core.IsSimplePacketMode();
+Nettention.Proud.RmiID __msgid= Common.Request_ItemData;
+__msg.Write(__msgid);
+Nettention.Proud.Marshaler.Write(__msg, iClientID);
+Nettention.Proud.Marshaler.Write(__msg, iItemID);
+		
+	return RmiSend(remotes,rmiContext,__msg,
+		RmiName_Request_ItemData, Common.Request_ItemData);
+        }
+}
+public bool Request_AddGold(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int ClientID, int GoldAmount)
+{
+	using (Nettention.Proud.FreeListPopper<Nettention.Proud.Message> freeList = new Nettention.Proud.FreeListPopper<Nettention.Proud.Message>())
+		{
+		Nettention.Proud.Message __msg=freeList.GetObject();
+		__msg.Clear();
+		__msg.SimplePacketMode = core.IsSimplePacketMode();
+		Nettention.Proud.RmiID __msgid= Common.Request_AddGold;
+		__msg.Write(__msgid);
+		Nettention.Proud.Marshaler.Write(__msg, ClientID);
+		Nettention.Proud.Marshaler.Write(__msg, GoldAmount);
+		
+	Nettention.Proud.HostID[] __list = new Nettention.Proud.HostID[1];
+	__list[0] = remote;
+		
+	return RmiSend(__list,rmiContext,__msg,
+		RmiName_Request_AddGold, Common.Request_AddGold);
+        }
+}
+
+public bool Request_AddGold(Nettention.Proud.HostID[] remotes,Nettention.Proud.RmiContext rmiContext, int ClientID, int GoldAmount)
+{
+	using (Nettention.Proud.FreeListPopper<Nettention.Proud.Message> freeList = new Nettention.Proud.FreeListPopper<Nettention.Proud.Message>())
+{
+Nettention.Proud.Message __msg=freeList.GetObject();
+__msg.Clear();
+__msg.SimplePacketMode = core.IsSimplePacketMode();
+Nettention.Proud.RmiID __msgid= Common.Request_AddGold;
+__msg.Write(__msgid);
+Nettention.Proud.Marshaler.Write(__msg, ClientID);
+Nettention.Proud.Marshaler.Write(__msg, GoldAmount);
+		
+	return RmiSend(remotes,rmiContext,__msg,
+		RmiName_Request_AddGold, Common.Request_AddGold);
+        }
+}
 public bool OnChat(Nettention.Proud.HostID remote,Nettention.Proud.RmiContext rmiContext, int clientId, string message)
 {
 	using (Nettention.Proud.FreeListPopper<Nettention.Proud.Message> freeList = new Nettention.Proud.FreeListPopper<Nettention.Proud.Message>())
@@ -420,6 +570,10 @@ public const string RmiName_OnPositionUpdated="OnPositionUpdated";
 public const string RmiName_OnActorPositionUpdated="OnActorPositionUpdated";
 public const string RmiName_OnAnimUpdated="OnAnimUpdated";
 public const string RmiName_OnActorAnimUpdated="OnActorAnimUpdated";
+public const string RmiName_Request_AddItem="Request_AddItem";
+public const string RmiName_Request_RemoveItem="Request_RemoveItem";
+public const string RmiName_Request_ItemData="Request_ItemData";
+public const string RmiName_Request_AddGold="Request_AddGold";
 public const string RmiName_OnChat="OnChat";
        
 public const string RmiName_First = RmiName_OnGameLogin;
@@ -435,6 +589,10 @@ public const string RmiName_OnPositionUpdated="";
 public const string RmiName_OnActorPositionUpdated="";
 public const string RmiName_OnAnimUpdated="";
 public const string RmiName_OnActorAnimUpdated="";
+public const string RmiName_Request_AddItem="";
+public const string RmiName_Request_RemoveItem="";
+public const string RmiName_Request_ItemData="";
+public const string RmiName_Request_AddGold="";
 public const string RmiName_OnChat="";
        
 public const string RmiName_First = "";

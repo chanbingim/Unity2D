@@ -67,6 +67,30 @@ DEFRMI_ClientToServer_OnActorAnimUpdated(CCustom_Stub)
     return true;
 }
 
+DEFRMI_ClientToServer_Request_AddItem(CCustom_Stub)
+{
+    m_pInstance->ADD_Item(iClientID, iItemID, iItemCount);
+    return true;
+}
+
+DEFRMI_ClientToServer_Request_AddGold(CCustom_Stub)
+{
+    m_pInstance->ADD_Gold(ClientID, GoldAmount);
+    return true;
+}
+
+DEFRMI_ClientToServer_Request_RemoveItem(CCustom_Stub)
+{
+    m_pInstance->Remove_Item(iClientID, iItemID, SlotIndex, iItemCount);
+    return true;
+}
+
+DEFRMI_ClientToServer_Request_ItemData(CCustom_Stub)
+{
+    return true;
+}
+
+
 CCustom_Stub* CCustom_Stub::Create()
 {
     CCustom_Stub* pInstance = new CCustom_Stub();

@@ -22,7 +22,11 @@ namespace ClientToServer
 			public const Nettention.Proud.RmiID OnActorPositionUpdated = (Nettention.Proud.RmiID)2000+7;
 			public const Nettention.Proud.RmiID OnAnimUpdated = (Nettention.Proud.RmiID)2000+8;
 			public const Nettention.Proud.RmiID OnActorAnimUpdated = (Nettention.Proud.RmiID)2000+9;
-			public const Nettention.Proud.RmiID OnChat = (Nettention.Proud.RmiID)2000+10;
+			public const Nettention.Proud.RmiID Request_AddItem = (Nettention.Proud.RmiID)2000+10;
+			public const Nettention.Proud.RmiID Request_RemoveItem = (Nettention.Proud.RmiID)2000+11;
+			public const Nettention.Proud.RmiID Request_ItemData = (Nettention.Proud.RmiID)2000+12;
+			public const Nettention.Proud.RmiID Request_AddGold = (Nettention.Proud.RmiID)2000+13;
+			public const Nettention.Proud.RmiID OnChat = (Nettention.Proud.RmiID)2000+14;
 		// List that has RMI ID.
 		public static Nettention.Proud.RmiID[] RmiIDList = new Nettention.Proud.RmiID[] {
 			OnGameLogin,
@@ -34,6 +38,10 @@ namespace ClientToServer
 			OnActorPositionUpdated,
 			OnAnimUpdated,
 			OnActorAnimUpdated,
+			Request_AddItem,
+			Request_RemoveItem,
+			Request_ItemData,
+			Request_AddGold,
 			OnChat,
 		};
 	}

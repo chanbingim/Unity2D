@@ -141,12 +141,10 @@
     <ClCompile Include="..\private\Inventory.cpp">
       <Filter>08. Inventory</Filter>
     </ClCompile>
-    <ClCompile Include="ProjectZZZ_Server.cpp">
-      <Filter>08. Inventory</Filter>
-    </ClCompile>
     <ClCompile Include="..\private\Actor.cpp">
       <Filter>09. Actor</Filter>
     </ClCompile>
+    <ClCompile Include="ProjectZZZ_Server.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\util\ServerRmi.pidl">

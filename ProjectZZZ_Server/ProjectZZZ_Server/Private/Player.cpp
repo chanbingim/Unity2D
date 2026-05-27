@@ -2,6 +2,7 @@
 #include "Player.h"
 
 #include "Inventory.h"
+#include "ServerManager.h"
 
 void CPlayer::Set_Info(const PLAYER_DATA* pinfo)
 {
@@ -51,6 +52,11 @@ void CPlayer::Set_Dead()
     m_pInfo.bIsDead = true;
 }
 
+void CPlayer::Inveontory_Update(int ihostID)
+{
+    m_pInventory->Update(ihostID);
+}
+
 void CPlayer::ADD_Gold(int Amount)
 {
     if (nullptr == m_pInventory)
@@ -59,12 +65,25 @@ void CPlayer::ADD_Gold(int Amount)
     m_pInventory->ADD_Gold(Amount);
 }
 
-int CPlayer::Picked_Item(int ItemID, int ItemCount)
+int CPlayer::Picked_Item(const ITEM_DATA& Data, int ItemCount)
 {
     if (nullptr == m_pInventory)
         return -1;
 
-    return m_pInventory->ADD_Item(ItemID, ItemCount);
+    return m_pInventory->ADD_Item(Data, ItemCount);
+}
+
+bool CPlayer::Remove_Item(const ITEM_DATA& Data, int SlotIndex, int ItemCount)
+{
+    if (nullptr == m_pInventory)
+        return false;
+
+    return m_pInventory->Remove_Item(Data.ItemType, SlotIndex, ItemCount);
+}
+
+const vector<ItemSlot>& CPlayer::Get_InventoryItems(int SlotType)
+{
+    return m_pInventory->Get_Items(SlotType);
 }
 
 void CPlayer::ADD_NearObject(HostID iHostID, CActor* pActor)
