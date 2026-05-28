@@ -17,6 +17,10 @@ public class UIManager : MonoBehaviour
         public CPopupBase prefab;
     }
 
+    public delegate void KeyInputHandler();
+    private Dictionary<KeyCode, KeyInputHandler> _bindings
+     = new Dictionary<KeyCode, KeyInputHandler>();
+
     [SerializeField]
     private List<PopupPrefabEntry>              m_PopupPrefabList = new List<PopupPrefabEntry>();
     private Dictionary<POPUP_TYPE, CPopupBase>  m_PopupPrefabs = new Dictionary<POPUP_TYPE, CPopupBase>();
@@ -28,7 +32,30 @@ public class UIManager : MonoBehaviour
 
     public void Update()
     {
-        
+        foreach (var binding in _bindings)
+        {
+            if (Input.GetKeyDown(binding.Key))
+            {
+                binding.Value?.Invoke();
+            }
+        }
+    }
+
+    public void Register(KeyCode key, KeyInputHandler handler)
+    {
+        if (_bindings.ContainsKey(key))
+        {
+            Debug.Log("Already Bind Key");
+            return;
+        }
+
+        _bindings.Add(key, handler);
+    }
+
+    public void Unregister(KeyCode key, KeyInputHandler handler)
+    {
+        if (_bindings.ContainsKey(key))
+            _bindings[key] -= handler;
     }
 
     public RESULT  Initialize()
