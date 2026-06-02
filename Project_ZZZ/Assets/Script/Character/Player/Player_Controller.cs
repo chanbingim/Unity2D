@@ -75,7 +75,6 @@ public class Player_Controller : CCharacter_Controller
         m_Commands.Add("Move", new CMoveCommand(Vector3.zero, Vector3.zero, 0.0f));
         m_Commands.Add("Attack", new CATK_Command(50f, 5f));
 
-
         return true;
     }
 

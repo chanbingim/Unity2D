@@ -31,6 +31,8 @@ public:
     void                        Inveontory_Update(int ihostID);
 
     void                        ADD_Gold(int Amount);
+    int                         Get_Gold();
+
     int                         Picked_Item(const ITEM_DATA& Data, int ItemCount);
     bool                        Remove_Item(const ITEM_DATA& Data, int SlotIndex, int ItemCount);
     const vector<ItemSlot>&     Get_InventoryItems(int SlotType);

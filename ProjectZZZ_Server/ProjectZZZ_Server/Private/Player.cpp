@@ -65,6 +65,11 @@ void CPlayer::ADD_Gold(int Amount)
     m_pInventory->ADD_Gold(Amount);
 }
 
+int CPlayer::Get_Gold()
+{
+    return m_pInventory->Get_Gold();
+}
+
 int CPlayer::Picked_Item(const ITEM_DATA& Data, int ItemCount)
 {
     if (nullptr == m_pInventory)

@@ -4,10 +4,10 @@ using ServerToClient;
 using InputCommand;
 using Nettention.Proud;
 using UnityEngine;
-using System.Collections.Generic;
 using System;
 using static Defines;
 using Client_Structs;
+using static ServerToClient.Stub;
 
 public class GameClient : MonoBehaviour
 {
@@ -72,6 +72,16 @@ public class GameClient : MonoBehaviour
     public void Spawn_Event(int iLeveLID, int iObjectID, int iSpawnPointID)
     {
         m_ClientProxy.SpawnObjectEvent(HostID.HostID_Server, RmiContext.ReliableSend, iLeveLID, iObjectID, iSpawnPointID);
+    }
+
+    public void ADD_Gold(int Amount)
+    {
+        m_ClientProxy.Request_AddGold(HostID.HostID_Server, RmiContext.ReliableSend, m_MyID, Amount);
+    }
+
+    public void Bind_ResponeGoldEvent(Func<HostID, RmiContext, int, int, bool>  Callback)
+    {
+        m_ClientStub.Response_Gold += new Response_GoldDelegate(Callback);
     }
 
     #region Private

@@ -39,6 +39,11 @@ public class UIManager : MonoBehaviour
                 binding.Value?.Invoke();
             }
         }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            GameClient.Get_Instance().ADD_Gold(300);
+        }
     }
 
     public void Register(KeyCode key, KeyInputHandler handler)

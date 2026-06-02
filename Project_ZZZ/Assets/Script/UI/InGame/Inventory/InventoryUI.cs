@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Nettention.Proud;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -10,6 +9,7 @@ public class InventoryUI : MonoBehaviour
     //List<InvenSlot>[]       invenSlots = new List<InvenSlot>[(int)InvenTag.END];
 
     [SerializeField] Text      TttleText = null;
+    [SerializeField] Text      GoldText = null;
 
     InvenTag        m_SelectTag = InvenTag.EQUIPMENT;
     bool            m_bIsActive = false;
@@ -19,6 +19,7 @@ public class InventoryUI : MonoBehaviour
         var Instance = UIManager.Get_Instance();
         Instance.Register(KeyCode.I, ToggleInventoryVisible);
 
+        GameClient.Get_Instance().Bind_ResponeGoldEvent(Respone_GoldAmount);
         gameObject.SetActive(false);
     }
 
@@ -40,5 +41,13 @@ public class InventoryUI : MonoBehaviour
             return;
 
         TttleText.text = m_SelectTag.ToString();
+    }
+
+    bool Respone_GoldAmount(HostID hostID, RmiContext rmiContext, int ClientID, int Amount)
+    {
+        if(GoldText == null) return false;
+
+        GoldText.text = Amount.ToString();
+        return true;
     }
 }

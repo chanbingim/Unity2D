@@ -18,6 +18,11 @@ HRESULT CInventory::Initialize()
     return S_OK;
 }
 
+int CInventory::Get_Gold()
+{
+    return m_Gold;
+}
+
 void CInventory::Update(int ihostID)
 {
     Proxy* pProxy = CServerManager::Get_Instance()->Get_Proxy();

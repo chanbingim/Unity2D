@@ -76,7 +76,9 @@ void CServerManager::ADD_Gold(int iHostID, int Amount)
     if (iter == m_SessionList.end())
         return;
 
-    return iter->second->GetPlayer()->ADD_Gold(Amount);
+    CPlayer* pPlayer = iter->second->GetPlayer();
+    pPlayer->ADD_Gold(Amount);
+    m_pProxy->Response_Gold((HostID)iHostID, RmiContext::ReliableSend, iHostID, pPlayer->Get_Gold());
 }
 
 bool CServerManager::ADD_Item(int iHostID, int ItemID, int ItemCount)
@@ -277,9 +279,6 @@ void CServerManager::Server_DataUpdate(float fTime)
 
 void CServerManager::Update(float fTime)
 {
-    Item_Data d;
-    m_pDBManager->Connection_DB("item_db");
-    m_pDBManager->Request_ItemData(1001, d);
 
     HostID clientList[256];
     int count = m_pServer->GetClientHostIDs(clientList, 256);
