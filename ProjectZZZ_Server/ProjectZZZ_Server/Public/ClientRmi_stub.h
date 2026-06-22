@@ -81,6 +81,26 @@ namespace ClientToServer {
 #define CALL_ClientToServer_OnPositionUpdated OnPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)
 #define PARAM_ClientToServer_OnPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)
                
+		virtual bool OnRotationUpdated ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & , const float & )		{ 
+			return false;
+		} 
+
+#define DECRMI_ClientToServer_OnRotationUpdated bool OnRotationUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & RotX, const float & RotY, const float & RotZ, const float & RotW) PN_OVERRIDE
+
+#define DEFRMI_ClientToServer_OnRotationUpdated(DerivedClass) bool DerivedClass::OnRotationUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & RotX, const float & RotY, const float & RotZ, const float & RotW)
+#define CALL_ClientToServer_OnRotationUpdated OnRotationUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & RotX, const float & RotY, const float & RotZ, const float & RotW)
+#define PARAM_ClientToServer_OnRotationUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & RotX, const float & RotY, const float & RotZ, const float & RotW)
+               
+		virtual bool OnScaleUpdated ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & )		{ 
+			return false;
+		} 
+
+#define DECRMI_ClientToServer_OnScaleUpdated bool OnScaleUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & ScaleX, const float & ScaleY, const float & ScaleZ) PN_OVERRIDE
+
+#define DEFRMI_ClientToServer_OnScaleUpdated(DerivedClass) bool DerivedClass::OnScaleUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & ScaleX, const float & ScaleY, const float & ScaleZ)
+#define CALL_ClientToServer_OnScaleUpdated OnScaleUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & ScaleX, const float & ScaleY, const float & ScaleZ)
+#define PARAM_ClientToServer_OnScaleUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & ScaleX, const float & ScaleY, const float & ScaleZ)
+               
 		virtual bool OnActorPositionUpdated ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & , const float & , const float & , const float & )		{ 
 			return false;
 		} 
@@ -90,6 +110,26 @@ namespace ClientToServer {
 #define DEFRMI_ClientToServer_OnActorPositionUpdated(DerivedClass) bool DerivedClass::OnActorPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)
 #define CALL_ClientToServer_OnActorPositionUpdated OnActorPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)
 #define PARAM_ClientToServer_OnActorPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ)
+               
+		virtual bool OnActorRotationUpdated ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & , const float & )		{ 
+			return false;
+		} 
+
+#define DECRMI_ClientToServer_OnActorRotationUpdated bool OnActorRotationUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & RotX, const float & RotY, const float & RotZ, const float & RotW) PN_OVERRIDE
+
+#define DEFRMI_ClientToServer_OnActorRotationUpdated(DerivedClass) bool DerivedClass::OnActorRotationUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & RotX, const float & RotY, const float & RotZ, const float & RotW)
+#define CALL_ClientToServer_OnActorRotationUpdated OnActorRotationUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & RotX, const float & RotY, const float & RotZ, const float & RotW)
+#define PARAM_ClientToServer_OnActorRotationUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & RotX, const float & RotY, const float & RotZ, const float & RotW)
+               
+		virtual bool OnActorScaleUpdated ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & )		{ 
+			return false;
+		} 
+
+#define DECRMI_ClientToServer_OnActorScaleUpdated bool OnActorScaleUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & ScaleX, const float & ScaleY, const float & ScaleZ) PN_OVERRIDE
+
+#define DEFRMI_ClientToServer_OnActorScaleUpdated(DerivedClass) bool DerivedClass::OnActorScaleUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & ScaleX, const float & ScaleY, const float & ScaleZ)
+#define CALL_ClientToServer_OnActorScaleUpdated OnActorScaleUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & ScaleX, const float & ScaleY, const float & ScaleZ)
+#define PARAM_ClientToServer_OnActorScaleUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & ScaleX, const float & ScaleY, const float & ScaleZ)
                
 		virtual bool OnAnimUpdated ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const int & , const float & )		{ 
 			return false;
@@ -168,7 +208,11 @@ namespace ClientToServer {
 		static const PNTCHAR* RmiName_SpawnPlayerEvent;
 		static const PNTCHAR* RmiName_RequestCheckNickname;
 		static const PNTCHAR* RmiName_OnPositionUpdated;
+		static const PNTCHAR* RmiName_OnRotationUpdated;
+		static const PNTCHAR* RmiName_OnScaleUpdated;
 		static const PNTCHAR* RmiName_OnActorPositionUpdated;
+		static const PNTCHAR* RmiName_OnActorRotationUpdated;
+		static const PNTCHAR* RmiName_OnActorScaleUpdated;
 		static const PNTCHAR* RmiName_OnAnimUpdated;
 		static const PNTCHAR* RmiName_OnActorAnimUpdated;
 		static const PNTCHAR* RmiName_Request_AddItem;
@@ -241,12 +285,48 @@ namespace ClientToServer {
 		}
 
                
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & , const float & ) > OnRotationUpdated_Function;
+		virtual bool OnRotationUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & RotX, const float & RotY, const float & RotZ, const float & RotW) 
+		{ 
+			if (OnRotationUpdated_Function==nullptr) 
+				return true; 
+			return OnRotationUpdated_Function(remote,rmiContext, clientId, RotX, RotY, RotZ, RotW); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & ) > OnScaleUpdated_Function;
+		virtual bool OnScaleUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & clientId, const float & ScaleX, const float & ScaleY, const float & ScaleZ) 
+		{ 
+			if (OnScaleUpdated_Function==nullptr) 
+				return true; 
+			return OnScaleUpdated_Function(remote,rmiContext, clientId, ScaleX, ScaleY, ScaleZ); 
+		}
+
+               
 		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & , const float & , const float & , const float & ) > OnActorPositionUpdated_Function;
 		virtual bool OnActorPositionUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & PosX, const float & PosY, const float & PosZ, const float & DirX, const float & DirY, const float & DirZ) 
 		{ 
 			if (OnActorPositionUpdated_Function==nullptr) 
 				return true; 
 			return OnActorPositionUpdated_Function(remote,rmiContext, templeteID, PosX, PosY, PosZ, DirX, DirY, DirZ); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & , const float & ) > OnActorRotationUpdated_Function;
+		virtual bool OnActorRotationUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & RotX, const float & RotY, const float & RotZ, const float & RotW) 
+		{ 
+			if (OnActorRotationUpdated_Function==nullptr) 
+				return true; 
+			return OnActorRotationUpdated_Function(remote,rmiContext, templeteID, RotX, RotY, RotZ, RotW); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int & , const float & , const float & , const float & ) > OnActorScaleUpdated_Function;
+		virtual bool OnActorScaleUpdated ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & templeteID, const float & ScaleX, const float & ScaleY, const float & ScaleZ) 
+		{ 
+			if (OnActorScaleUpdated_Function==nullptr) 
+				return true; 
+			return OnActorScaleUpdated_Function(remote,rmiContext, templeteID, ScaleX, ScaleY, ScaleZ); 
 		}
 
                

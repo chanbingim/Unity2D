@@ -17,21 +17,29 @@ namespace ClientToServer {
                
     static const ::Proud::RmiID Rmi_OnPositionUpdated = (::Proud::RmiID)(2000+6);
                
-    static const ::Proud::RmiID Rmi_OnActorPositionUpdated = (::Proud::RmiID)(2000+7);
+    static const ::Proud::RmiID Rmi_OnRotationUpdated = (::Proud::RmiID)(2000+7);
                
-    static const ::Proud::RmiID Rmi_OnAnimUpdated = (::Proud::RmiID)(2000+8);
+    static const ::Proud::RmiID Rmi_OnScaleUpdated = (::Proud::RmiID)(2000+8);
                
-    static const ::Proud::RmiID Rmi_OnActorAnimUpdated = (::Proud::RmiID)(2000+9);
+    static const ::Proud::RmiID Rmi_OnActorPositionUpdated = (::Proud::RmiID)(2000+9);
                
-    static const ::Proud::RmiID Rmi_Request_AddItem = (::Proud::RmiID)(2000+10);
+    static const ::Proud::RmiID Rmi_OnActorRotationUpdated = (::Proud::RmiID)(2000+10);
                
-    static const ::Proud::RmiID Rmi_Request_RemoveItem = (::Proud::RmiID)(2000+11);
+    static const ::Proud::RmiID Rmi_OnActorScaleUpdated = (::Proud::RmiID)(2000+11);
                
-    static const ::Proud::RmiID Rmi_Request_ItemData = (::Proud::RmiID)(2000+12);
+    static const ::Proud::RmiID Rmi_OnAnimUpdated = (::Proud::RmiID)(2000+12);
                
-    static const ::Proud::RmiID Rmi_Request_AddGold = (::Proud::RmiID)(2000+13);
+    static const ::Proud::RmiID Rmi_OnActorAnimUpdated = (::Proud::RmiID)(2000+13);
                
-    static const ::Proud::RmiID Rmi_OnChat = (::Proud::RmiID)(2000+14);
+    static const ::Proud::RmiID Rmi_Request_AddItem = (::Proud::RmiID)(2000+14);
+               
+    static const ::Proud::RmiID Rmi_Request_RemoveItem = (::Proud::RmiID)(2000+15);
+               
+    static const ::Proud::RmiID Rmi_Request_ItemData = (::Proud::RmiID)(2000+16);
+               
+    static const ::Proud::RmiID Rmi_Request_AddGold = (::Proud::RmiID)(2000+17);
+               
+    static const ::Proud::RmiID Rmi_OnChat = (::Proud::RmiID)(2000+18);
 
 	// List that has RMI ID.
 	extern ::Proud::RmiID g_RmiIDList[];
